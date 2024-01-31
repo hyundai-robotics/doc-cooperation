@@ -18,7 +18,6 @@
     * [2.3.2. 2대 이상의 공통 좌표계 설정](2-system-setting/3-coordinate/2-common-coord.md)
     * [2.3.3. 주행축 시스템](2-system-setting/3-coordinate/3-base-axis.md)
     * [2.3.4. 공통 좌표계 설정](2-system-setting/3-coordinate/4-common-coord-set.md)
-    * [2.3.5. 협조로봇 공통 좌표계 확인](2-system-setting/3-coordinate/5-setting-outline.md)
 * [3. 수동모드 협조조작](3-manual-mode/README.md)
   * [3.1. 사용자 키(F-Key) 등록](3-manual-mode/1-key.md)
   * [3.2. 독립/협조 전환](3-manual-mode/2-mode-switch.md)
