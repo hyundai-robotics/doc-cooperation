@@ -17,7 +17,7 @@
 
 (4)	MASTER와 SLAVE 로봇을 F버튼에 할당한 사용자키를 이용하여 협조 상태(Cooperation Status)로 설정합니다. R351 코드를 입력하여 로봇의 역할을 지정하는 것도 가능합니다.  
 
-(5)	협조제어 개시 명령(COWORK M/S)을 등록합니다. COWORK 명령은 MASTER/SLAVE 인지를 지정하고 SLAVE/MASTER의 번호를 지정합니다. 이때 MASTER 로봇은 동일 그룹 내 1대만 설정 되어야 하고 SLAVE 로봇은 최대 3대까지 지정할 수 있습니다.   
+(5)	협조제어 개시 명령(cowork M/S)을 등록합니다. cowork 명령은 MASTER/SLAVE 인지를 지정하고 SLAVE/MASTER의 번호를 지정합니다. 이때 MASTER 로봇은 동일 그룹 내 1대만 설정 되어야 하고 SLAVE 로봇은 최대 3대까지 지정할 수 있습니다.   
 
  ![](../_assets/4-prg4.png)
  
@@ -36,7 +36,7 @@
  
 ![](../_assets/4-prg6.png)
 
-(8)	협조 동작을 마치면 협조 제어를 종료(COWORK END)하는 명령을 MASTER와 SLAVE에 삽입합니다.  
+(8)	협조 동작을 마치면 협조 제어를 종료(cowork END)하는 명령을 MASTER와 SLAVE에 삽입합니다.  
 
  
 ![](../_assets/4-prg7.png)
