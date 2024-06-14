@@ -1,0 +1,342 @@
+﻿[
+	{
+		"link": "README.md",
+		"char_ofs": 0,
+		"byte_ofs": 0
+	},
+	{
+		"link": "1-intro/README.md",
+		"char_ofs": 261,
+		"byte_ofs": 517
+	},
+	{
+		"link": "1-intro/1-overview.md",
+		"char_ofs": 269,
+		"byte_ofs": 532
+	},
+	{
+		"link": "1-intro/2-main-func/README.md",
+		"char_ofs": 806,
+		"byte_ofs": 1689
+	},
+	{
+		"link": "1-intro/2-main-func/1-specs.md",
+		"char_ofs": 818,
+		"byte_ofs": 1712
+	},
+	{
+		"link": "1-intro/2-main-func/2-features.md",
+		"char_ofs": 1183,
+		"byte_ofs": 2330
+	},
+	{
+		"link": "1-intro/3-operation-seq.md",
+		"char_ofs": 1959,
+		"byte_ofs": 4090
+	},
+	{
+		"link": "2-system-setting/README.md",
+		"char_ofs": 2666,
+		"byte_ofs": 5716
+	},
+	{
+		"link": "2-system-setting/1-install/README.md",
+		"char_ofs": 2678,
+		"byte_ofs": 5741
+	},
+	{
+		"link": "2-system-setting/1-install/1-wiring.md",
+		"char_ofs": 2694,
+		"byte_ofs": 5774
+	},
+	{
+		"link": "2-system-setting/1-install/2-network-config.md",
+		"char_ofs": 3486,
+		"byte_ofs": 7535
+	},
+	{
+		"link": "2-system-setting/1-install/3-net-check.md",
+		"char_ofs": 3894,
+		"byte_ofs": 8282
+	},
+	{
+		"link": "2-system-setting/2-ctrl-setting.md",
+		"char_ofs": 4300,
+		"byte_ofs": 9071
+	},
+	{
+		"link": "2-system-setting/3-comm-setting.md",
+		"char_ofs": 5006,
+		"byte_ofs": 10562
+	},
+	{
+		"link": "2-system-setting/4-coordinate/README.md",
+		"char_ofs": 5858,
+		"byte_ofs": 12227
+	},
+	{
+		"link": "2-system-setting/4-coordinate/1-setting-outline.md",
+		"char_ofs": 5874,
+		"byte_ofs": 12260
+	},
+	{
+		"link": "2-system-setting/4-coordinate/2-common-coord.md",
+		"char_ofs": 6303,
+		"byte_ofs": 13165
+	},
+	{
+		"link": "2-system-setting/4-coordinate/3-base-axis.md",
+		"char_ofs": 6564,
+		"byte_ofs": 13730
+	},
+	{
+		"link": "2-system-setting/4-coordinate/4-common-coord-set.md",
+		"char_ofs": 7010,
+		"byte_ofs": 14657
+	},
+	{
+		"link": "3-manual-mode/README.md",
+		"char_ofs": 8730,
+		"byte_ofs": 18306
+	},
+	{
+		"link": "3-manual-mode/1-mode-switch.md",
+		"char_ofs": 8748,
+		"byte_ofs": 18346
+	},
+	{
+		"link": "3-manual-mode/2-operation.md",
+		"char_ofs": 9999,
+		"byte_ofs": 20727
+	},
+	{
+		"link": "3-manual-mode/3-jog.md",
+		"char_ofs": 10965,
+		"byte_ofs": 22524
+	},
+	{
+		"link": "3-manual-mode/4-cmov.md",
+		"char_ofs": 11315,
+		"byte_ofs": 23233
+	},
+	{
+		"link": "3-manual-mode/5-arm-interfere/README.md",
+		"char_ofs": 11768,
+		"byte_ofs": 24129
+	},
+	{
+		"link": "3-manual-mode/5-arm-interfere/1-counter-err.md",
+		"char_ofs": 11799,
+		"byte_ofs": 24195
+	},
+	{
+		"link": "3-manual-mode/5-arm-interfere/2-err-clear.md",
+		"char_ofs": 11989,
+		"byte_ofs": 24570
+	},
+	{
+		"link": "4-programming/README.md",
+		"char_ofs": 12170,
+		"byte_ofs": 24934
+	},
+	{
+		"link": "4-programming/1-cowork/README.md",
+		"char_ofs": 12184,
+		"byte_ofs": 24963
+	},
+	{
+		"link": "4-programming/1-cowork/1-parameters.md",
+		"char_ofs": 12201,
+		"byte_ofs": 24987
+	},
+	{
+		"link": "4-programming/1-cowork/2-usage.md",
+		"char_ofs": 13634,
+		"byte_ofs": 27246
+	},
+	{
+		"link": "4-programming/2-programming.md",
+		"char_ofs": 14437,
+		"byte_ofs": 28820
+	},
+	{
+		"link": "4-programming/3-cmov.md",
+		"char_ofs": 15638,
+		"byte_ofs": 31015
+	},
+	{
+		"link": "4-programming/4-arc-sealing.md",
+		"char_ofs": 16308,
+		"byte_ofs": 31935
+	},
+	{
+		"link": "4-programming/5-cmov-record.md",
+		"char_ofs": 18456,
+		"byte_ofs": 36091
+	},
+	{
+		"link": "4-programming/6-positioner/README.md",
+		"char_ofs": 19333,
+		"byte_ofs": 37882
+	},
+	{
+		"link": "4-programming/6-positioner/1-jog.md",
+		"char_ofs": 19447,
+		"byte_ofs": 38145
+	},
+	{
+		"link": "4-programming/6-positioner/2-teaching.md",
+		"char_ofs": 19885,
+		"byte_ofs": 39029
+	},
+	{
+		"link": "5-play/README.md",
+		"char_ofs": 20788,
+		"byte_ofs": 40841
+	},
+	{
+		"link": "5-play/1-overview.md",
+		"char_ofs": 20803,
+		"byte_ofs": 40873
+	},
+	{
+		"link": "5-play/2-program-check.md",
+		"char_ofs": 21439,
+		"byte_ofs": 42028
+	},
+	{
+		"link": "5-play/3-auto-mode.md",
+		"char_ofs": 22145,
+		"byte_ofs": 43453
+	},
+	{
+		"link": "5-play/4-resume.md",
+		"char_ofs": 22682,
+		"byte_ofs": 44558
+	},
+	{
+		"link": "5-play/5-robot-lock.md",
+		"char_ofs": 23127,
+		"byte_ofs": 45488
+	},
+	{
+		"link": "6-hinet/README.md",
+		"char_ofs": 24019,
+		"byte_ofs": 47035
+	},
+	{
+		"link": "6-hinet/1-io-overview.md",
+		"char_ofs": 24037,
+		"byte_ofs": 47060
+	},
+	{
+		"link": "6-hinet/2-example.md",
+		"char_ofs": 24948,
+		"byte_ofs": 48533
+	},
+	{
+		"link": "7-arm-interference/README.md",
+		"char_ofs": 25104,
+		"byte_ofs": 48868
+	},
+	{
+		"link": "7-arm-interference/1-overview/README.md",
+		"char_ofs": 25120,
+		"byte_ofs": 48901
+	},
+	{
+		"link": "7-arm-interference/1-overview/1-purpose.md",
+		"char_ofs": 25142,
+		"byte_ofs": 48946
+	},
+	{
+		"link": "7-arm-interference/1-overview/2-coverage.md",
+		"char_ofs": 25282,
+		"byte_ofs": 49255
+	},
+	{
+		"link": "7-arm-interference/1-overview/3-restiction.md",
+		"char_ofs": 25519,
+		"byte_ofs": 49747
+	},
+	{
+		"link": "7-arm-interference/2-setting/README.md",
+		"char_ofs": 25746,
+		"byte_ofs": 50274
+	},
+	{
+		"link": "7-arm-interference/3-detect/README.md",
+		"char_ofs": 25759,
+		"byte_ofs": 50298
+	},
+	{
+		"link": "7-arm-interference/3-detect/1-decel-stop.md",
+		"char_ofs": 25773,
+		"byte_ofs": 50325
+	},
+	{
+		"link": "7-arm-interference/3-detect/2-quick-stop.md",
+		"char_ofs": 26755,
+		"byte_ofs": 52511
+	},
+	{
+		"link": "7-arm-interference/3-detect/3-play-err.md",
+		"char_ofs": 27118,
+		"byte_ofs": 53270
+	},
+	{
+		"link": "7-arm-interference/3-detect/4-dead-lock.md",
+		"char_ofs": 27886,
+		"byte_ofs": 54821
+	},
+	{
+		"link": "7-arm-interference/3-detect/5-net-err.md",
+		"char_ofs": 28232,
+		"byte_ofs": 55524
+	},
+	{
+		"link": "8-service/README.md",
+		"char_ofs": 28574,
+		"byte_ofs": 56288
+	},
+	{
+		"link": "8-service/1-status-mon.md",
+		"char_ofs": 28586,
+		"byte_ofs": 56313
+	},
+	{
+		"link": "8-service/2-io-mon.md",
+		"char_ofs": 29371,
+		"byte_ofs": 57886
+	},
+	{
+		"link": "8-service/3-manual-sigout.md",
+		"char_ofs": 29519,
+		"byte_ofs": 58141
+	},
+	{
+		"link": "8-service/4-rcode.md",
+		"char_ofs": 29713,
+		"byte_ofs": 58576
+	},
+	{
+		"link": "9-error-code/README.md",
+		"char_ofs": 29928,
+		"byte_ofs": 58913
+	},
+	{
+		"link": "9-error-code/1-warning.md",
+		"char_ofs": 29938,
+		"byte_ofs": 58934
+	},
+	{
+		"link": "9-error-code/2-system-err.md",
+		"char_ofs": 31216,
+		"byte_ofs": 61546
+	},
+	{
+		"link": "9-error-code/3-operation-err.md",
+		"char_ofs": 32063,
+		"byte_ofs": 63319
+	}
+]
