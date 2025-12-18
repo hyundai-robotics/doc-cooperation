@@ -1,6 +1,6 @@
 ﻿# Table of contents
 
-* [Hi6 로봇제어기 기능설명서 - 협조제어](README.md)
+* [${cont_model} 로봇제어기 기능설명서 - 협조제어](README.md)
 * [1. 개요](1-intro/README.md)
   * [1.1. 로봇 협조기능의 개요](1-intro/1-overview.md)
   * [1.2. 주요기능](1-intro/2-main-func/README.md)
