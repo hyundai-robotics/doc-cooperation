@@ -1,34 +1,33 @@
-﻿## 3.2. 수동모드 협조조작
-### 3.2.1. MASTER 로봇과 SLAVE 로봇의 설정   
+## 3.2. Manual Mode Cooperative Operation
+### 3.2.1. Setting MASTER and SLAVE Robots
 
-
-R351을 이용하여 로봇 역할을 MASTER와 SLAVE로 설정합니다. 이때 로봇의 역할은 로봇 번호와는 무관합니다.
+Use R351 to set robot roles to MASTER and SLAVE. The robot role is independent of the robot number.
 
  
 
-![[그림 3-7] 수동모드 협조조작(Master 로봇과 Slave 로봇의 설정)](../_assets/3-7.png)
+![[Figure 3-7] Manual mode cooperative operation (Setting Master and Slave robots)](../_assets/3-7.png)
 
 <br>
          
- - ①	MASTER 로봇과 SLAVE 로봇이 모두 ‘수동모드’인지 확인합니다.  
- - ②	MASTER와 SLAVE 로봇을 모두 운전준비 ON 대기합니다.  
- - ③	SLAVE 로봇의 ENABLE 스위치를 잡아 운전준비 ON이 유지되도록 되도록 하고 MASTER 로봇도 운전준비 ON 되어 있는지 확인합니다.  
- - ④	MASTER 로봇을 조작하면 SLAVE 로봇은 상대 위치를 추종하여 움직입니다.  
+ - ① Confirm that both MASTER and SLAVE robots are in 'Manual Mode'.
+ - ② Ensure both MASTER and SLAVE robots have Drive Ready ON and are in standby.
+ - ③ Keep the Slave robot's ENABLE switch held so that Drive Ready ON is maintained, and confirm that the MASTER's Drive Ready is also ON.
+ - ④ When the MASTER robot is operated, the SLAVE robot follows by tracking the relative position.
 
  
-![[그림 3-8] 수동모드 협조조작(Master 로봇 조작 / Slave 로봇 추종)](../_assets/3-8.png)
+![[Figure 3-8] Manual mode cooperative operation (Master operation / Slave following)](../_assets/3-8.png)
 
 <br>
 
 {% hint style="warning" %}
- -	다음과 같은 경우에는 수동 협조 JOG가 불가능합니다. 
-    - MASTER를 두 개 이상 지정하여 조작하는 경우 
-    - SLAVE로 설정된 로봇을 조작하는 경우 
-    - MASTER혹은 SLAVE의 Enable 스위치를 누르고 있지 않은 경우 
-    - 로봇간 협조 좌표계 설정이 되지 않은 경우
-    - 로봇간 협조 제어  통신이 끊어진 경우
+ - Manual cooperative JOG is not possible in the following cases:
+    - When more than one Master is designated and operated
+    - When attempting to operate a robot set as Slave
+    - When the Enable switches of Master or Slave are not pressed
+    - When the inter-robot cooperative coordinate system is not configured
+    - When cooperative control communication between robots is disconnected
 
- -	수동모드 협조기능 시에 SLAVE로 설정한 로봇에서는 JOG가 불가합니다. SLAVE의 JOG를 위해서는 로봇의 역할을 수동 모드 독립 상태로 변경하여 사용하십시오. 
+ - In Manual Mode cooperative operation, JOG is not permitted on robots set as Slave. To jog a Slave, change the robot role to Manual Mode Independent.
 
- - 	협조제어가 <무효>인 경우에 수동모드의 화면 상단에 I:R# / S:R# / M:R#의 표시가 되지 않고 설정도 되지 않습니다. 따라서 수동 협조 JOG도 불가능합니다. 
+ - If cooperative control is <Disabled>, the I:R# / S:R# / M:R# indicators will not appear at the top of the Manual Mode screen and cannot be configured, therefore Manual cooperative JOG is not possible.
 {% endhint %}

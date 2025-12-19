@@ -1,1 +1,1 @@
-﻿## 7.2. 설정 방법
+## 7.2. Configuration Procedures

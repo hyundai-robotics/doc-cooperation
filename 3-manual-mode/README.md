@@ -1,3 +1,1 @@
-﻿## 3. 수동모드 협조조작
-
-
+## 3. Manual Mode Cooperative Operation

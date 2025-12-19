@@ -1,73 +1,68 @@
-﻿## 7.2.3. 툴 간섭 영역 설정
+## 7.2.3. Setting Tool Interference Areas
 
 <Br>
 
-![[그림7-13] 플랜지 좌표계](../../_assets/7-13.png)
+![[Figure 7-13] Flange coordinate system](../../_assets/7-13.png)
 
 <Br>
 
-각 툴 번호에 대한 툴 간섭 영역을 설정하기 위해서는 로봇 플랜지 좌표계를 기준으로 작성합니다. 로봇이 기준자세에 있는 경우 플랜지 좌표계는 플랜지 면에 수직하여 밖으로 나가는 방향이 Z이고 아래방향이 X방향 그리고 로봇의 왼쪽 방향이 Y방향입니다.  
+To set the tool interference area for each tool number, use the robot flange coordinate system as a reference. When the robot is in the reference pose, the flange coordinate system has Z pointing outward normal to the flange face, X pointing downward, and Y pointing to the robot's left.
 
-툴 번호 하나 당 4개의 간섭 영역을 설정할 수 있습니다. 로봇 프로그램에서 사용하는 툴 번호는 반드시 툴 간섭 영역을 설정하십시오. 이 설정이 되어 있지 않으면 툴 간섭 검지가 되지 않습니다.  
+You can set up to 4 interference areas per tool number. For any tool number used in the robot program, you must configure the tool interference area. If not configured, tool interference detection will not occur.
 
-### 1) 서보건 설정의 예
+### 1) Example for a single (servo-gun) tool
 
-툴 간섭 영역의 설정은 툴 플랜지(Tool Flange) 면에 설정된 좌표로부터 시작점과 종료점 그리고 반경을 설정하여 툴의 간섭영역을 설정할 수 있습니다. 툴 번호 하나 당 4개의 간섭 영역을 설정할 수 있습니다.  
+The tool interference area is set by defining start and end points and a radius from coordinates on the tool flange. You may set up to four interference areas per tool number.
 
-플랜지 좌표계 방향과 설정 예는 아래의 그림을 참고하십시오.  
+Refer to the figure below for flange coordinate directions and an example configuration.
  
  <Br>
 
-![[그림7-14] 플랜지 좌표계 설정 예](../../_assets/7-14.png)
+![[Figure 7-14] Flange coordinate system example](../../_assets/7-14.png)
 
 <Br>
 
-### 2) 행거 설정의 예
+### 2) Example for a hanger-type tool
 
-#### 2-1) 툴 간섭 설정 영역을 1개만 설정하는 경우  
+#### 2-1) When configuring only one tool interference area
 
-플랜지의 중심을 기준으로 대칭이 아닌 툴의 경우 툴 간섭 영역을 1개로 설정하고자 할 때는 툴 형상의 중심위치 및 중심위치와 툴의 모서리와의 최대거리를 반지름으로 설정하는 방법을 사용할 수 있습니다.  
-아래의 예에서 로봇 좌표계 기준으로 X=-175, Y=-485 이며 반경은 R1과 R2중에 R1이 크므로 1250보다 다소 크게 1300으로 설정합니다. 반지름을 1300으로 설정하게 되면 원통의 각 면에 반구(hemi-sphere)가 설정되는 점을 감안하여 Z의 위치는 P1=(-175,-485,500), P2=(-175,-485,1000)를 각각 설정합니다.  
+For asymmetrical tools relative to the flange center, when defining a single tool interference area you can set the tool shape center and use the maximum distance from center to tool corners as the radius. In the example below, relative to the robot coordinate system X=-175, Y=-485, and the radius should be set slightly larger than the larger of R1 and R2 (e.g., 1300 rather than 1250). Because hemispheres are created at each end of the cylinder when setting a radius of 1300, set Z positions as P1=(-175,-485,500) and P2=(-175,-485,1000).
 
  
  <Br>
 
-![[그림7-15] 1개 툴 간섭 영역 설정 도면](../../_assets/7-15.png)
+![[Figure 7-15] Drawing for 1 tool interference area setting](../../_assets/7-15.png)
 
 
 <Br>
   
 
-![[그림7-16] 1개 툴 간섭 영역 설정](../../_assets/7-16.png)
+![[Figure 7-16] 1 tool interference area setting](../../_assets/7-16.png)
 
 
 <Br>
 
-그러나 상기와 같이 반지름을 크게 설정할 경우 툴의 실제 모양보다 불필요하게 크게 설정되는 것을 피할 수 없습니다. 따라서 정밀하게 툴의 영역을 설정할 필요가 있을 경우에는 여러 개로 나누어서 모델링 하여야 합니다.
+However, when the radius is set this large, it may be unnecessarily larger than the actual tool shape. If precise tool region settings are required, model the tool by dividing it into multiple regions.
 
 
-#### 2-2) 툴 간섭 설정 영역을 4개로 설정하는 경우  
+#### 2-2) When configuring 4 tool interference areas
 
 <Br>
   
 
-![[그림7-17] 4개 툴 간섭 영역 설정 도면](../../_assets/7-17.png)
+![[Figure 7-17] Drawing for 4 tool interference areas](../../_assets/7-17.png)
 
 
 <Br>
 
-행거와 같이 툴이 큰 경우 영역을 나누어 설정하면 툴 간섭영역을 과대하게 설정하는 것을 방지할 수 있습니다. 아래의 예와 같이 가로 2110mm세로 1350mm의 툴이라고 생각하면 세로 영역을 3등분하여 약 350mm의 반지름을 갖는 원통 3개의 영역1~3으로 모델링 할 수 있습니다. 마지막으로 플랜지에서 툴까지의 옵셋을 영역 4로 설정하면 아래와 같은 설정이 가능합니다.
+For large tools such as hangers, dividing the area can prevent overestimation of the tool interference area. For example, for a tool of width 2110mm and height 1350mm, divide the vertical area into three equal parts and model three cylinders with approximately 350mm radius as areas 1–3. Finally, set the offset from the flange to the tool as area 4 to achieve the configuration below.
 
  
 <Br>
   
 
-![[그림7-18] 4개 툴 간섭 영역 설정](../../_assets/7-18.png)
-
+![[Figure 7-18] 4 tool interference areas configuration](../../_assets/7-18.png)
 
 <Br>
-
-
-
 
 

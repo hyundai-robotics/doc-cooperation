@@ -1,70 +1,63 @@
-﻿## 3.1. 독립/협조 전환
+## 3.1. Switching Between Independent and Cooperative Modes
 
-### 3.1.1. 키 조작에 따른 모드 전환
+### 3.1.1. Mode switching by key operation
 
+In manual mode, cooperative control operation mode can be changed as follows.
 
-수동 모드에서 협조제어 동작 모드는 아래와 같은 방법으로 변경할 수 있습니다.  
-
-- ② R CODE를 이용한 방법   
+- ② Using R CODE
   
-이에 따른 조작은 아래의 표와 같습니다. 
+The operations are as shown in the table below.
 
-
-|키 조작|	기능전환|
+| Key Operation | Mode Switch |
 |:--:|:--:|
-|R351,0|	수동 독립 모드|
-|R351,1	|수동 협조 모드, MASTER 지정|
-|R351,2|	수동 협조 모드, SLAVE 지정|
-|R351,3|	cmove기록모드, SLAVE 조그 모드 지정 <br> 이전 상태가 SLAVE 지정인 경우만 본 모드로 전환 기능|
+| R351,0 | Manual Independent Mode |
+| R351,1 | Manual Cooperative Mode, designate MASTER |
+| R351,2 | Manual Cooperative Mode, designate SLAVE |
+| R351,3 | cmov Recording Mode, designate SLAVE Jog Mode <br> (This mode can only be entered if the previous state was SLAVE) |
 
-[표 3-1] 키 조작에 따른 기능의 전환
+[Table 3-1] Mode switching by key operation
 
 
 <br>
 
- -	수동 모드 독립(INDIVIDUAL) 상태 
+ - Manual Mode Independent (INDIVIDUAL) state
  
-![[그림 3-3] 수동 모드 독립(Individual) 상태 화면](../_assets/3-3.png)
+![[Figure 3-3] Manual Mode Independent state screen](../_assets/3-3.png)
 
 <br>
 
-   각 로봇을 독립적으로 조그 조작을 할 수 있는 상태입니다. 
+   This state allows each robot to be jogged independently.	
 
- -	수동 모드 협조(MASTER지정) 상태 
+ - Manual Mode Cooperative (MASTER designated) state
  
- 
- 
-![[그림 3-4] 수동 모드 협조 마스터 상태 화면](../_assets/3-4.png)
+![[Figure 3-4] Manual Mode Cooperative Master state screen](../_assets/3-4.png)
 
 <br>
 
-   슬레이브가 지정된 상태에서 마스터의 움직임에 따른 동기 조작을 위한 상태입니다.
+   This is the state for synchronized operation according to the Master's movement when a Slave is designated.
 
- -	수동 모드 협조(SLAVE지정) 상태 
+ - Manual Mode Cooperative (SLAVE designated) state
  
- 
- 
-![[그림 3-5] 수동 모드 협조 슬레이브 상태 화면](../_assets/3-5.png)
+![[Figure 3-5] Manual Mode Cooperative Slave state screen](../_assets/3-5.png)
 
 <br>
 
-    마스터의 움직임에 따른 추종을 위한 슬레이브 설정 상태입니다.
+    The state for the Slave to follow the Master's movement.
 
 
- - 	cmov기록모드, SLAVE 조그 모드 상태 
- 
+ - cmov Recording Mode, SLAVE Jog mode state
+  
 
-
-![[그림 3-6] cmov 기록 모드 상태 화면](../_assets/3-6.png)
+![[Figure 3-6] cmov Recording Mode state screen](../_assets/3-6.png)
 
 <br>
 
-cmov기록을 하거나 cmov명령의 스텝 전후진을 통해 티칭 위치를 확인할 수 있습니다.<br> 단 스텝을 기록하거나 로봇을 움직이고자 할 경우 협조대상 로봇 중 반드시 Master로 설정된 로봇이 있어야 합니다. <br>이때, 슬레이브측에 기록된 위치는 마스터 로봇의 엔드 이펙터 좌표계 기준의 슬레이브 로봇의 상대적 위치 입니다.  
+In cmov recording mode, you can record cmov or verify taught positions using cmov step forward/back. Note that to record steps or move the robot, there must be a robot set as Master among the cooperative robots. The position recorded on the Slave is the relative position of the Slave robot based on the Master's end effector coordinate system.
 
 <br>
 
 {% hint style="warning" %}
- - 	공통 좌표계가 설정되어 있지 않은 상태에서는 수동 모드 독립 상태에서 마스터나 슬레이브로 협조 역할의 변환이 불가능합니다.  
- -	R CODE에 의한 수동 협조상태 전환에서 R351,3‘cmov기록 상태’는 항상 ‘수동협조상태(Slave지정 모드)’(R351,2)에서만 가능합니다.  
+ - Without a common coordinate system set, it is not possible to switch roles to Master or Slave from Manual Mode Independent state.
+ - The R351,3 'cmov recording state' R CODE can only be entered from manual cooperative state (Slave designated mode) (R351,2).
  
 {% endhint %}

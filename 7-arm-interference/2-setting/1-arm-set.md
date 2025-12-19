@@ -1,23 +1,22 @@
-﻿## 7.2.1. 암 간섭 방지 기능 설정
+## 7.2.1. Enabling Arm Interference Prevention
 
-
-『시스템』 → 『4: 응용 파라미터』 → 『17: 협조제어』→ 『4: 로봇간 간섭방지』→ 『1: 간섭 방지 조건』를 선택합니다.
-
-<br> 
-
-![[그림7-7]암 간섭 방지 메뉴](../../_assets/7-8.png) 
-
-<br>
-
-암 간섭 방지를 유효로 설정하기 위해서 ‘간섭 검지 상대 로봇’을 선택합니다. 간섭 예상 최대 거리는 간섭을 예상하여 감속정지할 수 암 간섭 영역으로부터의 거리입니다. 
+Select 'System' → '4: Application Parameters' → '17: Cooperative Control' → '4: Inter-robot Interference Prevention' → '1: Interference Prevention Conditions'.
 
 <br> 
 
-![[그림7-8]암 간섭 방지 조건 화면](../../_assets/7-9.png)
+![[Figure 7-7] Arm Interference Prevention Menu](../../_assets/7-8.png) 
 
 <br>
 
-|에러 메시지|	E0244 	로봇 0)의 Arm 간섭검지가 불가능한 상태임|
+To enable arm interference prevention, select the 'Interference Detection Partner Robot'. The 'expected maximum interference distance' is the distance from the arm interference area at which the system expects interference and can perform deceleration stop.
+
+<br> 
+
+![[Figure 7-8] Arm Interference Prevention Conditions Screen](../../_assets/7-9.png)
+
+<br>
+
+| Error Message | E0244 Robot (0)'s arm interference detection is not possible |
 |:--|:--| 
-|발생 가능한 에러 원인|	- 만일 간섭 검지를 자신의 로봇에서 설정한 상대 로봇의 협조제어가 ‘무효’로 설정 <br> - 상대 로봇이 협조제어 네트워크에 참여하지 않은 경우 <br> - 상대 로봇이 Arm간섭 방지 조건을 설정하지 않은 경우 <br> - 상대 로봇의 공통좌표계가 설정되어 있지 않은 경우 에러가 발생합니다.|
-|조치 방법	|자신의 로봇과 상대로봇의  협조제어 상태, 공통좌표계 설정, 협조제어 네트워크 참여여부, 간섭 방지 조건을 확인하십시오.|
+| Possible Causes | - If the cooperative control of the partner robot set for interference detection is set to 'Disabled' on the partner robot. <br> - The partner robot is not participating in the cooperative control network. <br> - The partner robot has not configured arm interference prevention conditions. <br> - The partner robot's common coordinate system is not set. |
+| Action | Check your robot's and the partner robot's cooperative control status, common coordinate settings, participation in the cooperative control network, and interference prevention conditions. |

@@ -1,32 +1,27 @@
-﻿## 1.3. 조작순서
+## 1.3. Operation Sequence
 
+This section describes the sequence for using cooperative robot features. Detailed instructions are provided in subsequent sections.
 
+- (1) Robot Calibration
+Ensure each robot's axis origin and tool data are correctly set for cooperative control. See the automatic calibration feature for details.
 
-협조 로봇의 기능을 사용하는 순서를 설명합니다. 상세한 내용은 다음 절부터 설명합니다.
+- (2) Hardware Installation
+Connect hardware required for the controller's communication. Connect the network hub and Ethernet cable.
 
-- (1) 로봇의 캘리브레이션  
-협조제어를 위해서 각 로봇의 축원점 및 툴 데이터가 올바로 설정되어 있어야 합니다.
-자동 캘리브레이션 기능을 참고하십시오.
+- (3) Control Environment Settings
+Set whether to use cooperative control for your robot and assign the robot number.
 
-- (2) 하드웨어 인스톨   
-제어기의 통신 접속에 필요한 하드웨어를 연결합니다.
-네트워크 허브와 이더넷통신 케이블을 연결합니다.
+- (4) Communication Settings
+Set network IP addresses for cooperative robots. To use HiNet I/O, set the start index and byte count for input/output signals. Your robot's signals are outputs and partner robots' signals are inputs.
 
-- (3) 사용환경 설정  
-자신의 로봇에 대한 협조제어 사용 여부 및 로봇 번호를 설정합니다.
+- (5) Common Coordinate System Setup
+Perform calibration to provide relative positional information between cooperative robots.
 
-- (4) 통신 설정  
-협조 로봇들에 대한 네트워크 IP주소를 설정합니다. HiNet I/O를 사용하려면 입출력 신호의 시작 인덱스와 바이트 수를 설정합니다. 여기서 자신의 로봇은 출력이 되며 상대 로봇들은 입력이 됩니다.
+- (6) Teaching
+Use R351 (Manual Cooperative State Setting) to assign Master and Slave roles and teach cooperative motions by operating the Master robot.
 
-- (5) 공통좌표계 설정  
-협조 로봇간의 위치를 알려주는 캘리브레이션 작업을 하여야 합니다.
+- (7) Operation Check
+Verify cooperative motion in manual mode. Start cooperative robots by stepping forward simultaneously.
 
-- (6) 티칭  
-협조작업 티칭을 위한 R351(수동 협조상태 설정)을 사용하여 Master와 Slave로봇의 역할을 지정합니다. 그리고 협조동작시 Master로봇을 조작하여 티칭합니다.
-
-- (7) 확인운전  
-수동모드에서 협조동작을 확인합니다.
-협조로봇을 동시에 스텝 전진으로 기동합니다.
-
-- (8) 연속운전  
-자동모드로 전환합니다. 프로그램을 선두위치에 놓고 협조 로봇으로 지정된 제어기의 기동스위치를 모두 누릅니다.
+- (8) Continuous Operation
+Switch to automatic mode. Place the program at the lead step and press the start switches on all controllers designated as cooperative robots.

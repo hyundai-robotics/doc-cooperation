@@ -1,29 +1,27 @@
-﻿## 6.1. HiNet I/O 개요
+## 6.1. HiNet I/O Overview
 
-
-
-HiNet I/O는 협조제어 네트워크를 통해 로봇간의 정보를 공유하는 기능입니다. 각 제어기는 협조로봇 간의 정보를 모니터링하고 있으므로 공유로 설정되어 있는 부분을 자유롭게 사용할 수 있습니다. 각 제어기가 사용할 수 있는 데이터의 최대 크기는 12byte이고 자신의 부분을 제외한 36byte를 수신할 수 있습니다.  
+HiNet I/O is a function that shares information between robots via the cooperative control network. Each controller monitors information from cooperative robots, so the sections set to be shared can be used freely. The maximum data size each controller can use is 12 bytes, and it can receive 36 bytes excluding its own portion.
  
 
-![[그림 6-1] HiNet 그룹 구조 ](../_assets/6-1.png)
+![[Figure 6-1] HiNet Group Structure](../_assets/6-1.png)
 
-이 기능은 로봇언어(HRScript)을 이용하여 사용이 가능하기 때문에 사용자의 욕구에 부합하는 다양한 응용에 사용이 가능합니다.  
+This function can be used via the robot language (HRScript), allowing various applications that meet user needs.
 
 
 ![ ](../_assets/6-3.png) 
 
 <br>
 
-예를들어 하기와 같이 설정된 경우 ROBOT 1인 경우에 자신의 정보를 fb7.dob0 ~ fb7.dob3 에 설정하고, ROBOT2의 정보를 fb7.dib4 ~ fb7.dib7, ROBOT3의 정보를 fb7.dib8 ~ fb7.dib11, ROBOT4의 정보를 fb7.dib12 ~ fb7.dib15에 수신하게 됩니다.   
+For example, if configured as below, when ROBOT 1 is the local robot, its information is set to fb7.dob0 ~ fb7.dob3, ROBOT2's information is received at fb7.dib4 ~ fb7.dib7, ROBOT3's information at fb7.dib8 ~ fb7.dib11, and ROBOT4's information at fb7.dib12 ~ fb7.dib15.
 
-<자신의 로봇이 ROBOT 1인 경우>
+<If your robot is ROBOT 1>
 
-| 로봇 번호 | 시작 신호 | 바이트 수 | 비고 |
+| Robot No. | Start Signal | Byte Count | Note |
 | :---: | :---: |  :---: | :---: | 
-| ROBOT 1 | fb7.0 | 4 | 출력(fb7.dob0 ~ fb7.dob3) |
-| ROBOT 2 | fb7.32 | 4 | 입력(fb7.dib4 ~ fb7.dib7) |
-| ROBOT 3 | fb7.64 | 4 | 입력(fb7.dib8 ~ fb7.dib11) |
-| ROBOT 4 | fb7.96 | 4 | 입력(fb7.dib12 ~ fb7.dib15) |
+| ROBOT 1 | fb7.0 | 4 | Output (fb7.dob0 ~ fb7.dob3) |
+| ROBOT 2 | fb7.32 | 4 | Input (fb7.dib4 ~ fb7.dib7) |
+| ROBOT 3 | fb7.64 | 4 | Input (fb7.dib8 ~ fb7.dib11) |
+| ROBOT 4 | fb7.96 | 4 | Input (fb7.dib12 ~ fb7.dib15) |
 
 
-![[그림 6-2] HiNet I/O 사용 예시(그룹 1번 – 로봇 4대) ](../_assets/6-2.png) 
+![[Figure 6-2] HiNet I/O Usage Example (Group 1 – 4 Robots) ](../_assets/6-2.png)

@@ -1,13 +1,10 @@
-﻿## 7.3.5. 협조제어 네트워크 이상시 처리
+## 7.3.5. Handling Network Issues During Cooperative Control
 
-
-
-협조제어 네트워크가 정상적이지 않으면 로봇간 Arm간섭 검지가 정상적으로 이루어질 수가 없습니다. 따라서 협조제어 네트워크에 문제가 발생하는 경우 다음과 같은 에러가 발생합니다.
-
+If the cooperative control network is not functioning properly, arm interference detection between robots may not operate correctly. When problems occur on the cooperative control network, the following error may occur.
 
 <br>
 
-|에러 메시지|	E0244 	로봇 0)의 Arm 간섭검지가 불가능한 상태임|
-|:--|:--| 
-|발생 가능한 에러 원인	|간섭 검지 조건을 설정한 상대 로봇과의 HiNet 네트워크가 단절된 경우|
-|조치 방법|	- 해당 로봇의 로봇의 네트워크 케이블을 확인하십시오. <Br>  - 협조제어 상태 모니터링을 참조하여 협조제어 상태를 정상으로 복귀되도록 하십시오.|
+| Error Message | E0244 Robot (0)'s arm interference detection is not possible |
+|:--|:--|
+| Possible Causes | The HiNet network to the partner robot for which interference detection conditions were set is disconnected |
+| Action | - Check the network cable of the affected robot. <br> - Refer to Cooperative Control Status Monitoring and restore the cooperative control state to normal. |

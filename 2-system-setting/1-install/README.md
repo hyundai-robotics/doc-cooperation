@@ -1,1 +1,1 @@
-﻿## 2.1. 하드웨어 인스톨
+## 2.1. Hardware Installation

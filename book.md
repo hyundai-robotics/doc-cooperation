@@ -1,500 +1,448 @@
-﻿# ${cont_model} 로봇제어기 기능설명서 - 협조제어
+﻿# ${cont_model} Robot Controller Feature Manual - Cooperative Control
 
 {% hint style="warning" %}
-본 제품 설명서에서 제공되는 정보는 HD현대로보틱스의 자산입니다.
+The information provided in this product manual is the property of HD Hyundai Robotics.
 
-HD현대로보틱스의 서면에 의한 동의 없이 전부 또는 일부를 무단 전재 및 재배포할 수 없으며, 제3자에게 제공되거나 다른 목적에 사용할 수 없습니다.
+No part of this manual may be reproduced or redistributed in whole or in part, nor provided to any third party, or used for other purposes without the written consent of HD Hyundai Robotics.
 
-
-
-본 설명서는 사전 예고 없이 변경될 수 있습니다. 
-
-
+This manual may be changed without prior notice.
 
 **Copyright ⓒ 2024 by HD Hyundai Robotics**
 {% endhint %}
-## 1. 개요## 1.1. 로봇 협조기능의 개요
+## 1. Overview
+## 1.1. Overview of Robot Cooperative Features
 
 <br>
 
 {% hint style="info" %}
-본 기능을 사용하기 위해서는 별도의 라이선스가 필요하므로 당사에 문의합니다. <br>
-본 기능은 V60.26-00 부터 지원됩니다.
+A separate license is required to use this feature; please contact us. <br>
+This feature is supported from V60.26-00.
 {% endhint %}
 
 <br>
 
-로봇 협조기능은 여러 대의 로봇을 이용하여 한 대의 로봇으로는 할 수 없는 작업을 수행하기 위한 기능입니다. 
+Robot cooperative features enable multiple robots to perform tasks that a single robot cannot accomplish.
 
-이 기능은 다음과 같은 경우에 적용할 수 있습니다.
+This feature applies in cases such as:
 
--	간단한 핸드를 가진 두 로봇의 협조작업으로 작업물을 핸들링하고자 하는 경우  
--	작업물이 커서 단일 로봇 작업으로는 핸들링하기가 어려운 경우   
--	마스터 로봇이 작업물을 핸들링하는 가운데 슬레이브 로봇이 작업물 위에 아크용접이나, 실링과 같은 지그리스 작업을 수행하는 경우   
+- When two robots with simple hands cooperate to handle a workpiece
+- When a workpiece is too large to be handled by a single robot
+- When a Master robot handles the workpiece while a Slave performs jigless tasks such as arc welding or sealing on the workpiece
  
-이 기능을 이용하여 최대 4대의 로봇을 협조 동기화 할 수 있습니다.  
-각 로봇은 독립적인 작업과 협조 작업을 하나의 프로그램에서 수행할 수 있습니다. 
+This feature allows synchronization of up to 4 robots.
+Each robot can perform independent tasks and cooperative tasks within a single program.
 
 
 <br>
 
-![[그림 1.1] 로봇 협조 기능](../_assets/1-1.png)## 1.2. 주요기능## 1.2.1. 주요 기능 사양
+![[Figure 1.1] Robot cooperative features](../_assets/1-1.png)
+## 1.2. Main Features
+## 1.2.1. Key Feature Specifications
 
 <br>
 
-| 주요 기능 사양 | 비고 | 
+| Key Feature Specification | Remarks | 
 | :---: | :---: | 
-|협조 로봇 대수	|최대 4대|
-|통신 방식	|범용 Ethernet(UDP)|
-|통신 속도	|100MBPS|
-|Master 로봇 설정 가능 수|	1대|
-|Slave 로봇 설정 가능 수|	마스터 1대당 3대의 Slave 제어가능|
-|주행축	|주행축 협조가능|
-|HiNet I/O|	로봇당 12바이트(입출력 신호)|
-|Jigless 협조|	로봇과 포지셔너의 지그리스 협조 지원|
+| Number of cooperative robots | Up to 4 |
+| Communication method | General Ethernet (UDP) |
+| Communication speed | 100 Mbps |
+| Number of Masters supported | 1 |
+| Number of Slaves supported | Up to 3 Slaves per Master |
+| Drive Axis | Drive axis cooperation supported |
+| HiNet I/O | 12 bytes per robot (I/O signals) |
+| Jigless cooperation | Supports jigless cooperation between robot and positioner |
 
-[표 1-1] 협조 제어 사양
-
-
-<br>
-
-![[그림1-2] 지그리스 협조제어 (Jigless cooperation)](../../_assets/1-2.png)## 1.2.2. 기능의 특징
-
-
--	통신   
-    협조제어 기능은 UDP(범용 Ethernet) 통신을 이용하여 로봇들을 최대 4대까지 연동 제어할 수 있습니다.
-
--	로봇간 공통 좌표계 설정   
-    로봇간의 상대적인 위치를 파악하기 위한 기능입니다. 로봇간 공통좌표계 설정은 작업영역상의 동일한 3점의 위치를 교시하여 얻어집니다. 
-
--	수동모드 협조 동작   
-    수동 모드에서 사용자가 쉽게 교시할 수 있습니다. 각 로봇의 마스터와 슬레이브의 역할을 정한후, 핸들링의 응용은 MASTER만을 조작하여 교시가 가능하게 하고, 지그리스 협조의 경우에는 마스터 작업물 위에 슬레이브의 위치를 교시할 수 있도록 지원합니다. 
-
--	포지셔너 마스터 지원  
-    마스터 로봇으로 설정된 로봇의 포지셔너를 마스터로 설정하여 협조제어가 가능합니다. 포지셔너에 4대의 로봇이 동시에 협조 동작할 수 있습니다. 
-
--	티칭  
-    각 제어기에 독립적인 프로그램이 필요합니다. 하나의 프로그램에 자신의 로봇이 독립된 동작을 하는 부분과 협조 동작을 하는 부분을 나누어, 쉽고 자유롭게 프로그램이 가능합니다. 
-
--	재생 협조 동작   
-    협조동작 명령(cowork)에 따라 상대 협조 로봇을 대기하며, 모든 협조 로봇이 준비가 되면 협조 동작을 시작합니다. 
-
--	HiNet I/O   
-    자신의 로봇 정보를 다른 협조 로봇에 전달하여 별도의 로봇간 인터록 제어반 없이 상태 로봇들의 상태를 확인할 수 있는 기능을 제공합니다. 이를 위하여 입출력 신호가 사용됩니다. 
-## 1.3. 조작순서
-
-
-
-협조 로봇의 기능을 사용하는 순서를 설명합니다. 상세한 내용은 다음 절부터 설명합니다.
-
-- (1) 로봇의 캘리브레이션  
-협조제어를 위해서 각 로봇의 축원점 및 툴 데이터가 올바로 설정되어 있어야 합니다.
-자동 캘리브레이션 기능을 참고하십시오.
-
-- (2) 하드웨어 인스톨   
-제어기의 통신 접속에 필요한 하드웨어를 연결합니다.
-네트워크 허브와 이더넷통신 케이블을 연결합니다.
-
-- (3) 사용환경 설정  
-자신의 로봇에 대한 협조제어 사용 여부 및 로봇 번호를 설정합니다.
-
-- (4) 통신 설정  
-협조 로봇들에 대한 네트워크 IP주소를 설정합니다. HiNet I/O를 사용하려면 입출력 신호의 시작 인덱스와 바이트 수를 설정합니다. 여기서 자신의 로봇은 출력이 되며 상대 로봇들은 입력이 됩니다.
-
-- (5) 공통좌표계 설정  
-협조 로봇간의 위치를 알려주는 캘리브레이션 작업을 하여야 합니다.
-
-- (6) 티칭  
-협조작업 티칭을 위한 R351(수동 협조상태 설정)을 사용하여 Master와 Slave로봇의 역할을 지정합니다. 그리고 협조동작시 Master로봇을 조작하여 티칭합니다.
-
-- (7) 확인운전  
-수동모드에서 협조동작을 확인합니다.
-협조로봇을 동시에 스텝 전진으로 기동합니다.
-
-- (8) 연속운전  
-자동모드로 전환합니다. 프로그램을 선두위치에 놓고 협조 로봇으로 지정된 제어기의 기동스위치를 모두 누릅니다.
-## 2. 시스템 설정## 2.1. 하드웨어 인스톨2.1.1. 비상정지선의 결선
-
-
-
-
-협조 동작 중에 비상정지를 하는 경우에 통신으로 서로의 상태를 모니터링하고 있어 상대의 로봇도 정지하도록 되어있지만 하드웨어적인 신호가 우선하므로 협조로봇 상호간의 위치가 어긋나게 됩니다. 비상정지시 협조위치의 어긋남을 최소화하기 위해서 제어기의 외부 비상정지 결선을 하십시오.  
-
-${cont_model} 제어기에는 사용자용 외부 비상정지가 준비되어 있습니다. 외부의 비상정지 결선은 아래의 그림과 같습니다.  
-
-로봇 협조 기능을 사용할 때는 동시에 비상정지가 각 제어기에 입력될 수 있도록 하는 별도의 비상정지 스위치를 설치하여야 합니다. 사용자용으로 마련된 외부 비상정지 결선을 이용하여 아래 같이 하나의 비상정지로 통합하여 사용하십시오. 비상정지시의 협조위치 어긋남이 최소화됩니다.  
-
-<br>
-
-![[그림2-1] 로봇 협조용 비상정지의 결선](../../_assets/2-1.png)
+[Table 1-1] Cooperative control specifications
 
 
 <br>
 
+![[Figure1-2] Jigless cooperative control](../../_assets/1-2.png)## 1.2.2. Feature Characteristics
 
-{% hint style="warning" %}
--	협조 중 비상정지 시 상대적인 협조 위치가 어긋남이 발생 할 수 있습니다.  
--	핸들링 기능으로 적용할 때 협조 동작중의 협조 어긋남(비상정지시 오차, 동기 오차, 캘리브레이션 오차, 궤적 오차)를 흡수하기 위해서는 플로팅 기구를 설치하여야 합니다.  
--	핸들링 기능으로 적용할 때 플로팅 기구는 협조 로봇이 2대일 때 최소 1대 이상 설치할 것을 권장합니다.  
--	외부 비상정지 사용 시 사용하는 릴레이는 Safety Relay를 이용하십시오.  
-    예시 제품) Omron사 G7S-4A2B
+- Communication
+  The cooperative control feature uses UDP (General Ethernet) communication to coordinate up to 4 robots.
 
-{% endhint %}2.1.2. 네트워크 구성
+- Common Coordinate System between Robots
+  Provides a function to determine relative positions between robots. The common coordinate system is obtained by teaching the same three points in the workspace on each robot.
 
+- Manual Mode Cooperative Operation
+  Allows users to easily teach in manual mode. After assigning Master and Slave roles for each robot, handling applications can be taught by operating only the MASTER. For jigless cooperation, the Slave's positions can be taught relative to the Master's workpiece.
 
-<br>
+- Positioner Master Support
+  You can assign a positioner as the Master robot, enabling cooperative control. Up to 4 robots can cooperate with a positioner simultaneously.
 
-| 구성품| 	사양| 
-| :---: | :---: | 
-| ${cont_model}COM	| Main CPU 보드| 
-| UTP cable	| 허브 이용 연결: direct LAN cable <br> 2대 직접 연결: cross LAN cable| 
-| Network Hub| 	당사가 제공하는 사양 (스위칭 허브)| 
+- Teaching
+  Each controller needs an independent program. Split a program into parts for independent robot actions and cooperative actions to enable flexible and easy programming.
 
+- Cooperative Playback
+  According to the `cowork` command, the system waits for partner robots to be ready and begins cooperation when all robots are ready.
 
-[표 2-1] 협조제어 요구사항
+- HiNet I/O
+  Provides the capability to share your robot's information with other cooperative robots using I/O signals so that robot states can be checked without a separate interlock control panel.## 1.3. Operation Sequence
 
+This section describes the sequence for using cooperative robot features. Detailed instructions are provided in subsequent sections.
 
-<br>
+- (1) Robot Calibration
+Ensure each robot's axis origin and tool data are correctly set for cooperative control. See the automatic calibration feature for details.
 
--	연결방법  
-${cont_model}COM 모듈의 네트워크 소켓 중에서 범용 네트워크에 UTP 케이블(Direct)을 한쪽을 연결하고 다른 한쪽은 네트워크 허브에 연결합니다. 이런 방식으로 4대까지 허브에 연결할 수 있습니다.  
-두 대의 로봇을 허브 없이 연결하는 경우에는 네트워크 UTP CROSS 케이블로 범용 네트워크 소켓에 연결합니다.  
-## 2.1.3. 네트워크 연결 확인
+- (2) Hardware Installation
+Connect hardware required for the controller's communication. Connect the network hub and Ethernet cable.
 
-다음과 같은 경우 네트워크 이상 유무를 확인합니다. 
--	초기 설치 시  
--	협조제어 동작 중 네트워크 이상이 검지 되었을 때  
+- (3) Control Environment Settings
+Set whether to use cooperative control for your robot and assign the robot number.
 
-<br>
-<br>
+- (4) Communication Settings
+Set network IP addresses for cooperative robots. To use HiNet I/O, set the start index and byte count for input/output signals. Your robot's signals are outputs and partner robots' signals are inputs.
 
--	확인사항   
-    - 네트워크 케이블 연결상태를 확인합니다.  
-    - ${cont_model}COM 네트워크 소켓에 녹색등이 점멸되어야 합니다.  
-    - 케이블의 이상 유무를 확인합니다.  
-    - [로봇간 협조제어] 모니터링에서 네트워크 상태를 확인합니다.  
+- (5) Common Coordinate System Setup
+Perform calibration to provide relative positional information between cooperative robots.
 
-<br>
+- (6) Teaching
+Use R351 (Manual Cooperative State Setting) to assign Master and Slave roles and teach cooperative motions by operating the Master robot.
 
-![[그림 2-2] 협조제어 상태 확인](../../_assets/2-2.png)
+- (7) Operation Check
+Verify cooperative motion in manual mode. Start cooperative robots by stepping forward simultaneously.
 
-<br>
+- (8) Continuous Operation
+Switch to automatic mode. Place the program at the lead step and press the start switches on all controllers designated as cooperative robots.
+## 2. System Settings
+## 2.1. Hardware Installation
+## 2.1.1. Emergency Stop Wiring
 
-{% hint style="warning" %}
--	협조제어 네트워크는 다른 네트워크와는 분리하여 독립적으로 구성하는게 좋습니다.  
+If an emergency stop occurs during cooperative motion, robots monitor each other's state via communication so that partner robots also stop, but hardware signals take precedence and positional mismatches between cooperative robots may occur. To minimize cooperative position mismatches during emergency stop, wire the controller's external emergency stop.
 
-{% endhint %}## 2.2 사용환경 설정
+The ${cont_model} controller provides a user external emergency stop. The external emergency stop wiring is shown below.
 
-
-협조제어 기능의 사용 여부 및 로봇 번호 등을 설정합니다. 
-
-(1)	『시스템』→『4: 응용 파라미터』→『17: 협조제어』를 선택합니다.
-
-(2)	『1: 사용환경 설정』를 선택합니다.
-
-(3)	대화상자의 파라미터를 설정합니다. 각 파라미터의 용도는 다음과 같습니다. 
-
-
--	협조제어 기능: <무효, 유효> 
-협조제어 기능의 사용 여부를 선택합니다. 
--	로봇 번호: <1~4>  
-로봇의 번호를 설정합니다. 로봇의 번호는 협조제어에서 연결된 네트워크 상에서 자신의 제어기를 인식하는 번호입니다. ${cont_model} 제어기에서는 최대 4대의 로봇이 협조 네트워크를 구성할 수 있습니다. 로봇 번호가 중복되지 않도록 설정하여 주십시오. 
+When using the robot cooperative feature, install a dedicated emergency stop switch so that emergency stop signals can be input to each controller simultaneously. Use the user-provided external emergency stop wiring to integrate them into a single emergency stop as shown below. This minimizes cooperative position mismatches during an emergency stop.
 
 <br>
 
-![[그림 2-11] 사용환경 설정](../_assets/2-11.png)
+![[Figure 2-1] Emergency stop wiring for robot cooperation](../../_assets/2-1.png)
 
 
 <br>
 
 {% hint style="warning" %}
--	특수 로봇 및 6자유도 미만의 로봇에는 HiNet통신만 적용이 가능하며 cowork명령은 사용할 수 없습니다. 
--	협조제어 기능은 옵션사양입니다. 따라서 본 기능을 사용하기 위해서는 라이선스키 등록이 필요합니다. 한 달간은 임시 키를 발급받아 사용할 수 있으나 그 이상 사용하기 위해서는 당사에 문의하시기 바랍니다.  
-
-<br>
-
-![[그림 2-3] 로봇간 협조제어 라이선스키 옵션 설정](../_assets/2-3.png)
-
-{% endhint %}## 2.3 통신 설정
-
-
-협조제어를 위한 통신 네트워크 IP 주소 및 HiNet I/O 사용을 위한 정보를 설정합니다. 
-
-(1)	『시스템』→『4: 응용 파라미터』→『17: 협조제어』를 선택합니다.
-
-(2)	『2: 통신 설정』를 선택합니다.
--	로봇 협조제어 대수만큼 "+" 버튼으로 로봇을 추가하십시오. (예를들어 협조제어 대수가 3대인 경우에는 하기의 그림과 같이 robot1, robot2, robot3이 모든 로봇들에 동일하게 추가되어야 합니다.) 
-
-(3)	대화상자의 파라미터를 설정합니다. 각 파라미터의 용도는 다음과 같습니다. 
-
--	IP 주소: 각각의 협조제어 로봇들에 대한 네트워크 IP주소를 설정합니다. (예를들어 robot1=192.168.1.150, robot2=192.168.1.151, robot3=192.168.1.152의 I/P인 경우에 모든 로봇들에 대해 동일하게 설정합니다.) 
--	HiNet I/O: 입출력 신호의 시작 인덱스와 바이트 수를 설정합니다.
-HiNet I/O는 자신의 로봇 정보를 다른 협조 로봇에 전달하여 별도의 로봇간 인터록 제어반 없이 상태 로봇들의 상태를 확인할 수 있는 기능으로 자신의 로봇 정보는 출력 신호, 다른 협조 로봇 정보는 입력 신호가 사용됩니다. (예들들어 robot1=fb7.0에 바이트 수가 4, robot2=fb7.32에 바이트 수가 4, robot3=fb7.64에 바이트 수가 4인 경우에 모든 로봇들에 대해 동일하게 설정합니다. 자세한 내용은 "[6. HiNet I/O 기능](../6-hinet/1-io-overview.md)를 참고하십시오.)
-<br>
-
-![[그림 2-12] 사용환경 설정](../_assets/2-12.png)
-
-<br>
-## 2.4. 공통좌표계 설정## 2.4.1. 공통좌표계 설정의 개요
-
-
-
-
-협조 동작을 위해서는 로봇간에 상대적인 위치를 정확히 알아야 합니다. 로봇 제어기는 베이스 좌표계를 기준으로 툴 끝의 위치를 계산하고 있으며 상대 로봇에 대한 정보는 추가적으로 등록되어야 합니다. 로봇간의 위치 정보는 공통좌표계 설정을 통해 이루어집니다.  
- 
-<br>
-
-로봇 1과 로봇2의 위치를 상호 인식하기 위해 공통의 좌표계를 설정합니다. (그림2.4) 설정의 방식은 각각의 로봇에서 공간상의 동일한 위치의 3점을 티칭하여 설정합니다.  
-
-<Br>
-
-![[그림 2-4] 협조 로봇간 공통좌표계 설정](../../_assets/2-4.png)
-
-<Br>
-
-{% hint style="warning" %}
--	공통 좌표계 설정 이전에 로봇의 캘리브레이션을 먼저 수행하여야 합니다.  
+- A positional mismatch during cooperative motion may occur when an emergency stop happens.
+- For handling applications, install a floating mechanism to absorb cooperative mismatches during cooperative motion (errors on emergency stop, synchronization errors, calibration errors, trajectory errors).
+- For handling applications with 2 cooperative robots, it is recommended to install at least one floating mechanism.
+- Use a Safety Relay when using external emergency stop relays.
+    Example product: Omron G7S-4A2B
 
 {% endhint %}
-## 2.4.2. 2대 이상의 공통 좌표계 설정
-
-협조 로봇의 공통 좌표계는 로봇간의 동일점을 티칭하여야 하므로 협조하는 모든 로봇이 동일한 3점을 가리킬 수 있도록 하여야 합니다. 따라서 로봇간의 거리가 많이 떨어져 있는 경우에는 공통 좌표계의 설정이 불가능합니다. 이때는 별도의 툴(Tool)을 제작하여 로봇간의 동일점을 티칭할 수 있도록 하여야 합니다. 
-
-
-<Br>
-
-![[그림 2-5] 2대 이상의 공통 좌표계 설정](../../_assets/2-5.png)## 2.4.3. 주행축 시스템
-
-
-협조제어를 위한 주행축 시스템을 구성할 때에는 동일한 사양의 주행축을 가능한 평행하게 설치하여야 합니다. 
+## 2.1.2. Network Configuration
 
 <br>
 
-![[그림 2-6] 협조제어를 위한 주행축 시스템 구성](../../_assets/2-6.png)
+| Component | Specification | 
+| :---: | :---: | 
+| ${cont_model}COM | Main CPU board | 
+| UTP cable | Hub connection: direct LAN cable <br> Direct connection of two units: cross LAN cable |
+| Network Hub | Company-specified switching hub |
+
+
+[Table 2-1] Cooperative control requirements
+
+
+<br>
+
+- Connection method
+Connect one end of a UTP cable (Direct) to the universal network socket of the ${cont_model}COM module and the other end to the network hub. Up to 4 units can be connected to the hub this way.
+If connecting two robots without a hub, use a network UTP CROSS cable and connect it to the universal network sockets.
+## 2.1.3. Network Connection Check
+
+Check the network when the following situations occur:
+- During initial installation
+- When a network anomaly is detected during cooperative control operation
+
+<br>
+<br>
+
+- Check items:
+    - Verify the network cable connection.
+    - The ${cont_model}COM network socket LED should be blinking green.
+    - Verify cable integrity.
+    - Check network status in [Inter-robot Cooperative Control] monitoring.
+
+<br>
+
+![[Figure 2-2] Cooperative control status check](../../_assets/2-2.png)
 
 <br>
 
 {% hint style="warning" %}
--	주행축이 있는 시스템은 주행축 사양을 ‘임의’로 설정하고 주행축 캘리브레이션을 한 후 사용하여야 합니다.  
--	협조 로봇간의 주행축은 가능한 서로 평행하게 설치해야 합니다.   
--	주행축을 이동할 때 동기 오차가 커지는 것은 부정확한 주행축 캘리브레이션의 문제일 수 있습니다.   
--	주행축 캘리브레이션 기능에 대한 설명은 『${cont_model} 제어기 조작설명서』를 참고하십시오.   
--	주행축 캘리브레이션은 MASTER, SLAVE 모두 해야 합니다.   
+- It is recommended that the cooperative control network be configured separately and independently from other networks.
 
-{% endhint %}## 2.4.4. 공통좌표계 설정
+{% endhint %}
+## 2.2. Control Environment Settings
 
+Set whether to use the cooperative control function and the robot number, etc.
 
-공통 좌표계가 설정되어 있지 않으면 수동 협조 조그 조작이나 협조 재생이 불가합니다. 공통 좌표계가 설정되어 있는 경우 협조 조그 동작을 통해 공통 좌표계 설정이 올바로 되었는지 확인 후에 본격적인 작업을 하는 것이 바람직합니다. 
-공통 좌표계의 설정은 협조 로봇의 툴 선단의 위치를 정확히 알고 있어야 합니다. 그렇지 않을 경우 로봇간 협조제어 시 위치동기 오차가 발생하게 됩니다. 따라서 로봇의 원점 및 툴의 정확한 위치를 설정하기 위한 캘리브레이션이 필요합니다. ${cont_model} 제어기는 3차원 위치 측정기가 없는 경우 자동 캘리브레이션(『시스템』 → 『6: 자동 캘리브레이션』 → 『1: 축 원점 및 툴 길이 최적화』) 기능을 제공하고 있습니다.  3차원 위치 측정기를 보유하고 있다면 보다 정확한 캘리브레이션이 가능합니다. 이 경우에는 『9: 로봇과 툴 캘리브레이션』 기능을 이용하십시오. 보다 자세한 내용은 ${cont_model} 조작설명서』를 참고하십시오. 
+(1) Select 'System' → '4: Application Parameters' → '17: Cooperative Control'.
 
--	ROBOT1, ROBOT2 로봇 두 대의 환경에서 공통 좌표계 설정 예시  
+(2) Select '1: Control Environment Settings'.
 
-    - ①	ROBOT1과 ROBOT2 제어기에 공통 좌표계 설정용 프로그램 번호를 선택합니다.  
-    - ②	ROBOT1과 ROBOT2를 각각 조그로 조작하여 가능한 큰 삼각형을 생성하도록 3점을 스텝 1,2,3에 순차적으로 기록합니다.  이때 기록위치는 공간상에 동일한 위치에 기록되어야 하며 보간 방식과, 속도는 무관하나 툴 번호는 툴 선단의 위치를 정확히 알고 있는 툴을 선택 하여야 합니다.  
-    - ③	수동 모드에서 『시스템』 → 『4: 응용 파라미터』→『3: 공통좌표계 설정』을 선택합니다.  
-    - ④	『자동계산』에서 공통좌표계 설정용 프로그램 번호를 입력합니다.  
-    - ⑤	실행 결과는 로봇 베이스에서 본 공통 좌표계 위치와 자세가 표시됩니다.  
-    - ⑥	『확인』키를 누르면 설정이 완료됩니다.  
+(3) Set the dialog parameters. The purpose of each parameter is as follows:
+
+- Cooperative Control Function: <Disabled, Enabled>
+Select whether to use the cooperative control function.
+- Robot Number: <1~4>
+Set the robot number. The robot number is the identifier for your controller on the cooperative control network. The ${cont_model} controller supports a maximum of 4 robots in a cooperative network. Ensure robot numbers are not duplicated.
 
 <br>
 
-![[그림 2-7] 각 로봇 별 공통좌표계 설정 프로그램](../../_assets/2-7.png)
-
-<br>
-
-![[그림 2-8] 공통좌표계 설정 티칭 방법](../../_assets/2-8.png)
+![[Figure 2-11] Control environment settings](../_assets/2-11.png)
 
 
 <br>
-
-![[그림 2-9] 공통좌표계 설정 결과 화면](../../_assets/2-9.png)
-
-<Br>
 
 {% hint style="warning" %}
--	공통좌표계 설정용 툴 데이터 값은 정확한 툴의 규격을 입력하거나 자동 캘리브레이션을 통해 툴 데이터 값을 구하여 사용하십시오. 각 점은 로봇의 자세를 동일하게 기록하는 것이 바람직합니다.   
--	설정한 3점이 가능한 큰 삼각형을 생성하도록 기록하십시오. 점 사이의 거리가 가깝거나, 3점이 거의 직선에 가까운 경우에는 에러가 발생합니다.  
--	공통 좌표계의 자세 Rx, Ry, Rz의 변환은 로봇 좌표계와 다음과 같은 관계에 있습니다.  
+- For special robots and robots with fewer than 6 degrees of freedom, only HiNet communication is applicable and the `cowork` command cannot be used.
+- Cooperative control is an optional feature. Therefore, a license key registration is required to use this function. A temporary key can be issued for one month; for continued use beyond that, contact the company.
 
-    - ①	자신의 로봇(번호 2) 좌표계(ref)를 X축 방향으로 γ만큼 회전시킵니다.  
-    - ②	자신의 로봇(번호 2) 좌표계(ref)를 Y축 방향으로 β만큼 회전시킵니다.  
-    - ③	자신의 로봇(번호 2) 좌표계(ref)를 Z축 방향으로 α만큼 회전시킵니다.  
-    - ④	자신의 로봇(번호 2)베이스 좌표계를 γ, β, α만큼 회전한 자세가 공통 좌표계의 공간상의 자세입니다.  
+<br>
 
-![[그림 2-10] 공통 좌표계의 자세 변환](../../_assets/2-10.png)
+![[Figure 2-3] Cooperative control license key option settings](../_assets/2-3.png)
 
-{% endhint %}## 3. 수동모드 협조조작
+{% endhint %}## 2.3 Communication Settings
 
+Set the network IP addresses for cooperative control and the information for HiNet I/O usage.
 
-## 3.1. 독립/협조 전환
+(1) Select 'System' → '4: Application Parameters' → '17: Cooperative Control'.
 
-### 3.1.1. 키 조작에 따른 모드 전환
+(2) Select '2: Communication Settings'.
+- Add robots using the "+" button for the number of robots to be cooperated. (For example, if the number of cooperative robots is 3, robot1, robot2, robot3 should be equally added on all robots as shown below.)
 
+(3) Set the dialog parameters. Each parameter's purpose is as follows:
 
-수동 모드에서 협조제어 동작 모드는 아래와 같은 방법으로 변경할 수 있습니다.  
+- IP Address: Set network IP addresses for each cooperative robot. (For example, if robot1=192.168.1.150, robot2=192.168.1.151, robot3=192.168.1.152, set the same on all robots.)
+- HiNet I/O: Set the start index and byte count for input/output signals.
+HiNet I/O transmits your robot's information to other cooperative robots to check robot states without a separate interlock control panel; your robot info is used as output signals and other cooperative robots' info as input signals. (For example, robot1=fb7.0 with byte count 4, robot2=fb7.32 with byte count 4, robot3=fb7.64 with byte count 4; set the same on all robots. For more details, see "[6. HiNet I/O Features](../6-hinet/1-io-overview.md)")
+<br>
 
-- ② R CODE를 이용한 방법   
+![[Figure 2-12] Usage settings](../_assets/2-12.png)
+
+<br>## 2.4. Common Coordinate System Settings
+## 2.4.1. Overview of Common Coordinate System Settings
+
+To perform cooperative operations, the relative positions between robots must be known accurately. The robot controller computes the tool tip position with respect to each robot's base coordinate frame, and additional information about the other robots must be registered. The positional relationship between robots is established by configuring a common coordinate system.
+
+To mutually recognize the positions of Robot 1 and Robot 2, a common coordinate system is set (Figure 2.4). The setup is performed by teaching three identical points in space on each robot.
+
+![[Figure 2-4] Common coordinate system setup between cooperative robots](../../_assets/2-4.png)
+
+{% hint style="warning" %}
+- Perform robot calibration before setting the common coordinate system.
+
+{% endhint %}## 2.4.2. Setting a Common Coordinate System for Two or More Robots
+
+A common coordinate system for cooperative robots is defined by teaching identical points between robots, so all cooperating robots must be able to indicate the same three points. Therefore, when the distance between robots is large, it may not be possible to set a common coordinate system. In such cases, a separate tool should be fabricated so that identical points between the robots can be taught.
+
+![[Figure 2-5] Setting a common coordinate system for two or more robots](../../_assets/2-5.png)
+## 2.4.3. Travel-Axis System
+
+When configuring the travel-axis system for cooperative control, install travel axes with the same specifications as parallel as possible.
+
+![[Figure 2-6] Travel-axis system configuration for cooperative control](../../_assets/2-6.png)
+
+{% hint style="warning" %}
+- Systems with travel axes should set the travel-axis specification to 'arbitrary' and perform travel-axis calibration before use.
+- Install the travel axes of cooperative robots as parallel as possible.
+- Large synchronization errors during travel-axis movement may be caused by inaccurate travel-axis calibration.
+- For details about the travel-axis calibration function, refer to the '${cont_model} controller operation manual'.
+- Travel-axis calibration should be performed for both MASTER and SLAVE.
+
+{% endhint %}## 2.4.4. Common Coordinate System Setup
+
+If a common coordinate system is not set, manual cooperative jog operations and cooperative replay are not possible. When the common coordinate system is set, it is recommended to verify the setup using cooperative jog operations before proceeding with full operations.
+
+The common coordinate system setup requires accurate knowledge of the robots' tool-tip positions. Otherwise, synchronization position errors may occur during cooperative control between robots. Therefore, calibration is required to set the robot origins and the exact tool positions. The ${cont_model} controller provides an automatic calibration function when a 3D position measurement device is not available (System → 6: Automatic Calibration → 1: Axis Origin and Tool Length Optimization). If a 3D position measurement device is available, more accurate calibration is possible; in that case, use the 9: Robot and Tool Calibration function. For more details, refer to the ${cont_model} operation manual.
+
+- Example of common coordinate system setup for a two-robot environment (ROBOT1, ROBOT2)
+
+    - ① Select the program number for common coordinate system setup on both ROBOT1 and ROBOT2 controllers.
+    - ② Jog ROBOT1 and ROBOT2 and sequentially record three points in steps 1, 2, and 3 to form as large a triangle as possible. The recorded positions must correspond to the same spatial points; interpolation method and speed do not matter, but choose a tool number whose tool tip position is known accurately.
+    - ③ In Manual mode, select System → 4: Application Parameters → 3: Common Coordinate Setup.
+    - ④ In Automatic Calculation, enter the program number used for common coordinate setup.
+    - ⑤ The execution result displays the common coordinate system position and orientation as seen from the robot base.
+    - ⑥ Press the Confirm key to complete the setup.
+
+![[Figure 2-7] Per-robot program for common coordinate setup](../../_assets/2-7.png)
+
+![[Figure 2-8] Teaching method for common coordinate setup](../../_assets/2-8.png)
+
+![[Figure 2-9] Common coordinate setup result screen](../../_assets/2-9.png)
+
+{% hint style="warning" %}
+- Enter either the correct tool specifications or obtain tool data using automatic calibration for common coordinate setup. It is recommended that each point be recorded with the same robot posture.
+- Record the three points so they form as large a triangle as possible. If the points are too close or nearly collinear, errors may occur.
+- The orientation transformation of the common coordinate system Rx, Ry, Rz relates to the robot coordinate system as follows:
+
+    - ① Rotate your robot (number 2) coordinate frame (ref) around the X-axis by γ.
+    - ② Rotate your robot (number 2) coordinate frame (ref) around the Y-axis by β.
+    - ③ Rotate your robot (number 2) coordinate frame (ref) around the Z-axis by α.
+    - ④ The pose obtained by rotating your robot (number 2) base coordinate frame by γ, β, α is the orientation of the common coordinate system in space.
+
+![[Figure 2-10] Orientation transformation of the common coordinate system](../../_assets/2-10.png)
+
+{% endhint %}## 3. Manual Mode Cooperative Operation
+## 3.1. Switching Between Independent and Cooperative Modes
+
+### 3.1.1. Mode switching by key operation
+
+In manual mode, cooperative control operation mode can be changed as follows.
+
+- ② Using R CODE
   
-이에 따른 조작은 아래의 표와 같습니다. 
+The operations are as shown in the table below.
 
-
-|키 조작|	기능전환|
+| Key Operation | Mode Switch |
 |:--:|:--:|
-|R351,0|	수동 독립 모드|
-|R351,1	|수동 협조 모드, MASTER 지정|
-|R351,2|	수동 협조 모드, SLAVE 지정|
-|R351,3|	cmove기록모드, SLAVE 조그 모드 지정 <br> 이전 상태가 SLAVE 지정인 경우만 본 모드로 전환 기능|
+| R351,0 | Manual Independent Mode |
+| R351,1 | Manual Cooperative Mode, designate MASTER |
+| R351,2 | Manual Cooperative Mode, designate SLAVE |
+| R351,3 | cmov Recording Mode, designate SLAVE Jog Mode <br> (This mode can only be entered if the previous state was SLAVE) |
 
-[표 3-1] 키 조작에 따른 기능의 전환
+[Table 3-1] Mode switching by key operation
 
 
 <br>
 
- -	수동 모드 독립(INDIVIDUAL) 상태 
+ - Manual Mode Independent (INDIVIDUAL) state
  
-![[그림 3-3] 수동 모드 독립(Individual) 상태 화면](../_assets/3-3.png)
+![[Figure 3-3] Manual Mode Independent state screen](../_assets/3-3.png)
 
 <br>
 
-   각 로봇을 독립적으로 조그 조작을 할 수 있는 상태입니다. 
+   This state allows each robot to be jogged independently.	
 
- -	수동 모드 협조(MASTER지정) 상태 
+ - Manual Mode Cooperative (MASTER designated) state
  
- 
- 
-![[그림 3-4] 수동 모드 협조 마스터 상태 화면](../_assets/3-4.png)
+![[Figure 3-4] Manual Mode Cooperative Master state screen](../_assets/3-4.png)
 
 <br>
 
-   슬레이브가 지정된 상태에서 마스터의 움직임에 따른 동기 조작을 위한 상태입니다.
+   This is the state for synchronized operation according to the Master's movement when a Slave is designated.
 
- -	수동 모드 협조(SLAVE지정) 상태 
+ - Manual Mode Cooperative (SLAVE designated) state
  
- 
- 
-![[그림 3-5] 수동 모드 협조 슬레이브 상태 화면](../_assets/3-5.png)
+![[Figure 3-5] Manual Mode Cooperative Slave state screen](../_assets/3-5.png)
 
 <br>
 
-    마스터의 움직임에 따른 추종을 위한 슬레이브 설정 상태입니다.
+    The state for the Slave to follow the Master's movement.
 
 
- - 	cmov기록모드, SLAVE 조그 모드 상태 
- 
+ - cmov Recording Mode, SLAVE Jog mode state
+  
 
-
-![[그림 3-6] cmov 기록 모드 상태 화면](../_assets/3-6.png)
+![[Figure 3-6] cmov Recording Mode state screen](../_assets/3-6.png)
 
 <br>
 
-cmov기록을 하거나 cmov명령의 스텝 전후진을 통해 티칭 위치를 확인할 수 있습니다.<br> 단 스텝을 기록하거나 로봇을 움직이고자 할 경우 협조대상 로봇 중 반드시 Master로 설정된 로봇이 있어야 합니다. <br>이때, 슬레이브측에 기록된 위치는 마스터 로봇의 엔드 이펙터 좌표계 기준의 슬레이브 로봇의 상대적 위치 입니다.  
+In cmov recording mode, you can record cmov or verify taught positions using cmov step forward/back. Note that to record steps or move the robot, there must be a robot set as Master among the cooperative robots. The position recorded on the Slave is the relative position of the Slave robot based on the Master's end effector coordinate system.
 
 <br>
 
 {% hint style="warning" %}
- - 	공통 좌표계가 설정되어 있지 않은 상태에서는 수동 모드 독립 상태에서 마스터나 슬레이브로 협조 역할의 변환이 불가능합니다.  
- -	R CODE에 의한 수동 협조상태 전환에서 R351,3‘cmov기록 상태’는 항상 ‘수동협조상태(Slave지정 모드)’(R351,2)에서만 가능합니다.  
+ - Without a common coordinate system set, it is not possible to switch roles to Master or Slave from Manual Mode Independent state.
+ - The R351,3 'cmov recording state' R CODE can only be entered from manual cooperative state (Slave designated mode) (R351,2).
  
-{% endhint %}## 3.2. 수동모드 협조조작
-### 3.2.1. MASTER 로봇과 SLAVE 로봇의 설정   
+{% endhint %}## 3.2. Manual Mode Cooperative Operation
+### 3.2.1. Setting MASTER and SLAVE Robots
 
-
-R351을 이용하여 로봇 역할을 MASTER와 SLAVE로 설정합니다. 이때 로봇의 역할은 로봇 번호와는 무관합니다.
+Use R351 to set robot roles to MASTER and SLAVE. The robot role is independent of the robot number.
 
  
 
-![[그림 3-7] 수동모드 협조조작(Master 로봇과 Slave 로봇의 설정)](../_assets/3-7.png)
+![[Figure 3-7] Manual mode cooperative operation (Setting Master and Slave robots)](../_assets/3-7.png)
 
 <br>
          
- - ①	MASTER 로봇과 SLAVE 로봇이 모두 ‘수동모드’인지 확인합니다.  
- - ②	MASTER와 SLAVE 로봇을 모두 운전준비 ON 대기합니다.  
- - ③	SLAVE 로봇의 ENABLE 스위치를 잡아 운전준비 ON이 유지되도록 되도록 하고 MASTER 로봇도 운전준비 ON 되어 있는지 확인합니다.  
- - ④	MASTER 로봇을 조작하면 SLAVE 로봇은 상대 위치를 추종하여 움직입니다.  
+ - ① Confirm that both MASTER and SLAVE robots are in 'Manual Mode'.
+ - ② Ensure both MASTER and SLAVE robots have Drive Ready ON and are in standby.
+ - ③ Keep the Slave robot's ENABLE switch held so that Drive Ready ON is maintained, and confirm that the MASTER's Drive Ready is also ON.
+ - ④ When the MASTER robot is operated, the SLAVE robot follows by tracking the relative position.
 
  
-![[그림 3-8] 수동모드 협조조작(Master 로봇 조작 / Slave 로봇 추종)](../_assets/3-8.png)
+![[Figure 3-8] Manual mode cooperative operation (Master operation / Slave following)](../_assets/3-8.png)
 
 <br>
 
 {% hint style="warning" %}
- -	다음과 같은 경우에는 수동 협조 JOG가 불가능합니다. 
-    - MASTER를 두 개 이상 지정하여 조작하는 경우 
-    - SLAVE로 설정된 로봇을 조작하는 경우 
-    - MASTER혹은 SLAVE의 Enable 스위치를 누르고 있지 않은 경우 
-    - 로봇간 협조 좌표계 설정이 되지 않은 경우
-    - 로봇간 협조 제어  통신이 끊어진 경우
+ - Manual cooperative JOG is not possible in the following cases:
+    - When more than one Master is designated and operated
+    - When attempting to operate a robot set as Slave
+    - When the Enable switches of Master or Slave are not pressed
+    - When the inter-robot cooperative coordinate system is not configured
+    - When cooperative control communication between robots is disconnected
 
- -	수동모드 협조기능 시에 SLAVE로 설정한 로봇에서는 JOG가 불가합니다. SLAVE의 JOG를 위해서는 로봇의 역할을 수동 모드 독립 상태로 변경하여 사용하십시오. 
+ - In Manual Mode cooperative operation, JOG is not permitted on robots set as Slave. To jog a Slave, change the robot role to Manual Mode Independent.
 
- - 	협조제어가 <무효>인 경우에 수동모드의 화면 상단에 I:R# / S:R# / M:R#의 표시가 되지 않고 설정도 되지 않습니다. 따라서 수동 협조 JOG도 불가능합니다. 
+ - If cooperative control is <Disabled>, the I:R# / S:R# / M:R# indicators will not appear at the top of the Manual Mode screen and cannot be configured, therefore Manual cooperative JOG is not possible.
 {% endhint %}
-## 3.3. 협조 주행축 조그
+## 3.3. Cooperative Drive Axis Jog
 
-
-
-
-협조 주행축 조그는 통상의 협조 조그와 동일한 조작입니다. 그림3.5와 같이 협조 조그 상태에서 Master를 주행축 조작하면 Slave의 주행축이 상대 위치를 보상하여 이동합니다. 
+Cooperative drive axis jogging is operated the same way as standard cooperative jogging. As shown in Figure 3-5, when operating the Master drive axis in cooperative jog state, the Slave's drive axis moves compensating the relative position.
 
  
-![[그림 3-9] 협조 주행축 조그](../_assets/3-9.png)
+![[Figure 3-9] Cooperative drive axis jog](../_assets/3-9.png)
 
 <br>
 
-
 {% hint style="warning" %}
- -	협조제어 시스템의 주행축은 마스터와 슬레이브가 가능한 평행하게 설치되어야 합니다.  
--	협조제어 주행축 시스템은 1축만 지원합니다.   
--	협조 주행축 기능을 사용하기 위해서는 주행축 캘리브레이션을 먼저 실행해야 합니다.  
+ - The drive axes of cooperative control systems should be installed as parallel as possible between Master and Slave.  
+- Cooperative control drive axis systems support only a single axis.   
+- To use cooperative drive axis functionality, perform drive axis calibration first.  
 {% endhint %}
-## 3.4. cmov 기록모드 조그
+## 3.4. cmov Recording Mode Jog
 
+The cmov recording mode is a mode for teaching Slave positions for jigless cooperative motion.
 
-cmov기록 모드는 지그리스 협조 동작을 위해 슬레이브의 위치를 교시하는 모드입니다. 
-
- -	cmov 기록모드 설정 방법  
-    - ①	로봇역할을 슬레이브로 선택합니다.  
-    - ②	마스터 로봇의 수동 협조 상태를 MASTER로 놓습니다.  
-    - ④	직교좌표계 조그 상태에서도 마스터 좌표와 상관없이 로봇의 직교좌표계 기준으로 조그가 이루어집니다. 
+ - How to set cmov recording mode:
+    - ① Select the robot role as Slave.
+    - ② Set the Master's manual cooperative state to MASTER.
+    - ④ Even in Cartesian coordinate jog state, jogging is performed relative to the robot's Cartesian coordinate system regardless of the Master coordinates.
 
 <Br>
 
-![[그림 3-10] cmov 기록모드 조그](../_assets/3-10.png)
+![[Figure 3-10] cmov recording mode jog](../_assets/3-10.png)
 
 <br>
  
 <br>
 
  {% hint style="warning" %}
--  협조제어 시스템의 주행축은 마스터와 슬레이브가 가능한 평행하게 설치되어야 합니다.   
--  슬레이브가 cmov기록 모드일 때는 수동 협조 상태가 마스터로 설정된 로봇의 조그 조작은 불가합니다.  
+- The drive axes of cooperative control systems should be installed as parallel as possible between Master and Slave.
+- When the Slave is in cmov recording mode, jogging of the robot set as Master in manual cooperative state is not allowed.
 {% endhint %}
-## 3.6. 협조 로봇간 암 간섭 및 소프트 리밋 검지## 3.6.1. 상대 에러의 검지
+## 3.6. Detection of Arm Interference and Soft Limits Between Cooperative Robots
+## 3.6.1. Detection of Partner Errors
 
-
-협조 동작 중 상대 로봇이 암 간섭 에러 혹은 소프트리밋 등의 에러로 정지하는 경우 상대 위치를 유지한 채 정지합니다. Slave에서 발생하여도 Master도 정지하며 조작이 되지 않습니다. 
-
- 
-
-<br>
- 
-![[그림 3-11] 소프트리밋 에러 감지](../../_assets/3-11.png)
-## 3.5.2. 에러의 해제
-
-에러가 발생하지 않는 방향으로 Master 로봇 조그 키를 누르면 해제되며 에러가 해제됩니다. 에러 해제 이후 에러가 발생하지 않는 방향으로 조그 키를 다시 누르면 조작이 가능합니다. 
+If a partner robot stops due to an arm interference error or soft limit error during cooperative motion, the system stops while maintaining relative positions. If the error occurs on a Slave, the Master will also stop and cannot be operated.
 
  
 <br>
  
-![[그림 3-12] 소프트리밋 에러 해제](../../_assets/3-12.png)
-## 4. 협조 동작 티칭## 4.1. cowork 명령## 4.1.1. 명령의 파라미터
+![[Figure 3-11] Soft limit error detection](../../_assets/3-11.png)
+## 3.5.2. Error Clearance
 
+Press the Master's jog key in a direction that does not cause the error to be released, and the error will be cleared. After clearing the error, pressing the jog key again in a direction that does not cause the error allows operation.
 
-cowork 명령는 프로그램에서 협조제어의 시작 및 종료를 표시하여 주고, 각 로봇의 MASTER 및 SLAVE를 지정하는 프로시져입니다.  
+ 
+<br>
+ 
+![[Figure 3-12] Clearing soft limit error](../../_assets/3-12.png)
+## 4. Cooperative Motion Teaching
+## 4.1. cowork Command
+````markdown
+## 4.1.1. Command Parameters
+
+The `cowork` command marks the start and end of cooperative control in a program and specifies each robot's MASTER and SLAVE roles.
 
 <br>
 
-### 문법
+### Syntax
 
 ```python
 cowork {param1},{param2},{param3},{param4},{param5}
@@ -508,78 +456,74 @@ cowork m,id=0,s=[2,3,4],wait=5
 
 <br>
 
-### 파라미터
-| param# | 의미 | 용례 |
+### Parameters
+| param# | Meaning | Example |
 | :--- | :--- | :--- |
-| param1| - 자신의 로봇 역할 (MASTER/SLAVE) 지정 <br>- 협조 동작의 종료(end) 지정 <br> m: 마스터 <br> s: 슬레이브 <br> end : 협조동작의 종료 <br> with : 상대 로봇과 위치 동기, sync 번호 동일| <br> <br> cowork m,s=... <br> cowork s,m=... <br> cowork end <br> cowork with, sync=1 |
-| param2 | - 마스터 로봇 제어기가 마스터로 지정할 매니퓰레이터 id번호  <br>  자신이 MASTER인 경우: 	 <br>id = 0 은 로봇 매니퓰레이터 <br>  id = 1 은 부가축으로 등록되어 있는 포지셔너 그룹 1 <br> (마스터 측에 부가축으로 포지셔너 그룹이 설정되어 있는 경우)|cowork m,id=1,s  <br> <br> <br>|
-| param3 | - 상대의 로봇 번호 지정 <Br> 자신을 MASTER로 지정한 경우:   	 <br> 상대는 SLAVE가 되며, SLAVE의 로봇 번호를 지정(최대 3개) <br> 자신을 SLAVE로 지정한 경우:	<br> 상대는 MASTER가 되며, MASTER가 되는 로봇 번호를 지정 | cowork m,s=[2,3,4] <Br> <Br>cowork s,m=1 |
-| param4 | - 마스터 로봇 제어기에서 마스터로 지정할 매니퓰레이터 id번호 <br> 자신이 SLAVE인 경우: <br> id = 0 은 로봇 매니퓰레이터  <br>     id = 1 은 부가축으로 등록되어 있는 포지셔너 그룹 1 <Br>  (마스터 측에 부가축으로 포지셔너 그룹이 설정되어 있는 경우)  | cowork s,m=1,id=0  <br> <br> <br>|
-| param5 | - 협조상대 로봇 대기시간(sec) < 0(무한대기) ~ 120 > <Br> 자신을 MASTER로 지정한 경우:  <br> SLAVE의 협조 기준위치로 올 때까지의 대기시간 <br> 자신을 SLAVE로 지정한 경우: 	 <br> MASTER의 협조 기준위치로 올 때까지의 대기시간  | cowork s,m=1,wait=30 <Br> <Br>cowork s,m=1,wait=30 |
+| param1| - Designate your robot role (MASTER/SLAVE) <br>- Specify end of cooperative motion (end) <br> m: Master <br> s: Slave <br> end : End cooperative motion <br> with : Position synchronization with partner robot; sync number must match| <br> <br> `cowork m,s=...` <br> `cowork s,m=...` <br> `cowork end` <br> `cowork with, sync=1` |
+| param2 | - Manipulator ID that the master robot controller designates as Master <br> If you are MASTER: <br> id = 0 indicates robot manipulator <br> id = 1 indicates the positioner group 1 registered as an auxiliary axis (if a positioner group is set as an auxiliary axis on the Master side)| `cowork m,id=1,s` <br> |
+| param3 | - Specify partner robot number <Br> If you designate yourself as MASTER: <br> the partners become SLAVEs and their robot numbers are specified (up to 3) <br> If you designate yourself as SLAVE: <br> the partner becomes MASTER and specify the robot number of the MASTER | `cowork m,s=[2,3,4]` <Br> `cowork s,m=1` |
+| param4 | - Manipulator ID that the Master robot controller designates as Master <br> If you are SLAVE: <br> id = 0 is robot manipulator <br> id = 1 is the positioner group 1 registered as an auxiliary axis (if a positioner group is set as an auxiliary axis on the Master side) | `cowork s,m=1,id=0` |
+| param5 | - Partner robot wait time (sec) < 0 (infinite wait) ~ 120 > <Br> If you designate yourself as MASTER: <br> Wait time for SLAVEs to reach the cooperative reference position <br> If you designate yourself as SLAVE: <br> Wait time for MASTER to reach the cooperative reference position | `cowork s,m=1,wait=30` |
 
 
-4.1.2. cowork 명령의 사용법
+````## 4.1.2. How to Use the `cowork` Command
 
+(1) On the MASTER robot, the actions within the `cowork ~ cowork end` section are treated as cooperative segment commands. SLAVEs cannot insert action commands.
 
+(2) On SLAVE robots, standard `move` commands cannot be used within the cooperative section; use the `cmov` command (cowork move) instead.
 
-(1)	MASTER 로봇에는 cowork ~ cowork end 구간에 있는 동작 명령이 협조 구간 명령이 됩니다. SLAVE는 동작명령을 삽입할 수 없습니다.  
-
-(2)	SLAVE 로봇에는 협조 구간에서 일반 move 명령을 사용할 수 없으며 cowork move 명령인 cmov명령을 사용해야 합니다.  
-
-(3)	슬레이브가 마스터 로봇을 추종하는 역할을 수행하는 핸들링 응용에서는 아래의 예시와 같이 슬레이브에 cmov명령을 삽입하지 않아도 cowork 명령을 실행할 때 마스터와 슬레이브의 상대위치를 유지하며 이동하게 됩니다.  
+(3) In handling applications where the Slave follows the Master, as in the example below, the Slave will maintain the relative position to the Master and move accordingly when the `cowork` command is executed even if no `cmov` commands are inserted on the Slave.
 
 ![](../../_assets/4-prg1.png)
  
-(4)	슬레이브에는 마스터 엔드 이펙터 좌표계 기준으로 보간 동작하도록 cmov 명령을 삽입할 수 있으며 cmov의 기록 위치는 마스터의 툴 엔드 이펙터 좌표계 기준입니다. 아래의 예와 같이 교시하면 cowork ~ cowork end 구간 사이에서 협조 동작을 수행하며 마스터 움직임에 따라 슬레이브는 마스터 로봇을 추종하면서 마스터 엔드 이펙터 좌표계로 기록된 cmov 경로를 따라 움직입니다.  
-
+(4) On the Slave, you can insert `cmov` commands that interpolate in the Master end effector coordinate system; `cmov` recorded positions are relative to the Master's tool end effector coordinate system. If taught as in the example below, within `cowork ~ cowork end` the Slave performs cooperative motion and follows the Master's movement along the `cmov` path recorded in the Master end effector coordinate system.
 
  ![](../../_assets/4-prg2.png)
 
 {% hint style="warning" %}
 
- -	협조 동작 종료 위치에는 반드시 cowork end  명령이 삽입되어 있어야 합니다.  
- -	슬레이브(Slave) 로봇의 경우 협조 구간 내에 move 명령은 삽입이 불가하며 마스터(master) 로봇의 경우 cmov 명령의 삽입이 불가능합니다.
+ - A `cowork end` command must be inserted at the end of cooperative motion.
+ - For SLAVE robots, `move` commands cannot be inserted within the cooperative section; for MASTER robots, `cmov` commands cannot be inserted.
 
-{% endhint %}## 4.2. 협조 핸들링용 프로그램 티칭 및 프로그램 작성
+{% endhint %}
+## 4.2. Teaching and Writing Programs for Cooperative Handling
 
+(1) Operators are required equal to the number of cooperative robots; therefore, each operator participates for each robot to be cooperated.
 
+(2) Verify that the cooperative robot common coordinate system is configured.
 
-(1)	협조제어 대수만큼의 조작자가 필요합니다. 따라서 조작자는 협조할 로봇 수만큼 참여합니다.  
-
-(2)	협조로봇 공통 좌표계 설정이 되어 있는지 확인합니다.   
-
-(3)	MATER와 SLAVE 로봇을 각각 협조 시작 위치로 이동시키고 기준위치로 시작위치를 기록합니다.  
+(3) Move the MASTER and SLAVE robots to their respective cooperation start positions and record the start positions as reference.
 
 ![](../_assets/4-prg3.png)
  
  <br>
 
-![[그림 4-1] 협조동작 개시 기준위치 기록](../_assets/4-1.png)
+![[Figure 4-1] Recording cooperative motion start reference positions](../_assets/4-1.png)
 
 <br>
 
-(4)	MASTER와 SLAVE 로봇을 R351 코드를 입력하여 로봇의 역할을 지정합니다.  
+(4) Assign robot roles by entering R351 codes for MASTER and SLAVE robots.
 
-(5)	협조제어 개시 명령(cowork m/s)을 등록합니다. cowork 명령은 MASTER/SLAVE 인지를 지정하고 SLAVE/MASTER의 번호를 지정합니다. 이때 MASTER 로봇은 1대만 설정 되어야 하고 SLAVE 로봇은 최대 3대까지 지정할 수 있습니다.   
+(5) Register the cooperative control start command (`cowork m/s`). The `cowork` command specifies Master/Slave and assigns the Slave/Master numbers. Only one Master may be set, and up to three Slaves may be specified.
 
  ![](../_assets/4-prg4.png)
  
 
-(6)	MASTER 로봇을 조그(JOG)로 조작합니다. 이때 SLAVE는 MASTER의 툴끝의 위치를 상대적인 위치로 추종합니다. 협조 조그 시에는 SLAVE도 Enable 스위치를 누르고 있어야 합니다. 기록위치에 스텝을 Master에만 기록합니다. Slave 로봇 제어기에는 기록하지 않습니다.  
+(6) Operate the MASTER robot by jogging (JOG). The Slave follows the Master tool-tip position relatively. During cooperative jogging, the Slave must have the Enable switch pressed. Record step positions only on the Master; do not record them on the Slave controller.
 
  
 ![](../_assets/4-prg5.png)
       
 
  
-![[그림 4-2] Master 로봇 조작](../_assets/4-2.png)
+![[Figure 4-2] Master robot operation](../_assets/4-2.png)
 
-(7)	협조 동작 스텝을 MASTER에 기록합니다. MASTER의 보간 종류 및 속도를 설정합니다. 협조동작 명령 내에서는 일반적인 move 명령을 사용합니다. (cmov는 사용할 수 없습니다.)  
+(7) Record cooperative motion steps on the MASTER. Set the Master's interpolation type and speed. Use standard `move` commands within cooperative motion commands (cmov cannot be used).
 
  
 ![](../_assets/4-prg6.png)
 
-(8)	협조 동작을 마치면 협조 제어를 종료(cowork end)하는 명령을 MASTER와 SLAVE에 삽입합니다.  
+(8) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control.
 
  
 ![](../_assets/4-prg7.png)
@@ -588,11 +532,11 @@ cowork m,id=0,s=[2,3,4],wait=5
 <br>
 
 {% hint style="warning" %}
-	수동 협조 조작 중 Slave의 Enable 스위치 상태를 OFF로 변경하지 마십시오. 하드웨어 신호가 통신보다 우선하여 처리되어 협조 로봇간 위치 어긋남이 발생합니다. 이 경우 심하면 작업물이나 로봇 핸드가 파손될 우려가 있습니다. 
+	Do not change the Slave's Enable switch to OFF during manual cooperative operation. Hardware signals take priority over communication and can cause position mismatches between cooperative robots. In severe cases, this may result in damage to the workpiece or the robot hand.
 
 {% endhint %}
-
-## 4.3. cmov 명령
+```markdown
+## 4.3. cmov Command
 
 <br>
 
@@ -604,578 +548,632 @@ cmov R20,L,tg=po1,spd=60%,accu=0,tool=1 until di1
 ```
 
 
-
 <br>
 
-### 파라미터
-| param# | 의미 | 
+### Parameters
+| param# | Meaning | 
 | :--- | :--- | 
-| param1| - 마스터 로봇 시스템의 매니퓰레이터 식별자 <br> 형태: R(#1)(#2) <br> #1 : 마스터 로봇 시스템 번호 (1～4) <br> #2 : 로봇 시스템의 마스터 매니퓰레이터 식별자 <br> (0: Robot, 1: Positioner Group 1, 2: Positioner Group 2)| 
-| param2 | - 보간 종류 (interpolation)  <br> 슬레이브 로봇의 보간 방식 지정, 직선과 원호만 가능 <br> (L: Linear, C: Circular)|
-| param3 | - 이동 속도 (Speed) <Br> 작업물 대비 상대적인 속도 지정 | 
+| param1| - Master robot system manipulator identifier <br> Format: R(#1)(#2) <br> #1 : Master robot system number (1～4) <br> #2 : Master manipulator identifier of the robot system <br> (0: Robot, 1: Positioner Group 1, 2: Positioner Group 2)| 
+| param2 | - Interpolation type <br> Specifies the interpolation mode for the slave robot; only linear and circular are supported <br> (L: Linear, C: Circular)|
+| param3 | - Movement speed (Speed) <Br> Specify the relative speed compared to the workpiece | 
 | param4 | - Accuracy (0~7)|
-| param5 | - Tool 번호 (0~31) |
+| param5 | - Tool number (0~31) |
 
 
-![[그림 4-3] ID 식별자 구분 방법](../_assets/4-3.png)
+![[Figure 4-3] Method for distinguishing ID identifiers](../_assets/4-3.png)
 
-## 4.4. 아크 용접 및 실링용 티칭 (지그리스 협조제어)
+```## 4.4. Teaching for Arc Welding and Sealing (Jigless Cooperative Control)
 
-
-
-(1)	마스터와 슬레이브의 수동 협조 로봇 역할을‘독립’으로 설정한 후 협조시작 위치에 각각의 스텝을 기록 하고 협조 시작 위치에 cowork 명령을 입력합니다. 
+(1) Set the manual cooperative roles of Master and Slave robots to 'Independent', record the start steps for cooperation, and insert the cowork command at the cooperation start position.
  
 ![](../_assets/4-prg8.png)
 
-![[그림 4-4] 스텝 시작 및 목표 위치](../_assets/4-4.png)
+![[Figure 4-4] Step start and target positions](../_assets/4-4.png)
 
 
-(2)	수동 협조상태 Master와 Slave를 각각의 역할에 따라 지정합니다.  
+(2) Set the Manual Cooperative states for Master and Slave according to their roles.
 
 ![](../_assets/4-prg9.png)
 
 
-
-(3)	Master를 조그 조작하면 슬레이브는 추종하게 됩니다. 원하는 기록위치에 마스터 스텝을 기록합니다.  
-
- ![](../_assets/4-prg10.png)
-
-(4)	Slave를 R351,3 명령을 이용하여 cmov기록 상태로 전환합니다. 화면 상단의 로봇역할 표시가 흰색에서 빨간색으로 변경됩니다.  
+(3) When you jog the Master, the Slave follows. Record the Master step at the desired position.
 
  ![](../_assets/4-prg10.png)
 
-(5)	슬레이브 로봇을 목표위치까지 조그 조작한 후 ‘기록’키를 누릅니다.  
+(4) Switch the Slave to cmov recording state using R351,3. The robot role indicator at the top of the screen changes from white to red.
+
+ ![](../_assets/4-prg10.png)
+
+(5) Jog the Slave robot to the target position and press the 'Record' key.
  
 
-![[그림 4-5] 스텝 목표 위치 cmov 기록](../_assets/4-5.png)  
+![[Figure 4-5] Recording cmov target positions](../_assets/4-5.png)
 
  
 ![](../_assets/4-prg11.png)  
 
 
-
-(6)	슬레이브에는 cmov가 기록됩니다. cmov의 기록위치는 마스터 툴 엔드 이펙터 좌표계 기준의 좌표입니다. [속성]키를 눌러 기록된 좌표위치를 확인, 수정이 가능합니다. 
+(6) The cmov positions are recorded on the Slave. The recorded cmov positions are coordinates relative to the Master tool end effector coordinate system. Press the [Properties] key to view or modify the recorded coordinates.
   
-(7)	이때 기록된 좌표계는 ‘마스터’로 표시됩니다. 
+(7) The recorded coordinate system will be shown as 'Master'. 
 
-(8)	마찬가지 방법으로 슬레이브를 이동하며 여러 개의 cmov 스텝을 기록할 수 있습니다.  
+(8) Similarly, move the Slave and record multiple cmov steps.
 
  ![](../_assets/4-prg12.png)
 
-(9)	단 기록된 스텝에 대한 이동 계획은 마스터와 슬레이브가 개별적으로 수행하므로 마스터와 슬레이브의 목표 위치에 도달하는 시점은 서로 다를 수 있습니다. 따라서 협조 구간에서 마스터의 move위치와 슬레이브의 cmov위치의 시작 위치 타이밍을 맞추기 위해서는 HiNet I/O를 이용한 상호 인터록 방법을 사용 하거나 cowork with,sync=1명령을 사용할 수 있습니다. cowork with 명령어는 sync번호가 같아야만 동기 동작을 수행합니다. 다른 번호의 cowork with 명령을 만나면 에러가 발생합니다.
+(9) Note that the movement planning for recorded steps is executed separately by Master and Slave, so the timing when Master and Slave reach their target positions may differ. To align the start timings of the Master's move position and the Slave's cmov position in the cooperative section, use mutual interlocks implemented with HiNet I/O or use `cowork with, sync=1`. The `cowork with` command performs synchronized motion only if the sync numbers match; encountering a `cowork with` with a different number will cause an error.
 
-(10)	예를 들어 마스터와 슬레이브의 스텝 5(S5) 시작 시점을 동기화시키기 위해 _mb 메모리 변수를 이용하여 서로 상대가 스텝위치에 도달했는지를 확인하는 방법을 사용할 수 있습니다.  
+(10) For example, to synchronize the start of step 5 (S5) for Master and Slave, you can use an _mb memory variable to check whether each robot has reached its step position.
 
  ![](../_assets/4-prg13.png)
 
-※ 위와 같은 방법을 사용하면 마스터와 슬레이브가 스텝 4(S4)에 도달한 후 상대 로봇이 스텝 4까지 도달했는지 확인하고 다음 스텝(S5)로 이동하게 됩니다. 
+※ Using this method, after Master and Slave reach step 4 (S4), they verify that the partner robot has reached step 4 before moving to the next step (S5).
 
-(11)	협조 동작을 마치면 협조 제어를 마치도록 마스터와 슬레이브에 모두 cowork end 명령을 삽입하면 협조제어 교시가 완료됩니다.  
+(11) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control teaching.
 
 ![](../_assets/4-prg14.png)     
 
-(12)	앞에서 설명한 전체 프로그램은 다음과 같으며 협조제어의 타이밍 제어를 위해 ⓐ, ⓑ, ⓒ와 같은 타이밍 제어를 실시할 수 있습니다.  
+(12) The entire program example described above is shown below, and timing control such as ⓐ, ⓑ, ⓒ may be applied for cooperative timing control.
 
  ![](../_assets/4-prg15.png)
 
-(13)	cowork with 명령은 협조제어 중(cowork~cowork end사이)에서 마스터와 슬레이브 로봇간에 위치를 동기화할 때 사용하는 명령입니다. 협조제어 중에 cowork with명령을 만나게 되면 협조 중인 로봇이 모두 cowork with에 도달할 때까지 대기합니다. 따라서 이전의 프로그램은 다음과 같은 방법으로도 변경할 수 있습니다.  
+(13) The `cowork with` command is used during cooperative control (between `cowork` and `cowork end`) to synchronize positions between Master and Slave. When a `cowork with` command is encountered during cooperative control, it waits until all cooperating robots reach that `cowork with`. Therefore, the earlier program can be modified as follows.
 
  ![](../_assets/4-prg16.png)
 
 
 {% hint style="warning" %}
 
- -	cmov의 위빙동작을 사용하는 경우 참조점(refp)은 협조제어 구간(cowork ~ cowork end) 내에 기록해야 합니다. 
- -	레이저 비전 센서를 이용한 cmov궤적 Seam-Tracking 기능은 지원하지 않습니다.
- -	cowork with명령은 협조제어 구간에서(cowork~cowork end) 마스터와 슬레이브 모두 동일한 개수만큼 사용해야 합니다. 
- -	협조 로봇들이 함께 수행하는 cowork with 명령어는 동일한 sync번호를 사용해야 합니다.
+ - When using cmov weaving motion, reference points (refp) must be recorded within the cooperative control region (`cowork ~ cowork end`).
+ - Seam-tracking of cmov trajectories using laser vision sensors is not supported.
+ - In the cooperative control region (`cowork ~ cowork end`), the number of `cowork with` commands must be the same for both Master and Slave.
+ - `cowork with` commands performed jointly by cooperating robots must use the same sync number.
 
 {% endhint %}
- 
-## 4.5. cmov 기록 위치 확인
+## 4.5. Checking cmov Recorded Positions
 
+The cmov steps are a useful feature that allows you to verify taught positions using the step forward/back functions in cmov recording mode. The cmov step records positions and orientations relative to the Master end effector coordinate system, so verify and execute based on the Master's tool position.
 
-cmov 스텝은 cmov기록 모드에서 스텝 전 후진 기능을 이용하여 티칭 위치를 확인 할 수 있는 유용한 기능입니다. cmov 스텝은 ‘마스터 엔드’ 이펙터 좌표계 기준의 위치와 자세가 기록되므로 마스터의 툴 위치를 확인하고 실행하여야 합니다.  
-
- - (1)	마스터로 티칭된(cowork m) 로봇의 수동 협조 상태를 마스터로 설정합니다. (R351,1)  
- - (2)	슬레이브로 티칭된(cowork s) 로봇을 cmov기록 상태로 설정합니다. (R351,3)  
- - (3)	마스터 로봇을 협조할 스텝 위치로 이동시킨 후 정지된 상태로 놓습니다.  
- - (4)	슬레이브는 이동할 cmov 스텝을 선택하고 스텝 전진 키를 누르면 마스터 엔드 이펙터 위에 기록된 위치로 이동합니다. 예를 들어 아래의 그림처럼 cmov 기록위치가 마스터 엔드 이펙터 좌표계의 원점(0,0,0)에 기록되어 있다면 마스터 로봇이 어느 위치에 있어도 슬레이브 로봇은 cmov 실행 시 마스터 엔드 이펙터의 원점으로 이동합니다.  
+ - (1) Set the robot taught as Master (cowork m) to Manual Cooperative Master state (R351,1).
+ - (2) Set the robot taught as Slave (cowork s) to cmov recording state (R351,3).
+ - (3) Move the Master robot to the step position to be cooperated and leave it stopped.
+ - (4) On the Slave, select the cmov step to move to and press the step forward key; the Slave will move to the position recorded in the Master end effector. For example, if the cmov recording position is recorded as the origin (0,0,0) of the Master end effector coordinate system as shown below, the Slave will move to the Master end effector origin regardless of the Master's global position when executing cmov.
 
  
-![[그림 4-6] cmov 기록위치 확인](../_assets/4-6.png)
+![[Figure 4-6] Checking cmov recorded positions](../_assets/4-6.png)
 
 {% hint style="warning" %}
- -	cmov 기록 상태(R351,3 상태)에서는 cowork 명령의 실행 여부에 상관없이 해당 스텝위치로 이동합니다.  
- - 	cmov 기록 상태에서 마스터의 조그는 불가합니다.  
- -	cmov 기록 상태에서는 실시간 협조동작을 하지 않기 때문에 마스터를 동시에 스텝 전 후진 조작하지 말고 정지 상태로 놓으십시오.  
- -	cmov 기록 상태 마스터의 위치를 변경한 후 정지 시킨 후 cmov 스텝을 스텝 전진하면 갱신된 위치로 이동합니다  
+ - In cmov recording state (R351,3), the robot will move to the recorded step position regardless of cowork command execution.
+ - Master jogging is not allowed in cmov recording state.
+ - Because real-time cooperative motion does not occur in cmov recording state, do not operate step forward/back on the Master simultaneously; keep the Master stopped.
+ - If you change and then stop the Master's position while in cmov recording state, stepping forward to the cmov step will move to the updated position.
 {% endhint %}
-## 4.6. 포지셔너 마스터 시스템 
+## 4.6. Positioner Master System
 
 <br>
 
-본 기능은 협조 마스터를 포지셔너로 할당하여 슬레이브 로봇이 마스터 포지셔너와 협조할 수 있도록 준비되어 있습니다. 포지셔너 그룹 1~3를 지원합니다. ## 4.6.1. 포지셔너 마스터 조그
-
+This feature allows assigning a positioner as the cooperative Master so that Slave robots can cooperate with the Master positioner. Positioner groups 1–3 are supported.
+## 4.6.1. Positioner Master Jog
 
 <Br>
 
-(1)	포지셔너가 설정되어 있는 로봇에 포지셔너 동기 기능을 위한 포지셔너 그룹 설정 및 포지셔너 캘리브레이션 등을 수행합니다. 
+(1) Perform positioner group setup and positioner calibration for the robot that has a positioner installed to enable positioner synchronization.
 
-(2)	R351, 1혹은 사용자키를 이용하여 마스터로 설정할 포지셔너가 설정되어 있는 로봇을 수동 협조 마스터(M:G#R#)로 설정합니다. 
+(2) Use R351,1 or a user key to set the robot with the positioner to Manual Cooperative Master (M:G#R#).
 
-(3)	‘메커니즘’ 키를 눌러 포지셔너 메커니즘을 선택합니다.  
+(3) Press the 'Mechanism' key to select the positioner mechanism.
 
 ![](../../_assets/4-7.png)
 
-(4)	‘좌표계’ 키를 눌러 동기좌표계 S1(혹은 S2)이 선택되도록 합니다.  
+(4) Press the 'Coordinate System' key so that the synchronization coordinate system S1 (or S2) is selected.
 
  ![](../../_assets/4-8.png)
 
 
-(5)	슬레이브 로봇은 R351,2를 이용하여 SLAVE로(S:G#R#) 역할을 설정합니다. 
+(5) Set the Slave robot to SLAVE using R351,2 (S:G#R#).
 
-(6)	포지셔너 동기 조그 동작을 실시하면 로봇 1과 로봇 2가 모두 포지셔너와 동기로 조작됩니다. 
-## 4.6.2. 포지셔너 마스터 티칭과 재생
+(6) When performing positioner synchronized jog, both Robot 1 and Robot 2 are operated synchronized with the positioner.
+## 4.6.2. Positioner Master Teaching and Playback
 
-cowork 명령을 이용하여 마스터와 슬레이브에 교시합니다. 슬레이브 측은 마스터 측의 포지셔너를 마스터로 선택하기 위해 id=1(포지셔너 그룹 번호)로 설정합니다. 
+Teach Master and Slave using the `cowork` command. On the Slave side, set `id=1` (positioner group number) to select the Master's positioner as Master.
 
-포지셔너를 마스터로 설정한 상태(마스터 로봇측 좌표계 ‘동기 S1’)에서 슬레이브의 위치를 기록합니다. 이때 기록 위치는 포지셔너 엔드 이펙터 좌표계로 기록됩니다. 
+While the positioner is set as Master (Master robot coordinate system 'Sync S1'), record the Slave positions. Recorded positions are stored in the positioner end effector coordinate system.
 
 ![](../../_assets/4-prg20.png) 
 
-마스터 로봇이 포지셔너와 협조하기 위해서는 기존의 포지셔너와 동일한 방법으로 smov스텝으로 교시합니다. 슬레이브 로봇은 마스터 로봇의 포지셔너를 마스터로 설정한 상태(마스터 로봇측 좌표계 ‘동기 S1’)에서 스텝을 기록하면 마스터 ID를 반영한 로봇번호로 기록됩니다. 
+To have the Master robot cooperate with the positioner, teach smov steps in the same way as for an ordinary positioner. When the Slave records a step while the Master's positioner is set as Master (Master robot coordinate system 'Sync S1'), it is recorded using a robot number that reflects the Master ID.
 
  
 ![](../../_assets/4-prg21.png)
 
-마스터는 포지셔너 동기기능과 동일하고 슬레이브는 R11으로 기록됩니다.
+The Master uses the same positioner synchronization function, and the Slave is recorded with R11.
 
-상기의 (3)과 동일한 방법으로 마스터와 슬레이브를 티칭하고 cowork end로 마무리 합니다. 
+Teach Master and Slave in the same way as described in (3) above and finish with `cowork end`.
      
 ![](../../_assets/4-prg22.png)
 
-수동 모드에서 동작 확인 후 자동모드에서 운전합니다. 
+After confirming operation in manual mode, operate in automatic mode.
 
     
-![[그림 4-7] 각 로봇 별 포지셔너 동기 동작 시뮬레이션](../../_assets/4-9.png)
+![[Figure 4-7] Simulation of positioner synchronized operation per robot](../../_assets/4-9.png)
 
 
 <br>
 
 {% hint style="warning" %}
 
- -	지그리스 협조제어에서 포지셔너 그룹은 1~3를 지원합니다. 포지셔너 조그, cmov에서 포지셔너 그룹 번호를 1~3으로 선택해야 합니다.  
- -	슬레이브에서 cowork s,m=#1,id=#2에서 설정한 값과 cmov R#1#2값이 다를 경우 『E1365 cmov 마스터 No. ID가 부적절함.』 에러가 발생합니다.  
+ - Jigless cooperative control supports positioner groups 1–3. When positioner jogging or in `cmov`, select the positioner group number 1–3.
+ - If values set in the Slave with `cowork s,m=#1,id=#2` differ from the `cmov R#1#2` values, an `E1365 cmov Master No. ID is invalid.` error occurs.
 
 {% endhint %}
+## 5. Cooperative Motion Playback
+## 5.1. Overview of Cooperative Playback
 
-## 5. 협조동작 재생
+This section provides an overview of cooperative playback and its main behaviors, including manual verification and automatic playback procedures. Refer to subsequent sections for detailed instructions.
+## 5.2. Program Check in Manual Mode
 
-5.1. 협조 재생의 개요
-
-
-
-
-
-협조 프로그램은 독립동작 부분과 협조동작 부분으로 나눌 수 있습니다. 
-독립동작 부분은 통상적인 제어 방식과 동일하게 개별적으로 동작하는 부분이며, 협조 동작은 MASTER의 프로그램의 위치에 의해 SLAVE의 동작이 결정되는 cowork ~ cowork END 부분입니다. 
-
-(1)	협조 동작 부분은 cowork ~ cowork end 부분이며 cowork 명령이 시작되면 모든 협조 로봇이 cowork이 실행될 때까지 대기합니다.  
- 
-<br>
-
-![[그림 5-1] 협조 재생1](../_assets/5-1.png)
-
-<br>
-
-(2)	상대 로봇이 모두 cowork 위치에 도달하면 협조 동작을 개시합니다.  
- 
-<br>
-
-![[그림 5-2] 협조 재생2](../_assets/5-2.png)
-
-<br>
-
-
-
-(3)	협조 구간 동작을 모두 끝내면 MASTER 측이 cowork end에 도달하며 협조 상태가 종료됩니다.  
- 
- 
-<br>
-
-![[그림 5-3] 협조 재생1](../_assets/5-3.png)
-
-<br>
-
-(4)	협조 동작이 종료되면 각자의 독립 동작을 다시 수행합니다.   
-
-
- <br>
-
-![[그림 5-4] 협조 재생1](../_assets/5-4.png)
-
-<br>
-## 5.2. 수동모드에서 프로그램 확인
-
-
-(1)	수동모드에서 마스터 로봇은 수동 협조 상태를 I(Indiv.)나 M(Master)로 설정하고, 슬레이브 로봇은 수동 협조 상태를 I(Indiv.)나 S(Slave)로 설정합니다.  
-(2)	운전 준비를 On 하고 양측 모두 ‘스텝 전진’키를 누릅니다.  
-(3)	마스터와 슬레이브의 동기 동작을 확인하기 위해서 마스터와 슬레이브의 스텝전진 키를 협조 동작이 종료될 때까지 누릅니다.  
+(1) In manual mode, set the Master robot's manual cooperative state to I (Indiv.) or M (Master), and set the Slave robot's manual cooperative state to I (Indiv.) or S (Slave).
+(2) Turn Drive Ready On and press the 'Step Forward' key on both sides.
+(3) To verify synchronous motion between Master and Slave, press the Master and Slave step forward keys until cooperative motion is completed.
  
  <br>
  
 ![](../_assets/4-prg23.png)
 
-![[그림 5-5] 수동모드에서 프로그램 확인](../_assets/5-5.png)
+![[Figure 5-5] Program check in manual mode](../_assets/5-5.png)
 
 <br>
  
 
 {% hint style="warning" %}
  
- - 	슬레이브가 cmov기록 모드이면 마스터와의 수동 모드 협조 동작이 되지 않습니다.  
- - 	스텝 전후진 실행 시 조건설정의 ‘스텝 전진시 펑션 실행’을 On으로 설정해야 합니다.  
- -	마스터와 슬레이브 로봇은 cowork 명령을 실행하는 순간만 실행 위치를 검사하며 그 이외의 구간에서 마스터와 슬레이브의 스텝위치를 동기화 시키지는 않습니다. 따라서 스텝 전 후진으로 확인한 마스터와 슬레이브의 상대 위치는 자동모드 재생 동작에서는 달라질 수 있습니다.   
- - 	두 로봇의 위치를 동기화 하기 위해서는 cowork with,sync=1 명령문을 사용하십시오.
+ - If the Slave is in cmov recording mode, manual mode cooperative operation with the Master will not be possible.
+ - When executing step forward/backward, set 'Execute function on step forward' in Condition Settings to On.
+ - The Master and Slave robots check the execution position only at the moment the cowork command is executed; they do not synchronize Master and Slave step positions outside of that. Therefore, the relative positions of Master and Slave checked using step forward/back may differ during automatic mode playback.
+ - To synchronize the positions of the two robots, use the `cowork with, sync=1` statement.
 
 {% endhint %}
-## 5.3. 자동 모드에서의 재생
+## 5.3. Playback in Automatic Mode
 
+(1) Switch all cooperative robots to automatic mode.
 
+(2) Verify that all cooperative robots have Drive Ready ON.
 
+(3) Start the program from the beginning.
 
-(1)	협조로봇을 모두 자동모드로 전환합니다.  
-
-(2)	협조로봇이 모두 운전 준비가 ON되었는지 확인합니다.  
-
-(3)	프로그램을 처음부터 시작하도록 합니다.  
-
-(4)	협조 로봇을 전부 각각 기동시킵니다.  
-    (MASTER와 SLAVE의 기동 순서는 임의의 순서로 하여도 무관합니다.) 
+(4) Start each cooperative robot. (The start order of MASTER and SLAVE may be arbitrary.)
 
 
 
 {% hint style="warning" %}
 
- -	협조 재생 기준위치가 아닌 상태에서 임의로 커서를 이동하여 cowork m(혹은 cowork s)에서부터 실행하지 마십시오. cowork m(cowork s)위치에서 Master와 Slave의 상대 위치를 계산하여 협조 동작하므로 반드시 협조 기준위치에서 실행하여야 합니다. 
- - 	협조 대기시간의 설정은 적당하게 설정하십시오. MASTER나 SLAVE중 하나가 먼저 협조 기준위치에 도달한 후에도 상대 로봇이 ‘협조 대기시간’내에 도달하지 않으면 에러가 발생합니다. 무한 대기하려면 협조 대기시간을 0으로 설정합니다. 
+ - Do not arbitrarily move the cursor and execute from cowork m (or cowork s) unless you are at the cooperative playback reference position. Cooperative motion calculates the relative position of Master and Slave from the cowork m (cowork s) position, so it must be executed from the cooperative reference position.
+ - Set the cooperative waiting time appropriately. If one of MASTER or SLAVE reaches the cooperative reference position first and the partner robot does not arrive within the 'cooperative waiting time', an error occurs. To wait indefinitely, set the cooperative waiting time to 0.
 
 
 {% endhint %}
-## 5.4. 협조 재생 정지/재기동
+## 5.4. Stop/Resume of Cooperative Playback
 
-
-협조 동작 중 사용자가 정지 명령(외부정지, 내부정지)을 입력하면 협조 동작 중인 로봇이 모두 정지합니다.  
+If the user inputs a stop command (external stop, internal stop) during cooperative motion, all robots engaged in cooperative motion will stop.
 
 
 <br>
 
-![[그림 5-6] 상대 로봇 정지 시 경고 출력  ](../_assets/5-6.png)
+![[Figure 5-6] Warning displayed when a partner robot stops](../_assets/5-6.png)
 
 <br>
 
 
 
-
-
-협조 동작 중 정지 후 스텝 번호를 변경하고 재생하는 것은 협조 재생 상태가 무효인 경우에만 가능합니다. 협조 중에 정지하고 스텝을 변경한 후 재생하려면 사용자에 대한 확인의 의미로 [Yes/No]를 입력해 줄 것을 요구합니다.  
+After stopping during cooperative motion, changing the step number and replaying is only possible when cooperative playback is disabled. If you stop during cooperation, change the step, and then attempt to replay, a [Yes/No] confirmation is required from the user.
 
 <br>
 
-![[그림 5-7] 협조 동작 중 정지 후 스텝 변경 시 메시지   ](../_assets/5-7.png)
+![[Figure 5-7] Message when changing step after stopping during cooperative motion](../_assets/5-7.png)
 
 <br>
 
  
 
+If a cooperative control state reset is input, it releases the cooperative state and operates. To operate while keeping the cooperative state, specify the stopped step number and start.
+## 5.5. Robot Lock Function (Robot Lock Playback)
 
-협조제어 상태 리셋을 입력한 경우는 협조 상태를 해제하고 동작합니다. 협조 상태를 유지한 채 동작하려면 정지 스텝 번호를 지정하고 기동합니다.  
-## 5.5. 로봇 락 기능(Robot Lock Playback)
-
-
-『조건 설정』 → 『5: 로봇 Lock』을 <유효>로 설정합니다.  
+Set 'Condition Settings' → '5: Robot Lock' to <Enabled>.
 
  
 <br>
 
-![[그림 5-8] 로봇 lock 유효 설정  ](../_assets/5-8.png)
+![[Figure 5-8] Robot Lock Enable Setting](../_assets/5-8.png)
 
 <br>
 
-Master 로봇을 로봇 Lock <유효>로 설정하고 재생하면 Slave는 협조 동작을 수행하고 Master 로봇은 동작하지 않고 축 데이터 모니터는 변경됩니다.  
+When the Master robot is set to Robot Lock <Enabled> and playback is performed, the Slave performs cooperative motion while the Master robot does not move and only the axis data monitor changes.
 
 
 <br>
 
-![[그림 5-10] 로봇 Lock 기능(Master Lock)   ](../_assets/5-10.png)
+![[Figure 5-10] Robot Lock Function (Master Lock)](../_assets/5-10.png)
 
 <br>
 
-
-Slave 로봇을 로봇 Lock <유효>로 설정하고 Master 로봇을 <무효>로 설정한 경우 Master 로봇은 정상 동작하고 Slave 로봇은 정지한 채 모니터링 데이터만 움직입니다.  
+If the Slave robot is set to Robot Lock <Enabled> and the Master robot is set to <Disabled>, the Master robot operates normally while the Slave robot remains stopped and only monitoring data moves.
 
 <br>
 
-![[그림 5-11] 로봇 Lock 기능(Slave Lock)     ](../_assets/5-11.png)
+![[Figure 5-11] Robot Lock Function (Slave Lock)](../_assets/5-11.png)
 
 <br>
 
  
 
-Master와 Slave를 모두 로봇 Lock <유효>로 설정하면 Master/Slave 모두 정지한 채 프로그램을 실행합니다.  
+When both Master and Slave are set to Robot Lock <Enabled>, the program runs with both Master and Slave stopped.
  
 <br>
 
-![[그림 5-12] 로봇 Lock 기능(Master, Slave Lock)     ](../_assets/5-12.png)
+![[Figure 5-12] Robot Lock Function (Master, Slave Lock)](../_assets/5-12.png)
 
 <br>
-
 
 
 {% hint style="warning" %}
 
- -	협조 대기시간은 적당한 길이로 설정하십시오.
- - 	로봇 Lock <유효> 설정한 로봇은 움직이지 않으므로 다른 로봇과 간섭이 되지 않는 위치로 이동 후 프로그램을 실행하여 주십시오. 
- -	로봇 Lock 설정을 다시 <무효>로 변경 후 실행할 때는 로봇의 위치와 스텝의 위치가 대응하지 않으므로 프로그램 처음부터 실행시켜 주십시오. 
+ - Set the cooperative waiting time to an appropriate length.
+ - Robots set to Robot Lock <Enabled> will not move, so move them to a position where they will not interfere with other robots before running the program.
+ - When changing the Robot Lock setting back to <Disabled> and running, the robot positions and step positions may not correspond; please run the program from the beginning.
 
-{% endhint %}## 6. HiNet I/O 기능## 6.1. HiNet I/O 개요
+{% endhint %}
+## 6. HiNet I/O Features
+## 6.1. HiNet I/O Overview
 
-
-
-HiNet I/O는 협조제어 네트워크를 통해 로봇간의 정보를 공유하는 기능입니다. 각 제어기는 협조로봇 간의 정보를 모니터링하고 있으므로 공유로 설정되어 있는 부분을 자유롭게 사용할 수 있습니다. 각 제어기가 사용할 수 있는 데이터의 최대 크기는 12byte이고 자신의 부분을 제외한 36byte를 수신할 수 있습니다.  
+HiNet I/O is a function that shares information between robots via the cooperative control network. Each controller monitors information from cooperative robots, so the sections set to be shared can be used freely. The maximum data size each controller can use is 12 bytes, and it can receive 36 bytes excluding its own portion.
  
 
-![[그림 6-1] HiNet 그룹 구조 ](../_assets/6-1.png)
+![[Figure 6-1] HiNet Group Structure](../_assets/6-1.png)
 
-이 기능은 로봇언어(HRScript)을 이용하여 사용이 가능하기 때문에 사용자의 욕구에 부합하는 다양한 응용에 사용이 가능합니다.  
+This function can be used via the robot language (HRScript), allowing various applications that meet user needs.
 
 
 ![ ](../_assets/6-3.png) 
 
 <br>
 
-예를들어 하기와 같이 설정된 경우 ROBOT 1인 경우에 자신의 정보를 fb7.dob0 ~ fb7.dob3 에 설정하고, ROBOT2의 정보를 fb7.dib4 ~ fb7.dib7, ROBOT3의 정보를 fb7.dib8 ~ fb7.dib11, ROBOT4의 정보를 fb7.dib12 ~ fb7.dib15에 수신하게 됩니다.   
+For example, if configured as below, when ROBOT 1 is the local robot, its information is set to fb7.dob0 ~ fb7.dob3, ROBOT2's information is received at fb7.dib4 ~ fb7.dib7, ROBOT3's information at fb7.dib8 ~ fb7.dib11, and ROBOT4's information at fb7.dib12 ~ fb7.dib15.
 
-<자신의 로봇이 ROBOT 1인 경우>
+<If your robot is ROBOT 1>
 
-| 로봇 번호 | 시작 신호 | 바이트 수 | 비고 |
+| Robot No. | Start Signal | Byte Count | Note |
 | :---: | :---: |  :---: | :---: | 
-| ROBOT 1 | fb7.0 | 4 | 출력(fb7.dob0 ~ fb7.dob3) |
-| ROBOT 2 | fb7.32 | 4 | 입력(fb7.dib4 ~ fb7.dib7) |
-| ROBOT 3 | fb7.64 | 4 | 입력(fb7.dib8 ~ fb7.dib11) |
-| ROBOT 4 | fb7.96 | 4 | 입력(fb7.dib12 ~ fb7.dib15) |
+| ROBOT 1 | fb7.0 | 4 | Output (fb7.dob0 ~ fb7.dob3) |
+| ROBOT 2 | fb7.32 | 4 | Input (fb7.dib4 ~ fb7.dib7) |
+| ROBOT 3 | fb7.64 | 4 | Input (fb7.dib8 ~ fb7.dib11) |
+| ROBOT 4 | fb7.96 | 4 | Input (fb7.dib12 ~ fb7.dib15) |
 
 
-![[그림 6-2] HiNet I/O 사용 예시(그룹 1번 – 로봇 4대) ](../_assets/6-2.png) 
-## 6.2. 적용 예 
+![[Figure 6-2] HiNet I/O Usage Example (Group 1 – 4 Robots) ](../_assets/6-2.png)
+## 6.2. Examples
 
-
-
-로봇 언어로 적용되는 다양한 응용을 모두 예로 들어 설명할 수는 없지만 간단한 응용에 대한 예를 다음 화면에 표시합니다. 입출력 신호로 사용이 가능하기 때문에 다양한 적용이 가능한 장점이 있습니다.  
+It is not possible to list all applications that can be implemented with the robot language, but a simple example application is shown in the following figure. Because input/output signals can be used, it has the advantage of supporting various applications.
 
 ![](../_assets/6-4.png)
-
-## 7. 암 간섭 검지 기능## 7.1. 암 간섭 검지 기능의 개요## 7.1.1. 기능의 목적 
-
+## 7. Arm Interference Detection Features
+## 7.1. Overview of Arm Interference Detection Features
+## 7.1.1. Purpose of the Feature
 
 <br>
 
-프로그램의 오류나 사용자의 조작실수(조그, 프로그램 작성의 실수)에 의해 의도하지 않게 로봇 암(Arm) 및 툴(Tool) 등이 충돌이 예상될 경우 사전에 로봇을 정지시킴으로써 사고를 예방하는 것입니다.
-## 7.1.2. 기능의 범위 
+The purpose is to prevent accidents by stopping the robot in advance when a collision between robot arms and tools is predicted due to program errors or user mistakes (jogging or program creation errors).
+## 7.1.2. Scope of the Feature
 
- 
 
  <Br>
 
-![[그림 7-1] 로봇간 간섭](../../_assets/7-1.png)
+![[Figure 7-1] Interference between robots](../../_assets/7-1.png)
  <br>
 
-로봇의 Tool, Arm의 간섭을 원통으로 간략화한 모델을 이용하여 간섭을 검지하며, 주행축을 사용하는 로봇에 대해서도 적용이 가능합니다.
+Interference between robot tools and arms is detected using a simplified cylindrical model, and it can also be applied to robots that use drive axes.
 
-- 간섭 검지 기능을 지원하는 로봇은 협조제어 네트워크에 접속되어야 합니다. 
-- 기능을 지원하는 그룹 및 로봇 수는 협조제어와 동일합니다.
+- Robots that support the interference detection feature must be connected to the cooperative control network.
+- The supported groups and number of robots are the same as for cooperative control.
+## 7.1.3. Limitations of the Feature
 
-## 7.1.3. 기능의 제한사항 
+This feature cannot intelligently and automatically avoid interference between robots nor automatically determine and execute robot drive priorities.
 
-이 기능을 이용해서 지능적으로 로봇간의 간섭을 자동적으로 회피하고, 로봇간 구동 순위를 자동으로 결정하여 구동할 수는 없습니다.
+- It does not support automatic arm interference avoidance without mutual interlocks.
+- It does not support automatic deadlock avoidance between robots.
+- It does not detect interference between a robot's own arm and tool.
+## 7.2. Configuration Procedures
+## 7.2.1. Enabling Arm Interference Prevention
 
-- 상호 인터록을 사용하지 않고 자동적으로 Arm간섭을 회피하는 기능을 지원하지 않습니다.
-- 상호 로봇 간의 데드락(dead-lock)을 자동적으로 회피하는 기능을 지원하지 않습니다.
-- 자신의 암과 툴 간의 간섭은 검지하지 않습니다.
-## 7.2. 설정 방법## 7.3. 간섭의 검지## 7.3.1. 감속 정지
-
-
-
-사용자가 설정한 암 간섭 영역 및 툴 간섭 영역을 침범한 후에 감속 정지할 경우 감속 정지 거리 및 로봇의 관성 때문에 에러를 검지하더라도 로봇은 충돌할 수도 있습니다. 따라서 로봇의 속도를 고려하여 영역을 확장하여 간섭을 검지합니다.  
-
-아래의 그림은 로봇이 서로 접근하는 방향으로 이동하고 있는 경우 간섭예상 영역(Level2 검지 영역)이 생성되어 간섭을 미리 검지하는 개념입니다. 점선으로 표시된 영역이 간섭 예상 영역이고 실선으로 표시된 선이 사용자가 설정한 간섭 영역입니다.  
- 
-![[그림7-22] 간섭 영역의 침범1](../../_assets/7-22.png)
-
-
-<br>
-
-간섭 예상 영역은 로봇의 이동 속도와 정지 시간을 계산하여 그 거리만큼 자동으로 설정되지만 사용자는 그 최대 값을 ‘간섭 예상 최대 거리’로 설정 할 수 있습니다.
-제어기에서 계산하는 간섭 예상 거리는 로봇이 고속으로 이동할 때는 여기에 설정된 간섭영역에 간섭 예상 최대거리를 더하여 간섭을 검지합니다. 간섭 예상 거리 구간에서는 감속 정지를 하게 되며 간섭 영역에 진입할 경우 감속 없이 즉시 정지합니다. 로봇이 저속으로 이동하여 제어기 내부에서 계산한 예상 거리가‘간섭 예상 최대 거리’보다 작은 경우에는 간섭 예상 최대 거리 이내에 들어오더라도 간섭 검지를 하지 않습니다.  
-
- ![[그림7-23] 암 간섭 방지 조건](../../_assets/7-23.png)
-
-
-<br>
-
-
-|에러 메시지|	- W0147 	로봇 0)과 ARM 간섭이 예상되어 정지함  <br> - E0237   로봇 0)과 ARM간섭 영역 검지|
-|:--|:--|
-|발생 가능한 에러 원인|	로봇이 이동 중에 다른 로봇의 간섭 예상 영역을 침범할 경우 아래와 같은 경고와 에러 메시지가 동시 발생하고 정지합니다.|
-|조치 방법|	정상적인 로봇 프로그램의 재생 중에 상기와 같은 경고가 발생할 경우 작업 프로그램을 다시 점검해 주십시오.|
-
-
-
-
-
- ## 7.3.2. 즉시 정지
-
-
-간섭 예상 검지(Level2검지 영역)에서 감속하여 정지하여도 로봇의 정지시 감속도 때문에 간섭 영역을 침범할 수 밖에 없는 경우가 있습니다. 간섭영역으로 설정한 범위를 직접적으로 초과하는 경우에는 감속정지 하지 않고 즉시 정지 처리 합니다.
-
- 
-![[그림7-24] 간섭 영역의 침범2](../../_assets/7-24.png)
-
-
-|에러 메시지|	E0237    로봇 0)과 ARM간섭 영역 검지|
-|:--|:--|
-|발생 가능한 에러 원인	|Arm과 Tool영역을 침범한 경우|
-|조치 방법|	정상적인 로봇 프로그램의 재생 중에 상기와 같은 경고가 발생할 경우 작업 프로그램을 다시 점검해 주십시오.|
-
-
-
-
-## 7.3.3. 재생 동작 중 에러가 발생하는 경우
-
-
-
-
-아래 그림과 같이 두 로봇이 주행축 위의 S1에서 S2로 각각 이동하는 경우 두 로봇의 S2위치가 툴 간섭영역과 간섭 예상 최대거리를 합한 것 보다 떨어져 있는 경우 W0147이나 E0237이 발생하지 않습니다. 이러한 작업 작업프로그램이 정상적인 경우입니다.
+Select 'System' → '4: Application Parameters' → '17: Cooperative Control' → '4: Inter-robot Interference Prevention' → '1: Interference Prevention Conditions'.
 
 <br> 
 
-![[그림7-25] 정상적인 작업 프로그램의 예](../../_assets/7-25.png)
+![[Figure 7-7] Arm Interference Prevention Menu](../../_assets/7-8.png) 
 
 <br>
 
-아래의 그림과 같이 설정한 툴 간섭영역과는 약간 떨어져 있으나 간섭 예상 최대 거리 이내에 S2가 교시되어 있는 경우입니다. 이 경우 에러(W0147이나 E0237)가 발생하므로 간섭 예상 최대거리를 조정하거나 교시점을 바꿔주십시오.
+To enable arm interference prevention, select the 'Interference Detection Partner Robot'. The 'expected maximum interference distance' is the distance from the arm interference area at which the system expects interference and can perform deceleration stop.
+
+<br> 
+
+![[Figure 7-8] Arm Interference Prevention Conditions Screen](../../_assets/7-9.png)
+
+<br>
+
+| Error Message | E0244 Robot (0)'s arm interference detection is not possible |
+|:--|:--| 
+| Possible Causes | - If the cooperative control of the partner robot set for interference detection is set to 'Disabled' on the partner robot. <br> - The partner robot is not participating in the cooperative control network. <br> - The partner robot has not configured arm interference prevention conditions. <br> - The partner robot's common coordinate system is not set. |
+| Action | Check your robot's and the partner robot's cooperative control status, common coordinate settings, participation in the cooperative control network, and interference prevention conditions. |
+## 7.2.2. Setting Arm Interference Areas
+
+The arm interference area model is a cylinder composed of hemispheres on both ends. For example, for the H-axis, you can model the radius from the H-axis joint position to the V-axis joint position as shown below.
+
+
+<br>
+
+![[Figure 7-10] Hemispherical and cylindrical arm interference area](../../_assets/7-10.png)
+
+<br>
+
+The cylindrical link model for the robot body arm applies to S, H, V, and B axes. The default radius values for each axis are determined as follows. If additional equipment is mounted on the robot, set the radius for the corresponding axis larger than the default value.
+
+ - S-axis radius: Set to twice the distance from the S-axis rotation center to the H-axis joint
+ - H-axis radius: 1.8 times the distance from the B-axis rotation center to the flange face
+ - V-axis radius: Distance from the B-axis rotation center to the flange face
+
+<br>
+
+![[Figure 7-11] Axis-specific interference radius settings](../../_assets/7-11.png)
+
+<br>
+
+Currently, arm interference detection supports detecting all axes using the S, H, and V axis settings.
+
+<br>
+
+![[Figure 7-12] H-axis offset radius](../../_assets/7-12.png)
+
+<br>
+
+{% hint style="warning" %}
+If you intend to set values smaller than the defaults, exercise extreme caution. For example, the H-axis of a serial-link robot such as the HS220 has an offset to the right from the S-axis center as shown in the figure. The H-axis interference detection area is set based on the segment from the S-axis rotation center along the H-axis link to the V-axis rotation center, so the H-axis radius must be set large enough to include the entire H-axis link from the S-axis rotation center.
+{% endhint %}
+## 7.2.3. Setting Tool Interference Areas
+
+<Br>
+
+![[Figure 7-13] Flange coordinate system](../../_assets/7-13.png)
+
+<Br>
+
+To set the tool interference area for each tool number, use the robot flange coordinate system as a reference. When the robot is in the reference pose, the flange coordinate system has Z pointing outward normal to the flange face, X pointing downward, and Y pointing to the robot's left.
+
+You can set up to 4 interference areas per tool number. For any tool number used in the robot program, you must configure the tool interference area. If not configured, tool interference detection will not occur.
+
+### 1) Example for a single (servo-gun) tool
+
+The tool interference area is set by defining start and end points and a radius from coordinates on the tool flange. You may set up to four interference areas per tool number.
+
+Refer to the figure below for flange coordinate directions and an example configuration.
+ 
+ <Br>
+
+![[Figure 7-14] Flange coordinate system example](../../_assets/7-14.png)
+
+<Br>
+
+### 2) Example for a hanger-type tool
+
+#### 2-1) When configuring only one tool interference area
+
+For asymmetrical tools relative to the flange center, when defining a single tool interference area you can set the tool shape center and use the maximum distance from center to tool corners as the radius. In the example below, relative to the robot coordinate system X=-175, Y=-485, and the radius should be set slightly larger than the larger of R1 and R2 (e.g., 1300 rather than 1250). Because hemispheres are created at each end of the cylinder when setting a radius of 1300, set Z positions as P1=(-175,-485,500) and P2=(-175,-485,1000).
+
+ 
+ <Br>
+
+![[Figure 7-15] Drawing for 1 tool interference area setting](../../_assets/7-15.png)
+
+
+<Br>
+  
+
+![[Figure 7-16] 1 tool interference area setting](../../_assets/7-16.png)
+
+
+<Br>
+
+However, when the radius is set this large, it may be unnecessarily larger than the actual tool shape. If precise tool region settings are required, model the tool by dividing it into multiple regions.
+
+
+#### 2-2) When configuring 4 tool interference areas
+
+<Br>
+  
+
+![[Figure 7-17] Drawing for 4 tool interference areas](../../_assets/7-17.png)
+
+
+<Br>
+
+For large tools such as hangers, dividing the area can prevent overestimation of the tool interference area. For example, for a tool of width 2110mm and height 1350mm, divide the vertical area into three equal parts and model three cylinders with approximately 350mm radius as areas 1–3. Finally, set the offset from the flange to the tool as area 4 to achieve the configuration below.
+
+ 
+<Br>
+  
+
+![[Figure 7-18] 4 tool interference areas configuration](../../_assets/7-18.png)
+
+<Br>
+
+
+## 7.2.4. Arm Interference Status Monitoring
+
+<Br>
+
+![[Figure 7-21] Cooperative control monitoring](../../_assets/7-21.png)
+
+
+<br>
+
+You can check the arm interference state in 'Cooperative Control Monitoring'. The arm interference state displays the potential interference axis and the interference distance.
+
+ - Potential Interference Axis: The axis of your robot that has the smallest distance to the partner robot
+ - Interference Distance [mm]: Distance between potential interference axes
+      - Display range: 10 times the expected maximum interference distance (if expected maximum interference distance is 0, display range is 1000 mm)
+      - If interference distance exceeds the display range, it is shown as ----.
+
+If the monitored arm interference state differs from the actual state, check the cooperative control common coordinate system and the arm interference detection configuration.
+## 7.3. Interference Detection
+## 7.3.1. Deceleration Stop
+
+If the robot decelerates and stops after invading the user-configured arm interference area and tool interference area, due to deceleration distance and robot inertia, a collision may occur even if an error is detected. Therefore, the detection area is expanded taking robot speed into account to detect interference earlier.
+
+The figure below illustrates the concept of generating an expected interference area (Level 2 detection area) when robots move toward each other. The dashed area indicates the expected interference area, and the solid line indicates the user-configured interference area.
+ 
+![[Figure 7-22] Interference area invasion 1](../../_assets/7-22.png)
+
+
+<br>
+
+The expected interference area is automatically set by calculating the robot's travel speed and stopping time, but the user can set the maximum value as the 'expected maximum interference distance.'
+The expected interference distance calculated by the controller, when the robot moves at high speed, is the configured interference area plus the expected maximum interference distance to detect interference. In the expected interference distance range, the robot performs deceleration stop, and if it enters the interference area, it performs an immediate stop without deceleration. If the robot moves at low speed and the controller-calculated expected distance is smaller than the 'expected maximum interference distance', it will not detect interference even if it is within the expected maximum interference distance.
+
+ ![[Figure 7-23] Arm interference prevention conditions](../../_assets/7-23.png)
+
+
+<br>
+
+| Error Message | - W0147 Robot 0) expected arm interference and stopped  <br> - E0237 Robot 0) ARM interference area detected |
+|:--|:--|
+| Possible Causes | When a robot invades another robot's expected interference area during movement, the above warning and error messages may occur simultaneously and stop the robot. |
+| Action | If the above warning occurs during normal program playback, re-check the work program. |
+
+## 7.3.2. Immediate Stop
+
+Even if deceleration stopping occurs in the predicted interference detection (Level 2 detection area), the robot may still invade the interference area due to deceleration distance during stopping. If the interference area is directly exceeded, an immediate stop is performed without deceleration.
+
+ 
+![[Figure 7-24] Interference area invasion 2](../../_assets/7-24.png)
+
+
+| Error Message | E0237 Robot 0) ARM interference area detected |
+|:--|:--|
+| Possible Causes | The arm and tool areas were invaded |
+| Action | If the above warning occurs during normal program playback, re-check the work program. |
+
+## 7.3.3. Errors Occurring During Playback
+
+When two robots move from S1 to S2 on a rail as shown below, if the S2 positions of the two robots are separated by more than the sum of the tool interference area and the expected maximum interference distance, no W0147 or E0237 will occur. This represents a normal program.
+
+<br> 
+
+![[Figure 7-25] Example of a normal program](../../_assets/7-25.png)
+
+<br>
+
+If, as in the figure below, the S2 point is slightly outside the configured tool interference area but within the expected maximum interference distance, an error (W0147 or E0237) may occur. In this case, adjust the expected maximum interference distance or change the teach points.
 
 <Br>
  
-![[그림7-26] 잘못된 프로그램 예1](../../_assets/7-26.png)
+![[Figure 7-26] Incorrect program example 1](../../_assets/7-26.png)
 
 <br>
  
-아래의 그림과 같이 설정한 툴 간섭영역을 완전히 침범하도록 S2를 교시한 경우에는 로봇이 서로 S2로 이동할 때 에러(W0147이나 E0237)가 발생합니다.
+If the S2 point is taught so that it completely invades the defined tool interference area, an error (W0147 or E0237) will occur when the robots move to S2.
 
 
 <br>
 
-![[그림7-27] 잘못된 프로그램 예2](../../_assets/7-27.png)
+![[Figure 7-27] Incorrect program example 2](../../_assets/7-27.png)
 
 <br>
 
-상기와 같은 경우 ‘툴 간섭 영역’을 축소하거나 ‘간섭 예상 최대 거리’를 축소하여 에러가 발생하지 않도록 조치할 수 있습니다. 
+In such cases, reduce the 'tool interference area' or the 'expected maximum interference distance' to prevent the error.
 
 
 {% hint style="warning" %}
 
-툴 간섭 영역을 너무 축소해서 실제 툴 보다 작게 설정하면 로봇 간에 충돌이 발생할 수 있습니다. 
+Setting the tool interference area too small—smaller than the actual tool—may cause collisions between robots.
 
 {% endhint %}
-## 7.3.4. 데드락(Dead Lock) 상태에서 처리 방법
+## 7.3.4. Handling in Deadlock State
 
-
-데드락은 두 로봇이 서로 간섭 영역을 침범하여 조그나 프로그램으로 더 이상 로봇을 움직일 수 없는 상태입니다.
-이때는 간섭된 로봇을 상대 로봇과의 간섭 검지를 ‘해제’한 후 조그 기능을 이용하여 사용자의 주의 하에 간섭영역을 빠져나가야 합니다.
+A deadlock occurs when two robots invade each other's interference area and cannot move the robots further by jogging or program execution. In this case, release the interference detection for the affected robot relative to the partner robot, and then use the jog function to move out of the interference area carefully under user supervision.
  
 <br> 
 
-![[그림7-28] 로봇간 암 간섭 검지 해제](../../_assets/7-28.png)
+![[Figure 7-28] Release inter-robot arm interference detection](../../_assets/7-28.png)
 
 <br>
 
-간섭영역을 빠져나간 후에는 상대 로봇 번호를 체크 하여 복귀하여 사용합니다.
+After moving out of the interference area, check the partner robot number and resume operation.
  
 <Br> 
 
-![[그림7-29] 로봇간 암 간섭 검지 설정](../../_assets/7-29.png)
+![[Figure 7-29] Setting inter-robot arm interference detection](../../_assets/7-29.png)
+## 7.3.5. Handling Network Issues During Cooperative Control
 
-## 7.3.5. 협조제어 네트워크 이상시 처리
-
-
-
-협조제어 네트워크가 정상적이지 않으면 로봇간 Arm간섭 검지가 정상적으로 이루어질 수가 없습니다. 따라서 협조제어 네트워크에 문제가 발생하는 경우 다음과 같은 에러가 발생합니다.
-
+If the cooperative control network is not functioning properly, arm interference detection between robots may not operate correctly. When problems occur on the cooperative control network, the following error may occur.
 
 <br>
 
-|에러 메시지|	E0244 	로봇 0)의 Arm 간섭검지가 불가능한 상태임|
-|:--|:--| 
-|발생 가능한 에러 원인	|간섭 검지 조건을 설정한 상대 로봇과의 HiNet 네트워크가 단절된 경우|
-|조치 방법|	- 해당 로봇의 로봇의 네트워크 케이블을 확인하십시오. <Br>  - 협조제어 상태 모니터링을 참조하여 협조제어 상태를 정상으로 복귀되도록 하십시오.|
-## 8. 서비스 기능## 8.1. 협조제어 상태 모니터
+| Error Message | E0244 Robot (0)'s arm interference detection is not possible |
+|:--|:--|
+| Possible Causes | The HiNet network to the partner robot for which interference detection conditions were set is disconnected |
+| Action | - Check the network cable of the affected robot. <br> - Refer to Cooperative Control Status Monitoring and restore the cooperative control state to normal. |
+## 8. Service Functions
+## 8.1. Cooperative Control Status Monitor
 
-
-(1)	『창조정』 → 『선택』에서 『로봇간 협조제어』를 선택합니다.
+(1) Select 'Inter-robot Cooperative Control' from 'Window Settings' → 'Selection'.
  
  ![](../_assets/9-2.png)
 
 
-(3)	협조제어 상태가 다음과 같이 표시됩니다.  
+(3) The cooperative control status is displayed as follows.
 
  ![](../_assets/9-3.png)
 
 
 
+(4) Each item in the monitoring function has the following meanings.
 
-(4)	모니터링 기능의 각 항목은 다음의 의미를 가집니다.
-
- - 모터 ON: 각 로봇의 운전 준비 상태를 표시합니다. (on/off)
-- 조작모드: 각 로봇이 수동모드로 설정되어 있는지 자동모드로 설정되어 있는지를 표시합니다. (수동/자동)
-- 수동협조: 각 로봇의 수동모드의 협조 상태를 표시합니다. 
-    - 독립: 개별 조그 상태 
-    - 마스터: 협조 조그 상태, MASTER 지정 
-    - 슬래이브: 협조 조그 상태, SLAVE 지정 
-- 자동협조: 로봇 재생시의 협조 상태를 표시합니다. 
-    - 정지: 로봇이 기동중이 아님 
-    - 독립: 개별적인 로봇 재생 동작을 수행중 
-    - 대기: cowork 명령에서 상대의 로봇이 협조 위치가 되기를 대기하는 중 
-    - 협조: 협조 재생 중 
-- 에러상태: 각 로봇의 최근 에러 상태를 표시. 기동시에 클리어 됨 
-- 간섭가능 축: 상대로봇과 가장 가까운 거리를 갖는 자신 로봇의 축 이름
-- 간섭거리[mm]: 간섭가능 축간의 거리
+ - Motor ON: Indicates the drive-ready state of each robot. (on/off)
+- Operation Mode: Indicates whether each robot is set to manual mode or automatic mode. (Manual/Automatic)
+- Manual Cooperation: Displays the manual cooperative state of each robot.
+    - Independent: Individual jog state
+    - Master: Cooperative jog state, MASTER specified
+    - Slave: Cooperative jog state, SLAVE specified
+- Automatic Cooperation: Displays the cooperative state during robot playback.
+    - Stop: Robot is not running
+    - Individual: Performing individual robot playback actions
+    - Waiting: Waiting in the cowork command for the partner robot to reach the cooperation position
+    - Cooperation: During cooperative playback
+- Error State: Shows the recent error state of each robot. Cleared upon startup
+- Potential Interference Axis: The axis of the robot closest to the partner robot
+- Interference Distance [mm]: Distance between potential interference axes
 
 
 {% hint style="warning" %}
-협조제어 파라미터에서 협조제어가 <무효>로 설정되어 있으면 모니터링 정보가 표시되지 않습니다.  
+If cooperative control is set to <Disabled> in the cooperative control parameters, monitoring information will not be displayed.
 
 ![](../_assets/9-4.png)
 
 {% endhint %}
-## 8.2. HiNet I/O 모니터
+## 8.2. HiNet I/O Monitor
 
-
-
-(1)	『창조정』 → 『선택』에서 『범용 입력』을 선택합니다.  
+(1) Select 'General Input' from 'Window Settings' → 'Selection'.
  ![](../_assets/9-5.png)
 
 
-(2)	각 로봇별 설정된 입력 신호의 상태를 확인합니다.   
+(2) Check the status of configured input signals for each robot.
 ![](../_assets/9-6.png)
-## 8.3. 수동설정 기능
+## 8.3. Manual Output Function
 
-협조 제어용 자신의 로봇 상태를 수동으로 변경할 수 있습니다. 
+You can manually change your robot's cooperative control status.
 
-- 『창조정』 → 『선택』에서 『범용 출력』창을 표시합니다.
-- 자신의 로봇번호에 해당하는 수동으로 변경을 원하는 출력 신호로 이동합니다.
-- ‘수동 출력’ 버튼을 눌러 표시되는 대화상자에서 변경합니다.
+- Display the 'General Output' window from 'Window Settings' → 'Selection'.
+- Move to the output signal corresponding to your robot number that you want to change manually.
+- Press the 'Manual Output' button and change it in the dialog that appears.
 
 
 ![](../_assets/9-7.png)
@@ -1183,171 +1181,163 @@ HiNet I/O는 협조제어 네트워크를 통해 로봇간의 정보를 공유�
 
 
 
+R codes used for cooperative control.
 
-협조제어에 사용하는 R code 입니다. 
+[Table 8-1] R351 Manual Cooperative State Setting
 
-[표 8 1] R351 수동 협조상태 설정
-
-|	#1|	내용|
+| # | Description |
 |:--:|:--:|
-|0|Indiv.(개별)|
+|0|Indiv. (Individual)|
 |1|Master|
 |2|Slave|
-|3|cmov 기록 모드|
+|3|cmov Recording Mode|
 
 <br>
-[표 8 2] R353 로봇 협조상태 리셋
+[Table 8-2] R353 Robot Cooperative State Reset
 
-|	#1|	내용|
+| # | Description |
 |:--:|:--:|
-|0|리셋 취소|
-|1|리셋 실행|
-## 9. 에러코드## 9.1. Warning
-
+|0|Cancel Reset|
+|1|Execute Reset|
+## 9. Error Codes
+## 9.1. Warning
 
 <br>
 
 ---
-- 코드 번호 : W00123 
-- 경고명 : 로봇의 정지요구
-- 경고내용 : 협조제어를 실행 중 상대 로봇으로부터 정지명령이 입력되었습니다. 이 경우, 상기 메시지를 출력하며 로봇이 정지합니다. 
-- 조치방법
-    - 슬레이브측 로봇 운전을 먼저 시작한 후, 마스터 운전을 시작하여 프로그램을 재개합니다. 
+- Code No.: W00123
+- Warning: Robot stop requested
+- Details: During cooperative control, a stop command was received from a partner robot. In this case, the above message is displayed and the robot stops.
+- Action:
+    - Start the Slave robot drive first, then start the Master drive to resume the program.
 
 ---
-- 코드 번호 : W00124 
-- 경고명 : Slave 로봇 조그조작 불가
-- 경고내용 : 수동 협조제어 슬레이브 상태로 설정되어 있습니다. 슬레이브로 설정된 로봇은 독립 조작이 불가합니다.
-- 조치방법
-    - 각각의 로봇을 개별적으로 수동 조작하기 위해서는 수동 협조 상태를 ‘독립’ 설정으로 변경하십시오. 수동 협조 상태는 사용자 키 또는 R351코드를 사용하여 변경할 수 있습니다. 
+- Code No.: W00124
+- Warning: Slave robot jog operation not allowed
+- Details: The robot is set to manual cooperative Slave state. A robot configured as Slave cannot be operated independently.
+- Action:
+    - To operate each robot individually in manual mode, change the manual cooperative state to 'Independent'. The manual cooperative state can be changed using user keys or the R351 code.
 
 ---
-- 코드 번호 : W00131 
-- 경고명 : 협조 조그 조작불가-Master로봇 중복
-- 경고내용 : HiNet상에 접속되어 있는 로봇 중에 수동 협조 상태가 Master로 설정된 로봇이 두 대 이상입니다.
-- 조치방법
-    - 수동 협조 Master는 한 대만 설정 가능합니다. 설정을 변경하십시오.
+- Code No.: W00131
+- Warning: Cooperative jog operation not allowed - Duplicate Master robots
+- Details: More than one robot connected on HiNet is set as manual cooperative Master.
+- Action:
+    - Only one manual cooperative Master can be set. Please change the settings.
 
 ---
-- 코드 번호 : W00132  
-- 경고명 : 협조 조그 조작불가-Slave선택 불가
-- 경고내용 : Slave 로봇을 협조 가능한 상태로 설정해 놓지 않은 상태에서 Master 로봇의 조그 조작을 시도하였습니다.
-- 조치방법
-    - Slave 로봇이 선택되어 있는지 확인한 후, Slave로봇을 협조 가능한 상태로 준비하고(Enabling Switch On) 조작하십시오.
+- Code No.: W00132
+- Warning: Cooperative jog operation not allowed - Slave selection unavailable
+- Details: An attempt was made to jog the Master robot while the Slave robot was not set to a cooperative-ready state.
+- Action:
+    - Confirm that the Slave robot is selected, prepare the Slave robot for cooperation (Enabling Switch On), and then operate.
 ---
 
-- 코드 번호 : W00133   
-- 경고명 : Slave 측의 조그 설정이 변경됨-정지
-- 경고내용 : Master로봇으로 협조 조그 조작 중에 같이 동작을 하던 Slave로봇 중에 수동 협조상태를 변경한 로봇이 검지되었습니다.
-- 조치방법
-    - Slave의 협조상태를 다시 확인 한 후에 조작하십시오.
+- Code No.: W00133
+- Warning: Slave jog setting changed - Stop
+- Details: During Master cooperative jog operation, a Slave robot that was operating together was detected to have its manual cooperative state changed.
+- Action:
+    - Re-check the Slave's cooperative state before operating.
 ---
 
-- 코드 번호 : W00134    
-- 경고명 : Master Tool좌표계가 선택되지 않음
-- 경고내용 : cmov기록 모드에서( R351,3) Slave 로봇의 조그 조작을 시도할 때 발생합니다. Master 로봇이 지정되어 있지 않습니다. 
-또는 cmov스텝 전진 기능을 사용할 때 발생할 수 있습니다. 현재 설정된 Master 번호와 cmov에 기록된 마스터 번호와 다릅니다.
-- 조치방법
-    - 올바른 마스터 로봇을 수동 협조 Master상태로 설정하여 주십시오.
----## 9.2. System Error
-
-
+- Code No.: W00134
+- Warning: Master Tool coordinate system not selected
+- Details: This occurs when attempting to jog a Slave robot in cmov recording mode (R351,3). A Master robot is not specified. It may also occur when using the cmov step forward function. The currently set Master number differs from the Master number recorded in cmov.
+- Action:
+    - Set the correct Master robot to Manual Cooperative Master state.
+---
+## 9.2. System Error
 
 ---
 
-- 코드 번호 : E00200     
-- 에러명 : 협조동작 중 최고속 초과
-- 에러내용 : 협조 동작 추종 중 로봇의 최고속을 초과하는 지령이 입력되었습니다.
-- 조치방법
-    - 협조 동작을 하는 Slave의 기준위치에서 로봇의 자세를 변경하거나, 협조 기록 위치를 변경하거나, 기록속도를 낮추어 재생하십시오.
+- Code No.: E00200
+- Error: Exceeded maximum speed during cooperative motion
+- Details: A command that exceeds the robot's maximum speed was received while following cooperative motion.
+- Action:
+    - For the Slave performing cooperative motion, change the robot posture at the reference position, modify the recorded cooperative positions, or lower the recorded speed and replay.
 ---
 
-- 코드 번호 : E00201      
-- 에러명 : 협조동작 개시 오류 
-- 에러내용 : 협조 로봇들의 동기신호 송수신에 오류가 있습니다. 재생 모드가 서로 다릅니다.
-- 조치방법
-    - 통신상태를 점검하십시오 협조 로봇들의 재생 모드를 일치시킨 후 협조동작을 시작하십시오.
+- Code No.: E00201
+- Error: Cooperative motion start error
+- Details: There is an error in sending/receiving synchronization signals among cooperative robots. The playback modes are different.
+- Action:
+    - Check communication status. Match the playback modes of the cooperative robots and then start cooperative motion.
 ---
 
-- 코드 번호 : E00203       
-- 에러명 : 협조 상대 로봇 이상 - 비상정지 
-- 에러내용 : 협조 동작 중 상대 로봇의 운전준비 Off 상태가 되었습니다. 운전준비를 Off하고 정지합니다. 
-- 조치방법
-    - 상대 로봇의 정지 원인을 조치한 후, 운전 준비를 On하고 재기동하십시오.
+- Code No.: E00203
+- Error: Cooperative partner robot fault - Emergency stop
+- Details: During cooperative motion, the partner robot's drive-ready state turned Off. The operation is stopped with drive-ready Off.
+- Action:
+    - Resolve the cause of the partner robot's stop, set drive-ready On, and restart.
 ---
 
-- 코드 번호 : E00204        
-- 에러명 : 로봇 협조제어 통신 오류
-- 에러내용 : 협조 조그, 재생 중에 상대 로봇과 통신 중 오류가 발생했습니다.
-- 조치방법
-    - 협조제어 통신 케이블 및 커넥터 연결 상태를 점검하십시오.
+- Code No.: E00204
+- Error: Robot cooperative control communication error
+- Details: A communication error occurred with a partner robot during cooperative jog or playback.
+- Action:
+    - Check the cooperative control communication cables and connector connections.
 ---
 
-- 코드 번호 : E00227          
-- 에러명 : 협조제어 동기 시퀀스 오류 
-- 에러내용 : 협조제어 중 마스터 로봇과 슬레이브 로봇의 지령 시퀀스 차이가 발생했습니다.
-- 조치방법
-    - 협조제어 통신 케이블 및 커넥터 연결 상태를 점검하십시오.
----## 9.3. Operation Error
-
-
-
+- Code No.: E00227
+- Error: Cooperative control synchronization sequence error
+- Details: A sequence difference occurred between the master robot and slave robot commands during cooperative control.
+- Action:
+    - Check the cooperative control communication cables and connector connections.
 ---
-
-
-- 코드 번호 : E01340           
-- 에러명 : 로봇협조 조건 부적절(WD,공통좌표) 
-- 에러내용 : cowork 명령을 실행하기에 부적절한 상태로 제어기가 설정되어 있습니다.
-- 조치방법
-    - 통신상태가 정상인지, 상대의 공통좌표계는 설정하였는지, 수동협조 상태가 cowork 명령의 로봇역할과 같은지 확인하십시오.
----
-
-- 코드 번호 : E01341            
-- 에러명 : 협조재생 대기 시간 초과 
-- 에러내용 : cowork 명령에서 협조상대 로봇들이 협조 준비가 될 때까지 대기하는 시간이 명령어에 설정된 시간을 초과하였습니다.
-- 조치방법
-    - 모든 협조 로봇이 협조 위치에 도착 하는 시간을 고려하여 대기시간을 설정하십시오.
-    - 0으로 설정하면 모든 로봇이 협조 준비가 될 때까지 계속 대기합니다.
+## 9.3. Operation Error
 
 ---
 
-- 코드 번호 : E01342            
-- 에러명 : 로봇협조 상태,공통좌표계 무효
-- 에러내용 : 로봇협조 상태가 무효이거나 공통좌표계가 설정되어 있지 않아 cowork 명령을 수행할 수 없습니다.
-- 조치방법
-    - 시스템/제어 파라미터/네트워크/서비스/협조제어 대화상자에서 협조제어 기능을 <유효>로 설정한 후 공통좌표계를 설정하십시오.
+- Code No.: E01340
+- Error: Inappropriate robot cooperation conditions (WD, common coordinate)
+- Details: The controller is configured in a state unsuitable for executing the cowork command.
+- Action:
+    - Check that communication status is normal, verify that the partner's common coordinate system is set, and confirm the manual cooperative state matches the robot role required by the cowork command.
 ---
 
-- 코드 번호 : E01343             
-- 에러명 : cowork기능 실행 불일치  
-- 에러내용 : cowork 명령을 중복하여 실행하였거나 cowork end 없이 프로그램 end를 실행한 경우입니다. 
-- 조치방법
-    - cowork 명령과 cowork end명령이 짝을 이루도록 프로그램 하십시오. 
-    - 스텝 변경 후 cowork 명령을 다시 실행하는 경우 협조제어 상태를 초기화 하십시오.
+- Code No.: E01341
+- Error: Cooperative playback wait time exceeded
+- Details: In the cowork command, the waiting time for partner robots to become ready for cooperation exceeded the time set in the command.
+- Action:
+    - Set the wait time considering the time required for all cooperative robots to reach the cooperation positions.
+    - If set to 0, it will wait indefinitely until all robots are ready for cooperation.
 
 ---
 
-
-- 코드 번호 : E01344             
-- 에러명 : cowork 파라미터(m/s,로봇번호) 에러
-- 에러내용 : cowork명령의 상대로봇 번호가 자신의 로봇번호로 잘못 설정되어 있습니다.
-- 조치방법
-    - cowork 명령의 로봇번호를 상대 로봇번호로 변경하십시오.
+- Code No.: E01342
+- Error: Robot cooperation state or common coordinate invalid
+- Details: The robot cooperation state is invalid or the common coordinate system is not set, so the cowork command cannot be executed.
+- Action:
+    - In System → Control Parameters → Network → Service → Cooperative Control dialog, set the cooperative control function to <Enabled> and then set the common coordinate system.
 ---
 
+- Code No.: E01343
+- Error: cowork function execution mismatch
+- Details: This occurs when the cowork command was executed redundantly or the program ended without a cowork end command.
+- Action:
+    - Program so that cowork and cowork end commands are paired.
+    - When re-executing the cowork command after a step change, initialize the cooperative control state.
 
-- 코드 번호 : E01345              
-- 에러명 : 슬레이브 로봇이 이미 협조 상태임
-- 에러내용 : 슬레이브 로봇의 협조 상태가 cowork end 위치에서 협조 중이거나 정지 중입니다.
-- 조치방법
-    - Master와 Slave의 정상적인 협조동작을 위해 인위적인 스텝변경을 하지 마십시오.
 ---
 
+- Code No.: E01344
+- Error: cowork parameter (m/s, robot number) error
+- Details: The partner robot number in the cowork command is incorrectly set to the robot's own number.
+- Action:
+    - Change the robot number in the cowork command to the partner robot number.
+---
 
-- 코드 번호 : E01355               
-- 에러명 : 협조 상대 로봇 이상 – 정지
-- 에러내용 : 협조 상대 로봇이 협조 동작이 불가능한 상태로 정지 중입니다. 협조 동작을 수행할 수 없으므로 정지합니다.
-- 조치방법
-    - 로봇간 동작모드가 동일한지 확인하십시오. 
-    - 협조 동작 중 정지 후 다시 기동하는 경우라면 Slave를 먼저 기동한 후 Master를 기동하십시오.
+- Code No.: E01345
+- Error: Slave robot is already in cooperative state
+- Details: The Slave robot is cooperating or stopped at the cowork end position.
+- Action:
+    - Do not perform artificial step changes to ensure normal cooperative operation between Master and Slave.
+---
+
+- Code No.: E01355
+- Error: Cooperative partner robot fault - Stopped
+- Details: The cooperative partner robot is stopped in a state where cooperative motion is not possible. It stops because cooperative motion cannot be performed.
+- Action:
+    - Confirm that the operation modes among robots are the same.
+    - If restarting after a stop during cooperative motion, start the Slave first and then the Master.
 ---

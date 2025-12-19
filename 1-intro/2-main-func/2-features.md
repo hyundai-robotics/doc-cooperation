@@ -1,23 +1,22 @@
-﻿## 1.2.2. 기능의 특징
+## 1.2.2. Feature Characteristics
 
+- Communication
+  The cooperative control feature uses UDP (General Ethernet) communication to coordinate up to 4 robots.
 
--	통신   
-    협조제어 기능은 UDP(범용 Ethernet) 통신을 이용하여 로봇들을 최대 4대까지 연동 제어할 수 있습니다.
+- Common Coordinate System between Robots
+  Provides a function to determine relative positions between robots. The common coordinate system is obtained by teaching the same three points in the workspace on each robot.
 
--	로봇간 공통 좌표계 설정   
-    로봇간의 상대적인 위치를 파악하기 위한 기능입니다. 로봇간 공통좌표계 설정은 작업영역상의 동일한 3점의 위치를 교시하여 얻어집니다. 
+- Manual Mode Cooperative Operation
+  Allows users to easily teach in manual mode. After assigning Master and Slave roles for each robot, handling applications can be taught by operating only the MASTER. For jigless cooperation, the Slave's positions can be taught relative to the Master's workpiece.
 
--	수동모드 협조 동작   
-    수동 모드에서 사용자가 쉽게 교시할 수 있습니다. 각 로봇의 마스터와 슬레이브의 역할을 정한후, 핸들링의 응용은 MASTER만을 조작하여 교시가 가능하게 하고, 지그리스 협조의 경우에는 마스터 작업물 위에 슬레이브의 위치를 교시할 수 있도록 지원합니다. 
+- Positioner Master Support
+  You can assign a positioner as the Master robot, enabling cooperative control. Up to 4 robots can cooperate with a positioner simultaneously.
 
--	포지셔너 마스터 지원  
-    마스터 로봇으로 설정된 로봇의 포지셔너를 마스터로 설정하여 협조제어가 가능합니다. 포지셔너에 4대의 로봇이 동시에 협조 동작할 수 있습니다. 
+- Teaching
+  Each controller needs an independent program. Split a program into parts for independent robot actions and cooperative actions to enable flexible and easy programming.
 
--	티칭  
-    각 제어기에 독립적인 프로그램이 필요합니다. 하나의 프로그램에 자신의 로봇이 독립된 동작을 하는 부분과 협조 동작을 하는 부분을 나누어, 쉽고 자유롭게 프로그램이 가능합니다. 
+- Cooperative Playback
+  According to the `cowork` command, the system waits for partner robots to be ready and begins cooperation when all robots are ready.
 
--	재생 협조 동작   
-    협조동작 명령(cowork)에 따라 상대 협조 로봇을 대기하며, 모든 협조 로봇이 준비가 되면 협조 동작을 시작합니다. 
-
--	HiNet I/O   
-    자신의 로봇 정보를 다른 협조 로봇에 전달하여 별도의 로봇간 인터록 제어반 없이 상태 로봇들의 상태를 확인할 수 있는 기능을 제공합니다. 이를 위하여 입출력 신호가 사용됩니다. 
+- HiNet I/O
+  Provides the capability to share your robot's information with other cooperative robots using I/O signals so that robot states can be checked without a separate interlock control panel.

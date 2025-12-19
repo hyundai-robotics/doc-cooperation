@@ -1,17 +1,13 @@
-﻿## 7.3.2. 즉시 정지
+## 7.3.2. Immediate Stop
 
-
-간섭 예상 검지(Level2검지 영역)에서 감속하여 정지하여도 로봇의 정지시 감속도 때문에 간섭 영역을 침범할 수 밖에 없는 경우가 있습니다. 간섭영역으로 설정한 범위를 직접적으로 초과하는 경우에는 감속정지 하지 않고 즉시 정지 처리 합니다.
+Even if deceleration stopping occurs in the predicted interference detection (Level 2 detection area), the robot may still invade the interference area due to deceleration distance during stopping. If the interference area is directly exceeded, an immediate stop is performed without deceleration.
 
  
-![[그림7-24] 간섭 영역의 침범2](../../_assets/7-24.png)
+![[Figure 7-24] Interference area invasion 2](../../_assets/7-24.png)
 
 
-|에러 메시지|	E0237    로봇 0)과 ARM간섭 영역 검지|
+| Error Message | E0237 Robot 0) ARM interference area detected |
 |:--|:--|
-|발생 가능한 에러 원인	|Arm과 Tool영역을 침범한 경우|
-|조치 방법|	정상적인 로봇 프로그램의 재생 중에 상기와 같은 경고가 발생할 경우 작업 프로그램을 다시 점검해 주십시오.|
-
-
-
+| Possible Causes | The arm and tool areas were invaded |
+| Action | If the above warning occurs during normal program playback, re-check the work program. |
 

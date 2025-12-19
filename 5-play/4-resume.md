@@ -1,28 +1,24 @@
-﻿## 5.4. 협조 재생 정지/재기동
+## 5.4. Stop/Resume of Cooperative Playback
 
-
-협조 동작 중 사용자가 정지 명령(외부정지, 내부정지)을 입력하면 협조 동작 중인 로봇이 모두 정지합니다.  
+If the user inputs a stop command (external stop, internal stop) during cooperative motion, all robots engaged in cooperative motion will stop.
 
 
 <br>
 
-![[그림 5-6] 상대 로봇 정지 시 경고 출력  ](../_assets/5-6.png)
+![[Figure 5-6] Warning displayed when a partner robot stops](../_assets/5-6.png)
 
 <br>
 
 
 
-
-
-협조 동작 중 정지 후 스텝 번호를 변경하고 재생하는 것은 협조 재생 상태가 무효인 경우에만 가능합니다. 협조 중에 정지하고 스텝을 변경한 후 재생하려면 사용자에 대한 확인의 의미로 [Yes/No]를 입력해 줄 것을 요구합니다.  
+After stopping during cooperative motion, changing the step number and replaying is only possible when cooperative playback is disabled. If you stop during cooperation, change the step, and then attempt to replay, a [Yes/No] confirmation is required from the user.
 
 <br>
 
-![[그림 5-7] 협조 동작 중 정지 후 스텝 변경 시 메시지   ](../_assets/5-7.png)
+![[Figure 5-7] Message when changing step after stopping during cooperative motion](../_assets/5-7.png)
 
 <br>
 
  
 
-
-협조제어 상태 리셋을 입력한 경우는 협조 상태를 해제하고 동작합니다. 협조 상태를 유지한 채 동작하려면 정지 스텝 번호를 지정하고 기동합니다.  
+If a cooperative control state reset is input, it releases the cooperative state and operates. To operate while keeping the cooperative state, specify the stopped step number and start.

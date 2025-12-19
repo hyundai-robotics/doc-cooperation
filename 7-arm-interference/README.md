@@ -1,1 +1,1 @@
-﻿## 7. 암 간섭 검지 기능
+## 7. Arm Interference Detection Features

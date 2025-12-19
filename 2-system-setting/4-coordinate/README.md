@@ -1,1 +1,1 @@
-﻿## 2.4. 공통좌표계 설정
+## 2.4. Common Coordinate System Settings

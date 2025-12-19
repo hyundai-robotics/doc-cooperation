@@ -1,36 +1,34 @@
-﻿## 7.2.2. 암 간섭 영역 설정
+## 7.2.2. Setting Arm Interference Areas
 
-
-
-암 간섭 영역의 모델은 양쪽 면이 반구(Hemi-Sphere)로 이루어진 원통으로 되어 있습니다. 예를 들어 H축의 경우에 아래와 같이 H축의 조인트 위치부터 V축의 조인트 위치까지를 반경을 설정하여 모델링 할 수 있습니다.  
+The arm interference area model is a cylinder composed of hemispheres on both ends. For example, for the H-axis, you can model the radius from the H-axis joint position to the V-axis joint position as shown below.
 
 
 <br>
 
-![[그림7-10] 반구와 원통형의 암 간섭 영역](../../_assets/7-10.png)
+![[Figure 7-10] Hemispherical and cylindrical arm interference area](../../_assets/7-10.png)
 
 <br>
 
-로봇 본체 암에 대한 원통 링크 모델은 S축, H축, V축 그리고 B축에 적용됩니다. 각 축의 반경의 기본 설정 값은 다음과 같이 결정되었습니다. 추가적인 설비가 로봇에 장착되었을 경우 해당 축의 반경을 기본 값 보다 크게 설정하여 사용하시기 바랍니다.
+The cylindrical link model for the robot body arm applies to S, H, V, and B axes. The default radius values for each axis are determined as follows. If additional equipment is mounted on the robot, set the radius for the corresponding axis larger than the default value.
 
- -	S축 반경 : S축의 회전 중심에서 H 축 조인트 거리의 두 배 설정
- -	H축 반경 : B축 회전 중심에서 Flange면까지의 거리의 1.8배
- -	V축 반경 : B축 회전 중심에서 Flange면까지의 거리
-
-<br>
-
-![[그림7-11] 축별 간섭 반경 설정](../../_assets/7-11.png)
+ - S-axis radius: Set to twice the distance from the S-axis rotation center to the H-axis joint
+ - H-axis radius: 1.8 times the distance from the B-axis rotation center to the flange face
+ - V-axis radius: Distance from the B-axis rotation center to the flange face
 
 <br>
 
-현재 로봇 암 간섭은 S, H, V축의 설정값으로 모든 축을 검지할 수 있도록 지원하고 있습니다.
+![[Figure 7-11] Axis-specific interference radius settings](../../_assets/7-11.png)
 
 <br>
 
-![[그림7-12] H축의 오프셋 반경](../../_assets/7-12.png)
+Currently, arm interference detection supports detecting all axes using the S, H, and V axis settings.
+
+<br>
+
+![[Figure 7-12] H-axis offset radius](../../_assets/7-12.png)
 
 <br>
 
 {% hint style="warning" %}
-만일 기본값보다 줄여서 사용하고자 하는 경우 매우 주의를 요합니다. 예를 들어 HS220같은 시리얼 링크의 H축은 위의 그림과 같이 S축의 중심에서 오른쪽으로 오프셋이 있습니다. H축의 간섭검지 영역은 상기의 그림과 같이 S축 회전 중심에서 H축 링크를 따라 V축 회전 중심까지 잇는 선분을 기준으로 설정되기 때문에 H축 반경은 S축 회전 중심에서 H축 링크를 모두 포함 할 수 있는 크기로 설정되어야 합니다.
+If you intend to set values smaller than the defaults, exercise extreme caution. For example, the H-axis of a serial-link robot such as the HS220 has an offset to the right from the S-axis center as shown in the figure. The H-axis interference detection area is set based on the segment from the S-axis rotation center along the H-axis link to the V-axis rotation center, so the H-axis radius must be set large enough to include the entire H-axis link from the S-axis rotation center.
 {% endhint %}

@@ -1,14 +1,12 @@
-﻿## 7.1.2. 기능의 범위 
+## 7.1.2. Scope of the Feature
 
- 
 
  <Br>
 
-![[그림 7-1] 로봇간 간섭](../../_assets/7-1.png)
+![[Figure 7-1] Interference between robots](../../_assets/7-1.png)
  <br>
 
-로봇의 Tool, Arm의 간섭을 원통으로 간략화한 모델을 이용하여 간섭을 검지하며, 주행축을 사용하는 로봇에 대해서도 적용이 가능합니다.
+Interference between robot tools and arms is detected using a simplified cylindrical model, and it can also be applied to robots that use drive axes.
 
-- 간섭 검지 기능을 지원하는 로봇은 협조제어 네트워크에 접속되어야 합니다. 
-- 기능을 지원하는 그룹 및 로봇 수는 협조제어와 동일합니다.
-
+- Robots that support the interference detection feature must be connected to the cooperative control network.
+- The supported groups and number of robots are the same as for cooperative control.

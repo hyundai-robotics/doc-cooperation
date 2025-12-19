@@ -1,4 +1,5 @@
-﻿## 4.3. cmov 명령
+```markdown
+## 4.3. cmov Command
 
 <br>
 
@@ -10,18 +11,18 @@ cmov R20,L,tg=po1,spd=60%,accu=0,tool=1 until di1
 ```
 
 
-
 <br>
 
-### 파라미터
-| param# | 의미 | 
+### Parameters
+| param# | Meaning | 
 | :--- | :--- | 
-| param1| - 마스터 로봇 시스템의 매니퓰레이터 식별자 <br> 형태: R(#1)(#2) <br> #1 : 마스터 로봇 시스템 번호 (1～4) <br> #2 : 로봇 시스템의 마스터 매니퓰레이터 식별자 <br> (0: Robot, 1: Positioner Group 1, 2: Positioner Group 2)| 
-| param2 | - 보간 종류 (interpolation)  <br> 슬레이브 로봇의 보간 방식 지정, 직선과 원호만 가능 <br> (L: Linear, C: Circular)|
-| param3 | - 이동 속도 (Speed) <Br> 작업물 대비 상대적인 속도 지정 | 
+| param1| - Master robot system manipulator identifier <br> Format: R(#1)(#2) <br> #1 : Master robot system number (1～4) <br> #2 : Master manipulator identifier of the robot system <br> (0: Robot, 1: Positioner Group 1, 2: Positioner Group 2)| 
+| param2 | - Interpolation type <br> Specifies the interpolation mode for the slave robot; only linear and circular are supported <br> (L: Linear, C: Circular)|
+| param3 | - Movement speed (Speed) <Br> Specify the relative speed compared to the workpiece | 
 | param4 | - Accuracy (0~7)|
-| param5 | - Tool 번호 (0~31) |
+| param5 | - Tool number (0~31) |
 
 
-![[그림 4-3] ID 식별자 구분 방법](../_assets/4-3.png)
+![[Figure 4-3] Method for distinguishing ID identifiers](../_assets/4-3.png)
 
+```

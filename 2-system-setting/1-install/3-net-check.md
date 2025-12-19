@@ -1,25 +1,25 @@
-﻿## 2.1.3. 네트워크 연결 확인
+## 2.1.3. Network Connection Check
 
-다음과 같은 경우 네트워크 이상 유무를 확인합니다. 
--	초기 설치 시  
--	협조제어 동작 중 네트워크 이상이 검지 되었을 때  
-
-<br>
-<br>
-
--	확인사항   
-    - 네트워크 케이블 연결상태를 확인합니다.  
-    - ${cont_model}COM 네트워크 소켓에 녹색등이 점멸되어야 합니다.  
-    - 케이블의 이상 유무를 확인합니다.  
-    - [로봇간 협조제어] 모니터링에서 네트워크 상태를 확인합니다.  
+Check the network when the following situations occur:
+- During initial installation
+- When a network anomaly is detected during cooperative control operation
 
 <br>
+<br>
 
-![[그림 2-2] 협조제어 상태 확인](../../_assets/2-2.png)
+- Check items:
+    - Verify the network cable connection.
+    - The ${cont_model}COM network socket LED should be blinking green.
+    - Verify cable integrity.
+    - Check network status in [Inter-robot Cooperative Control] monitoring.
+
+<br>
+
+![[Figure 2-2] Cooperative control status check](../../_assets/2-2.png)
 
 <br>
 
 {% hint style="warning" %}
--	협조제어 네트워크는 다른 네트워크와는 분리하여 독립적으로 구성하는게 좋습니다.  
+- It is recommended that the cooperative control network be configured separately and independently from other networks.
 
 {% endhint %}

@@ -1,20 +1,19 @@
-﻿2.1.2. 네트워크 구성
-
+## 2.1.2. Network Configuration
 
 <br>
 
-| 구성품| 	사양| 
+| Component | Specification | 
 | :---: | :---: | 
-| ${cont_model}COM	| Main CPU 보드| 
-| UTP cable	| 허브 이용 연결: direct LAN cable <br> 2대 직접 연결: cross LAN cable| 
-| Network Hub| 	당사가 제공하는 사양 (스위칭 허브)| 
+| ${cont_model}COM | Main CPU board | 
+| UTP cable | Hub connection: direct LAN cable <br> Direct connection of two units: cross LAN cable |
+| Network Hub | Company-specified switching hub |
 
 
-[표 2-1] 협조제어 요구사항
+[Table 2-1] Cooperative control requirements
 
 
 <br>
 
--	연결방법  
-${cont_model}COM 모듈의 네트워크 소켓 중에서 범용 네트워크에 UTP 케이블(Direct)을 한쪽을 연결하고 다른 한쪽은 네트워크 허브에 연결합니다. 이런 방식으로 4대까지 허브에 연결할 수 있습니다.  
-두 대의 로봇을 허브 없이 연결하는 경우에는 네트워크 UTP CROSS 케이블로 범용 네트워크 소켓에 연결합니다.  
+- Connection method
+Connect one end of a UTP cable (Direct) to the universal network socket of the ${cont_model}COM module and the other end to the network hub. Up to 4 units can be connected to the hub this way.
+If connecting two robots without a hub, use a network UTP CROSS cable and connect it to the universal network sockets.

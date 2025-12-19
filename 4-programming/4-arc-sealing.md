@@ -1,73 +1,68 @@
-﻿## 4.4. 아크 용접 및 실링용 티칭 (지그리스 협조제어)
+## 4.4. Teaching for Arc Welding and Sealing (Jigless Cooperative Control)
 
-
-
-(1)	마스터와 슬레이브의 수동 협조 로봇 역할을‘독립’으로 설정한 후 협조시작 위치에 각각의 스텝을 기록 하고 협조 시작 위치에 cowork 명령을 입력합니다. 
+(1) Set the manual cooperative roles of Master and Slave robots to 'Independent', record the start steps for cooperation, and insert the cowork command at the cooperation start position.
  
 ![](../_assets/4-prg8.png)
 
-![[그림 4-4] 스텝 시작 및 목표 위치](../_assets/4-4.png)
+![[Figure 4-4] Step start and target positions](../_assets/4-4.png)
 
 
-(2)	수동 협조상태 Master와 Slave를 각각의 역할에 따라 지정합니다.  
+(2) Set the Manual Cooperative states for Master and Slave according to their roles.
 
 ![](../_assets/4-prg9.png)
 
 
-
-(3)	Master를 조그 조작하면 슬레이브는 추종하게 됩니다. 원하는 기록위치에 마스터 스텝을 기록합니다.  
-
- ![](../_assets/4-prg10.png)
-
-(4)	Slave를 R351,3 명령을 이용하여 cmov기록 상태로 전환합니다. 화면 상단의 로봇역할 표시가 흰색에서 빨간색으로 변경됩니다.  
+(3) When you jog the Master, the Slave follows. Record the Master step at the desired position.
 
  ![](../_assets/4-prg10.png)
 
-(5)	슬레이브 로봇을 목표위치까지 조그 조작한 후 ‘기록’키를 누릅니다.  
+(4) Switch the Slave to cmov recording state using R351,3. The robot role indicator at the top of the screen changes from white to red.
+
+ ![](../_assets/4-prg10.png)
+
+(5) Jog the Slave robot to the target position and press the 'Record' key.
  
 
-![[그림 4-5] 스텝 목표 위치 cmov 기록](../_assets/4-5.png)  
+![[Figure 4-5] Recording cmov target positions](../_assets/4-5.png)
 
  
 ![](../_assets/4-prg11.png)  
 
 
-
-(6)	슬레이브에는 cmov가 기록됩니다. cmov의 기록위치는 마스터 툴 엔드 이펙터 좌표계 기준의 좌표입니다. [속성]키를 눌러 기록된 좌표위치를 확인, 수정이 가능합니다. 
+(6) The cmov positions are recorded on the Slave. The recorded cmov positions are coordinates relative to the Master tool end effector coordinate system. Press the [Properties] key to view or modify the recorded coordinates.
   
-(7)	이때 기록된 좌표계는 ‘마스터’로 표시됩니다. 
+(7) The recorded coordinate system will be shown as 'Master'. 
 
-(8)	마찬가지 방법으로 슬레이브를 이동하며 여러 개의 cmov 스텝을 기록할 수 있습니다.  
+(8) Similarly, move the Slave and record multiple cmov steps.
 
  ![](../_assets/4-prg12.png)
 
-(9)	단 기록된 스텝에 대한 이동 계획은 마스터와 슬레이브가 개별적으로 수행하므로 마스터와 슬레이브의 목표 위치에 도달하는 시점은 서로 다를 수 있습니다. 따라서 협조 구간에서 마스터의 move위치와 슬레이브의 cmov위치의 시작 위치 타이밍을 맞추기 위해서는 HiNet I/O를 이용한 상호 인터록 방법을 사용 하거나 cowork with,sync=1명령을 사용할 수 있습니다. cowork with 명령어는 sync번호가 같아야만 동기 동작을 수행합니다. 다른 번호의 cowork with 명령을 만나면 에러가 발생합니다.
+(9) Note that the movement planning for recorded steps is executed separately by Master and Slave, so the timing when Master and Slave reach their target positions may differ. To align the start timings of the Master's move position and the Slave's cmov position in the cooperative section, use mutual interlocks implemented with HiNet I/O or use `cowork with, sync=1`. The `cowork with` command performs synchronized motion only if the sync numbers match; encountering a `cowork with` with a different number will cause an error.
 
-(10)	예를 들어 마스터와 슬레이브의 스텝 5(S5) 시작 시점을 동기화시키기 위해 _mb 메모리 변수를 이용하여 서로 상대가 스텝위치에 도달했는지를 확인하는 방법을 사용할 수 있습니다.  
+(10) For example, to synchronize the start of step 5 (S5) for Master and Slave, you can use an _mb memory variable to check whether each robot has reached its step position.
 
  ![](../_assets/4-prg13.png)
 
-※ 위와 같은 방법을 사용하면 마스터와 슬레이브가 스텝 4(S4)에 도달한 후 상대 로봇이 스텝 4까지 도달했는지 확인하고 다음 스텝(S5)로 이동하게 됩니다. 
+※ Using this method, after Master and Slave reach step 4 (S4), they verify that the partner robot has reached step 4 before moving to the next step (S5).
 
-(11)	협조 동작을 마치면 협조 제어를 마치도록 마스터와 슬레이브에 모두 cowork end 명령을 삽입하면 협조제어 교시가 완료됩니다.  
+(11) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control teaching.
 
 ![](../_assets/4-prg14.png)     
 
-(12)	앞에서 설명한 전체 프로그램은 다음과 같으며 협조제어의 타이밍 제어를 위해 ⓐ, ⓑ, ⓒ와 같은 타이밍 제어를 실시할 수 있습니다.  
+(12) The entire program example described above is shown below, and timing control such as ⓐ, ⓑ, ⓒ may be applied for cooperative timing control.
 
  ![](../_assets/4-prg15.png)
 
-(13)	cowork with 명령은 협조제어 중(cowork~cowork end사이)에서 마스터와 슬레이브 로봇간에 위치를 동기화할 때 사용하는 명령입니다. 협조제어 중에 cowork with명령을 만나게 되면 협조 중인 로봇이 모두 cowork with에 도달할 때까지 대기합니다. 따라서 이전의 프로그램은 다음과 같은 방법으로도 변경할 수 있습니다.  
+(13) The `cowork with` command is used during cooperative control (between `cowork` and `cowork end`) to synchronize positions between Master and Slave. When a `cowork with` command is encountered during cooperative control, it waits until all cooperating robots reach that `cowork with`. Therefore, the earlier program can be modified as follows.
 
  ![](../_assets/4-prg16.png)
 
 
 {% hint style="warning" %}
 
- -	cmov의 위빙동작을 사용하는 경우 참조점(refp)은 협조제어 구간(cowork ~ cowork end) 내에 기록해야 합니다. 
- -	레이저 비전 센서를 이용한 cmov궤적 Seam-Tracking 기능은 지원하지 않습니다.
- -	cowork with명령은 협조제어 구간에서(cowork~cowork end) 마스터와 슬레이브 모두 동일한 개수만큼 사용해야 합니다. 
- -	협조 로봇들이 함께 수행하는 cowork with 명령어는 동일한 sync번호를 사용해야 합니다.
+ - When using cmov weaving motion, reference points (refp) must be recorded within the cooperative control region (`cowork ~ cowork end`).
+ - Seam-tracking of cmov trajectories using laser vision sensors is not supported.
+ - In the cooperative control region (`cowork ~ cowork end`), the number of `cowork with` commands must be the same for both Master and Slave.
+ - `cowork with` commands performed jointly by cooperating robots must use the same sync number.
 
 {% endhint %}
- 

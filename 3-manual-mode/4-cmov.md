@@ -1,22 +1,21 @@
-﻿## 3.4. cmov 기록모드 조그
+## 3.4. cmov Recording Mode Jog
 
+The cmov recording mode is a mode for teaching Slave positions for jigless cooperative motion.
 
-cmov기록 모드는 지그리스 협조 동작을 위해 슬레이브의 위치를 교시하는 모드입니다. 
-
- -	cmov 기록모드 설정 방법  
-    - ①	로봇역할을 슬레이브로 선택합니다.  
-    - ②	마스터 로봇의 수동 협조 상태를 MASTER로 놓습니다.  
-    - ④	직교좌표계 조그 상태에서도 마스터 좌표와 상관없이 로봇의 직교좌표계 기준으로 조그가 이루어집니다. 
+ - How to set cmov recording mode:
+    - ① Select the robot role as Slave.
+    - ② Set the Master's manual cooperative state to MASTER.
+    - ④ Even in Cartesian coordinate jog state, jogging is performed relative to the robot's Cartesian coordinate system regardless of the Master coordinates.
 
 <Br>
 
-![[그림 3-10] cmov 기록모드 조그](../_assets/3-10.png)
+![[Figure 3-10] cmov recording mode jog](../_assets/3-10.png)
 
 <br>
  
 <br>
 
  {% hint style="warning" %}
--  협조제어 시스템의 주행축은 마스터와 슬레이브가 가능한 평행하게 설치되어야 합니다.   
--  슬레이브가 cmov기록 모드일 때는 수동 협조 상태가 마스터로 설정된 로봇의 조그 조작은 불가합니다.  
+- The drive axes of cooperative control systems should be installed as parallel as possible between Master and Slave.
+- When the Slave is in cmov recording mode, jogging of the robot set as Master in manual cooperative state is not allowed.
 {% endhint %}

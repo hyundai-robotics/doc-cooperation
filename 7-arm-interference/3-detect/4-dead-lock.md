@@ -1,18 +1,15 @@
-﻿## 7.3.4. 데드락(Dead Lock) 상태에서 처리 방법
+## 7.3.4. Handling in Deadlock State
 
-
-데드락은 두 로봇이 서로 간섭 영역을 침범하여 조그나 프로그램으로 더 이상 로봇을 움직일 수 없는 상태입니다.
-이때는 간섭된 로봇을 상대 로봇과의 간섭 검지를 ‘해제’한 후 조그 기능을 이용하여 사용자의 주의 하에 간섭영역을 빠져나가야 합니다.
+A deadlock occurs when two robots invade each other's interference area and cannot move the robots further by jogging or program execution. In this case, release the interference detection for the affected robot relative to the partner robot, and then use the jog function to move out of the interference area carefully under user supervision.
  
 <br> 
 
-![[그림7-28] 로봇간 암 간섭 검지 해제](../../_assets/7-28.png)
+![[Figure 7-28] Release inter-robot arm interference detection](../../_assets/7-28.png)
 
 <br>
 
-간섭영역을 빠져나간 후에는 상대 로봇 번호를 체크 하여 복귀하여 사용합니다.
+After moving out of the interference area, check the partner robot number and resume operation.
  
 <Br> 
 
-![[그림7-29] 로봇간 암 간섭 검지 설정](../../_assets/7-29.png)
-
+![[Figure 7-29] Setting inter-robot arm interference detection](../../_assets/7-29.png)

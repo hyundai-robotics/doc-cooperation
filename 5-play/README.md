@@ -1,2 +1,1 @@
-﻿## 5. 협조동작 재생
-
+## 5. Cooperative Motion Playback

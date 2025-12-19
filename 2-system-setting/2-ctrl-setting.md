@@ -1,33 +1,31 @@
-﻿## 2.2 사용환경 설정
+## 2.2. Control Environment Settings
 
+Set whether to use the cooperative control function and the robot number, etc.
 
-협조제어 기능의 사용 여부 및 로봇 번호 등을 설정합니다. 
+(1) Select 'System' → '4: Application Parameters' → '17: Cooperative Control'.
 
-(1)	『시스템』→『4: 응용 파라미터』→『17: 협조제어』를 선택합니다.
+(2) Select '1: Control Environment Settings'.
 
-(2)	『1: 사용환경 설정』를 선택합니다.
+(3) Set the dialog parameters. The purpose of each parameter is as follows:
 
-(3)	대화상자의 파라미터를 설정합니다. 각 파라미터의 용도는 다음과 같습니다. 
-
-
--	협조제어 기능: <무효, 유효> 
-협조제어 기능의 사용 여부를 선택합니다. 
--	로봇 번호: <1~4>  
-로봇의 번호를 설정합니다. 로봇의 번호는 협조제어에서 연결된 네트워크 상에서 자신의 제어기를 인식하는 번호입니다. ${cont_model} 제어기에서는 최대 4대의 로봇이 협조 네트워크를 구성할 수 있습니다. 로봇 번호가 중복되지 않도록 설정하여 주십시오. 
+- Cooperative Control Function: <Disabled, Enabled>
+Select whether to use the cooperative control function.
+- Robot Number: <1~4>
+Set the robot number. The robot number is the identifier for your controller on the cooperative control network. The ${cont_model} controller supports a maximum of 4 robots in a cooperative network. Ensure robot numbers are not duplicated.
 
 <br>
 
-![[그림 2-11] 사용환경 설정](../_assets/2-11.png)
+![[Figure 2-11] Control environment settings](../_assets/2-11.png)
 
 
 <br>
 
 {% hint style="warning" %}
--	특수 로봇 및 6자유도 미만의 로봇에는 HiNet통신만 적용이 가능하며 cowork명령은 사용할 수 없습니다. 
--	협조제어 기능은 옵션사양입니다. 따라서 본 기능을 사용하기 위해서는 라이선스키 등록이 필요합니다. 한 달간은 임시 키를 발급받아 사용할 수 있으나 그 이상 사용하기 위해서는 당사에 문의하시기 바랍니다.  
+- For special robots and robots with fewer than 6 degrees of freedom, only HiNet communication is applicable and the `cowork` command cannot be used.
+- Cooperative control is an optional feature. Therefore, a license key registration is required to use this function. A temporary key can be issued for one month; for continued use beyond that, contact the company.
 
 <br>
 
-![[그림 2-3] 로봇간 협조제어 라이선스키 옵션 설정](../_assets/2-3.png)
+![[Figure 2-3] Cooperative control license key option settings](../_assets/2-3.png)
 
 {% endhint %}

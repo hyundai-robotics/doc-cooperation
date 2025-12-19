@@ -1,23 +1,19 @@
-﻿## 5.3. 자동 모드에서의 재생
+## 5.3. Playback in Automatic Mode
 
+(1) Switch all cooperative robots to automatic mode.
 
+(2) Verify that all cooperative robots have Drive Ready ON.
 
+(3) Start the program from the beginning.
 
-(1)	협조로봇을 모두 자동모드로 전환합니다.  
-
-(2)	협조로봇이 모두 운전 준비가 ON되었는지 확인합니다.  
-
-(3)	프로그램을 처음부터 시작하도록 합니다.  
-
-(4)	협조 로봇을 전부 각각 기동시킵니다.  
-    (MASTER와 SLAVE의 기동 순서는 임의의 순서로 하여도 무관합니다.) 
+(4) Start each cooperative robot. (The start order of MASTER and SLAVE may be arbitrary.)
 
 
 
 {% hint style="warning" %}
 
- -	협조 재생 기준위치가 아닌 상태에서 임의로 커서를 이동하여 cowork m(혹은 cowork s)에서부터 실행하지 마십시오. cowork m(cowork s)위치에서 Master와 Slave의 상대 위치를 계산하여 협조 동작하므로 반드시 협조 기준위치에서 실행하여야 합니다. 
- - 	협조 대기시간의 설정은 적당하게 설정하십시오. MASTER나 SLAVE중 하나가 먼저 협조 기준위치에 도달한 후에도 상대 로봇이 ‘협조 대기시간’내에 도달하지 않으면 에러가 발생합니다. 무한 대기하려면 협조 대기시간을 0으로 설정합니다. 
+ - Do not arbitrarily move the cursor and execute from cowork m (or cowork s) unless you are at the cooperative playback reference position. Cooperative motion calculates the relative position of Master and Slave from the cowork m (cowork s) position, so it must be executed from the cooperative reference position.
+ - Set the cooperative waiting time appropriately. If one of MASTER or SLAVE reaches the cooperative reference position first and the partner robot does not arrive within the 'cooperative waiting time', an error occurs. To wait indefinitely, set the cooperative waiting time to 0.
 
 
 {% endhint %}

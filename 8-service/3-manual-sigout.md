@@ -1,10 +1,10 @@
-﻿## 8.3. 수동설정 기능
+## 8.3. Manual Output Function
 
-협조 제어용 자신의 로봇 상태를 수동으로 변경할 수 있습니다. 
+You can manually change your robot's cooperative control status.
 
-- 『창조정』 → 『선택』에서 『범용 출력』창을 표시합니다.
-- 자신의 로봇번호에 해당하는 수동으로 변경을 원하는 출력 신호로 이동합니다.
-- ‘수동 출력’ 버튼을 눌러 표시되는 대화상자에서 변경합니다.
+- Display the 'General Output' window from 'Window Settings' → 'Selection'.
+- Move to the output signal corresponding to your robot number that you want to change manually.
+- Press the 'Manual Output' button and change it in the dialog that appears.
 
 
 ![](../_assets/9-7.png)

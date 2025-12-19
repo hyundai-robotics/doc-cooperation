@@ -1,24 +1,23 @@
-﻿## 5.2. 수동모드에서 프로그램 확인
+## 5.2. Program Check in Manual Mode
 
-
-(1)	수동모드에서 마스터 로봇은 수동 협조 상태를 I(Indiv.)나 M(Master)로 설정하고, 슬레이브 로봇은 수동 협조 상태를 I(Indiv.)나 S(Slave)로 설정합니다.  
-(2)	운전 준비를 On 하고 양측 모두 ‘스텝 전진’키를 누릅니다.  
-(3)	마스터와 슬레이브의 동기 동작을 확인하기 위해서 마스터와 슬레이브의 스텝전진 키를 협조 동작이 종료될 때까지 누릅니다.  
+(1) In manual mode, set the Master robot's manual cooperative state to I (Indiv.) or M (Master), and set the Slave robot's manual cooperative state to I (Indiv.) or S (Slave).
+(2) Turn Drive Ready On and press the 'Step Forward' key on both sides.
+(3) To verify synchronous motion between Master and Slave, press the Master and Slave step forward keys until cooperative motion is completed.
  
  <br>
  
 ![](../_assets/4-prg23.png)
 
-![[그림 5-5] 수동모드에서 프로그램 확인](../_assets/5-5.png)
+![[Figure 5-5] Program check in manual mode](../_assets/5-5.png)
 
 <br>
  
 
 {% hint style="warning" %}
  
- - 	슬레이브가 cmov기록 모드이면 마스터와의 수동 모드 협조 동작이 되지 않습니다.  
- - 	스텝 전후진 실행 시 조건설정의 ‘스텝 전진시 펑션 실행’을 On으로 설정해야 합니다.  
- -	마스터와 슬레이브 로봇은 cowork 명령을 실행하는 순간만 실행 위치를 검사하며 그 이외의 구간에서 마스터와 슬레이브의 스텝위치를 동기화 시키지는 않습니다. 따라서 스텝 전 후진으로 확인한 마스터와 슬레이브의 상대 위치는 자동모드 재생 동작에서는 달라질 수 있습니다.   
- - 	두 로봇의 위치를 동기화 하기 위해서는 cowork with,sync=1 명령문을 사용하십시오.
+ - If the Slave is in cmov recording mode, manual mode cooperative operation with the Master will not be possible.
+ - When executing step forward/backward, set 'Execute function on step forward' in Condition Settings to On.
+ - The Master and Slave robots check the execution position only at the moment the cowork command is executed; they do not synchronize Master and Slave step positions outside of that. Therefore, the relative positions of Master and Slave checked using step forward/back may differ during automatic mode playback.
+ - To synchronize the positions of the two robots, use the `cowork with, sync=1` statement.
 
 {% endhint %}

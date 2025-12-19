@@ -1,10 +1,8 @@
-﻿## 8.2. HiNet I/O 모니터
+## 8.2. HiNet I/O Monitor
 
-
-
-(1)	『창조정』 → 『선택』에서 『범용 입력』을 선택합니다.  
+(1) Select 'General Input' from 'Window Settings' → 'Selection'.
  ![](../_assets/9-5.png)
 
 
-(2)	각 로봇별 설정된 입력 신호의 상태를 확인합니다.   
+(2) Check the status of configured input signals for each robot.
 ![](../_assets/9-6.png)

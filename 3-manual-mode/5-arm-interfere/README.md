@@ -1,1 +1,1 @@
-﻿## 3.6. 협조 로봇간 암 간섭 및 소프트 리밋 검지
+## 3.6. Detection of Arm Interference and Soft Limits Between Cooperative Robots

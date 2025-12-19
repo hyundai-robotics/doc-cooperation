@@ -1,43 +1,34 @@
-﻿## 2.4.4. 공통좌표계 설정
+## 2.4.4. Common Coordinate System Setup
 
+If a common coordinate system is not set, manual cooperative jog operations and cooperative replay are not possible. When the common coordinate system is set, it is recommended to verify the setup using cooperative jog operations before proceeding with full operations.
 
-공통 좌표계가 설정되어 있지 않으면 수동 협조 조그 조작이나 협조 재생이 불가합니다. 공통 좌표계가 설정되어 있는 경우 협조 조그 동작을 통해 공통 좌표계 설정이 올바로 되었는지 확인 후에 본격적인 작업을 하는 것이 바람직합니다. 
-공통 좌표계의 설정은 협조 로봇의 툴 선단의 위치를 정확히 알고 있어야 합니다. 그렇지 않을 경우 로봇간 협조제어 시 위치동기 오차가 발생하게 됩니다. 따라서 로봇의 원점 및 툴의 정확한 위치를 설정하기 위한 캘리브레이션이 필요합니다. ${cont_model} 제어기는 3차원 위치 측정기가 없는 경우 자동 캘리브레이션(『시스템』 → 『6: 자동 캘리브레이션』 → 『1: 축 원점 및 툴 길이 최적화』) 기능을 제공하고 있습니다.  3차원 위치 측정기를 보유하고 있다면 보다 정확한 캘리브레이션이 가능합니다. 이 경우에는 『9: 로봇과 툴 캘리브레이션』 기능을 이용하십시오. 보다 자세한 내용은 ${cont_model} 조작설명서』를 참고하십시오. 
+The common coordinate system setup requires accurate knowledge of the robots' tool-tip positions. Otherwise, synchronization position errors may occur during cooperative control between robots. Therefore, calibration is required to set the robot origins and the exact tool positions. The ${cont_model} controller provides an automatic calibration function when a 3D position measurement device is not available (System → 6: Automatic Calibration → 1: Axis Origin and Tool Length Optimization). If a 3D position measurement device is available, more accurate calibration is possible; in that case, use the 9: Robot and Tool Calibration function. For more details, refer to the ${cont_model} operation manual.
 
--	ROBOT1, ROBOT2 로봇 두 대의 환경에서 공통 좌표계 설정 예시  
+- Example of common coordinate system setup for a two-robot environment (ROBOT1, ROBOT2)
 
-    - ①	ROBOT1과 ROBOT2 제어기에 공통 좌표계 설정용 프로그램 번호를 선택합니다.  
-    - ②	ROBOT1과 ROBOT2를 각각 조그로 조작하여 가능한 큰 삼각형을 생성하도록 3점을 스텝 1,2,3에 순차적으로 기록합니다.  이때 기록위치는 공간상에 동일한 위치에 기록되어야 하며 보간 방식과, 속도는 무관하나 툴 번호는 툴 선단의 위치를 정확히 알고 있는 툴을 선택 하여야 합니다.  
-    - ③	수동 모드에서 『시스템』 → 『4: 응용 파라미터』→『3: 공통좌표계 설정』을 선택합니다.  
-    - ④	『자동계산』에서 공통좌표계 설정용 프로그램 번호를 입력합니다.  
-    - ⑤	실행 결과는 로봇 베이스에서 본 공통 좌표계 위치와 자세가 표시됩니다.  
-    - ⑥	『확인』키를 누르면 설정이 완료됩니다.  
+    - ① Select the program number for common coordinate system setup on both ROBOT1 and ROBOT2 controllers.
+    - ② Jog ROBOT1 and ROBOT2 and sequentially record three points in steps 1, 2, and 3 to form as large a triangle as possible. The recorded positions must correspond to the same spatial points; interpolation method and speed do not matter, but choose a tool number whose tool tip position is known accurately.
+    - ③ In Manual mode, select System → 4: Application Parameters → 3: Common Coordinate Setup.
+    - ④ In Automatic Calculation, enter the program number used for common coordinate setup.
+    - ⑤ The execution result displays the common coordinate system position and orientation as seen from the robot base.
+    - ⑥ Press the Confirm key to complete the setup.
 
-<br>
+![[Figure 2-7] Per-robot program for common coordinate setup](../../_assets/2-7.png)
 
-![[그림 2-7] 각 로봇 별 공통좌표계 설정 프로그램](../../_assets/2-7.png)
+![[Figure 2-8] Teaching method for common coordinate setup](../../_assets/2-8.png)
 
-<br>
-
-![[그림 2-8] 공통좌표계 설정 티칭 방법](../../_assets/2-8.png)
-
-
-<br>
-
-![[그림 2-9] 공통좌표계 설정 결과 화면](../../_assets/2-9.png)
-
-<Br>
+![[Figure 2-9] Common coordinate setup result screen](../../_assets/2-9.png)
 
 {% hint style="warning" %}
--	공통좌표계 설정용 툴 데이터 값은 정확한 툴의 규격을 입력하거나 자동 캘리브레이션을 통해 툴 데이터 값을 구하여 사용하십시오. 각 점은 로봇의 자세를 동일하게 기록하는 것이 바람직합니다.   
--	설정한 3점이 가능한 큰 삼각형을 생성하도록 기록하십시오. 점 사이의 거리가 가깝거나, 3점이 거의 직선에 가까운 경우에는 에러가 발생합니다.  
--	공통 좌표계의 자세 Rx, Ry, Rz의 변환은 로봇 좌표계와 다음과 같은 관계에 있습니다.  
+- Enter either the correct tool specifications or obtain tool data using automatic calibration for common coordinate setup. It is recommended that each point be recorded with the same robot posture.
+- Record the three points so they form as large a triangle as possible. If the points are too close or nearly collinear, errors may occur.
+- The orientation transformation of the common coordinate system Rx, Ry, Rz relates to the robot coordinate system as follows:
 
-    - ①	자신의 로봇(번호 2) 좌표계(ref)를 X축 방향으로 γ만큼 회전시킵니다.  
-    - ②	자신의 로봇(번호 2) 좌표계(ref)를 Y축 방향으로 β만큼 회전시킵니다.  
-    - ③	자신의 로봇(번호 2) 좌표계(ref)를 Z축 방향으로 α만큼 회전시킵니다.  
-    - ④	자신의 로봇(번호 2)베이스 좌표계를 γ, β, α만큼 회전한 자세가 공통 좌표계의 공간상의 자세입니다.  
+    - ① Rotate your robot (number 2) coordinate frame (ref) around the X-axis by γ.
+    - ② Rotate your robot (number 2) coordinate frame (ref) around the Y-axis by β.
+    - ③ Rotate your robot (number 2) coordinate frame (ref) around the Z-axis by α.
+    - ④ The pose obtained by rotating your robot (number 2) base coordinate frame by γ, β, α is the orientation of the common coordinate system in space.
 
-![[그림 2-10] 공통 좌표계의 자세 변환](../../_assets/2-10.png)
+![[Figure 2-10] Orientation transformation of the common coordinate system](../../_assets/2-10.png)
 
 {% endhint %}

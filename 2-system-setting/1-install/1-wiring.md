@@ -1,27 +1,23 @@
-﻿2.1.1. 비상정지선의 결선
+## 2.1.1. Emergency Stop Wiring
 
+If an emergency stop occurs during cooperative motion, robots monitor each other's state via communication so that partner robots also stop, but hardware signals take precedence and positional mismatches between cooperative robots may occur. To minimize cooperative position mismatches during emergency stop, wire the controller's external emergency stop.
 
+The ${cont_model} controller provides a user external emergency stop. The external emergency stop wiring is shown below.
 
-
-협조 동작 중에 비상정지를 하는 경우에 통신으로 서로의 상태를 모니터링하고 있어 상대의 로봇도 정지하도록 되어있지만 하드웨어적인 신호가 우선하므로 협조로봇 상호간의 위치가 어긋나게 됩니다. 비상정지시 협조위치의 어긋남을 최소화하기 위해서 제어기의 외부 비상정지 결선을 하십시오.  
-
-${cont_model} 제어기에는 사용자용 외부 비상정지가 준비되어 있습니다. 외부의 비상정지 결선은 아래의 그림과 같습니다.  
-
-로봇 협조 기능을 사용할 때는 동시에 비상정지가 각 제어기에 입력될 수 있도록 하는 별도의 비상정지 스위치를 설치하여야 합니다. 사용자용으로 마련된 외부 비상정지 결선을 이용하여 아래 같이 하나의 비상정지로 통합하여 사용하십시오. 비상정지시의 협조위치 어긋남이 최소화됩니다.  
+When using the robot cooperative feature, install a dedicated emergency stop switch so that emergency stop signals can be input to each controller simultaneously. Use the user-provided external emergency stop wiring to integrate them into a single emergency stop as shown below. This minimizes cooperative position mismatches during an emergency stop.
 
 <br>
 
-![[그림2-1] 로봇 협조용 비상정지의 결선](../../_assets/2-1.png)
+![[Figure 2-1] Emergency stop wiring for robot cooperation](../../_assets/2-1.png)
 
 
 <br>
-
 
 {% hint style="warning" %}
--	협조 중 비상정지 시 상대적인 협조 위치가 어긋남이 발생 할 수 있습니다.  
--	핸들링 기능으로 적용할 때 협조 동작중의 협조 어긋남(비상정지시 오차, 동기 오차, 캘리브레이션 오차, 궤적 오차)를 흡수하기 위해서는 플로팅 기구를 설치하여야 합니다.  
--	핸들링 기능으로 적용할 때 플로팅 기구는 협조 로봇이 2대일 때 최소 1대 이상 설치할 것을 권장합니다.  
--	외부 비상정지 사용 시 사용하는 릴레이는 Safety Relay를 이용하십시오.  
-    예시 제품) Omron사 G7S-4A2B
+- A positional mismatch during cooperative motion may occur when an emergency stop happens.
+- For handling applications, install a floating mechanism to absorb cooperative mismatches during cooperative motion (errors on emergency stop, synchronization errors, calibration errors, trajectory errors).
+- For handling applications with 2 cooperative robots, it is recommended to install at least one floating mechanism.
+- Use a Safety Relay when using external emergency stop relays.
+    Example product: Omron G7S-4A2B
 
 {% endhint %}

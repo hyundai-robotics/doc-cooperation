@@ -1,8 +1,5 @@
-﻿## 2.4.2. 2대 이상의 공통 좌표계 설정
+## 2.4.2. Setting a Common Coordinate System for Two or More Robots
 
-협조 로봇의 공통 좌표계는 로봇간의 동일점을 티칭하여야 하므로 협조하는 모든 로봇이 동일한 3점을 가리킬 수 있도록 하여야 합니다. 따라서 로봇간의 거리가 많이 떨어져 있는 경우에는 공통 좌표계의 설정이 불가능합니다. 이때는 별도의 툴(Tool)을 제작하여 로봇간의 동일점을 티칭할 수 있도록 하여야 합니다. 
+A common coordinate system for cooperative robots is defined by teaching identical points between robots, so all cooperating robots must be able to indicate the same three points. Therefore, when the distance between robots is large, it may not be possible to set a common coordinate system. In such cases, a separate tool should be fabricated so that identical points between the robots can be taught.
 
-
-<Br>
-
-![[그림 2-5] 2대 이상의 공통 좌표계 설정](../../_assets/2-5.png)
+![[Figure 2-5] Setting a common coordinate system for two or more robots](../../_assets/2-5.png)

@@ -1,23 +1,22 @@
-﻿## 8.4. R code
+## 8.4. R code
 
 
 
+R codes used for cooperative control.
 
-협조제어에 사용하는 R code 입니다. 
+[Table 8-1] R351 Manual Cooperative State Setting
 
-[표 8 1] R351 수동 협조상태 설정
-
-|	#1|	내용|
+| # | Description |
 |:--:|:--:|
-|0|Indiv.(개별)|
+|0|Indiv. (Individual)|
 |1|Master|
 |2|Slave|
-|3|cmov 기록 모드|
+|3|cmov Recording Mode|
 
 <br>
-[표 8 2] R353 로봇 협조상태 리셋
+[Table 8-2] R353 Robot Cooperative State Reset
 
-|	#1|	내용|
+| # | Description |
 |:--:|:--:|
-|0|리셋 취소|
-|1|리셋 실행|
+|0|Cancel Reset|
+|1|Execute Reset|

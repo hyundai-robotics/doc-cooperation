@@ -1,43 +1,41 @@
-﻿## 4.2. 협조 핸들링용 프로그램 티칭 및 프로그램 작성
+## 4.2. Teaching and Writing Programs for Cooperative Handling
 
+(1) Operators are required equal to the number of cooperative robots; therefore, each operator participates for each robot to be cooperated.
 
+(2) Verify that the cooperative robot common coordinate system is configured.
 
-(1)	협조제어 대수만큼의 조작자가 필요합니다. 따라서 조작자는 협조할 로봇 수만큼 참여합니다.  
-
-(2)	협조로봇 공통 좌표계 설정이 되어 있는지 확인합니다.   
-
-(3)	MATER와 SLAVE 로봇을 각각 협조 시작 위치로 이동시키고 기준위치로 시작위치를 기록합니다.  
+(3) Move the MASTER and SLAVE robots to their respective cooperation start positions and record the start positions as reference.
 
 ![](../_assets/4-prg3.png)
  
  <br>
 
-![[그림 4-1] 협조동작 개시 기준위치 기록](../_assets/4-1.png)
+![[Figure 4-1] Recording cooperative motion start reference positions](../_assets/4-1.png)
 
 <br>
 
-(4)	MASTER와 SLAVE 로봇을 R351 코드를 입력하여 로봇의 역할을 지정합니다.  
+(4) Assign robot roles by entering R351 codes for MASTER and SLAVE robots.
 
-(5)	협조제어 개시 명령(cowork m/s)을 등록합니다. cowork 명령은 MASTER/SLAVE 인지를 지정하고 SLAVE/MASTER의 번호를 지정합니다. 이때 MASTER 로봇은 1대만 설정 되어야 하고 SLAVE 로봇은 최대 3대까지 지정할 수 있습니다.   
+(5) Register the cooperative control start command (`cowork m/s`). The `cowork` command specifies Master/Slave and assigns the Slave/Master numbers. Only one Master may be set, and up to three Slaves may be specified.
 
  ![](../_assets/4-prg4.png)
  
 
-(6)	MASTER 로봇을 조그(JOG)로 조작합니다. 이때 SLAVE는 MASTER의 툴끝의 위치를 상대적인 위치로 추종합니다. 협조 조그 시에는 SLAVE도 Enable 스위치를 누르고 있어야 합니다. 기록위치에 스텝을 Master에만 기록합니다. Slave 로봇 제어기에는 기록하지 않습니다.  
+(6) Operate the MASTER robot by jogging (JOG). The Slave follows the Master tool-tip position relatively. During cooperative jogging, the Slave must have the Enable switch pressed. Record step positions only on the Master; do not record them on the Slave controller.
 
  
 ![](../_assets/4-prg5.png)
       
 
  
-![[그림 4-2] Master 로봇 조작](../_assets/4-2.png)
+![[Figure 4-2] Master robot operation](../_assets/4-2.png)
 
-(7)	협조 동작 스텝을 MASTER에 기록합니다. MASTER의 보간 종류 및 속도를 설정합니다. 협조동작 명령 내에서는 일반적인 move 명령을 사용합니다. (cmov는 사용할 수 없습니다.)  
+(7) Record cooperative motion steps on the MASTER. Set the Master's interpolation type and speed. Use standard `move` commands within cooperative motion commands (cmov cannot be used).
 
  
 ![](../_assets/4-prg6.png)
 
-(8)	협조 동작을 마치면 협조 제어를 종료(cowork end)하는 명령을 MASTER와 SLAVE에 삽입합니다.  
+(8) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control.
 
  
 ![](../_assets/4-prg7.png)
@@ -46,7 +44,6 @@
 <br>
 
 {% hint style="warning" %}
-	수동 협조 조작 중 Slave의 Enable 스위치 상태를 OFF로 변경하지 마십시오. 하드웨어 신호가 통신보다 우선하여 처리되어 협조 로봇간 위치 어긋남이 발생합니다. 이 경우 심하면 작업물이나 로봇 핸드가 파손될 우려가 있습니다. 
+	Do not change the Slave's Enable switch to OFF during manual cooperative operation. Hardware signals take priority over communication and can cause position mismatches between cooperative robots. In severe cases, this may result in damage to the workpiece or the robot hand.
 
 {% endhint %}
-

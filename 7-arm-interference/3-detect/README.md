@@ -1,1 +1,1 @@
-﻿## 7.3. 간섭의 검지
+## 7.3. Interference Detection

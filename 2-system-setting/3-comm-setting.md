@@ -1,20 +1,19 @@
-﻿## 2.3 통신 설정
+## 2.3 Communication Settings
 
+Set the network IP addresses for cooperative control and the information for HiNet I/O usage.
 
-협조제어를 위한 통신 네트워크 IP 주소 및 HiNet I/O 사용을 위한 정보를 설정합니다. 
+(1) Select 'System' → '4: Application Parameters' → '17: Cooperative Control'.
 
-(1)	『시스템』→『4: 응용 파라미터』→『17: 협조제어』를 선택합니다.
+(2) Select '2: Communication Settings'.
+- Add robots using the "+" button for the number of robots to be cooperated. (For example, if the number of cooperative robots is 3, robot1, robot2, robot3 should be equally added on all robots as shown below.)
 
-(2)	『2: 통신 설정』를 선택합니다.
--	로봇 협조제어 대수만큼 "+" 버튼으로 로봇을 추가하십시오. (예를들어 협조제어 대수가 3대인 경우에는 하기의 그림과 같이 robot1, robot2, robot3이 모든 로봇들에 동일하게 추가되어야 합니다.) 
+(3) Set the dialog parameters. Each parameter's purpose is as follows:
 
-(3)	대화상자의 파라미터를 설정합니다. 각 파라미터의 용도는 다음과 같습니다. 
-
--	IP 주소: 각각의 협조제어 로봇들에 대한 네트워크 IP주소를 설정합니다. (예를들어 robot1=192.168.1.150, robot2=192.168.1.151, robot3=192.168.1.152의 I/P인 경우에 모든 로봇들에 대해 동일하게 설정합니다.) 
--	HiNet I/O: 입출력 신호의 시작 인덱스와 바이트 수를 설정합니다.
-HiNet I/O는 자신의 로봇 정보를 다른 협조 로봇에 전달하여 별도의 로봇간 인터록 제어반 없이 상태 로봇들의 상태를 확인할 수 있는 기능으로 자신의 로봇 정보는 출력 신호, 다른 협조 로봇 정보는 입력 신호가 사용됩니다. (예들들어 robot1=fb7.0에 바이트 수가 4, robot2=fb7.32에 바이트 수가 4, robot3=fb7.64에 바이트 수가 4인 경우에 모든 로봇들에 대해 동일하게 설정합니다. 자세한 내용은 "[6. HiNet I/O 기능](../6-hinet/1-io-overview.md)를 참고하십시오.)
+- IP Address: Set network IP addresses for each cooperative robot. (For example, if robot1=192.168.1.150, robot2=192.168.1.151, robot3=192.168.1.152, set the same on all robots.)
+- HiNet I/O: Set the start index and byte count for input/output signals.
+HiNet I/O transmits your robot's information to other cooperative robots to check robot states without a separate interlock control panel; your robot info is used as output signals and other cooperative robots' info as input signals. (For example, robot1=fb7.0 with byte count 4, robot2=fb7.32 with byte count 4, robot3=fb7.64 with byte count 4; set the same on all robots. For more details, see "[6. HiNet I/O Features](../6-hinet/1-io-overview.md)")
 <br>
 
-![[그림 2-12] 사용환경 설정](../_assets/2-12.png)
+![[Figure 2-12] Usage settings](../_assets/2-12.png)
 
 <br>

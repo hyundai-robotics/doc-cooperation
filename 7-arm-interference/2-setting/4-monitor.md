@@ -1,18 +1,17 @@
-﻿## 7.2.4. 암 간섭상태 모니터링
+## 7.2.4. Arm Interference Status Monitoring
 
 <Br>
 
-![[그림7-21] 협조제어 모니터링](../../_assets/7-21.png)
+![[Figure 7-21] Cooperative control monitoring](../../_assets/7-21.png)
 
 
 <br>
 
+You can check the arm interference state in 'Cooperative Control Monitoring'. The arm interference state displays the potential interference axis and the interference distance.
 
-『협조제어 모니터링』에서 암 간섭 상태를 확인할 수 있습니다. 암 간섭 상태로는 간섭가능 축과 간섭거리를 표시합니다. 
+ - Potential Interference Axis: The axis of your robot that has the smallest distance to the partner robot
+ - Interference Distance [mm]: Distance between potential interference axes
+      - Display range: 10 times the expected maximum interference distance (if expected maximum interference distance is 0, display range is 1000 mm)
+      - If interference distance exceeds the display range, it is shown as ----.
 
- - 	간섭가능 축: 상대로봇과 가장 가까운 거리를 갖는 자신 로봇의 축 이름
- - 	간섭거리[mm]: 간섭가능 축간의 거리.
-      - 표시 범위: 간섭예상 최대거리의 10배(간섭예상 최대거리가 0일 경우 1000mm)
-      - 간섭거리가 표시범위를 초과한 경우 ----로 표시.
-
-모니터링되는 암 간섭상태가 실제 상태와 다를 경우, 협조제어 공통좌표계와 암 간섭 검지 기능의 설정상태를 확인하십시오. 
+If the monitored arm interference state differs from the actual state, check the cooperative control common coordinate system and the arm interference detection configuration.

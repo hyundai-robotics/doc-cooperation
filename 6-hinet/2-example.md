@@ -1,8 +1,5 @@
-﻿## 6.2. 적용 예 
+## 6.2. Examples
 
-
-
-로봇 언어로 적용되는 다양한 응용을 모두 예로 들어 설명할 수는 없지만 간단한 응용에 대한 예를 다음 화면에 표시합니다. 입출력 신호로 사용이 가능하기 때문에 다양한 적용이 가능한 장점이 있습니다.  
+It is not possible to list all applications that can be implemented with the robot language, but a simple example application is shown in the following figure. Because input/output signals can be used, it has the advantage of supporting various applications.
 
 ![](../_assets/6-4.png)
-

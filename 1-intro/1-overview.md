@@ -1,26 +1,26 @@
-﻿## 1.1. 로봇 협조기능의 개요
+## 1.1. Overview of Robot Cooperative Features
 
 <br>
 
 {% hint style="info" %}
-본 기능을 사용하기 위해서는 별도의 라이선스가 필요하므로 당사에 문의합니다. <br>
-본 기능은 V60.26-00 부터 지원됩니다.
+A separate license is required to use this feature; please contact us. <br>
+This feature is supported from V60.26-00.
 {% endhint %}
 
 <br>
 
-로봇 협조기능은 여러 대의 로봇을 이용하여 한 대의 로봇으로는 할 수 없는 작업을 수행하기 위한 기능입니다. 
+Robot cooperative features enable multiple robots to perform tasks that a single robot cannot accomplish.
 
-이 기능은 다음과 같은 경우에 적용할 수 있습니다.
+This feature applies in cases such as:
 
--	간단한 핸드를 가진 두 로봇의 협조작업으로 작업물을 핸들링하고자 하는 경우  
--	작업물이 커서 단일 로봇 작업으로는 핸들링하기가 어려운 경우   
--	마스터 로봇이 작업물을 핸들링하는 가운데 슬레이브 로봇이 작업물 위에 아크용접이나, 실링과 같은 지그리스 작업을 수행하는 경우   
+- When two robots with simple hands cooperate to handle a workpiece
+- When a workpiece is too large to be handled by a single robot
+- When a Master robot handles the workpiece while a Slave performs jigless tasks such as arc welding or sealing on the workpiece
  
-이 기능을 이용하여 최대 4대의 로봇을 협조 동기화 할 수 있습니다.  
-각 로봇은 독립적인 작업과 협조 작업을 하나의 프로그램에서 수행할 수 있습니다. 
+This feature allows synchronization of up to 4 robots.
+Each robot can perform independent tasks and cooperative tasks within a single program.
 
 
 <br>
 
-![[그림 1.1] 로봇 협조 기능](../_assets/1-1.png)
+![[Figure 1.1] Robot cooperative features](../_assets/1-1.png)

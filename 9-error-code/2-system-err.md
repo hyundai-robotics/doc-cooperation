@@ -1,40 +1,38 @@
-﻿## 9.2. System Error
-
-
+## 9.2. System Error
 
 ---
 
-- 코드 번호 : E00200     
-- 에러명 : 협조동작 중 최고속 초과
-- 에러내용 : 협조 동작 추종 중 로봇의 최고속을 초과하는 지령이 입력되었습니다.
-- 조치방법
-    - 협조 동작을 하는 Slave의 기준위치에서 로봇의 자세를 변경하거나, 협조 기록 위치를 변경하거나, 기록속도를 낮추어 재생하십시오.
+- Code No.: E00200
+- Error: Exceeded maximum speed during cooperative motion
+- Details: A command that exceeds the robot's maximum speed was received while following cooperative motion.
+- Action:
+    - For the Slave performing cooperative motion, change the robot posture at the reference position, modify the recorded cooperative positions, or lower the recorded speed and replay.
 ---
 
-- 코드 번호 : E00201      
-- 에러명 : 협조동작 개시 오류 
-- 에러내용 : 협조 로봇들의 동기신호 송수신에 오류가 있습니다. 재생 모드가 서로 다릅니다.
-- 조치방법
-    - 통신상태를 점검하십시오 협조 로봇들의 재생 모드를 일치시킨 후 협조동작을 시작하십시오.
+- Code No.: E00201
+- Error: Cooperative motion start error
+- Details: There is an error in sending/receiving synchronization signals among cooperative robots. The playback modes are different.
+- Action:
+    - Check communication status. Match the playback modes of the cooperative robots and then start cooperative motion.
 ---
 
-- 코드 번호 : E00203       
-- 에러명 : 협조 상대 로봇 이상 - 비상정지 
-- 에러내용 : 협조 동작 중 상대 로봇의 운전준비 Off 상태가 되었습니다. 운전준비를 Off하고 정지합니다. 
-- 조치방법
-    - 상대 로봇의 정지 원인을 조치한 후, 운전 준비를 On하고 재기동하십시오.
+- Code No.: E00203
+- Error: Cooperative partner robot fault - Emergency stop
+- Details: During cooperative motion, the partner robot's drive-ready state turned Off. The operation is stopped with drive-ready Off.
+- Action:
+    - Resolve the cause of the partner robot's stop, set drive-ready On, and restart.
 ---
 
-- 코드 번호 : E00204        
-- 에러명 : 로봇 협조제어 통신 오류
-- 에러내용 : 협조 조그, 재생 중에 상대 로봇과 통신 중 오류가 발생했습니다.
-- 조치방법
-    - 협조제어 통신 케이블 및 커넥터 연결 상태를 점검하십시오.
+- Code No.: E00204
+- Error: Robot cooperative control communication error
+- Details: A communication error occurred with a partner robot during cooperative jog or playback.
+- Action:
+    - Check the cooperative control communication cables and connector connections.
 ---
 
-- 코드 번호 : E00227          
-- 에러명 : 협조제어 동기 시퀀스 오류 
-- 에러내용 : 협조제어 중 마스터 로봇과 슬레이브 로봇의 지령 시퀀스 차이가 발생했습니다.
-- 조치방법
-    - 협조제어 통신 케이블 및 커넥터 연결 상태를 점검하십시오.
+- Code No.: E00227
+- Error: Cooperative control synchronization sequence error
+- Details: A sequence difference occurred between the master robot and slave robot commands during cooperative control.
+- Action:
+    - Check the cooperative control communication cables and connector connections.
 ---

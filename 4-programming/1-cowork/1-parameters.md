@@ -1,11 +1,11 @@
-﻿## 4.1.1. 명령의 파라미터
+````markdown
+## 4.1.1. Command Parameters
 
-
-cowork 명령는 프로그램에서 협조제어의 시작 및 종료를 표시하여 주고, 각 로봇의 MASTER 및 SLAVE를 지정하는 프로시져입니다.  
+The `cowork` command marks the start and end of cooperative control in a program and specifies each robot's MASTER and SLAVE roles.
 
 <br>
 
-### 문법
+### Syntax
 
 ```python
 cowork {param1},{param2},{param3},{param4},{param5}
@@ -19,13 +19,14 @@ cowork m,id=0,s=[2,3,4],wait=5
 
 <br>
 
-### 파라미터
-| param# | 의미 | 용례 |
+### Parameters
+| param# | Meaning | Example |
 | :--- | :--- | :--- |
-| param1| - 자신의 로봇 역할 (MASTER/SLAVE) 지정 <br>- 협조 동작의 종료(end) 지정 <br> m: 마스터 <br> s: 슬레이브 <br> end : 협조동작의 종료 <br> with : 상대 로봇과 위치 동기, sync 번호 동일| <br> <br> cowork m,s=... <br> cowork s,m=... <br> cowork end <br> cowork with, sync=1 |
-| param2 | - 마스터 로봇 제어기가 마스터로 지정할 매니퓰레이터 id번호  <br>  자신이 MASTER인 경우: 	 <br>id = 0 은 로봇 매니퓰레이터 <br>  id = 1 은 부가축으로 등록되어 있는 포지셔너 그룹 1 <br> (마스터 측에 부가축으로 포지셔너 그룹이 설정되어 있는 경우)|cowork m,id=1,s  <br> <br> <br>|
-| param3 | - 상대의 로봇 번호 지정 <Br> 자신을 MASTER로 지정한 경우:   	 <br> 상대는 SLAVE가 되며, SLAVE의 로봇 번호를 지정(최대 3개) <br> 자신을 SLAVE로 지정한 경우:	<br> 상대는 MASTER가 되며, MASTER가 되는 로봇 번호를 지정 | cowork m,s=[2,3,4] <Br> <Br>cowork s,m=1 |
-| param4 | - 마스터 로봇 제어기에서 마스터로 지정할 매니퓰레이터 id번호 <br> 자신이 SLAVE인 경우: <br> id = 0 은 로봇 매니퓰레이터  <br>     id = 1 은 부가축으로 등록되어 있는 포지셔너 그룹 1 <Br>  (마스터 측에 부가축으로 포지셔너 그룹이 설정되어 있는 경우)  | cowork s,m=1,id=0  <br> <br> <br>|
-| param5 | - 협조상대 로봇 대기시간(sec) < 0(무한대기) ~ 120 > <Br> 자신을 MASTER로 지정한 경우:  <br> SLAVE의 협조 기준위치로 올 때까지의 대기시간 <br> 자신을 SLAVE로 지정한 경우: 	 <br> MASTER의 협조 기준위치로 올 때까지의 대기시간  | cowork s,m=1,wait=30 <Br> <Br>cowork s,m=1,wait=30 |
+| param1| - Designate your robot role (MASTER/SLAVE) <br>- Specify end of cooperative motion (end) <br> m: Master <br> s: Slave <br> end : End cooperative motion <br> with : Position synchronization with partner robot; sync number must match| <br> <br> `cowork m,s=...` <br> `cowork s,m=...` <br> `cowork end` <br> `cowork with, sync=1` |
+| param2 | - Manipulator ID that the master robot controller designates as Master <br> If you are MASTER: <br> id = 0 indicates robot manipulator <br> id = 1 indicates the positioner group 1 registered as an auxiliary axis (if a positioner group is set as an auxiliary axis on the Master side)| `cowork m,id=1,s` <br> |
+| param3 | - Specify partner robot number <Br> If you designate yourself as MASTER: <br> the partners become SLAVEs and their robot numbers are specified (up to 3) <br> If you designate yourself as SLAVE: <br> the partner becomes MASTER and specify the robot number of the MASTER | `cowork m,s=[2,3,4]` <Br> `cowork s,m=1` |
+| param4 | - Manipulator ID that the Master robot controller designates as Master <br> If you are SLAVE: <br> id = 0 is robot manipulator <br> id = 1 is the positioner group 1 registered as an auxiliary axis (if a positioner group is set as an auxiliary axis on the Master side) | `cowork s,m=1,id=0` |
+| param5 | - Partner robot wait time (sec) < 0 (infinite wait) ~ 120 > <Br> If you designate yourself as MASTER: <br> Wait time for SLAVEs to reach the cooperative reference position <br> If you designate yourself as SLAVE: <br> Wait time for MASTER to reach the cooperative reference position | `cowork s,m=1,wait=30` |
 
 
+````

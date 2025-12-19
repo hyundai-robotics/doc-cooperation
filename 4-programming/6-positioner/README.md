@@ -1,5 +1,5 @@
-﻿## 4.6. 포지셔너 마스터 시스템 
+## 4.6. Positioner Master System
 
 <br>
 
-본 기능은 협조 마스터를 포지셔너로 할당하여 슬레이브 로봇이 마스터 포지셔너와 협조할 수 있도록 준비되어 있습니다. 포지셔너 그룹 1~3를 지원합니다. 
+This feature allows assigning a positioner as the cooperative Master so that Slave robots can cooperate with the Master positioner. Positioner groups 1–3 are supported.

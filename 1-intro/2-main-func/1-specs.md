@@ -1,21 +1,21 @@
-﻿## 1.2.1. 주요 기능 사양
+## 1.2.1. Key Feature Specifications
 
 <br>
 
-| 주요 기능 사양 | 비고 | 
+| Key Feature Specification | Remarks | 
 | :---: | :---: | 
-|협조 로봇 대수	|최대 4대|
-|통신 방식	|범용 Ethernet(UDP)|
-|통신 속도	|100MBPS|
-|Master 로봇 설정 가능 수|	1대|
-|Slave 로봇 설정 가능 수|	마스터 1대당 3대의 Slave 제어가능|
-|주행축	|주행축 협조가능|
-|HiNet I/O|	로봇당 12바이트(입출력 신호)|
-|Jigless 협조|	로봇과 포지셔너의 지그리스 협조 지원|
+| Number of cooperative robots | Up to 4 |
+| Communication method | General Ethernet (UDP) |
+| Communication speed | 100 Mbps |
+| Number of Masters supported | 1 |
+| Number of Slaves supported | Up to 3 Slaves per Master |
+| Drive Axis | Drive axis cooperation supported |
+| HiNet I/O | 12 bytes per robot (I/O signals) |
+| Jigless cooperation | Supports jigless cooperation between robot and positioner |
 
-[표 1-1] 협조 제어 사양
+[Table 1-1] Cooperative control specifications
 
 
 <br>
 
-![[그림1-2] 지그리스 협조제어 (Jigless cooperation)](../../_assets/1-2.png)
+![[Figure1-2] Jigless cooperative control](../../_assets/1-2.png)

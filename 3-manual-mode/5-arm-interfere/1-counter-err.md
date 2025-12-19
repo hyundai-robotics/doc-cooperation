@@ -1,10 +1,8 @@
-﻿## 3.6.1. 상대 에러의 검지
+## 3.6.1. Detection of Partner Errors
 
-
-협조 동작 중 상대 로봇이 암 간섭 에러 혹은 소프트리밋 등의 에러로 정지하는 경우 상대 위치를 유지한 채 정지합니다. Slave에서 발생하여도 Master도 정지하며 조작이 되지 않습니다. 
+If a partner robot stops due to an arm interference error or soft limit error during cooperative motion, the system stops while maintaining relative positions. If the error occurs on a Slave, the Master will also stop and cannot be operated.
 
  
-
 <br>
  
-![[그림 3-11] 소프트리밋 에러 감지](../../_assets/3-11.png)
+![[Figure 3-11] Soft limit error detection](../../_assets/3-11.png)

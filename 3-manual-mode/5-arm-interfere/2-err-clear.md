@@ -1,8 +1,8 @@
-﻿## 3.5.2. 에러의 해제
+## 3.5.2. Error Clearance
 
-에러가 발생하지 않는 방향으로 Master 로봇 조그 키를 누르면 해제되며 에러가 해제됩니다. 에러 해제 이후 에러가 발생하지 않는 방향으로 조그 키를 다시 누르면 조작이 가능합니다. 
+Press the Master's jog key in a direction that does not cause the error to be released, and the error will be cleared. After clearing the error, pressing the jog key again in a direction that does not cause the error allows operation.
 
  
 <br>
  
-![[그림 3-12] 소프트리밋 에러 해제](../../_assets/3-12.png)
+![[Figure 3-12] Clearing soft limit error](../../_assets/3-12.png)
