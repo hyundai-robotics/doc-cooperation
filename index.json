@@ -265,78 +265,98 @@
 		"byte_ofs": 50367
 	},
 	{
-		"link": "7-arm-interference/3-detect/README.md",
+		"link": "7-arm-interference/2-setting/1-arm-set.md",
 		"char_ofs": 25859,
 		"byte_ofs": 50391
 	},
 	{
+		"link": "7-arm-interference/2-setting/2-arm-region.md",
+		"char_ofs": 26488,
+		"byte_ofs": 51708
+	},
+	{
+		"link": "7-arm-interference/2-setting/3-tool-region.md",
+		"char_ofs": 27419,
+		"byte_ofs": 53597
+	},
+	{
+		"link": "7-arm-interference/2-setting/4-monitor.md",
+		"char_ofs": 29015,
+		"byte_ofs": 56829
+	},
+	{
+		"link": "7-arm-interference/3-detect/README.md",
+		"char_ofs": 29399,
+		"byte_ofs": 57640
+	},
+	{
 		"link": "7-arm-interference/3-detect/1-decel-stop.md",
-		"char_ofs": 25873,
-		"byte_ofs": 50418
+		"char_ofs": 29413,
+		"byte_ofs": 57667
 	},
 	{
 		"link": "7-arm-interference/3-detect/2-quick-stop.md",
-		"char_ofs": 26855,
-		"byte_ofs": 52604
+		"char_ofs": 30395,
+		"byte_ofs": 59853
 	},
 	{
 		"link": "7-arm-interference/3-detect/3-play-err.md",
-		"char_ofs": 27218,
-		"byte_ofs": 53363
+		"char_ofs": 30758,
+		"byte_ofs": 60612
 	},
 	{
 		"link": "7-arm-interference/3-detect/4-dead-lock.md",
-		"char_ofs": 27986,
-		"byte_ofs": 54914
+		"char_ofs": 31526,
+		"byte_ofs": 62163
 	},
 	{
 		"link": "7-arm-interference/3-detect/5-net-err.md",
-		"char_ofs": 28332,
-		"byte_ofs": 55617
+		"char_ofs": 31872,
+		"byte_ofs": 62866
 	},
 	{
 		"link": "8-service/README.md",
-		"char_ofs": 28674,
-		"byte_ofs": 56381
+		"char_ofs": 32214,
+		"byte_ofs": 63630
 	},
 	{
 		"link": "8-service/1-status-mon.md",
-		"char_ofs": 28686,
-		"byte_ofs": 56406
+		"char_ofs": 32226,
+		"byte_ofs": 63655
 	},
 	{
 		"link": "8-service/2-io-mon.md",
-		"char_ofs": 29471,
-		"byte_ofs": 57979
+		"char_ofs": 33011,
+		"byte_ofs": 65228
 	},
 	{
 		"link": "8-service/3-manual-sigout.md",
-		"char_ofs": 29619,
-		"byte_ofs": 58234
+		"char_ofs": 33159,
+		"byte_ofs": 65483
 	},
 	{
 		"link": "8-service/4-rcode.md",
-		"char_ofs": 29813,
-		"byte_ofs": 58669
+		"char_ofs": 33353,
+		"byte_ofs": 65918
 	},
 	{
 		"link": "9-error-code/README.md",
-		"char_ofs": 30028,
-		"byte_ofs": 59006
+		"char_ofs": 33568,
+		"byte_ofs": 66255
 	},
 	{
 		"link": "9-error-code/1-warning.md",
-		"char_ofs": 30038,
-		"byte_ofs": 59027
+		"char_ofs": 33578,
+		"byte_ofs": 66276
 	},
 	{
 		"link": "9-error-code/2-system-err.md",
-		"char_ofs": 31316,
-		"byte_ofs": 61639
+		"char_ofs": 34856,
+		"byte_ofs": 68888
 	},
 	{
 		"link": "9-error-code/3-operation-err.md",
-		"char_ofs": 32163,
-		"byte_ofs": 63412
+		"char_ofs": 35703,
+		"byte_ofs": 70661
 	}
 ]
