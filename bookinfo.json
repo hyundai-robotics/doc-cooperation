@@ -1,9 +1,9 @@
 {
-    "langCode": "ko",
-    "series": "현대로봇 Hi6 제어기",
-    "title": "협조제어 기능설명서",
-    "publisher": "HD 현대로보틱스",
-    "tocTitle": "목차",
+    "langCode": "en",
+    "series": "Hyundai Robot Hi6 COntroller",
+    "title": "Function manual - Cooperation",
+    "publisher": "HD Hyundai Robotics",
+    "tocTitle": "Table of contents",
     "tocTitleElements": "[ \"h1\", \"h2\" ]",
     "variables": {
         "cont_model": "Hi6"
