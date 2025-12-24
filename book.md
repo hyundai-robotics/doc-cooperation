@@ -147,7 +147,7 @@ When using the robot cooperative feature, install a dedicated emergency stop swi
 <br>
 
 - Connection method
-Connect one end of a UTP cable (Direct) to the universal network socket of the ${cont_model}COM module and the other end to the network hub. Up to 4 units can be connected to the hub this way.
+Connect one of the COM module's network sockets (LAN 1–3) to the general-purpose network using a UTP cable (direct), and connect the other end to the network hub. Up to 4 units can be connected to the hub this way.
 If connecting two robots without a hub, use a network UTP CROSS cable and connect it to the universal network sockets.
 ## 2.1.3. Network Connection Check
 
@@ -298,17 +298,14 @@ The operations are as shown in the table below.
 
 | Key Operation | Mode Switch |
 |:--:|:--:|
-| R351,0 | Manual Independent Mode |
-| R351,1 | Manual Cooperative Mode, designate MASTER |
-| R351,2 | Manual Cooperative Mode, designate SLAVE |
-| R351,3 | cmov Recording Mode, designate SLAVE Jog Mode <br> (This mode can only be entered if the previous state was SLAVE) |
+| R351 -> 0 | Manual Independent Mode(INDIVIDUAL) |
+| R351 -> 1 | Manual Cooperative Mode, designate MASTER |
+| R351 -> 2 | Manual Cooperative Mode, designate SLAVE |
+| R351 -> 3 | cmov Recording Mode, designate SLAVE Jog Mode <br> (This mode can only be entered if the previous state was SLAVE) |
 
-[Table 3-1] Mode switching by key operation
+[Table 3-1] Mode switching by key operation  
 
-
-<br>
-
- - Manual Mode Independent (INDIVIDUAL) state
+### Manual Mode Independent (INDIVIDUAL) state
  
 ![[Figure 3-3] Manual Mode Independent state screen](../_assets/3-3.png)
 
@@ -1185,7 +1182,7 @@ R codes used for cooperative control.
 
 [Table 8-1] R351 Manual Cooperative State Setting
 
-| # | Description |
+| R351 | Description |
 |:--:|:--:|
 |0|Indiv. (Individual)|
 |1|Master|
@@ -1195,7 +1192,7 @@ R codes used for cooperative control.
 <br>
 [Table 8-2] R353 Robot Cooperative State Reset
 
-| # | Description |
+| R353 | Description |
 |:--:|:--:|
 |0|Cancel Reset|
 |1|Execute Reset|

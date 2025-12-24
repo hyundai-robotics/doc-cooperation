@@ -10,17 +10,14 @@ The operations are as shown in the table below.
 
 | Key Operation | Mode Switch |
 |:--:|:--:|
-| R351,0 | Manual Independent Mode |
-| R351,1 | Manual Cooperative Mode, designate MASTER |
-| R351,2 | Manual Cooperative Mode, designate SLAVE |
-| R351,3 | cmov Recording Mode, designate SLAVE Jog Mode <br> (This mode can only be entered if the previous state was SLAVE) |
+| R351 -> 0 | Manual Independent Mode(INDIVIDUAL) |
+| R351 -> 1 | Manual Cooperative Mode, designate MASTER |
+| R351 -> 2 | Manual Cooperative Mode, designate SLAVE |
+| R351 -> 3 | cmov Recording Mode, designate SLAVE Jog Mode <br> (This mode can only be entered if the previous state was SLAVE) |
 
-[Table 3-1] Mode switching by key operation
+[Table 3-1] Mode switching by key operation  
 
-
-<br>
-
- - Manual Mode Independent (INDIVIDUAL) state
+### Manual Mode Independent (INDIVIDUAL) state
  
 ![[Figure 3-3] Manual Mode Independent state screen](../_assets/3-3.png)
 

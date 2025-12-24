@@ -6,7 +6,7 @@ R codes used for cooperative control.
 
 [Table 8-1] R351 Manual Cooperative State Setting
 
-| # | Description |
+| R351 | Description |
 |:--:|:--:|
 |0|Indiv. (Individual)|
 |1|Master|
@@ -16,7 +16,7 @@ R codes used for cooperative control.
 <br>
 [Table 8-2] R353 Robot Cooperative State Reset
 
-| # | Description |
+| R353 | Description |
 |:--:|:--:|
 |0|Cancel Reset|
 |1|Execute Reset|
