@@ -432,7 +432,6 @@ Press the Master's jog key in a direction that does not cause the error to be re
 ![[Figure 3-12] Clearing soft limit error](../../_assets/3-12.png)
 ## 4. Cooperative Motion Teaching
 ## 4.1. cowork Command
-````markdown
 ## 4.1.1. Command Parameters
 
 The `cowork` command marks the start and end of cooperative control in a program and specifies each robot's MASTER and SLAVE roles.
@@ -461,9 +460,7 @@ cowork m,id=0,s=[2,3,4],wait=5
 | param3 | - Specify partner robot number <Br> If you designate yourself as MASTER: <br> the partners become SLAVEs and their robot numbers are specified (up to 3) <br> If you designate yourself as SLAVE: <br> the partner becomes MASTER and specify the robot number of the MASTER | `cowork m,s=[2,3,4]` <Br> `cowork s,m=1` |
 | param4 | - Manipulator ID that the Master robot controller designates as Master <br> If you are SLAVE: <br> id = 0 is robot manipulator <br> id = 1 is the positioner group 1 registered as an auxiliary axis (if a positioner group is set as an auxiliary axis on the Master side) | `cowork s,m=1,id=0` |
 | param5 | - Partner robot wait time (sec) < 0 (infinite wait) ~ 120 > <Br> If you designate yourself as MASTER: <br> Wait time for SLAVEs to reach the cooperative reference position <br> If you designate yourself as SLAVE: <br> Wait time for MASTER to reach the cooperative reference position | `cowork s,m=1,wait=30` |
-
-
-````## 4.1.2. How to Use the `cowork` Command
+## 4.1.2. How to Use the `cowork` Command
 
 (1) On the MASTER robot, the actions within the `cowork ~ cowork end` section are treated as cooperative segment commands. SLAVEs cannot insert action commands.
 
@@ -532,7 +529,6 @@ cowork m,id=0,s=[2,3,4],wait=5
 	Do not change the Slave's Enable switch to OFF during manual cooperative operation. Hardware signals take priority over communication and can cause position mismatches between cooperative robots. In severe cases, this may result in damage to the workpiece or the robot hand.
 
 {% endhint %}
-```markdown
 ## 4.3. cmov Command
 
 <br>
@@ -558,8 +554,7 @@ cmov R20,L,tg=po1,spd=60%,accu=0,tool=1 until di1
 
 
 ![[Figure 4-3] Method for distinguishing ID identifiers](../_assets/4-3.png)
-
-```## 4.4. Teaching for Arc Welding and Sealing (Jigless Cooperative Control)
+## 4.4. Teaching for Arc Welding and Sealing (Jigless Cooperative Control)
 
 (1) Set the manual cooperative roles of Master and Slave robots to 'Independent', record the start steps for cooperation, and insert the cowork command at the cooperation start position.
  
@@ -1158,11 +1153,11 @@ If cooperative control is set to <Disabled> in the cooperative control parameter
 {% endhint %}
 ## 8.2. HiNet I/O Monitor
 
-(1) Select 'General Input' from 'Window Settings' → 'Selection'.
- ![](../_assets/9-5.png)
+(1) Select 'General Input' from 'Window Settings' → 'Selection'.  
+![](../_assets/9-5.png)
 
 
-(2) Check the status of configured input signals for each robot.
+(2) Check the status of configured input signals for each robot.  
 ![](../_assets/9-6.png)
 ## 8.3. Manual Output Function
 

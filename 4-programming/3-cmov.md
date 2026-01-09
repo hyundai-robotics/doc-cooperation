@@ -1,4 +1,3 @@
-```markdown
 ## 4.3. cmov Command
 
 <br>
@@ -24,5 +23,3 @@ cmov R20,L,tg=po1,spd=60%,accu=0,tool=1 until di1
 
 
 ![[Figure 4-3] Method for distinguishing ID identifiers](../_assets/4-3.png)
-
-```
