@@ -10,7 +10,7 @@ R351을 이용하여 로봇 역할을 MASTER와 SLAVE로 설정합니다. 이때
 
 <br>
          
- - ①	MASTER 로봇과 SLAVE 로봇이 모두 ‘수동모드’인지 확인합니다.  
+ - ①	MASTER 로봇과 SLAVE 로봇이 모두 '수동모드'인지 확인합니다.  
  - ②	MASTER와 SLAVE 로봇을 모두 운전준비 ON 대기합니다.  
  - ③	SLAVE 로봇의 ENABLE 스위치를 잡아 운전준비 ON이 유지되도록 되도록 하고 MASTER 로봇도 운전준비 ON 되어 있는지 확인합니다.  
  - ④	MASTER 로봇을 조작하면 SLAVE 로봇은 상대 위치를 추종하여 움직입니다.  
