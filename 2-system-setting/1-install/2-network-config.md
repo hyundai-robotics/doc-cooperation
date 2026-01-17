@@ -1,4 +1,4 @@
-## 2.1.2. Network Configuration
+﻿## 2.1.2. Network Configuration
 
 <br>
 
@@ -15,5 +15,5 @@
 <br>
 
 - Connection method
-Connect one of the COM module's network sockets (LAN 1–3) to the general-purpose network using a UTP cable (direct), and connect the other end to the network hub. Up to 4 units can be connected to the hub this way.
+Connect one of the COM module's network sockets (LAN 1-3) to the general-purpose network using a UTP cable (direct), and connect the other end to the network hub. Up to 4 units can be connected to the hub this way.
 If connecting two robots without a hub, use a network UTP CROSS cable and connect it to the universal network sockets.

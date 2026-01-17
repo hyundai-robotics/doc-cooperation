@@ -1,4 +1,4 @@
-## 4.2. Teaching and Writing Programs for Cooperative Handling
+﻿## 4.2. Teaching and Writing Programs for Cooperative Handling
 
 (1) Operators are required equal to the number of cooperative robots; therefore, each operator participates for each robot to be cooperated.
 

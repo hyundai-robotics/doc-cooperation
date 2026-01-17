@@ -1,4 +1,4 @@
-## 4.1.2. How to Use the `cowork` Command
+﻿## 4.1.2. How to Use the `cowork` Command
 
 (1) On the MASTER robot, the actions within the `cowork ~ cowork end` section are treated as cooperative segment commands. SLAVEs cannot insert action commands.
 

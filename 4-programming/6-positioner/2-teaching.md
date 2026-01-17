@@ -1,4 +1,4 @@
-## 4.6.2. Positioner Master Teaching and Playback
+﻿## 4.6.2. Positioner Master Teaching and Playback
 
 Teach Master and Slave using the `cowork` command. On the Slave side, set `id=1` (positioner group number) to select the Master's positioner as Master.
 
@@ -27,7 +27,7 @@ After confirming operation in manual mode, operate in automatic mode.
 
 {% hint style="warning" %}
 
- - Jigless cooperative control supports positioner groups 1–3. When positioner jogging or in `cmov`, select the positioner group number 1–3.
+ - Jigless cooperative control supports positioner groups 1-3. When positioner jogging or in `cmov`, select the positioner group number 1-3.
  - If values set in the Slave with `cowork s,m=#1,id=#2` differ from the `cmov R#1#2` values, an `E1365 cmov Master No. ID is invalid.` error occurs.
 
 {% endhint %}

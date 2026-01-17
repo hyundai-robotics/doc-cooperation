@@ -1,4 +1,4 @@
-## 2.4.3. Travel-Axis System
+﻿## 2.4.3. Travel-Axis System
 
 When configuring the travel-axis system for cooperative control, install travel axes with the same specifications as parallel as possible.
 

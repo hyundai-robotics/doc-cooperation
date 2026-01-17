@@ -1,4 +1,4 @@
-## 6.1. HiNet I/O Overview
+﻿## 6.1. HiNet I/O Overview
 
 HiNet I/O is a function that shares information between robots via the cooperative control network. Each controller monitors information from cooperative robots, so the sections set to be shared can be used freely. The maximum data size each controller can use is 12 bytes, and it can receive 36 bytes excluding its own portion.
  
@@ -24,4 +24,4 @@ For example, if configured as below, when ROBOT 1 is the local robot, its inform
 | ROBOT 4 | fb7.96 | 4 | Input (fb7.dib12 ~ fb7.dib15) |
 
 
-![[Figure 6-2] HiNet I/O Usage Example (Group 1 – 4 Robots) ](../_assets/6-2.png)
+![[Figure 6-2] HiNet I/O Usage Example (Group 1 - 4 Robots) ](../_assets/6-2.png)

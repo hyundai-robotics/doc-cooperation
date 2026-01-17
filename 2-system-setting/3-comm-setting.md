@@ -1,4 +1,4 @@
-## 2.3 Communication Settings
+﻿## 2.3 Communication Settings
 
 Set the network IP addresses for cooperative control and the information for HiNet I/O usage.
 

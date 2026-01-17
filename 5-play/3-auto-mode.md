@@ -1,4 +1,4 @@
-## 5.3. Playback in Automatic Mode
+﻿## 5.3. Playback in Automatic Mode
 
 (1) Switch all cooperative robots to automatic mode.
 

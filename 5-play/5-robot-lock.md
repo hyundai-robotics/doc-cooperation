@@ -1,4 +1,4 @@
-## 5.5. Robot Lock Function (Robot Lock Playback)
+﻿## 5.5. Robot Lock Function (Robot Lock Playback)
 
 Set 'Condition Settings' → '5: Robot Lock' to <Enabled>.
 

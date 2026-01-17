@@ -1,4 +1,4 @@
-## 4.4. Teaching for Arc Welding and Sealing (Jigless Cooperative Control)
+﻿## 4.4. Teaching for Arc Welding and Sealing (Jigless Cooperative Control)
 
 (1) Set the manual cooperative roles of Master and Slave robots to 'Independent', record the start steps for cooperation, and insert the cowork command at the cooperation start position.
  
@@ -43,7 +43,7 @@
 
  ![](../_assets/4-prg13.png)
 
-※ Using this method, after Master and Slave reach step 4 (S4), they verify that the partner robot has reached step 4 before moving to the next step (S5).
+* Using this method, after Master and Slave reach step 4 (S4), they verify that the partner robot has reached step 4 before moving to the next step (S5).
 
 (11) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control teaching.
 

@@ -1,4 +1,4 @@
-## 1.2.2. Feature Characteristics
+﻿## 1.2.2. Feature Characteristics
 
 - Communication
   The cooperative control feature uses UDP (General Ethernet) communication to coordinate up to 4 robots.

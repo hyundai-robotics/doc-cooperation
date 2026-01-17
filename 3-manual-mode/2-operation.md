@@ -1,4 +1,4 @@
-## 3.2. Manual Mode Cooperative Operation
+﻿## 3.2. Manual Mode Cooperative Operation
 ### 3.2.1. Setting MASTER and SLAVE Robots
 
 Use R351 to set robot roles to MASTER and SLAVE. The robot role is independent of the robot number.

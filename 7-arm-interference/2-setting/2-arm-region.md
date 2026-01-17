@@ -1,4 +1,4 @@
-## 7.2.2. Setting Arm Interference Areas
+﻿## 7.2.2. Setting Arm Interference Areas
 
 The arm interference area model is a cylinder composed of hemispheres on both ends. For example, for the H-axis, you can model the radius from the H-axis joint position to the V-axis joint position as shown below.
 

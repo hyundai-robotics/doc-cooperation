@@ -1,4 +1,4 @@
-## 4.5. Checking cmov Recorded Positions
+﻿## 4.5. Checking cmov Recorded Positions
 
 The cmov steps are a useful feature that allows you to verify taught positions using the step forward/back functions in cmov recording mode. The cmov step records positions and orientations relative to the Master end effector coordinate system, so verify and execute based on the Master's tool position.
 

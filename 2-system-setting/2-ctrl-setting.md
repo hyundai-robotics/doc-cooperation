@@ -1,4 +1,4 @@
-## 2.2. Control Environment Settings
+﻿## 2.2. Control Environment Settings
 
 Set whether to use the cooperative control function and the robot number, etc.
 

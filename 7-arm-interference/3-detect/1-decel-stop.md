@@ -1,4 +1,4 @@
-## 7.3.1. Deceleration Stop
+﻿## 7.3.1. Deceleration Stop
 
 If the robot decelerates and stops after invading the user-configured arm interference area and tool interference area, due to deceleration distance and robot inertia, a collision may occur even if an error is detected. Therefore, the detection area is expanded taking robot speed into account to detect interference earlier.
 

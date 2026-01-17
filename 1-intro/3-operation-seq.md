@@ -1,4 +1,4 @@
-## 1.3. Operation Sequence
+﻿## 1.3. Operation Sequence
 
 This section describes the sequence for using cooperative robot features. Detailed instructions are provided in subsequent sections.
 

@@ -1,4 +1,4 @@
-## 2.1.1. Emergency Stop Wiring
+﻿## 2.1.1. Emergency Stop Wiring
 
 If an emergency stop occurs during cooperative motion, robots monitor each other's state via communication so that partner robots also stop, but hardware signals take precedence and positional mismatches between cooperative robots may occur. To minimize cooperative position mismatches during emergency stop, wire the controller's external emergency stop.
 

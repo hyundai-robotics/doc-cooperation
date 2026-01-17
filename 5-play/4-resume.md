@@ -1,4 +1,4 @@
-## 5.4. Stop/Resume of Cooperative Playback
+﻿## 5.4. Stop/Resume of Cooperative Playback
 
 If the user inputs a stop command (external stop, internal stop) during cooperative motion, all robots engaged in cooperative motion will stop.
 

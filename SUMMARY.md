@@ -1,6 +1,6 @@
 ﻿# Table of contents
 
-* [${cont_model} Robot Controller Feature Manual - Cooperative Control](README.md)
+* [${cont_model} Controller Function Manual - Cooperative Control](README.md)
 * [1. Overview](1-intro/README.md)
   * [1.1. Overview of Robot Cooperation Features](1-intro/1-overview.md)
   * [1.2. Main Features](1-intro/2-main-func/README.md)

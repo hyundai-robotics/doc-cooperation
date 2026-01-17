@@ -1,4 +1,4 @@
-## 3.1. Switching Between Independent and Cooperative Modes
+﻿## 3.1. Switching Between Independent and Cooperative Modes
 
 ### 3.1.1. Mode switching by key operation
 

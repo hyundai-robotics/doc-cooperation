@@ -1,4 +1,4 @@
-## 7.1.3. Limitations of the Feature
+﻿## 7.1.3. Limitations of the Feature
 
 This feature cannot intelligently and automatically avoid interference between robots nor automatically determine and execute robot drive priorities.
 

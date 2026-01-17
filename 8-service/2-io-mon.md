@@ -1,4 +1,4 @@
-## 8.2. HiNet I/O Monitor
+﻿## 8.2. HiNet I/O Monitor
 
 (1) Select 'General Input' from 'Window Settings' → 'Selection'.  
 ![](../_assets/9-5.png)

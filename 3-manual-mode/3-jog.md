@@ -1,4 +1,4 @@
-## 3.3. Cooperative Drive Axis Jog
+﻿## 3.3. Cooperative Drive Axis Jog
 
 Cooperative drive axis jogging is operated the same way as standard cooperative jogging. As shown in Figure 3-5, when operating the Master drive axis in cooperative jog state, the Slave's drive axis moves compensating the relative position.
 

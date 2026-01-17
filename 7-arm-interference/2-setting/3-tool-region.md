@@ -1,4 +1,4 @@
-## 7.2.3. Setting Tool Interference Areas
+﻿## 7.2.3. Setting Tool Interference Areas
 
 <Br>
 
@@ -55,7 +55,7 @@ However, when the radius is set this large, it may be unnecessarily larger than 
 
 <Br>
 
-For large tools such as hangers, dividing the area can prevent overestimation of the tool interference area. For example, for a tool of width 2110mm and height 1350mm, divide the vertical area into three equal parts and model three cylinders with approximately 350mm radius as areas 1–3. Finally, set the offset from the flange to the tool as area 4 to achieve the configuration below.
+For large tools such as hangers, dividing the area can prevent overestimation of the tool interference area. For example, for a tool of width 2110mm and height 1350mm, divide the vertical area into three equal parts and model three cylinders with approximately 350mm radius as areas 1-3. Finally, set the offset from the flange to the tool as area 4 to achieve the configuration below.
 
  
 <Br>
