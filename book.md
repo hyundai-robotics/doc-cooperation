@@ -3,7 +3,7 @@
 # ${cont_model} 제어기 기능설명서 - 협조제어
 
 [__SOURCE](1-intro/README.md)
-## 1. 개요
+# 1. 개요
 [__SOURCE](1-intro/1-overview.md)
 ## 1.1. 로봇 협조기능의 개요
 
@@ -115,7 +115,7 @@
 자동모드로 전환합니다. 프로그램을 선두위치에 놓고 협조 로봇으로 지정된 제어기의 기동스위치를 모두 누릅니다.
 
 [__SOURCE](2-system-setting/README.md)
-## 2. 시스템 설정
+# 2. 시스템 설정
 [__SOURCE](2-system-setting/1-install/README.md)
 ## 2.1. 하드웨어 인스톨
 [__SOURCE](2-system-setting/1-install/1-wiring.md)
@@ -349,7 +349,7 @@ HiNet I/O는 자신의 로봇 정보를 다른 협조 로봇에 전달하여 별
 
 {% endhint %}
 [__SOURCE](3-manual-mode/README.md)
-## 3. 수동모드 협조조작
+# 3. 수동모드 협조조작
 
 
 
@@ -481,9 +481,9 @@ cmov기록 모드는 지그리스 협조 동작을 위해 슬레이브의 위치
 {% endhint %}
 
 [__SOURCE](3-manual-mode/5-arm-interfere/README.md)
-## 3.6. 협조 로봇간 암 간섭 및 소프트 리밋 검지
+## 3.5. 협조 로봇간 암 간섭 및 소프트 리밋 검지
 [__SOURCE](3-manual-mode/5-arm-interfere/1-counter-err.md)
-## 3.6.1. 상대 에러의 검지
+## 3.5.1. 상대 에러의 검지
 
 
 협조 동작 중 상대 로봇이 암 간섭 에러 혹은 소프트리밋 등의 에러로 정지하는 경우 상대 위치를 유지한 채 정지합니다. Slave에서 발생하여도 Master도 정지하며 조작이 되지 않습니다. 
@@ -505,7 +505,7 @@ cmov기록 모드는 지그리스 협조 동작을 위해 슬레이브의 위치
 ![[그림 3-12] 소프트리밋 에러 해제](../../_assets/3-12.png)
 
 [__SOURCE](4-programming/README.md)
-## 4. 협조 동작 티칭
+# 4. 협조 동작 티칭
 [__SOURCE](4-programming/1-cowork/README.md)
 ## 4.1. cowork 명령
 [__SOURCE](4-programming/1-cowork/1-parameters.md)
@@ -810,14 +810,11 @@ cowork 명령을 이용하여 마스터와 슬레이브에 교시합니다. 슬�
 
 
 [__SOURCE](5-play/README.md)
-## 5. 협조동작 재생
+# 5. 협조동작 재생
 
 
 [__SOURCE](5-play/1-overview.md)
-5.1. 협조 재생의 개요
-
-
-
+## 5.1. 협조 재생의 개요
 
 
 협조 프로그램은 독립동작 부분과 협조동작 부분으로 나눌 수 있습니다. 
@@ -991,7 +988,7 @@ Master와 Slave를 모두 로봇 Lock <유효>로 설정하면 Master/Slave 모�
 
 {% endhint %}
 [__SOURCE](6-hinet/README.md)
-## 6. HiNet I/O 기능
+# 6. HiNet I/O 기능
 [__SOURCE](6-hinet/1-io-overview.md)
 ## 6.1. HiNet I/O 개요
 
@@ -1034,7 +1031,7 @@ HiNet I/O는 협조제어 네트워크를 통해 로봇간의 정보를 공유�
 
 
 [__SOURCE](7-arm-interference/README.md)
-## 7. 암 간섭 검지 기능
+# 7. 암 간섭 검지 기능
 [__SOURCE](7-arm-interference/1-overview/README.md)
 ## 7.1. 암 간섭 검지 기능의 개요
 [__SOURCE](7-arm-interference/1-overview/1-purpose.md)
@@ -1359,7 +1356,7 @@ HiNet I/O는 협조제어 네트워크를 통해 로봇간의 정보를 공유�
 |조치 방법|	- 해당 로봇의 로봇의 네트워크 케이블을 확인하십시오. <Br>  - 협조제어 상태 모니터링을 참조하여 협조제어 상태를 정상으로 복귀되도록 하십시오.|
 
 [__SOURCE](8-service/README.md)
-## 8. 서비스 기능
+# 8. 서비스 기능
 [__SOURCE](8-service/1-status-mon.md)
 ## 8.1. 협조제어 상태 모니터
 
@@ -1450,7 +1447,7 @@ HiNet I/O는 협조제어 네트워크를 통해 로봇간의 정보를 공유�
 |1|리셋 실행|
 
 [__SOURCE](9-error-code/README.md)
-## 9. 에러코드
+# 9. 에러코드
 [__SOURCE](9-error-code/1-warning.md)
 ## 9.1. Warning
 
