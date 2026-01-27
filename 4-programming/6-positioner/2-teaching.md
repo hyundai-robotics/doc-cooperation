@@ -1,4 +1,4 @@
-﻿## 4.6.2. Positioner Master Teaching and Playback
+﻿### 4.6.2. Positioner Master Teaching and Playback
 
 Teach Master and Slave using the `cowork` command. On the Slave side, set `id=1` (positioner group number) to select the Master's positioner as Master.
 

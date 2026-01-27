@@ -1,4 +1,4 @@
-﻿## 7.3.5. Handling Network Issues During Cooperative Control
+﻿### 7.3.5. Handling Network Issues During Cooperative Control
 
 If the cooperative control network is not functioning properly, arm interference detection between robots may not operate correctly. When problems occur on the cooperative control network, the following error may occur.
 

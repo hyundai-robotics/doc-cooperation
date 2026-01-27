@@ -1,4 +1,4 @@
-﻿## 7.3.3. Errors Occurring During Playback
+﻿### 7.3.3. Errors Occurring During Playback
 
 When two robots move from S1 to S2 on a rail as shown below, if the S2 positions of the two robots are separated by more than the sum of the tool interference area and the expected maximum interference distance, no W0147 or E0237 will occur. This represents a normal program.
 

@@ -1,4 +1,4 @@
-﻿## 2.1.3. Network Connection Check
+﻿### 2.1.3. Network Connection Check
 
 Check the network when the following situations occur:
 - During initial installation

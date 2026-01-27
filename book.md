@@ -37,7 +37,7 @@ Each robot can perform independent tasks and cooperative tasks within a single p
 ## 1.2. Main Features
 
 [__SOURCE](1-intro/2-main-func/1-specs.md)
-## 1.2.1. Key Feature Specifications
+### 1.2.1. Key Feature Specifications
 
 <br>
 
@@ -59,7 +59,7 @@ Each robot can perform independent tasks and cooperative tasks within a single p
 
 ![[Figure1-2] Jigless cooperative control](../../_assets/1-2.png)
 [__SOURCE](1-intro/2-main-func/2-features.md)
-## 1.2.2. Feature Characteristics
+### 1.2.2. Feature Characteristics
 
 - Communication
   The cooperative control feature uses UDP (General Ethernet) communication to coordinate up to 4 robots.
@@ -117,7 +117,7 @@ Switch to automatic mode. Place the program at the lead step and press the start
 ## 2.1. Hardware Installation
 
 [__SOURCE](2-system-setting/1-install/1-wiring.md)
-## 2.1.1. Emergency Stop Wiring
+### 2.1.1. Emergency Stop Wiring
 
 If an emergency stop occurs during cooperative motion, robots monitor each other's state via communication so that partner robots also stop, but hardware signals take precedence and positional mismatches between cooperative robots may occur. To minimize cooperative position mismatches during emergency stop, wire the controller's external emergency stop.
 
@@ -142,7 +142,7 @@ When using the robot cooperative feature, install a dedicated emergency stop swi
 {% endhint %}
 
 [__SOURCE](2-system-setting/1-install/2-network-config.md)
-## 2.1.2. Network Configuration
+### 2.1.2. Network Configuration
 
 <br>
 
@@ -163,7 +163,7 @@ Connect one of the COM module's network sockets (LAN 1-3) to the general-purpose
 If connecting two robots without a hub, use a network UTP CROSS cable and connect it to the universal network sockets.
 
 [__SOURCE](2-system-setting/1-install/3-net-check.md)
-## 2.1.3. Network Connection Check
+### 2.1.3. Network Connection Check
 
 Check the network when the following situations occur:
 - During initial installation
@@ -245,7 +245,7 @@ HiNet I/O transmits your robot's information to other cooperative robots to chec
 ## 2.4. Common Coordinate System Settings
 
 [__SOURCE](2-system-setting/4-coordinate/1-setting-outline.md)
-## 2.4.1. Overview of Common Coordinate System Settings
+### 2.4.1. Overview of Common Coordinate System Settings
 
 To perform cooperative operations, the relative positions between robots must be known accurately. The robot controller computes the tool tip position with respect to each robot's base coordinate frame, and additional information about the other robots must be registered. The positional relationship between robots is established by configuring a common coordinate system.
 
@@ -258,14 +258,14 @@ To mutually recognize the positions of Robot 1 and Robot 2, a common coordinate 
 
 {% endhint %}
 [__SOURCE](2-system-setting/4-coordinate/2-common-coord.md)
-## 2.4.2. Setting a Common Coordinate System for Two or More Robots
+### 2.4.2. Setting a Common Coordinate System for Two or More Robots
 
 A common coordinate system for cooperative robots is defined by teaching identical points between robots, so all cooperating robots must be able to indicate the same three points. Therefore, when the distance between robots is large, it may not be possible to set a common coordinate system. In such cases, a separate tool should be fabricated so that identical points between the robots can be taught.
 
 ![[Figure 2-5] Setting a common coordinate system for two or more robots](../../_assets/2-5.png)
 
 [__SOURCE](2-system-setting/4-coordinate/3-base-axis.md)
-## 2.4.3. Travel-Axis System
+### 2.4.3. Travel-Axis System
 
 When configuring the travel-axis system for cooperative control, install travel axes with the same specifications as parallel as possible.
 
@@ -280,7 +280,7 @@ When configuring the travel-axis system for cooperative control, install travel 
 
 {% endhint %}
 [__SOURCE](2-system-setting/4-coordinate/4-common-coord-set.md)
-## 2.4.4. Common Coordinate System Setup
+### 2.4.4. Common Coordinate System Setup
 
 If a common coordinate system is not set, manual cooperative jog operations and cooperative replay are not possible. When the common coordinate system is set, it is recommended to verify the setup using cooperative jog operations before proceeding with full operations.
 
@@ -456,7 +456,7 @@ The cmov recording mode is a mode for teaching Slave positions for jigless coope
 ## 3.5. Detection of Arm Interference and Soft Limits Between Cooperative Robots
 
 [__SOURCE](3-manual-mode/5-arm-interfere/1-counter-err.md)
-## 3.5.1. Detection of Partner Errors
+### 3.5.1. Detection of Partner Errors
 
 If a partner robot stops due to an arm interference error or soft limit error during cooperative motion, the system stops while maintaining relative positions. If the error occurs on a Slave, the Master will also stop and cannot be operated.
 
@@ -482,7 +482,7 @@ Press the Master's jog key in a direction that does not cause the error to be re
 ## 4.1. cowork Command
 
 [__SOURCE](4-programming/1-cowork/1-parameters.md)
-## 4.1.1. Command Parameters
+### 4.1.1. Command Parameters
 
 The `cowork` command marks the start and end of cooperative control in a program and specifies each robot's MASTER and SLAVE roles.
 
@@ -512,7 +512,7 @@ cowork m,id=0,s=[2,3,4],wait=5
 | param5 | - Partner robot wait time (sec) < 0 (infinite wait) ~ 120 > <Br> If you designate yourself as MASTER: <br> Wait time for SLAVEs to reach the cooperative reference position <br> If you designate yourself as SLAVE: <br> Wait time for MASTER to reach the cooperative reference position | `cowork s,m=1,wait=30` |
 
 [__SOURCE](4-programming/1-cowork/2-usage.md)
-## 4.1.2. How to Use the `cowork` Command
+### 4.1.2. How to Use the `cowork` Command
 
 (1) On the MASTER robot, the actions within the `cowork ~ cowork end` section are treated as cooperative segment commands. SLAVEs cannot insert action commands.
 
@@ -709,7 +709,7 @@ The cmov steps are a useful feature that allows you to verify taught positions u
 This feature allows assigning a positioner as the cooperative Master so that Slave robots can cooperate with the Master positioner. Positioner groups 1-3 are supported.
 
 [__SOURCE](4-programming/6-positioner/1-jog.md)
-## 4.6.1. Positioner Master Jog
+### 4.6.1. Positioner Master Jog
 
 <Br>
 
@@ -731,7 +731,7 @@ This feature allows assigning a positioner as the cooperative Master so that Sla
 (6) When performing positioner synchronized jog, both Robot 1 and Robot 2 are operated synchronized with the positioner.
 
 [__SOURCE](4-programming/6-positioner/2-teaching.md)
-## 4.6.2. Positioner Master Teaching and Playback
+### 4.6.2. Positioner Master Teaching and Playback
 
 Teach Master and Slave using the `cowork` command. On the Slave side, set `id=1` (positioner group number) to select the Master's positioner as Master.
 
@@ -774,7 +774,7 @@ After confirming operation in manual mode, operate in automatic mode.
 This section provides an overview of cooperative playback and its main behaviors, including manual verification and automatic playback procedures. Refer to subsequent sections for detailed instructions.
 
 [__SOURCE](5-play/2-program-check.md)
-## 5.2. Program Check in Manual Mode
+### 5.2. Program Check in Manual Mode
 
 (1) In manual mode, set the Master robot's manual cooperative state to I (Indiv.) or M (Master), and set the Slave robot's manual cooperative state to I (Indiv.) or S (Slave).
 (2) Turn Drive Ready On and press the 'Step Forward' key on both sides.
@@ -939,14 +939,14 @@ It is not possible to list all applications that can be implemented with the rob
 ## 7.1. Overview of Arm Interference Detection Features
 
 [__SOURCE](7-arm-interference/1-overview/1-purpose.md)
-## 7.1.1. Purpose of the Feature
+### 7.1.1. Purpose of the Feature
 
 <br>
 
 The purpose is to prevent accidents by stopping the robot in advance when a collision between robot arms and tools is predicted due to program errors or user mistakes (jogging or program creation errors).
 
 [__SOURCE](7-arm-interference/1-overview/2-coverage.md)
-## 7.1.2. Scope of the Feature
+### 7.1.2. Scope of the Feature
 
 
  <Br>
@@ -960,7 +960,7 @@ Interference between robot tools and arms is detected using a simplified cylindr
 - The supported groups and number of robots are the same as for cooperative control.
 
 [__SOURCE](7-arm-interference/1-overview/3-restiction.md)
-## 7.1.3. Limitations of the Feature
+### 7.1.3. Limitations of the Feature
 
 This feature cannot intelligently and automatically avoid interference between robots nor automatically determine and execute robot drive priorities.
 
@@ -972,7 +972,7 @@ This feature cannot intelligently and automatically avoid interference between r
 ## 7.2. Configuration Procedures
 
 [__SOURCE](7-arm-interference/2-setting/1-arm-set.md)
-## 7.2.1. Enabling Arm Interference Prevention
+### 7.2.1. Enabling Arm Interference Prevention
 
 Select 'System' → '4: Application Parameters' → '17: Cooperative Control' → '4: Inter-robot Interference Prevention' → '1: Interference Prevention Conditions'.
 
@@ -996,7 +996,7 @@ To enable arm interference prevention, select the 'Interference Detection Partne
 | Action | Check your robot's and the partner robot's cooperative control status, common coordinate settings, participation in the cooperative control network, and interference prevention conditions. |
 
 [__SOURCE](7-arm-interference/2-setting/2-arm-region.md)
-## 7.2.2. Setting Arm Interference Areas
+### 7.2.2. Setting Arm Interference Areas
 
 The arm interference area model is a cylinder composed of hemispheres on both ends. For example, for the H-axis, you can model the radius from the H-axis joint position to the V-axis joint position as shown below.
 
@@ -1032,7 +1032,7 @@ If you intend to set values smaller than the defaults, exercise extreme caution.
 {% endhint %}
 
 [__SOURCE](7-arm-interference/2-setting/3-tool-region.md)
-## 7.2.3. Setting Tool Interference Areas
+### 7.2.3. Setting Tool Interference Areas
 
 <Br>
 
@@ -1102,7 +1102,7 @@ For large tools such as hangers, dividing the area can prevent overestimation of
 
 
 [__SOURCE](7-arm-interference/2-setting/4-monitor.md)
-## 7.2.4. Arm Interference Status Monitoring
+### 7.2.4. Arm Interference Status Monitoring
 
 <Br>
 
@@ -1124,7 +1124,7 @@ If the monitored arm interference state differs from the actual state, check the
 ## 7.3. Interference Detection
 
 [__SOURCE](7-arm-interference/3-detect/1-decel-stop.md)
-## 7.3.1. Deceleration Stop
+### 7.3.1. Deceleration Stop
 
 If the robot decelerates and stops after invading the user-configured arm interference area and tool interference area, due to deceleration distance and robot inertia, a collision may occur even if an error is detected. Therefore, the detection area is expanded taking robot speed into account to detect interference earlier.
 
@@ -1150,7 +1150,7 @@ The expected interference distance calculated by the controller, when the robot 
 
 
 [__SOURCE](7-arm-interference/3-detect/2-quick-stop.md)
-## 7.3.2. Immediate Stop
+### 7.3.2. Immediate Stop
 
 Even if deceleration stopping occurs in the predicted interference detection (Level 2 detection area), the robot may still invade the interference area due to deceleration distance during stopping. If the interference area is directly exceeded, an immediate stop is performed without deceleration.
 
@@ -1165,7 +1165,7 @@ Even if deceleration stopping occurs in the predicted interference detection (Le
 
 
 [__SOURCE](7-arm-interference/3-detect/3-play-err.md)
-## 7.3.3. Errors Occurring During Playback
+### 7.3.3. Errors Occurring During Playback
 
 When two robots move from S1 to S2 on a rail as shown below, if the S2 positions of the two robots are separated by more than the sum of the tool interference area and the expected maximum interference distance, no W0147 or E0237 will occur. This represents a normal program.
 
@@ -1202,7 +1202,7 @@ Setting the tool interference area too small—smaller than the actual tool—ma
 {% endhint %}
 
 [__SOURCE](7-arm-interference/3-detect/4-dead-lock.md)
-## 7.3.4. Handling in Deadlock State
+### 7.3.4. Handling in Deadlock State
 
 A deadlock occurs when two robots invade each other's interference area and cannot move the robots further by jogging or program execution. In this case, release the interference detection for the affected robot relative to the partner robot, and then use the jog function to move out of the interference area carefully under user supervision.
  
@@ -1219,7 +1219,7 @@ After moving out of the interference area, check the partner robot number and re
 ![[Figure 7-29] Setting inter-robot arm interference detection](../../_assets/7-29.png)
 
 [__SOURCE](7-arm-interference/3-detect/5-net-err.md)
-## 7.3.5. Handling Network Issues During Cooperative Control
+### 7.3.5. Handling Network Issues During Cooperative Control
 
 If the cooperative control network is not functioning properly, arm interference detection between robots may not operate correctly. When problems occur on the cooperative control network, the following error may occur.
 

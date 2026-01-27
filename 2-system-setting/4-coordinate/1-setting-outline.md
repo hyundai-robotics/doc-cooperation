@@ -1,4 +1,4 @@
-﻿## 2.4.1. Overview of Common Coordinate System Settings
+﻿### 2.4.1. Overview of Common Coordinate System Settings
 
 To perform cooperative operations, the relative positions between robots must be known accurately. The robot controller computes the tool tip position with respect to each robot's base coordinate frame, and additional information about the other robots must be registered. The positional relationship between robots is established by configuring a common coordinate system.
 

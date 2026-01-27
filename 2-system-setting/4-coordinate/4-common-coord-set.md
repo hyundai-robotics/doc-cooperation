@@ -1,4 +1,4 @@
-﻿## 2.4.4. Common Coordinate System Setup
+﻿### 2.4.4. Common Coordinate System Setup
 
 If a common coordinate system is not set, manual cooperative jog operations and cooperative replay are not possible. When the common coordinate system is set, it is recommended to verify the setup using cooperative jog operations before proceeding with full operations.
 

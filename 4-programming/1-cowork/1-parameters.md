@@ -1,4 +1,4 @@
-﻿## 4.1.1. Command Parameters
+﻿### 4.1.1. Command Parameters
 
 The `cowork` command marks the start and end of cooperative control in a program and specifies each robot's MASTER and SLAVE roles.
 

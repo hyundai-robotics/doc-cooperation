@@ -1,4 +1,4 @@
-﻿## 7.2.1. Enabling Arm Interference Prevention
+﻿### 7.2.1. Enabling Arm Interference Prevention
 
 Select 'System' → '4: Application Parameters' → '17: Cooperative Control' → '4: Inter-robot Interference Prevention' → '1: Interference Prevention Conditions'.
 
