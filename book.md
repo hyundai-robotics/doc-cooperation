@@ -3,7 +3,7 @@
 # ${cont_model} Controller Function Manual - Cooperative Control
 
 [__SOURCE](1-intro/README.md)
-## 1. Overview
+# 1. Overview
 
 [__SOURCE](1-intro/1-overview.md)
 ## 1.1. Overview of Robot Cooperative Features
@@ -111,7 +111,7 @@ Verify cooperative motion in manual mode. Start cooperative robots by stepping f
 Switch to automatic mode. Place the program at the lead step and press the start switches on all controllers designated as cooperative robots.
 
 [__SOURCE](2-system-setting/README.md)
-## 2. System Settings
+# 2. System Settings
 
 [__SOURCE](2-system-setting/1-install/README.md)
 ## 2.1. Hardware Installation
@@ -315,7 +315,7 @@ The common coordinate system setup requires accurate knowledge of the robots' to
 
 {% endhint %}
 [__SOURCE](3-manual-mode/README.md)
-## 3. Manual Mode Cooperative Operation
+# 3. Manual Mode Cooperative Operation
 
 [__SOURCE](3-manual-mode/1-mode-switch.md)
 ## 3.1. Switching Between Independent and Cooperative Modes
@@ -453,10 +453,10 @@ The cmov recording mode is a mode for teaching Slave positions for jigless coope
 {% endhint %}
 
 [__SOURCE](3-manual-mode/5-arm-interfere/README.md)
-## 3.6. Detection of Arm Interference and Soft Limits Between Cooperative Robots
+## 3.5. Detection of Arm Interference and Soft Limits Between Cooperative Robots
 
 [__SOURCE](3-manual-mode/5-arm-interfere/1-counter-err.md)
-## 3.6.1. Detection of Partner Errors
+## 3.5.1. Detection of Partner Errors
 
 If a partner robot stops due to an arm interference error or soft limit error during cooperative motion, the system stops while maintaining relative positions. If the error occurs on a Slave, the Master will also stop and cannot be operated.
 
@@ -476,7 +476,7 @@ Press the Master's jog key in a direction that does not cause the error to be re
 ![[Figure 3-12] Clearing soft limit error](../../_assets/3-12.png)
 
 [__SOURCE](4-programming/README.md)
-## 4. Cooperative Motion Teaching
+# 4. Cooperative Motion Teaching
 
 [__SOURCE](4-programming/1-cowork/README.md)
 ## 4.1. cowork Command
@@ -766,7 +766,7 @@ After confirming operation in manual mode, operate in automatic mode.
 {% endhint %}
 
 [__SOURCE](5-play/README.md)
-## 5. Cooperative Motion Playback
+# 5. Cooperative Motion Playback
 
 [__SOURCE](5-play/1-overview.md)
 ## 5.1. Overview of Cooperative Playback
@@ -894,7 +894,7 @@ When both Master and Slave are set to Robot Lock <Enabled>, the program runs wit
 {% endhint %}
 
 [__SOURCE](6-hinet/README.md)
-## 6. HiNet I/O Features
+# 6. HiNet I/O Features
 
 [__SOURCE](6-hinet/1-io-overview.md)
 ## 6.1. HiNet I/O Overview
@@ -933,7 +933,7 @@ It is not possible to list all applications that can be implemented with the rob
 ![](../_assets/6-4.png)
 
 [__SOURCE](7-arm-interference/README.md)
-## 7. Arm Interference Detection Features
+# 7. Arm Interference Detection Features
 
 [__SOURCE](7-arm-interference/1-overview/README.md)
 ## 7.1. Overview of Arm Interference Detection Features
@@ -1231,7 +1231,7 @@ If the cooperative control network is not functioning properly, arm interference
 | Action | - Check the network cable of the affected robot. <br> - Refer to Cooperative Control Status Monitoring and restore the cooperative control state to normal. |
 
 [__SOURCE](8-service/README.md)
-## 8. Service Functions
+# 8. Service Functions
 
 [__SOURCE](8-service/1-status-mon.md)
 ## 8.1. Cooperative Control Status Monitor
@@ -1319,7 +1319,7 @@ R codes used for cooperative control.
 |1|Execute Reset|
 
 [__SOURCE](9-error-code/README.md)
-## 9. Error Codes
+# 9. Error Codes
 
 [__SOURCE](9-error-code/1-warning.md)
 ## 9.1. Warning
