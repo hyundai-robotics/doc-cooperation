@@ -466,7 +466,7 @@ If a partner robot stops due to an arm interference error or soft limit error du
 ![[Figure 3-11] Soft limit error detection](../../_assets/3-11.png)
 
 [__SOURCE](3-manual-mode/5-arm-interfere/2-err-clear.md)
-## 3.5.2. Error Clearance
+### 3.5.2. Error Clearance
 
 Press the Master's jog key in a direction that does not cause the error to be released, and the error will be cleared. After clearing the error, pressing the jog key again in a direction that does not cause the error allows operation.
 
@@ -1197,7 +1197,7 @@ In such cases, reduce the 'tool interference area' or the 'expected maximum inte
 
 {% hint style="warning" %}
 
-Setting the tool interference area too small—smaller than the actual tool—may cause collisions between robots.
+Setting the tool interference area too small-smaller than the actual tool-may cause collisions between robots.
 
 {% endhint %}
 

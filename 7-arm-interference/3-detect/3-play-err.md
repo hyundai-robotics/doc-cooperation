@@ -30,6 +30,6 @@ In such cases, reduce the 'tool interference area' or the 'expected maximum inte
 
 {% hint style="warning" %}
 
-Setting the tool interference area too small—smaller than the actual tool—may cause collisions between robots.
+Setting the tool interference area too small-smaller than the actual tool-may cause collisions between robots.
 
 {% endhint %}
