@@ -1,4 +1,4 @@
-﻿### 5.2. Program Check in Manual Mode
+﻿## 5.2. Program Check in Manual Mode
 
 (1) In manual mode, set the Master robot's manual cooperative state to I (Indiv.) or M (Master), and set the Slave robot's manual cooperative state to I (Indiv.) or S (Slave).
 (2) Turn Drive Ready On and press the 'Step Forward' key on both sides.
