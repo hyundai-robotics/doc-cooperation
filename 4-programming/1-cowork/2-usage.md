@@ -1,20 +1,20 @@
-﻿### 4.1.2. How to Use the `cowork` Command
+### 4.1.2. 如何使用 `cowork` 命令
 
-(1) On the MASTER robot, the actions within the `cowork ~ cowork end` section are treated as cooperative segment commands. SLAVEs cannot insert action commands.
+(1) 在 MASTER 机器人上，`cowork ~ cowork end` 部分的操作被视为协作段命令。SLAVE 不能插入操作命令。
 
-(2) On SLAVE robots, standard `move` commands cannot be used within the cooperative section; use the `cmov` command (cowork move) instead.
+(2) 在 SLAVE 机器人上，标准 `移动 (move)` 命令不能在协作部分中使用；应使用 `cmov` 命令（协作移动）。
 
-(3) In handling applications where the Slave follows the Master, as in the example below, the Slave will maintain the relative position to the Master and move accordingly when the `cowork` command is executed even if no `cmov` commands are inserted on the Slave.
+(3) 在处理从属跟随主控的应用时，如下面的示例所示，从属将保持相对主控的位置，并在执行 `cowork` 命令时相应移动，即使从属上没有插入 `cmov` 命令。
 
 ![](../../_assets/4-prg1.png)
- 
-(4) On the Slave, you can insert `cmov` commands that interpolate in the Master end effector coordinate system; `cmov` recorded positions are relative to the Master's tool end effector coordinate system. If taught as in the example below, within `cowork ~ cowork end` the Slave performs cooperative motion and follows the Master's movement along the `cmov` path recorded in the Master end effector coordinate system.
 
- ![](../../_assets/4-prg2.png)
+(4) 在从属上，您可以插入插值于主控末端执行器坐标系统中的 `cmov` 命令；`cmov` 记录的位置相对于主控的工具末端执行器坐标系统。如果如下面的示例所示进行教学，在 `cowork ~ cowork end` 内，从属执行协作运动，并沿着记录在主控末端执行器坐标系统中的 `cmov` 路径跟随主控的运动。
+
+![](../../_assets/4-prg2.png)
 
 {% hint style="warning" %}
 
- - A `cowork end` command must be inserted at the end of cooperative motion.
- - For SLAVE robots, `move` commands cannot be inserted within the cooperative section; for MASTER robots, `cmov` commands cannot be inserted.
+ - 必须在协作运动的末尾插入 `cowork end` 命令。
+ - 对于 SLAVE 机器人，`移动 (move)` 命令不能在协作部分中插入；对于 MASTER 机器人，`cmov` 命令不能插入。
 
 {% endhint %}

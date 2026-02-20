@@ -1,46 +1,46 @@
-﻿## 5.5. Robot Lock Function (Robot Lock Playback)
+## 5.5. 机器人锁定功能 (Robot Lock Playback)
 
-Set 'Condition Settings' → '5: Robot Lock' to <Enabled>.
+设置 '条件设置' → '5: 机器人锁定' 为 <Enabled>。
 
+ 
+<br>
+
+![[Figure 5-8] 机器人锁定启用设置](../_assets/5-8.png)
+
+<br>
+
+当主机器人设置为机器人锁定 <Enabled> 且进行回放时， 从属机器人进行协作运动，而主机器人不移动，只有轴数据监控发生变化。
+
+
+<br>
+
+![[Figure 5-10] 机器人锁定功能 (主锁)](../_assets/5-10.png)
+
+<br>
+
+如果从属机器人设置为机器人锁定 <Enabled>，而主机器人设置为 <Disabled>，则主机器人正常操作，而从属机器人保持停止，只有监控数据移动。
+
+<br>
+
+![[Figure 5-11] 机器人锁定功能 (从属锁)](../_assets/5-11.png)
+
+<br>
+
+ 
+
+当主机器人和从属机器人都设置为机器人锁定 <Enabled> 时，程序运行时主机器人和从属机器人均停止。
  
 <br>
 
-![[Figure 5-8] Robot Lock Enable Setting](../_assets/5-8.png)
-
-<br>
-
-When the Master robot is set to Robot Lock <Enabled> and playback is performed, the Slave performs cooperative motion while the Master robot does not move and only the axis data monitor changes.
-
-
-<br>
-
-![[Figure 5-10] Robot Lock Function (Master Lock)](../_assets/5-10.png)
-
-<br>
-
-If the Slave robot is set to Robot Lock <Enabled> and the Master robot is set to <Disabled>, the Master robot operates normally while the Slave robot remains stopped and only monitoring data moves.
-
-<br>
-
-![[Figure 5-11] Robot Lock Function (Slave Lock)](../_assets/5-11.png)
-
-<br>
-
- 
-
-When both Master and Slave are set to Robot Lock <Enabled>, the program runs with both Master and Slave stopped.
- 
-<br>
-
-![[Figure 5-12] Robot Lock Function (Master, Slave Lock)](../_assets/5-12.png)
+![[Figure 5-12] 机器人锁定功能 (主，从属锁)](../_assets/5-12.png)
 
 <br>
 
 
 {% hint style="warning" %}
 
- - Set the cooperative waiting time to an appropriate length.
- - Robots set to Robot Lock <Enabled> will not move, so move them to a position where they will not interfere with other robots before running the program.
- - When changing the Robot Lock setting back to <Disabled> and running, the robot positions and step positions may not correspond; please run the program from the beginning.
+ - 将协作等待时间设置为合适的长度。
+ - 设置为机器人锁定 <Enabled> 的机器人将不移动，因此请在运行程序之前将它们移动到不会干扰其他机器人的位置。
+ - 当将机器人锁定设置更改回 <Disabled> 并运行时，机器人位置和步骤位置可能不对应；请从头开始运行程序。
 
 {% endhint %}

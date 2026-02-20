@@ -1,5 +1,5 @@
-﻿## 4.6. Positioner Master System
+## 4.6. 位置器主系统
 
 <br>
 
-This feature allows assigning a positioner as the cooperative Master so that Slave robots can cooperate with the Master positioner. Positioner groups 1-3 are supported.
+此功能允许将位置器指定为协作主设备，以便从属机器人可以与主位置器协作。支持位置器组 1-3。

@@ -1,34 +1,33 @@
-﻿### 7.2.2. Setting Arm Interference Areas
+### 7.2.2. 设置臂干扰区域
 
-The arm interference area model is a cylinder composed of hemispheres on both ends. For example, for the H-axis, you can model the radius from the H-axis joint position to the V-axis joint position as shown below.
-
-
-<br>
-
-![[Figure 7-10] Hemispherical and cylindrical arm interference area](../../_assets/7-10.png)
+臂干扰区域模型是一个由两个端头的半球体组成的圆柱体。例如，对于H轴，您可以将从H轴关节位置到V轴关节位置的半径建模，如下所示。
 
 <br>
 
-The cylindrical link model for the robot body arm applies to S, H, V, and B axes. The default radius values for each axis are determined as follows. If additional equipment is mounted on the robot, set the radius for the corresponding axis larger than the default value.
-
- - S-axis radius: Set to twice the distance from the S-axis rotation center to the H-axis joint
- - H-axis radius: 1.8 times the distance from the B-axis rotation center to the flange face
- - V-axis radius: Distance from the B-axis rotation center to the flange face
+![[图7-10] 半球体和圆柱形臂干扰区域](../../_assets/7-10.png)
 
 <br>
 
-![[Figure 7-11] Axis-specific interference radius settings](../../_assets/7-11.png)
+机器人身体臂的圆柱链接模型适用于S、H、V和B轴。每个轴的默认半径值如下所示。如果机器人上安装了额外的设备，请将相应轴的半径设置大于默认值。
+
+ - S轴半径：设置为从S轴旋转中心到H轴关节的距离的两倍
+ - H轴半径：从B轴旋转中心到法兰面的距离的1.8倍
+ - V轴半径：从B轴旋转中心到法兰面的距离
 
 <br>
 
-Currently, arm interference detection supports detecting all axes using the S, H, and V axis settings.
+![[图7-11] 轴特定干扰半径设置](../../_assets/7-11.png)
 
 <br>
 
-![[Figure 7-12] H-axis offset radius](../../_assets/7-12.png)
+目前，臂干扰检测支持使用S、H和V轴设置检测所有轴。
+
+<br>
+
+![[图7-12] H轴偏移半径](../../_assets/7-12.png)
 
 <br>
 
 {% hint style="warning" %}
-If you intend to set values smaller than the defaults, exercise extreme caution. For example, the H-axis of a serial-link robot such as the HS220 has an offset to the right from the S-axis center as shown in the figure. The H-axis interference detection area is set based on the segment from the S-axis rotation center along the H-axis link to the V-axis rotation center, so the H-axis radius must be set large enough to include the entire H-axis link from the S-axis rotation center.
+如果您打算设置小于默认值的值，请务必谨慎。例如，串联链接机器人（如HS220）的H轴相对于S轴中心向右偏移，如图所示。H轴干扰检测区域是基于从S轴旋转中心沿H轴链接到V轴旋转中心的线段设置的，因此H轴半径必须设置得足够大，以包含从S轴旋转中心到整个H轴链接的区域。
 {% endhint %}

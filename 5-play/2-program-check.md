@@ -1,23 +1,22 @@
-﻿## 5.2. Program Check in Manual Mode
+## 5.2. 程序检查手动模式
 
-(1) In manual mode, set the Master robot's manual cooperative state to I (Indiv.) or M (Master), and set the Slave robot's manual cooperative state to I (Indiv.) or S (Slave).
-(2) Turn Drive Ready On and press the 'Step Forward' key on both sides.
-(3) To verify synchronous motion between Master and Slave, press the Master and Slave step forward keys until cooperative motion is completed.
- 
- <br>
- 
-![](../_assets/4-prg23.png)
-
-![[Figure 5-5] Program check in manual mode](../_assets/5-5.png)
+(1) 在手动模式下，将主机器人设置为手动协作状态 I (Indiv.) 或 M (Master)，将从机器人设置为手动协作状态 I (Indiv.) 或 S (Slave)。
+(2) 打开驱动准备并同时按下两侧的“前进”键。
+(3) 为了验证主从之间的同步运动，按住主和从的前进键，直到协作运动完成。
 
 <br>
- 
+
+![](../_assets/4-prg23.png)
+
+![[图 5-5] 手动模式下程序检查](../_assets/5-5.png)
+
+<br>
 
 {% hint style="warning" %}
- 
- - If the Slave is in cmov recording mode, manual mode cooperative operation with the Master will not be possible.
- - When executing step forward/backward, set 'Execute function on step forward' in Condition Settings to On.
- - The Master and Slave robots check the execution position only at the moment the cowork command is executed; they do not synchronize Master and Slave step positions outside of that. Therefore, the relative positions of Master and Slave checked using step forward/back may differ during automatic mode playback.
- - To synchronize the positions of the two robots, use the `cowork with, sync=1` statement.
+
+ - 如果从机器人处于 cmov 记录模式，则无法与主机器人进行手动模式的协作操作。
+ - 执行向前/向后步骤时，将“在向前步骤中执行功能”设置为打开。
+ - 主机器人和从机器人只在协作命令执行的瞬间检查执行位置；在此之外，它们不协调主从的步骤位置。因此，在自动模式回放期间，通过向前/向后步骤检查的主从相对位置可能会有所不同。
+ - 要同步两个机器人的位置，请使用 `cowork with, sync=1` 语句。
 
 {% endhint %}

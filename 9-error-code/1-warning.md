@@ -1,46 +1,45 @@
-﻿## 9.1. Warning
+## 9.1. 警告
 
 <br>
 
 ---
-- Code No.: W00123
-- Warning: Robot stop requested
-- Details: During cooperative control, a stop command was received from a partner robot. In this case, the above message is displayed and the robot stops.
-- Action:
-    - Start the Slave robot drive first, then start the Master drive to resume the program.
+- 代码编号：W00123
+- 警告：请求停止机器人
+- 详细信息：在协作控制期间，收到了来自合作机器人发送的停止命令。在这种情况下，显示上述消息并且机器人停止。
+- 行动：
+    - 首先启动从属机器人驱动，然后启动主驱动以恢复程序。
 
 ---
-- Code No.: W00124
-- Warning: Slave robot jog operation not allowed
-- Details: The robot is set to manual cooperative Slave state. A robot configured as Slave cannot be operated independently.
-- Action:
-    - To operate each robot individually in manual mode, change the manual cooperative state to 'Independent'. The manual cooperative state can be changed using user keys or the R351 code.
+- 代码编号：W00124
+- 警告：不允许从属机器人走动操作
+- 详细信息：机器人被设置为手动协作从属状态。配置为从属的机器人不能独立操作。
+- 行动：
+    - 要在手动模式下单独操作每个机器人，请将手动协作状态更改为“独立”。手动协作状态可以使用用户键或R351代码更改。
 
 ---
-- Code No.: W00131
-- Warning: Cooperative jog operation not allowed - Duplicate Master robots
-- Details: More than one robot connected on HiNet is set as manual cooperative Master.
-- Action:
-    - Only one manual cooperative Master can be set. Please change the settings.
+- 代码编号：W00131
+- 警告：不允许协作走动操作 - 重复的主机器人
+- 详细信息：在 HiNet 上连接的多个机器人被设置为手动协作主控。
+- 行动：
+    - 只能设置一个手动协作主控。请更改设置。
 
 ---
-- Code No.: W00132
-- Warning: Cooperative jog operation not allowed - Slave selection unavailable
-- Details: An attempt was made to jog the Master robot while the Slave robot was not set to a cooperative-ready state.
-- Action:
-    - Confirm that the Slave robot is selected, prepare the Slave robot for cooperation (Enabling Switch On), and then operate.
+- 代码编号：W00132
+- 警告：不允许协作走动操作 - 从属选择不可用
+- 详细信息：尝试在从属机器人未设置为协作准备状态时走动主机器人。
+- 行动：
+    - 确认已选择从属机器人，准备从属机器人进行协作（启用开关开启），然后操作。
 ---
 
-- Code No.: W00133
-- Warning: Slave jog setting changed - Stop
-- Details: During Master cooperative jog operation, a Slave robot that was operating together was detected to have its manual cooperative state changed.
-- Action:
-    - Re-check the Slave's cooperative state before operating.
+- 代码编号：W00133
+- 警告：从属走动设置已更改 - 停止
+- 详细信息：在主协作走动操作期间，检测到一起操作的从属机器人其手动协作状态已更改。
+- 行动：
+    - 在操作之前重新检查从属的协作状态。
 ---
 
-- Code No.: W00134
-- Warning: Master Tool coordinate system not selected
-- Details: This occurs when attempting to jog a Slave robot in cmov recording mode (R351,3). A Master robot is not specified. It may also occur when using the cmov step forward function. The currently set Master number differs from the Master number recorded in cmov.
-- Action:
-    - Set the correct Master robot to Manual Cooperative Master state.
----
+- 代码编号：W00134
+- 警告：未选择主工具坐标系统
+- 详细信息：当尝试以cmov录制模式（R351,3）走动从属机器人时发生此情况。未指定主机器人。使用cmov向前一步功能时也可能发生此情况。当前设置的主编号与cmov记录的主编号不同。
+- 行动：
+    - 将正确的主机器人设置为手动协作主控状态。

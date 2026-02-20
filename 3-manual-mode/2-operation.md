@@ -1,33 +1,30 @@
-﻿## 3.2. Manual Mode Cooperative Operation
-### 3.2.1. Setting MASTER and SLAVE Robots
+## 3.2. 手动模式协作操作
+### 3.2.1. 设置主机器人和从机器人
 
-Use R351 to set robot roles to MASTER and SLAVE. The robot role is independent of the robot number.
+使用 R351 将机器人角色设置为主（MASTER）和从（SLAVE）。机器人角色与机器人编号无关。
 
- 
-
-![[Figure 3-7] Manual mode cooperative operation (Setting Master and Slave robots)](../_assets/3-7.png)
+![[图 3-7] 手动模式协作操作（设置主机器人和从机器人）](../_assets/3-7.png)
 
 <br>
          
- - ① Confirm that both MASTER and SLAVE robots are in 'Manual Mode'.
- - ② Ensure both MASTER and SLAVE robots have Drive Ready ON and are in standby.
- - ③ Keep the Slave robot's ENABLE switch held so that Drive Ready ON is maintained, and confirm that the MASTER's Drive Ready is also ON.
- - ④ When the MASTER robot is operated, the SLAVE robot follows by tracking the relative position.
+ - ① 确认主机器人和从机器人均处于“手动模式”。
+ - ② 确保主机器人和从机器人均已开启驱动准备，并处于待机状态。
+ - ③ 按住从机器人的启用开关以保持驱动准备开启，并确认主机器人的驱动准备也已开启。
+ - ④ 当主机器人操作时，从机器人通过跟踪相对位置进行跟随。
 
- 
-![[Figure 3-8] Manual mode cooperative operation (Master operation / Slave following)](../_assets/3-8.png)
+![[图 3-8] 手动模式协作操作（主操作 / 从跟随）](../_assets/3-8.png)
 
 <br>
 
 {% hint style="warning" %}
- - Manual cooperative JOG is not possible in the following cases:
-    - When more than one Master is designated and operated
-    - When attempting to operate a robot set as Slave
-    - When the Enable switches of Master or Slave are not pressed
-    - When the inter-robot cooperative coordinate system is not configured
-    - When cooperative control communication between robots is disconnected
+ - 在以下情况下，手动协作 JOG 不可用：
+    - 当指定并操作多个主机器人时
+    - 当尝试操作设置为从机器人的机器人时
+    - 当主或从的启用开关未被按下时
+    - 当机器人间的协作坐标系统未配置时
+    - 当机器人间的协作控制通信断开时
 
- - In Manual Mode cooperative operation, JOG is not permitted on robots set as Slave. To jog a Slave, change the robot role to Manual Mode Independent.
+ - 在手动模式协作操作中，不允许对设置为从的机器人进行 JOG。要对从机器人进行 JOG，请将机器人角色更改为手动模式独立。
 
- - If cooperative control is <Disabled>, the I:R# / S:R# / M:R# indicators will not appear at the top of the Manual Mode screen and cannot be configured, therefore Manual cooperative JOG is not possible.
+ - 如果协作控制被 <禁用>，则 I:R# / S:R# / M:R# 指示灯将不会出现在手动模式屏幕顶部，并且无法进行配置，因此手动协作 JOG 不可用。
 {% endhint %}

@@ -1,68 +1,59 @@
-﻿### 7.2.3. Setting Tool Interference Areas
+### 7.2.3. 设置工具干扰区域
 
 <Br>
 
-![[Figure 7-13] Flange coordinate system](../../_assets/7-13.png)
+![[Figure 7-13] 法兰坐标系统](../../_assets/7-13.png)
 
 <Br>
 
-To set the tool interference area for each tool number, use the robot flange coordinate system as a reference. When the robot is in the reference pose, the flange coordinate system has Z pointing outward normal to the flange face, X pointing downward, and Y pointing to the robot's left.
+要为每个工具编号设置工具干扰区域，请使用机器人法兰坐标系统作为参考。当机器人处于参考姿态时，法兰坐标系统的Z轴指向法兰面的外部，X轴指向下方，Y轴指向机器人的左侧。
 
-You can set up to 4 interference areas per tool number. For any tool number used in the robot program, you must configure the tool interference area. If not configured, tool interference detection will not occur.
+每个工具编号最多可以设置4个干扰区域。对于机器人程序中使用的任何工具编号，您必须配置工具干扰区域。如果未配置，则不会发生工具干扰检测。
 
-### 1) Example for a single (servo-gun) tool
+### 1) 单一（伺服枪）工具示例
 
-The tool interference area is set by defining start and end points and a radius from coordinates on the tool flange. You may set up to four interference areas per tool number.
+工具干扰区域是通过定义起始点和终止点及从工具法兰上的坐标到干扰区域的半径来设置的。每个工具编号最多可以设置四个干扰区域。
 
-Refer to the figure below for flange coordinate directions and an example configuration.
- 
- <Br>
-
-![[Figure 7-14] Flange coordinate system example](../../_assets/7-14.png)
+请参阅下面的示例配置和法兰坐标方向的图。
 
 <Br>
 
-### 2) Example for a hanger-type tool
-
-#### 2-1) When configuring only one tool interference area
-
-For asymmetrical tools relative to the flange center, when defining a single tool interference area you can set the tool shape center and use the maximum distance from center to tool corners as the radius. In the example below, relative to the robot coordinate system X=-175, Y=-485, and the radius should be set slightly larger than the larger of R1 and R2 (e.g., 1300 rather than 1250). Because hemispheres are created at each end of the cylinder when setting a radius of 1300, set Z positions as P1=(-175,-485,500) and P2=(-175,-485,1000).
-
- 
- <Br>
-
-![[Figure 7-15] Drawing for 1 tool interference area setting](../../_assets/7-15.png)
-
-
-<Br>
-  
-
-![[Figure 7-16] 1 tool interference area setting](../../_assets/7-16.png)
-
+![[Figure 7-14] 法兰坐标系统示例](../../_assets/7-14.png)
 
 <Br>
 
-However, when the radius is set this large, it may be unnecessarily larger than the actual tool shape. If precise tool region settings are required, model the tool by dividing it into multiple regions.
+### 2) 挂架型工具示例
 
+#### 2-1) 当仅配置一个工具干扰区域时
 
-#### 2-2) When configuring 4 tool interference areas
+对于相对于法兰中心的不对称工具，在定义单个工具干扰区域时，可以设置工具形状中心，并且使用从中心到工具角的最大距离作为半径。在下面的示例中，相对于机器人坐标系统，X=-175，Y=-485，半径应设置略大于R1和R2中的较大者（例如，设置为1300而不是1250）。因为在设置1300的半径时，气体体将在圆柱体的每一端生成，所以Z位置设置为P1=(-175,-485,500)和P2=(-175,-485,1000)。
 
 <Br>
-  
 
-![[Figure 7-17] Drawing for 4 tool interference areas](../../_assets/7-17.png)
+![[Figure 7-15] 1个工具干扰区域设置的图示](../../_assets/7-15.png)
+
+<Br>
+
+![[Figure 7-16] 1个工具干扰区域设置](../../_assets/7-16.png)
+
+<Br>
+
+然而，当半径设置得这么大时，可能会比实际工具形状大得多。如果需要精确的工具区域设置，可以通过将工具划分为多个区域来建模工具。
+
+#### 2-2) 当配置4个工具干扰区域时
+
+<Br>
+![[图 7-17] 4 个工具干涉区域的图](../../_assets/7-17.png)
 
 
 <Br>
 
-For large tools such as hangers, dividing the area can prevent overestimation of the tool interference area. For example, for a tool of width 2110mm and height 1350mm, divide the vertical area into three equal parts and model three cylinders with approximately 350mm radius as areas 1-3. Finally, set the offset from the flange to the tool as area 4 to achieve the configuration below.
+对于大工具，例如吊架，划分区域可以防止对工具干涉区域的过高估计。例如，对于宽度为 2110mm 和高度为 1350mm 的工具，将垂直区域划分为三个相等的部分，并将三个半径约为 350mm 的圆柱模型化为区域 1-3。最后，将法兰到工具的偏移设置为区域 4，以实现如下配置。
 
  
 <Br>
   
 
-![[Figure 7-18] 4 tool interference areas configuration](../../_assets/7-18.png)
+![[图 7-18] 4 个工具干涉区域配置](../../_assets/7-18.png)
 
 <Br>
-
-

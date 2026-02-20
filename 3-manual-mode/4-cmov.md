@@ -1,21 +1,21 @@
-﻿## 3.4. cmov Recording Mode Jog
+## 3.4. cmov 录制模式 Jog
 
-The cmov recording mode is a mode for teaching Slave positions for jigless cooperative motion.
+cmov 录制模式是用于教授无夹具协作运动的从属位置的模式。
 
- - How to set cmov recording mode:
-    - ① Select the robot role as Slave.
-    - ② Set the Master's manual cooperative state to MASTER.
-    - ④ Even in Cartesian coordinate jog state, jogging is performed relative to the robot's Cartesian coordinate system regardless of the Master coordinates.
+ - 如何设置 cmov 录制模式：
+    - ① 将机器人角色选择为从属。
+    - ② 将主控手动协作状态设置为 MASTER。
+    - ④ 即使在笛卡尔坐标 jog 状态下，jogging 也相对于机器人的笛卡尔坐标系进行，而不考虑主控坐标。
 
 <Br>
 
-![[Figure 3-10] cmov recording mode jog](../_assets/3-10.png)
+![[图 3-10] cmov 录制模式 jog](../_assets/3-10.png)
 
 <br>
  
 <br>
 
  {% hint style="warning" %}
-- The drive axes of cooperative control systems should be installed as parallel as possible between Master and Slave.
-- When the Slave is in cmov recording mode, jogging of the robot set as Master in manual cooperative state is not allowed.
+- 协作控制系统的驱动轴应尽可能平行安装在主控和从属之间。
+- 当从属处于 cmov 录制模式时，手动协作状态下设置为主控的机器人的 jogging 是不允许的。
 {% endhint %}

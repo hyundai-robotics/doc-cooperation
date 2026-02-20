@@ -1,33 +1,32 @@
-﻿### 4.6.2. Positioner Master Teaching and Playback
+### 4.6.2. 主控器教导与回放
 
-Teach Master and Slave using the `cowork` command. On the Slave side, set `id=1` (positioner group number) to select the Master's positioner as Master.
+使用 `cowork` 命令教导主设备和从设备。在从设备端，设置 `id=1`（定位器组编号）以选择主设备的定位器作为主设备。
 
-While the positioner is set as Master (Master robot coordinate system 'Sync S1'), record the Slave positions. Recorded positions are stored in the positioner end effector coordinate system.
+当定位器设置为主设备时（主机器人坐标系统 'Sync S1'），记录从设备位置。记录的位置存储在定位器末端执行器坐标系统中。
 
 ![](../../_assets/4-prg20.png) 
 
-To have the Master robot cooperate with the positioner, teach smov steps in the same way as for an ordinary positioner. When the Slave records a step while the Master's positioner is set as Master (Master robot coordinate system 'Sync S1'), it is recorded using a robot number that reflects the Master ID.
+要让主机器人与定位器协作，按与普通定位器相同的方式教导 smov 步骤。当从设备在主设备的定位器设置为主设备（主机器人坐标系统 'Sync S1'）时记录步骤，使用反映主设备ID的机器人编号进行记录。
 
- 
 ![](../../_assets/4-prg21.png)
 
-The Master uses the same positioner synchronization function, and the Slave is recorded with R11.
+主设备使用相同的定位器同步功能，从设备记录为 R11。
 
-Teach Master and Slave in the same way as described in (3) above and finish with `cowork end`.
+以与上述 (3) 中描述的相同方式教导主设备和从设备，并以 `cowork end` 结束。
      
 ![](../../_assets/4-prg22.png)
 
-After confirming operation in manual mode, operate in automatic mode.
+在手动模式下确认操作后，以自动模式操作。
 
     
-![[Figure 4-7] Simulation of positioner synchronized operation per robot](../../_assets/4-9.png)
+![[图 4-7] 按机器人同步操作的定位器仿真](../../_assets/4-9.png)
 
 
 <br>
 
 {% hint style="warning" %}
 
- - Jigless cooperative control supports positioner groups 1-3. When positioner jogging or in `cmov`, select the positioner group number 1-3.
- - If values set in the Slave with `cowork s,m=#1,id=#2` differ from the `cmov R#1#2` values, an `E1365 cmov Master No. ID is invalid.` error occurs.
+ - 无夹具协作控制支持定位器组 1-3。当定位器操纵或在 `cmov` 中时，选择定位器组编号 1-3。
+ - 如果在从设备中设置的值与 `cowork s,m=#1,id=#2` 与 `cmov R#1#2` 值不同，则会发生 `E1365 cmov Master No. ID is invalid.` 错误。
 
 {% endhint %}

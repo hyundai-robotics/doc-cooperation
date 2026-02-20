@@ -1,14 +1,14 @@
-﻿## 3.3. Cooperative Drive Axis Jog
+## 3.3. 协作驱动轴行走
 
-Cooperative drive axis jogging is operated the same way as standard cooperative jogging. As shown in Figure 3-5, when operating the Master drive axis in cooperative jog state, the Slave's drive axis moves compensating the relative position.
+协作驱动轴行走的操作方式与标准协作行走相同。如图3-5所示，当在协作行走状态下操作主驱动轴时，从驱动轴会补偿相对位置。
 
  
-![[Figure 3-9] Cooperative drive axis jog](../_assets/3-9.png)
+![[Figure 3-9] 协作驱动轴行走](../_assets/3-9.png)
 
 <br>
 
 {% hint style="warning" %}
- - The drive axes of cooperative control systems should be installed as parallel as possible between Master and Slave.  
-- Cooperative control drive axis systems support only a single axis.   
-- To use cooperative drive axis functionality, perform drive axis calibration first.  
+ - 协作控制系统的驱动轴应尽可能平行安装在主从之间。  
+- 协作控制驱动轴系统只支持单个轴。  
+- 为了使用协作驱动轴功能，请首先进行驱动轴校准。  
 {% endhint %}

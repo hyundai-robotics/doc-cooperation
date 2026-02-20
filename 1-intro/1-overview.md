@@ -1,26 +1,25 @@
-﻿## 1.1. Overview of Robot Cooperative Features
+## 1.1. 机器人协作功能概述
 
 <br>
 
 {% hint style="info" %}
-A separate license is required to use this feature; please contact us. <br>
-This feature is supported from V60.26-00.
+使用此功能需要单独的许可证；请联系我们。 <br>
+此功能从 V60.26-00 开始支持。
 {% endhint %}
 
 <br>
 
-Robot cooperative features enable multiple robots to perform tasks that a single robot cannot accomplish.
+机器人协作功能使多个机器人能够执行单个机器人无法完成的任务。
 
-This feature applies in cases such as:
+此功能适用于以下情况：
 
-- When two robots with simple hands cooperate to handle a workpiece
-- When a workpiece is too large to be handled by a single robot
-- When a Master robot handles the workpiece while a Slave performs jigless tasks such as arc welding or sealing on the workpiece
- 
-This feature allows synchronization of up to 4 robots.
-Each robot can perform independent tasks and cooperative tasks within a single program.
+- 当两个简单手的机器人协作处理工件时
+- 当工件太大无法由单个机器人处理时
+- 当主机器人处理工件，而从属机器人在工件上执行无夹具的任务，如弧焊或密封
 
+此功能允许最多 4 台机器人的同步。
+每个机器人可以在单个程序内执行独立任务和协作任务。
 
 <br>
 
-![[Figure 1.1] Robot cooperative features](../_assets/1-1.png)
+![[图 1.1] 机器人协作功能](../_assets/1-1.png)

@@ -1,60 +1,58 @@
-﻿## 3.1. Switching Between Independent and Cooperative Modes
+## 3.1. 切换独立模式和协作模式
 
-### 3.1.1. Mode switching by key operation
+### 3.1.1. 通过按键操作切换模式
 
-In manual mode, cooperative control operation mode can be changed as follows.
+在手动模式下，协作控制操作模式可以按如下方式更改。
 
-- ② Using R CODE
+- ② 使用 R CODE
   
-The operations are as shown in the table below.
+操作如下表所示。
 
-| Key Operation | Mode Switch |
+| 按键操作 | 模式切换 |
 |:--:|:--:|
-| R351 -> 0 | Manual Independent Mode(INDIVIDUAL) |
-| R351 -> 1 | Manual Cooperative Mode, designate MASTER |
-| R351 -> 2 | Manual Cooperative Mode, designate SLAVE |
-| R351 -> 3 | cmov Recording Mode, designate SLAVE Jog Mode <br> (This mode can only be entered if the previous state was SLAVE) |
+| R351 -> 0 | 手动独立模式(INDIVIDUAL) |
+| R351 -> 1 | 手动协作模式，指定MASTER |
+| R351 -> 2 | 手动协作模式，指定SLAVE |
+| R351 -> 3 | cmov录制模式，指定SLAVE Jog模式 <br> (仅在前状态为SLAVE时可以进入此模式) |
 
-[Table 3-1] Mode switching by key operation  
+[表 3-1] 通过按键操作切换模式  
 
-### Manual Mode Independent (INDIVIDUAL) state
+### 手动模式独立(INDIVIDUAL)状态
  
-![[Figure 3-3] Manual Mode Independent state screen](../_assets/3-3.png)
+![[图 3-3] 手动模式独立状态屏幕](../_assets/3-3.png)
 
 <br>
 
-   This state allows each robot to be jogged independently.	
+此状态允许每个机器人独立操作。	
 
- - Manual Mode Cooperative (MASTER designated) state
+ - 手动模式协作(MASTER指定)状态
  
-![[Figure 3-4] Manual Mode Cooperative Master state screen](../_assets/3-4.png)
+![[图 3-4] 手动模式协作主状态屏幕](../_assets/3-4.png)
 
 <br>
 
-   This is the state for synchronized operation according to the Master's movement when a Slave is designated.
+这是指定Slave时，根据Master的运动进行同步操作的状态。
 
- - Manual Mode Cooperative (SLAVE designated) state
+ - 手动模式协作(SLAVE指定)状态
  
-![[Figure 3-5] Manual Mode Cooperative Slave state screen](../_assets/3-5.png)
+![[图 3-5] 手动模式协作从状态屏幕](../_assets/3-5.png)
 
 <br>
 
-    The state for the Slave to follow the Master's movement.
+该状态用于Slave跟随Master的运动。
 
 
- - cmov Recording Mode, SLAVE Jog mode state
+ - cmov录制模式，SLAVE Jog模式状态
   
-
-![[Figure 3-6] cmov Recording Mode state screen](../_assets/3-6.png)
+![[图 3-6] cmov录制模式状态屏幕](../_assets/3-6.png)
 
 <br>
-
-In cmov recording mode, you can record cmov or verify taught positions using cmov step forward/back. Note that to record steps or move the robot, there must be a robot set as Master among the cooperative robots. The position recorded on the Slave is the relative position of the Slave robot based on the Master's end effector coordinate system.
+在 cmov 记录模式下，您可以使用 cmov 步进向前/向后记录 cmov 或验证教学位置。请注意，要记录步骤或移动机器人，合作机器人中必须有一个设置为主控制器的机器人。记录在从属机器人的位置是基于主控制器末端执行器坐标系统的从属机器人相对位置。
 
 <br>
 
 {% hint style="warning" %}
- - Without a common coordinate system set, it is not possible to switch roles to Master or Slave from Manual Mode Independent state.
- - The R351,3 'cmov recording state' R CODE can only be entered from manual cooperative state (Slave designated mode) (R351,2).
+ - 如果没有设置公共坐标系统，则无法从手动模式独立状态切换角色为主控制器或从属机器人的角色。
+ - R351,3 'cmov 记录状态' R 代码只能从手动合作状态 (指定为从属模式) (R351,2) 进入。
  
 {% endhint %}
