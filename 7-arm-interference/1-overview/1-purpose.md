@@ -1,5 +1,5 @@
-### 7.1.1. 功能目的
+﻿### 7.1.1. Purpose of the Feature
 
 <br>
 
-其目的是通过在预测到机器人手臂和工具之间由于程序错误或用户错误（如手动操作或程序创建错误）发生碰撞时，提前停止机器人，从而防止事故的发生。
+The purpose is to prevent accidents by stopping the robot in advance when a collision between robot arms and tools is predicted due to program errors or user mistakes (jogging or program creation errors).

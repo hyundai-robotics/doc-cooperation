@@ -1,22 +1,22 @@
-### 1.2.2. 特性特征
+﻿### 1.2.2. Feature Characteristics
 
-- 通信  
-  协同控制特征使用UDP（通用以太网）通信来协调最多4个机器人。
+- Communication
+  The cooperative control feature uses UDP (General Ethernet) communication to coordinate up to 4 robots.
 
-- 机器人之间的共同坐标系统  
-  提供一个功能来确定机器人之间的相对位置。共同坐标系统通过在每个机器人上教学相同的三个工作空间点获得。
+- Common Coordinate System between Robots
+  Provides a function to determine relative positions between robots. The common coordinate system is obtained by teaching the same three points in the workspace on each robot.
 
-- 手动模式协同操作  
-  允许用户在手动模式下轻松教学。在为每个机器人分配主从角色后，可以仅通过操作主机器人来教学处理应用。对于无夹具的协作，从机器人的位置可以相对于主机器人的工件进行教学。
+- Manual Mode Cooperative Operation
+  Allows users to easily teach in manual mode. After assigning Master and Slave roles for each robot, handling applications can be taught by operating only the MASTER. For jigless cooperation, the Slave's positions can be taught relative to the Master's workpiece.
 
-- 定位器主支持  
-  您可以将定位器指定为主机器人，从而启用协同控制。最多4个机器人可以与一个定位器同时协作。
+- Positioner Master Support
+  You can assign a positioner as the Master robot, enabling cooperative control. Up to 4 robots can cooperate with a positioner simultaneously.
 
-- 教学  
-  每个控制器需要一个独立的程序。将程序拆分为独立机器人动作和协同动作的部分，以便实现灵活和简便的编程。
+- Teaching
+  Each controller needs an independent program. Split a program into parts for independent robot actions and cooperative actions to enable flexible and easy programming.
 
-- 协同播放  
-  根据`cowork`命令，系统等待合作伙伴机器人准备就绪，并在所有机器人都准备好时开始协作。
+- Cooperative Playback
+  According to the `cowork` command, the system waits for partner robots to be ready and begins cooperation when all robots are ready.
 
-- HiNet I/O  
-  提供使用I/O信号与其他协作机器人共享机器人信息的能力，以便机器人状态可以在没有单独联锁控制面板的情况下进行检查。
+- HiNet I/O
+  Provides the capability to share your robot's information with other cooperative robots using I/O signals so that robot states can be checked without a separate interlock control panel.

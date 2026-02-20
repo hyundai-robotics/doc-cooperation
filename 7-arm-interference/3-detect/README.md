@@ -1,1 +1,1 @@
-## 7.3. 干扰检测
+﻿## 7.3. Interference Detection

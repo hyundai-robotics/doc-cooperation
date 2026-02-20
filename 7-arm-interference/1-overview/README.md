@@ -1,1 +1,1 @@
-## 7.1. 臂干扰检测功能概述
+﻿## 7.1. Overview of Arm Interference Detection Features

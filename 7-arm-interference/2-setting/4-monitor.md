@@ -1,16 +1,17 @@
-### 7.2.4. 臂干扰状态监控
+﻿### 7.2.4. Arm Interference Status Monitoring
 
 <Br>
 
-![[Figure 7-21] 协作控制监控](../../_assets/7-21.png)
+![[Figure 7-21] Cooperative control monitoring](../../_assets/7-21.png)
+
 
 <br>
 
-您可以在“协作控制监控”中检查臂干扰状态。臂干扰状态显示潜在干扰轴和干扰距离。
+You can check the arm interference state in 'Cooperative Control Monitoring'. The arm interference state displays the potential interference axis and the interference distance.
 
- - 潜在干扰轴：与合作机器人距离最近的机器人轴
- - 干扰距离 [mm]：潜在干扰轴之间的距离
-      - 显示范围：预计最大干扰距离的10倍（如果预计最大干扰距离为0，则显示范围为1000 mm）
-      - 如果干扰距离超过显示范围，则显示为 ----。
+ - Potential Interference Axis: The axis of your robot that has the smallest distance to the partner robot
+ - Interference Distance [mm]: Distance between potential interference axes
+      - Display range: 10 times the expected maximum interference distance (if expected maximum interference distance is 0, display range is 1000 mm)
+      - If interference distance exceeds the display range, it is shown as ----.
 
-如果监控的臂干扰状态与实际状态不同，请检查协作控制公共坐标系统和臂干扰检测配置。
+If the monitored arm interference state differs from the actual state, check the cooperative control common coordinate system and the arm interference detection configuration.

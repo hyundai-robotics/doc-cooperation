@@ -1,3 +1,3 @@
-## 5.1. 协作播放概述
+﻿## 5.1. Overview of Cooperative Playback
 
-本节提供了协作播放及其主要行为的概述，包括手动验证和自动播放程序。有关详细说明，请参阅后续章节。
+This section provides an overview of cooperative playback and its main behaviors, including manual verification and automatic playback procedures. Refer to subsequent sections for detailed instructions.

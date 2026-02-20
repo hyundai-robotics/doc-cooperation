@@ -1,1 +1,1 @@
-﻿# 3. 手动模式协作操作
+﻿# 3. Manual Mode Cooperative Operation

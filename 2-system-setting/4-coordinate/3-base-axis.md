@@ -1,14 +1,14 @@
-### 2.4.3. 移动轴系统
+﻿### 2.4.3. Travel-Axis System
 
-在配置合作控制的移动轴系统时，尽可能安装具有相同规格的移动轴，以保持并行。
+When configuring the travel-axis system for cooperative control, install travel axes with the same specifications as parallel as possible.
 
-![[图 2-6] 合作控制的移动轴系统配置](../../_assets/2-6.png)
+![[Figure 2-6] Travel-axis system configuration for cooperative control](../../_assets/2-6.png)
 
 {% hint style="warning" %}
-- 具有移动轴的系统应将移动轴规格设置为“任意”，并在使用前进行移动轴校准。
-- 尽可能将合作机器人移动轴安装为平行。
-- 移动轴运动过程中可能由不准确的移动轴校准引起的大同步误差。
-- 有关移动轴校准功能的详细信息，请参考 '${cont_model} 控制器操作手册'。
-- MASTER 和 SLAVE 都应进行移动轴校准。
+- Systems with travel axes should set the travel-axis specification to 'arbitrary' and perform travel-axis calibration before use.
+- Install the travel axes of cooperative robots as parallel as possible.
+- Large synchronization errors during travel-axis movement may be caused by inaccurate travel-axis calibration.
+- For details about the travel-axis calibration function, refer to the '${cont_model} controller operation manual'.
+- Travel-axis calibration should be performed for both MASTER and SLAVE.
 
 {% endhint %}

@@ -1,1 +1,1 @@
-# 6. HiNet I/O 特性
+﻿# 6. HiNet I/O Features

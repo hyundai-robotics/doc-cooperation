@@ -1,6 +1,6 @@
-### 3.5.1. 伙伴故障检测
+﻿### 3.5.1. Detection of Partner Errors
 
-如果合作运动中因臂部干涉错误或软限制错误而导致伙伴机器人停止，系统将在保持相对位置的同时停止。如果错误发生在从属设备上，则主设备也会停止并无法操作。
+If a partner robot stops due to an arm interference error or soft limit error during cooperative motion, the system stops while maintaining relative positions. If the error occurs on a Slave, the Master will also stop and cannot be operated.
 
  
 <br>

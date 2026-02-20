@@ -1,15 +1,15 @@
-### 7.3.4. 死锁状态下的处理
+﻿### 7.3.4. Handling in Deadlock State
 
-当两个机器人相互侵入对方的干扰区域，并且无法通过按键或程序执行进一步移动机器人时，就会发生死锁。在这种情况下，释放受影响机器人的干扰检测相对于合作机器人，然后在用户监督下使用 jog 功能小心地移出干扰区域。
-
+A deadlock occurs when two robots invade each other's interference area and cannot move the robots further by jogging or program execution. In this case, release the interference detection for the affected robot relative to the partner robot, and then use the jog function to move out of the interference area carefully under user supervision.
+ 
 <br> 
 
-![[Figure 7-28] 释放机器人臂干扰检测](../../_assets/7-28.png)
+![[Figure 7-28] Release inter-robot arm interference detection](../../_assets/7-28.png)
 
 <br>
 
-移出干扰区域后，检查合作机器人编号并恢复操作。
-
+After moving out of the interference area, check the partner robot number and resume operation.
+ 
 <Br> 
 
-![[Figure 7-29] 设置机器人臂干扰检测](../../_assets/7-29.png)
+![[Figure 7-29] Setting inter-robot arm interference detection](../../_assets/7-29.png)

@@ -1,36 +1,36 @@
-## 8.1. 协作控制状态监视器
+﻿## 8.1. Cooperative Control Status Monitor
 
-(1) 从“窗口设置” → “选择”中选择“机器人间协作控制”。
-
+(1) Select 'Inter-robot Cooperative Control' from 'Window Settings' → 'Selection'.
+ 
  ![](../_assets/9-2.png)
 
 
-(3) 协作控制状态如下所示。
+(3) The cooperative control status is displayed as follows.
 
  ![](../_assets/9-3.png)
 
 
 
-(4) 监视功能中的每个项目具有以下含义。
+(4) Each item in the monitoring function has the following meanings.
 
- - 电机开启：指示每个机器人的驱动准备状态。 (on/off)
-- 操作模式：指示每个机器人是否设置为手动模式或自动模式。 (手动/自动)
-- 手动协作：显示每个机器人的手动协作状态。
-    - 独立：单独的 jog 状态
-    - 主控：协作 jog 状态，指定 MASTER
-    - 从控：协作 jog 状态，指定 SLAVE
-- 自动协作：显示机器人播放期间的协作状态。
-    - 停止：机器人未在运行
-    - 独立：执行独立机器人的播放动作
-    - 等待：在协作命令中等待伙伴机器人到达协作位置
-    - 协作：在协作播放期间
-- 错误状态：显示每个机器人的最近错误状态。 启动时清除
-- 潜在干扰轴：与伙伴机器人最近的机器人轴
-- 干扰距离 [mm]：潜在干扰轴之间的距离
+ - Motor ON: Indicates the drive-ready state of each robot. (on/off)
+- Operation Mode: Indicates whether each robot is set to manual mode or automatic mode. (Manual/Automatic)
+- Manual Cooperation: Displays the manual cooperative state of each robot.
+    - Independent: Individual jog state
+    - Master: Cooperative jog state, MASTER specified
+    - Slave: Cooperative jog state, SLAVE specified
+- Automatic Cooperation: Displays the cooperative state during robot playback.
+    - Stop: Robot is not running
+    - Individual: Performing individual robot playback actions
+    - Waiting: Waiting in the cowork command for the partner robot to reach the cooperation position
+    - Cooperation: During cooperative playback
+- Error State: Shows the recent error state of each robot. Cleared upon startup
+- Potential Interference Axis: The axis of the robot closest to the partner robot
+- Interference Distance [mm]: Distance between potential interference axes
 
 
 {% hint style="warning" %}
-如果在协作控制参数中将协作控制设置为 <Disabled>，将不会显示监视信息。
+If cooperative control is set to <Disabled> in the cooperative control parameters, monitoring information will not be displayed.
 
 ![](../_assets/9-4.png)
 

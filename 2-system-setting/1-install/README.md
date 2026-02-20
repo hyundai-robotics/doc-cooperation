@@ -1,1 +1,1 @@
-## 2.1. 硬件安装
+﻿## 2.1. Hardware Installation

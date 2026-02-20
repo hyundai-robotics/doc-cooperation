@@ -1,1 +1,1 @@
-﻿# 2. 系统设置
+﻿# 2. System Settings

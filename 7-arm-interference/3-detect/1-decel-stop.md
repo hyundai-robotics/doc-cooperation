@@ -1,22 +1,24 @@
-### 7.3.1. 减速停止
+﻿### 7.3.1. Deceleration Stop
 
-如果机器人减速并在侵入用户配置的臂干扰区域和工具干扰区域后停止，由于减速距离和机器人惯性，即使检测到错误，也可能发生碰撞。因此，检测区域在考虑机器人速度的基础上被扩展，以便更早地检测到干扰。
+If the robot decelerates and stops after invading the user-configured arm interference area and tool interference area, due to deceleration distance and robot inertia, a collision may occur even if an error is detected. Therefore, the detection area is expanded taking robot speed into account to detect interference earlier.
 
-下图说明了当机器人彼此移动时生成预期干扰区域（级别 2 检测区域）的概念。虚线区域表示预期干扰区域，实线表示用户配置的干扰区域。
-
-![[图 7-22] 干扰区域侵入 1](../../_assets/7-22.png)
-
-
-<br>
-
-预期干扰区域通过计算机器人的行驶速度和停止时间自动设置，但用户可以将最大值设置为“预期最大干扰距离”。当机器人以高速移动时，控制器计算的预期干扰距离是配置的干扰区域加上预期最大干扰距离，以检测干扰。在预期干扰距离范围内，机器人执行减速停止，如果进入干扰区域，则立即停止而不进行减速。如果机器人以低速移动，并且控制器计算的预期距离小于“预期最大干扰距离”，即使在预期最大干扰距离内也不会检测到干扰。
-
-![[图 7-23] 臂干扰预防条件](../../_assets/7-23.png)
+The figure below illustrates the concept of generating an expected interference area (Level 2 detection area) when robots move toward each other. The dashed area indicates the expected interference area, and the solid line indicates the user-configured interference area.
+ 
+![[Figure 7-22] Interference area invasion 1](../../_assets/7-22.png)
 
 
 <br>
 
-| 错误消息 | - W0147 机器人 0) 预期臂干扰并停止  <br> - E0237 机器人 0) 检测到 ARM 干扰区域 |
+The expected interference area is automatically set by calculating the robot's travel speed and stopping time, but the user can set the maximum value as the 'expected maximum interference distance.'
+The expected interference distance calculated by the controller, when the robot moves at high speed, is the configured interference area plus the expected maximum interference distance to detect interference. In the expected interference distance range, the robot performs deceleration stop, and if it enters the interference area, it performs an immediate stop without deceleration. If the robot moves at low speed and the controller-calculated expected distance is smaller than the 'expected maximum interference distance', it will not detect interference even if it is within the expected maximum interference distance.
+
+ ![[Figure 7-23] Arm interference prevention conditions](../../_assets/7-23.png)
+
+
+<br>
+
+| Error Message | - W0147 Robot 0) expected arm interference and stopped  <br> - E0237 Robot 0) ARM interference area detected |
 |:--|:--|
-| 可能原因 | 当机器人在移动过程中侵入另一个机器人的预期干扰区域时，上述警告和错误消息可能同时出现并停止机器人。 |
-| 行动 | 如果在正常程序播放过程中发生上述警告，请重新检查工作程序。 |
+| Possible Causes | When a robot invades another robot's expected interference area during movement, the above warning and error messages may occur simultaneously and stop the robot. |
+| Action | If the above warning occurs during normal program playback, re-check the work program. |
+

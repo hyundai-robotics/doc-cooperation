@@ -1,62 +1,68 @@
-## 4.4. 弧焊和密封的教学（无夹具协作控制）
+﻿## 4.4. Teaching for Arc Welding and Sealing (Jigless Cooperative Control)
 
-(1) 将主从机器人的手动协作角色设置为“独立”，记录协作的起始步骤，并在协作起始位置插入协作命令。
-
+(1) Set the manual cooperative roles of Master and Slave robots to 'Independent', record the start steps for cooperation, and insert the cowork command at the cooperation start position.
+ 
 ![](../_assets/4-prg8.png)
 
-![[图 4-4] 步骤起始和目标位置](../_assets/4-4.png)
+![[Figure 4-4] Step start and target positions](../_assets/4-4.png)
 
-(2) 根据角色为主从设置手动协作状态。
+
+(2) Set the Manual Cooperative states for Master and Slave according to their roles.
 
 ![](../_assets/4-prg9.png)
 
-(3) 当您操作主机器人时，从机器人将跟随。记录主机器人的位置。
 
-![](../_assets/4-prg10.png)
+(3) When you jog the Master, the Slave follows. Record the Master step at the desired position.
 
-(4) 使用 R351,3 将从机器人切换到 cmov 记录状态。屏幕顶部的机器人角色指示器从白色变为红色。
+ ![](../_assets/4-prg10.png)
 
-![](../_assets/4-prg10.png)
+(4) Switch the Slave to cmov recording state using R351,3. The robot role indicator at the top of the screen changes from white to red.
 
-(5) 将从机器人操作到目标位置并按下“记录”键。
+ ![](../_assets/4-prg10.png)
 
-![[图 4-5] 记录 cmov 目标位置](../_assets/4-5.png)
+(5) Jog the Slave robot to the target position and press the 'Record' key.
+ 
 
+![[Figure 4-5] Recording cmov target positions](../_assets/4-5.png)
+
+ 
 ![](../_assets/4-prg11.png)  
 
-(6) cmov 位置在从机器人上记录。记录的 cmov 位置是相对于主工具末端执行器坐标系的坐标。按下 [属性] 键以查看或修改记录的坐标。
 
-(7) 记录的坐标系将显示为“主”。
+(6) The cmov positions are recorded on the Slave. The recorded cmov positions are coordinates relative to the Master tool end effector coordinate system. Press the [Properties] key to view or modify the recorded coordinates.
+  
+(7) The recorded coordinate system will be shown as 'Master'. 
 
-(8) 类似地，移动从机器人并记录多个 cmov 步骤。
+(8) Similarly, move the Slave and record multiple cmov steps.
 
-![](../_assets/4-prg12.png)
+ ![](../_assets/4-prg12.png)
 
-(9) 请注意，记录步的运动规划是由主从单独执行的，因此主从到达目标位置的时机可能不同。为了对齐主机器人移动位置和从机器人 cmov 位置在协作部分的起始时机，请使用 HiNet I/O 实现的相互锁定或使用 `cowork with, sync=1`。只有当同步编号匹配时，`cowork with` 命令才执行同步运动；遇到不同编号的 `cowork with` 将导致错误。
+(9) Note that the movement planning for recorded steps is executed separately by Master and Slave, so the timing when Master and Slave reach their target positions may differ. To align the start timings of the Master's move position and the Slave's cmov position in the cooperative section, use mutual interlocks implemented with HiNet I/O or use `cowork with, sync=1`. The `cowork with` command performs synchronized motion only if the sync numbers match; encountering a `cowork with` with a different number will cause an error.
 
-(10) 例如，要同步主从的步骤 5 (S5) 开始，您可以使用 _mb 内存变量检查每个机器人是否已到达其步骤位置。
+(10) For example, to synchronize the start of step 5 (S5) for Master and Slave, you can use an _mb memory variable to check whether each robot has reached its step position.
 
-![](../_assets/4-prg13.png)
+ ![](../_assets/4-prg13.png)
 
-* 使用此方法，在主从达到步骤 4 (S4) 后，它们验证伙伴机器人是否已达到步骤 4，然后再移动到下一个步骤 (S5)。
+* Using this method, after Master and Slave reach step 4 (S4), they verify that the partner robot has reached step 4 before moving to the next step (S5).
 
-(11) 当协作运动完成时，在主从上插入 `cowork end` 命令以结束协作控制教学。
+(11) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control teaching.
 
-![](../_assets/4-prg14.png)
-(12) 上述的整个程序示例如下所示，定时控制如ⓐ、ⓑ、ⓒ可应用于协作定时控制。
+![](../_assets/4-prg14.png)     
+
+(12) The entire program example described above is shown below, and timing control such as ⓐ, ⓑ, ⓒ may be applied for cooperative timing control.
 
  ![](../_assets/4-prg15.png)
 
-(13) `cowork with` 命令在协作控制（`cowork` 和 `cowork end` 之间）期间使用，用于同步主从位置。当在协作控制期间遇到`cowork with`命令时，它会等待所有协作机器人到达该`cowork with`。因此，可以将早期的程序修改如下。
+(13) The `cowork with` command is used during cooperative control (between `cowork` and `cowork end`) to synchronize positions between Master and Slave. When a `cowork with` command is encountered during cooperative control, it waits until all cooperating robots reach that `cowork with`. Therefore, the earlier program can be modified as follows.
 
  ![](../_assets/4-prg16.png)
 
 
 {% hint style="warning" %}
 
- - 使用 cmov 编织运动时，参考点（refp）必须在协作控制区域内记录（`cowork ~ cowork end`）。
- - 不支持使用激光视觉传感器的 cmov 轨迹的缝合跟踪。
- - 在协作控制区域（`cowork ~ cowork end`）内，`cowork with` 命令的数量在主和从之间必须相同。
- - 协作机器人共同执行的 `cowork with` 命令必须使用相同的同步编号。
+ - When using cmov weaving motion, reference points (refp) must be recorded within the cooperative control region (`cowork ~ cowork end`).
+ - Seam-tracking of cmov trajectories using laser vision sensors is not supported.
+ - In the cooperative control region (`cowork ~ cowork end`), the number of `cowork with` commands must be the same for both Master and Slave.
+ - `cowork with` commands performed jointly by cooperating robots must use the same sync number.
 
 {% endhint %}

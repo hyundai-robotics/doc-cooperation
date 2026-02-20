@@ -1,1 +1,1 @@
-# 7. 手臂干扰检测功能
+﻿# 7. Arm Interference Detection Features

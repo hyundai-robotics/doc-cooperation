@@ -1,1 +1,1 @@
-﻿# ${cont_model} 控制器功能手册 - 协同控制
+﻿# ${cont_model} Controller Function Manual - Cooperative Control

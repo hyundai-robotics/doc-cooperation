@@ -1,1 +1,1 @@
-## 7.2. 配置程序
+﻿## 7.2. Configuration Procedures

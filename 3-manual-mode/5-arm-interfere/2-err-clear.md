@@ -1,8 +1,8 @@
-### 3.5.2. 错误清除
+﻿### 3.5.2. Error Clearance
 
-按下主控器的操作键，朝向不会导致错误释放的方向，错误将被清除。清除错误后，再次按下操作键，朝向不会导致错误的方向可以进行操作。
+Press the Master's jog key in a direction that does not cause the error to be released, and the error will be cleared. After clearing the error, pressing the jog key again in a direction that does not cause the error allows operation.
 
  
 <br>
  
-![[Figure 3-12] 清除软限制错误](../../_assets/3-12.png)
+![[Figure 3-12] Clearing soft limit error](../../_assets/3-12.png)

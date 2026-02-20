@@ -1,34 +1,34 @@
-### 2.4.4. 公共坐标系统设置
+﻿### 2.4.4. Common Coordinate System Setup
 
-如果未设置公共坐标系统，则无法进行手动协作移动操作和协作重放。设置公共坐标系统后，建议在进行全面操作之前，通过协作移动操作验证设置。
+If a common coordinate system is not set, manual cooperative jog operations and cooperative replay are not possible. When the common coordinate system is set, it is recommended to verify the setup using cooperative jog operations before proceeding with full operations.
 
-公共坐标系统的设置需要对机器人的工具尖端位置有准确了解。否则，在机器人之间的协作控制过程中可能会发生同步位置误差。因此，需要对机器人原点和准确的工具位置进行校准。当3D位置测量设备不可用时，${cont_model}控制器提供自动校准功能（系统 → 6：自动校准 → 1：轴原点和工具长度优化）。如果有3D位置测量设备，则可以进行更精确的校准；在这种情况下，使用9：机器人和工具校准功能。更多详细信息，请参考${cont_model}操作手册。
+The common coordinate system setup requires accurate knowledge of the robots' tool-tip positions. Otherwise, synchronization position errors may occur during cooperative control between robots. Therefore, calibration is required to set the robot origins and the exact tool positions. The ${cont_model} controller provides an automatic calibration function when a 3D position measurement device is not available (System → 6: Automatic Calibration → 1: Axis Origin and Tool Length Optimization). If a 3D position measurement device is available, more accurate calibration is possible; in that case, use the 9: Robot and Tool Calibration function. For more details, refer to the ${cont_model} operation manual.
 
-- 两个机器人环境的公共坐标系统设置示例（ROBOT1，ROBOT2）
+- Example of common coordinate system setup for a two-robot environment (ROBOT1, ROBOT2)
 
-    - ① 在ROBOT1和ROBOT2控制器上选择公共坐标系统设置的程序编号。
-    - ② 操作ROBOT1和ROBOT2，并依次记录步骤1、2和3中的三个点，以形成尽可能大的三角形。记录的位置必须对应于相同的空间点；插值方法和速度无关紧要，但请选择一个知道其工具尖端位置的工具编号。
-    - ③ 在手动模式下，选择系统 → 4：应用参数 → 3：公共坐标设置。
-    - ④ 在自动计算中，输入用于公共坐标设置的程序编号。
-    - ⑤ 执行结果显示机器人基座视角下的公共坐标系统位置和方向。
-    - ⑥ 按下确认键以完成设置。
+    - ① Select the program number for common coordinate system setup on both ROBOT1 and ROBOT2 controllers.
+    - ② Jog ROBOT1 and ROBOT2 and sequentially record three points in steps 1, 2, and 3 to form as large a triangle as possible. The recorded positions must correspond to the same spatial points; interpolation method and speed do not matter, but choose a tool number whose tool tip position is known accurately.
+    - ③ In Manual mode, select System → 4: Application Parameters → 3: Common Coordinate Setup.
+    - ④ In Automatic Calculation, enter the program number used for common coordinate setup.
+    - ⑤ The execution result displays the common coordinate system position and orientation as seen from the robot base.
+    - ⑥ Press the Confirm key to complete the setup.
 
-![[Figure 2-7] 每个机器人用于公共坐标设置的程序](../../_assets/2-7.png)
+![[Figure 2-7] Per-robot program for common coordinate setup](../../_assets/2-7.png)
 
-![[Figure 2-8] 公共坐标设置的教学方法](../../_assets/2-8.png)
+![[Figure 2-8] Teaching method for common coordinate setup](../../_assets/2-8.png)
 
-![[Figure 2-9] 公共坐标设置结果屏幕](../../_assets/2-9.png)
+![[Figure 2-9] Common coordinate setup result screen](../../_assets/2-9.png)
 
 {% hint style="warning" %}
-- 输入正确的工具规格或使用自动校准获取工具数据以进行公共坐标设置。建议用相同的机器人姿势记录每个点。
-- 记录三个点以使其形成尽可能大的三角形。如果点距离过近或几乎共线，可能会发生误差。
-- 公共坐标系统的方向变换Rx，Ry，Rz与机器人坐标系统的关系如下：
+- Enter either the correct tool specifications or obtain tool data using automatic calibration for common coordinate setup. It is recommended that each point be recorded with the same robot posture.
+- Record the three points so they form as large a triangle as possible. If the points are too close or nearly collinear, errors may occur.
+- The orientation transformation of the common coordinate system Rx, Ry, Rz relates to the robot coordinate system as follows:
 
-    - ① 绕X轴旋转你的机器人（编号2）坐标框（ref），旋转角度为γ。
-    - ② 绕Y轴旋转你的机器人（编号2）坐标框（ref），旋转角度为β。
-    - ③ 绕Z轴旋转你的机器人（编号2）坐标框（ref），旋转角度为α。
-    - ④ 通过γ，β，α旋转你的机器人（编号2）基座坐标框所获得的姿态就是公共坐标系统在空间中的方向。
+    - ① Rotate your robot (number 2) coordinate frame (ref) around the X-axis by γ.
+    - ② Rotate your robot (number 2) coordinate frame (ref) around the Y-axis by β.
+    - ③ Rotate your robot (number 2) coordinate frame (ref) around the Z-axis by α.
+    - ④ The pose obtained by rotating your robot (number 2) base coordinate frame by γ, β, α is the orientation of the common coordinate system in space.
 
-![[Figure 2-10] 公共坐标系统的方向变换](../../_assets/2-10.png)
+![[Figure 2-10] Orientation transformation of the common coordinate system](../../_assets/2-10.png)
 
 {% endhint %}

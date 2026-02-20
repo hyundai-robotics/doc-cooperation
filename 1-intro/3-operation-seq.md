@@ -1,27 +1,27 @@
-## 1.3. 操作顺序
+﻿## 1.3. Operation Sequence
 
-本节描述了使用协作机器人功能的顺序。详细的说明在后续章节中提供。
+This section describes the sequence for using cooperative robot features. Detailed instructions are provided in subsequent sections.
 
-- (1) 机器人校准
-确保每个机器人的轴原点和工具数据正确设置以进行协作控制。有关详细信息，请参见自动校准功能。
+- (1) Robot Calibration
+Ensure each robot's axis origin and tool data are correctly set for cooperative control. See the automatic calibration feature for details.
 
-- (2) 硬件安装
-连接控制器通信所需的硬件。连接网络集线器和以太网电缆。
+- (2) Hardware Installation
+Connect hardware required for the controller's communication. Connect the network hub and Ethernet cable.
 
-- (3) 控制环境设置
-设置是否使用协作控制并分配机器人编号。
+- (3) Control Environment Settings
+Set whether to use cooperative control for your robot and assign the robot number.
 
-- (4) 通信设置
-为协作机器人设置网络IP地址。要使用HiNet I/O，设置输入/输出信号的起始索引和字节计数。您的机器人的信号是输出，伙伴机器人的信号是输入。
+- (4) Communication Settings
+Set network IP addresses for cooperative robots. To use HiNet I/O, set the start index and byte count for input/output signals. Your robot's signals are outputs and partner robots' signals are inputs.
 
-- (5) 通用坐标系设置
-进行校准以提供协作机器人之间的相对位置信息。
+- (5) Common Coordinate System Setup
+Perform calibration to provide relative positional information between cooperative robots.
 
-- (6) 教学
-使用R351（手动协作状态设置）分配主控和从控角色，并通过操作主控机器人教授协作动作。
+- (6) Teaching
+Use R351 (Manual Cooperative State Setting) to assign Master and Slave roles and teach cooperative motions by operating the Master robot.
 
-- (7) 操作检查
-在手动模式下验证协作运动。通过同时向前走来启动协作机器人。
+- (7) Operation Check
+Verify cooperative motion in manual mode. Start cooperative robots by stepping forward simultaneously.
 
-- (8) 持续操作
-切换到自动模式。将程序放在引导步骤上，并按下所有被指定为协作机器人的控制器的启动开关。
+- (8) Continuous Operation
+Switch to automatic mode. Place the program at the lead step and press the start switches on all controllers designated as cooperative robots.

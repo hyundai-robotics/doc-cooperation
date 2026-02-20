@@ -1,55 +1,57 @@
-## 9.3. 操作错误
+﻿## 9.3. Operation Error
 
 ---
 
-- 代码编号：E01340
-- 错误：机器人合作条件不当（WD，公共坐标）
-- 详细信息：控制器配置在不适合执行合作命令的状态。
-- 操作：
-    - 检查通信状态是否正常，验证合作机器人的公共坐标系是否设置，并确认手动合作状态与合作命令所要求的机器人角色匹配。
+- Code No.: E01340
+- Error: Inappropriate robot cooperation conditions (WD, common coordinate)
+- Details: The controller is configured in a state unsuitable for executing the cowork command.
+- Action:
+    - Check that communication status is normal, verify that the partner's common coordinate system is set, and confirm the manual cooperative state matches the robot role required by the cowork command.
 ---
 
-- 代码编号：E01341
-- 错误：合作播放等待时间超过
-- 详细信息：在合作命令中，等待合作机器人为合作做好准备的时间超过了命令中设置的时间。
-- 操作：
-    - 设置等待时间，考虑所有合作机器人达到合作位置所需的时间。
-    - 如果设置为0，将无限期等待，直到所有机器人准备好进行合作。
-
----
-
-- 代码编号：E01342
-- 错误：机器人合作状态或公共坐标无效
-- 详细信息：机器人合作状态无效或公共坐标系未设置，因此无法执行合作命令。
-- 操作：
-    - 在系统 → 控制参数 → 网络 → 服务 → 合作控制对话框中，将合作控制功能设置为<启用>，然后设置公共坐标系。
----
-
-- 代码编号：E01343
-- 错误：合作功能执行不匹配
-- 详细信息：当合作命令冗余执行或程序在没有合作结束命令的情况下结束时会发生此情况。
-- 操作：
-    - 编写程序，使合作和合作结束命令成对出现。
-    - 在步骤变化后重新执行合作命令时，初始化合作控制状态。
+- Code No.: E01341
+- Error: Cooperative playback wait time exceeded
+- Details: In the cowork command, the waiting time for partner robots to become ready for cooperation exceeded the time set in the command.
+- Action:
+    - Set the wait time considering the time required for all cooperative robots to reach the cooperation positions.
+    - If set to 0, it will wait indefinitely until all robots are ready for cooperation.
 
 ---
 
-- 代码编号：E01344
-- 错误：合作参数（米/秒，机器人编号）错误
-- 详细信息：合作命令中合作机器人编号错误地设置为机器人的自身编号。
-- 操作：
-    - 将合作命令中的机器人编号更改为合作机器人编号。
+- Code No.: E01342
+- Error: Robot cooperation state or common coordinate invalid
+- Details: The robot cooperation state is invalid or the common coordinate system is not set, so the cowork command cannot be executed.
+- Action:
+    - In System → Control Parameters → Network → Service → Cooperative Control dialog, set the cooperative control function to <Enabled> and then set the common coordinate system.
 ---
 
-- 代码编号：E01345
-- 错误：从属机器人已经处于合作状态
-- 详细信息：从属机器人正在合作或停在合作结束位置。
-- 操作：
-    - 不要进行人为步骤变化，以确保主从之间的正常合作操作。
+- Code No.: E01343
+- Error: cowork function execution mismatch
+- Details: This occurs when the cowork command was executed redundantly or the program ended without a cowork end command.
+- Action:
+    - Program so that cowork and cowork end commands are paired.
+    - When re-executing the cowork command after a step change, initialize the cooperative control state.
+
 ---
-- 代码编号：E01355
-- 错误：协作伙伴机器人故障 - 停止
-- 详细信息：协作伙伴机器人处于无法进行协作运动的状态下停止。它因无法执行协作运动而停止。
-- 操作：
-    - 确认机器人之间的操作模式相同。
-    - 如果在协作运动中停止后重新启动，请先启动从属机器人，然后启动主控机器人。
+
+- Code No.: E01344
+- Error: cowork parameter (m/s, robot number) error
+- Details: The partner robot number in the cowork command is incorrectly set to the robot's own number.
+- Action:
+    - Change the robot number in the cowork command to the partner robot number.
+---
+
+- Code No.: E01345
+- Error: Slave robot is already in cooperative state
+- Details: The Slave robot is cooperating or stopped at the cowork end position.
+- Action:
+    - Do not perform artificial step changes to ensure normal cooperative operation between Master and Slave.
+---
+
+- Code No.: E01355
+- Error: Cooperative partner robot fault - Stopped
+- Details: The cooperative partner robot is stopped in a state where cooperative motion is not possible. It stops because cooperative motion cannot be performed.
+- Action:
+    - Confirm that the operation modes among robots are the same.
+    - If restarting after a stop during cooperative motion, start the Slave first and then the Master.
+---

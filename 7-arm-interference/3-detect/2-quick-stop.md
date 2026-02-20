@@ -1,12 +1,13 @@
-### 7.3.2. 即时停止
+﻿### 7.3.2. Immediate Stop
 
-即使在预测的干扰检测（级别 2 检测区域）中发生减速停车，机器人仍可能由于停车过程中的减速距离而侵入干扰区域。如果直接超过干扰区域，将进行不带减速的即时停止。
+Even if deceleration stopping occurs in the predicted interference detection (Level 2 detection area), the robot may still invade the interference area due to deceleration distance during stopping. If the interference area is directly exceeded, an immediate stop is performed without deceleration.
 
  
-![[图 7-24] 干扰区域侵入 2](../../_assets/7-24.png)
+![[Figure 7-24] Interference area invasion 2](../../_assets/7-24.png)
 
 
-| 错误信息 | E0237 机器人 0) 检测到 ARM 干扰区域 |
+| Error Message | E0237 Robot 0) ARM interference area detected |
 |:--|:--|
-| 可能原因 | 手臂和工具区域被侵入 |
-| 处理措施 | 如果在正常程序播放期间发生上述警告，请重新检查工作程序。 |
+| Possible Causes | The arm and tool areas were invaded |
+| Action | If the above warning occurs during normal program playback, re-check the work program. |
+
