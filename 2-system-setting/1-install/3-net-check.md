@@ -9,7 +9,7 @@ Check the network when the following situations occur:
 
 - Check items:
     - Verify the network cable connection.
-    - The ${cont_model}COM network socket LED should be blinking green.
+    - The COM network socket LED should be blinking green.
     - Verify cable integrity.
     - Check network status in [Inter-robot Cooperative Control] monitoring.
 
