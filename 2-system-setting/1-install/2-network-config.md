@@ -4,7 +4,7 @@
 
 | Component | Specification | 
 | :---: | :---: | 
-| ${cont_model}COM | Main CPU board | 
+| COM | Main CPU board | 
 | UTP cable | Hub connection: direct LAN cable <br> Direct connection of two units: cross LAN cable |
 | Network Hub | Company-specified switching hub |
 
