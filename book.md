@@ -2,10 +2,24 @@
 [__SOURCE](README.md)
 # ${cont_model} Controller Function Manual - Cooperative Control
 
+[__SOURCE](0-about-this-manual/README.md)
+# About the Manual
+
+You must fully understand the contents of the manual before using the product. Moreover, keep the manual nearby so that you can refer to it whenever you need it.
+
+This manual may be provided as reference material for customers who have purchased HD Hyundai Robotics products or may be used as internal training material.
+
+This manual has been created based on standard specifications, so some contents may differ depending on the model of the product you have purchased. In addition, the contents and specifications of this manual are subject to change without prior notice to improve the performance of the product, and HD Hyundai Robotics is not responsible for situations that could be caused by inaccuracies or typos in the manual. For detailed information on the revision of the manual, you need to visit our internet website [https://www.hd-hyundairobotics.com/en/main](https://www.hd-hyundairobotics.com/en/main).
+
 [__SOURCE](0-about-this-manual/precautions.md)
 # Precautions
 
-{% include url="https://hrcontentsrelay-bmgae5hdbzapc4bc.koreacentral-01.azurewebsites.net/api/proxy?path=doc-common-pages/en/precautions.md" %}
+{% include file="en/precautions.md" %}
+
+[__SOURCE](0-about-this-manual/safety-notice.md)
+# Safety Cautions
+
+{% include file="en/safety-notice.md" %}
 
 [__SOURCE](1-intro/README.md)
 # 1. Overview
@@ -153,7 +167,7 @@ When using the robot cooperative feature, install a dedicated emergency stop swi
 
 | Component | Specification | 
 | :---: | :---: | 
-| ${cont_model}COM | Main CPU board | 
+| COM | Main CPU board | 
 | UTP cable | Hub connection: direct LAN cable <br> Direct connection of two units: cross LAN cable |
 | Network Hub | Company-specified switching hub |
 
@@ -179,7 +193,7 @@ Check the network when the following situations occur:
 
 - Check items:
     - Verify the network cable connection.
-    - The ${cont_model}COM network socket LED should be blinking green.
+    - The COM network socket LED should be blinking green.
     - Verify cable integrity.
     - Check network status in [Inter-robot Cooperative Control] monitoring.
 

@@ -1,7 +1,9 @@
 ﻿# Table of contents
 
 * [${cont_model} Controller Function Manual - Cooperative Control](README.md)
-* [Precautions](0-about-this-manual/precautions.md)
+* [About the Manual](0-about-this-manual/README.md)
+  * [Precautions](0-about-this-manual/precautions.md)
+  * [Safety Cautions](0-about-this-manual/safety-notice.md)
 * [1. Overview](1-intro/README.md)
   * [1.1. Overview of Robot Cooperation Features](1-intro/1-overview.md)
   * [1.2. Main Features](1-intro/2-main-func/README.md)
