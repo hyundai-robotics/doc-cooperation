@@ -2,10 +2,24 @@
 [__SOURCE](README.md)
 # ${cont_model} 제어기 기능설명서 - 협조제어
 
+[__SOURCE](0-about-this-manual/README.md)
+# 이 설명서에 대하여
+
+제품을 사용하기 전에 반드시 설명서의 내용을 충분히 숙지하시기 바랍니다. 또한 필요할 때 언제든 볼 수 있도록 설명서를 가까운 장소에 보관하십시오.
+
+이 설명서는 HD현대로보틱스 제품을 구매한 고객에게 참조용으로 제공되거나 교육을 위한 내부 교육 자료로 제공되어 사용될 수 있습니다.
+
+이 설명서는 표준 사양을 기준으로 작성되었으므로 구입하신 제품의 모델에 따라 일부 내용이 다를 수 있습니다. 또한 이 설명서의 내용과 사양은 제품의 성능 향상을 위해 예고 없이 변경될 수 있으며 부정확한 내용이나 오탈자로 인해 발생하는 상황에 대해서 HD현대로보틱스는 책임이 없습니다. 개정에 관한 상세한 정보는 당사의 인터넷 웹사이트 [https://www.hd-hyundairobotics.com/](https://www.hd-hyundairobotics.com/)를 방문하여 확인하시기 바랍니다.
+
 [__SOURCE](0-about-this-manual/precautions.md)
 # 사전 주의사항
 
-{% include url="https://hrcontentsrelay-bmgae5hdbzapc4bc.koreacentral-01.azurewebsites.net/api/proxy?path=doc-common-pages/ko/precautions.md" %}
+{% include file="ko/precautions.md" %}
+
+[__SOURCE](0-about-this-manual/safety-notice.md)
+# 안전 주의 사항
+
+{% include file="ko/safety-notice.md" %}
 
 [__SOURCE](1-intro/README.md)
 # 1. 개요
@@ -159,7 +173,7 @@ ${cont_model} 제어기에는 사용자용 외부 비상정지가 준비되어 �
 
 | 구성품| 	사양| 
 | :---: | :---: | 
-| ${cont_model}COM	| Main CPU 보드| 
+| COM	| Main CPU 보드| 
 | UTP cable	| 허브 이용 연결: direct LAN cable <br> 2대 직접 연결: cross LAN cable| 
 | Network Hub| 	당사가 제공하는 사양 (스위칭 허브)| 
 
@@ -170,7 +184,7 @@ ${cont_model} 제어기에는 사용자용 외부 비상정지가 준비되어 �
 <br>
 
 -	연결방법  
-${cont_model}COM 모듈의 네트워크 소켓 LAN 1~3 중에서 하나를 범용 네트워크에 UTP 케이블(Direct)을 연결하고 다른 한쪽은 네트워크 허브에 연결합니다. 이런 방식으로 4대까지 허브에 연결할 수 있습니다.  
+COM 모듈의 네트워크 소켓 LAN 1~3 중에서 하나를 범용 네트워크에 UTP 케이블(Direct)을 연결하고 다른 한쪽은 네트워크 허브에 연결합니다. 이런 방식으로 4대까지 허브에 연결할 수 있습니다.  
 두 대의 로봇을 허브 없이 연결하는 경우에는 네트워크 UTP CROSS 케이블로 범용 네트워크 소켓에 연결합니다.  
 
 [__SOURCE](2-system-setting/1-install/3-net-check.md)
@@ -185,7 +199,7 @@ ${cont_model}COM 모듈의 네트워크 소켓 LAN 1~3 중에서 하나를 범�
 
 -	확인사항   
     - 네트워크 케이블 연결상태를 확인합니다.  
-    - ${cont_model}COM 네트워크 소켓에 녹색등이 점멸되어야 합니다.  
+    - COM 네트워크 소켓에 녹색등이 점멸되어야 합니다.  
     - 케이블의 이상 유무를 확인합니다.  
     - [로봇간 협조제어] 모니터링에서 네트워크 상태를 확인합니다.  
 
