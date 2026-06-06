@@ -1,7 +1,9 @@
 ﻿# Table of contents
 
-          * [${cont_model} 控制器功能手册 - 协同控制](README.md)
-          * [注意事项](0-about-this-manual/precautions.md)
+* [${cont_model} 控制器功能手册 - 协同控制](README.md)
+* [关于手册](0-about-this-manual/README.md)
+  * [注意事项](0-about-this-manual/precautions.md)
+  * [安全注意事项](0-about-this-manual/safety-notice.md)
 * [1. 概述](1-intro/README.md)
   * [1.1. 机器人协作功能概述](1-intro/1-overview.md)
   * [1.2. 主要特性](1-intro/2-main-func/README.md)
