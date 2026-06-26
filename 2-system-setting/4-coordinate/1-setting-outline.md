@@ -1,12 +1,12 @@
-﻿### 2.4.1. Overview of Common Coordinate System Settings
+### 2.4.1. 公共坐标系统设置概述
 
-To perform cooperative operations, the relative positions between robots must be known accurately. The robot controller computes the tool tip position with respect to each robot's base coordinate frame, and additional information about the other robots must be registered. The positional relationship between robots is established by configuring a common coordinate system.
+为了执行协作操作，机器人之间的相对位置必须准确了解。机器人控制器根据每个机器人的基础坐标框架计算工具尖端位置，并且必须注册有关其他机器人的附加信息。通过配置一个公共坐标系统来建立机器人之间的位置关系。
 
-To mutually recognize the positions of Robot 1 and Robot 2, a common coordinate system is set (Figure 2.4). The setup is performed by teaching three identical points in space on each robot.
+为了相互识别机器人1和机器人2的位置，设置一个公共坐标系统（图2.4）。该设置通过在每个机器人上教导三个空间中的相同点来完成。
 
-![[Figure 2-4] Common coordinate system setup between cooperative robots](../../_assets/2-4.png)
+![[Figure 2-4] 协作机器人之间的公共坐标系统设置](../../_assets/2-4.png)
 
 {% hint style="warning" %}
-- Perform robot calibration before setting the common coordinate system.
+- 在设置公共坐标系统之前执行机器人校准。
 
 {% endhint %}

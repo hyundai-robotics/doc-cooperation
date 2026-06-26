@@ -1,20 +1,19 @@
-﻿### 4.6.1. Positioner Master Jog
+### 4.6.1. 位置器主控手动操作
 
 <Br>
 
-(1) Perform positioner group setup and positioner calibration for the robot that has a positioner installed to enable positioner synchronization.
+(1) 对安装有位置器的机器人执行位置器组设置和位置器校准，以启用位置器同步。
 
-(2) Use R351,1 or a user key to set the robot with the positioner to Manual Cooperative Master (M:G#R#).
+(2) 使用 R351,1 或用户钥匙将带有位置器的机器人设置为手动协作主控 (M:G#R#)。
 
-(3) Press the 'Mechanism' key to select the positioner mechanism.
+(3) 按下 '机制' 按钮以选择位置器机制。
 
 ![](../../_assets/4-7.png)
 
-(4) Press the 'Coordinate System' key so that the synchronization coordinate system S1 (or S2) is selected.
+(4) 按下 '坐标系统' 按钮，以便选择同步坐标系统 S1 (或 S2)。
 
- ![](../../_assets/4-8.png)
+![](../../_assets/4-8.png)
 
+(5) 使用 R351,2 (S:G#R#) 将从属机器人设置为 SLAVE。
 
-(5) Set the Slave robot to SLAVE using R351,2 (S:G#R#).
-
-(6) When performing positioner synchronized jog, both Robot 1 and Robot 2 are operated synchronized with the positioner.
+(6) 在执行位置器同步手动操作时，机器人 1 和机器人 2 与位置器同步操作。

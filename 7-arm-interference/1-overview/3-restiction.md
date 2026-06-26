@@ -1,7 +1,7 @@
-﻿### 7.1.3. Limitations of the Feature
+### 7.1.3. 功能的限制
 
-This feature cannot intelligently and automatically avoid interference between robots nor automatically determine and execute robot drive priorities.
+此功能无法智能和自动地避免机器人之间的干扰，也无法自动确定和执行机器人驱动优先级。
 
-- It does not support automatic arm interference avoidance without mutual interlocks.
-- It does not support automatic deadlock avoidance between robots.
-- It does not detect interference between a robot's own arm and tool.
+- 它不支持在没有互锁的情况下自动避免臂干扰。
+- 它不支持在机器人之间自动避免死锁。
+- 它不检测机器人自身的臂和工具之间的干扰。

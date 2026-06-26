@@ -1,5 +1,5 @@
-﻿## 6.2. Examples
+## 6.2. 示例
 
-It is not possible to list all applications that can be implemented with the robot language, but a simple example application is shown in the following figure. Because input/output signals can be used, it has the advantage of supporting various applications.
+无法列出所有可以用机器人语言实现的应用，但以下图中展示了一个简单的示例应用。由于可以使用输入/输出信号，因此支持各种应用的优势。 
 
 ![](../_assets/6-4.png)

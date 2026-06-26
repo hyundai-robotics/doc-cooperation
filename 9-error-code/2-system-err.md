@@ -1,38 +1,38 @@
-﻿## 9.2. System Error
+## 9.2. 系统错误
 
 ---
 
-- Code No.: E00200
-- Error: Exceeded maximum speed during cooperative motion
-- Details: A command that exceeds the robot's maximum speed was received while following cooperative motion.
-- Action:
-    - For the Slave performing cooperative motion, change the robot posture at the reference position, modify the recorded cooperative positions, or lower the recorded speed and replay.
+- 代码编号：E00200
+- 错误：在协作运动中超出最大速度
+- 详情：在执行协作运动时接收到了超出机器人最大速度的指令。
+- 操作：
+    - 对于执行协作运动的从机器人，在参考位置改变机器人姿态，修改录制的协作位置，或者降低录制速度并重新播放。
 ---
 
-- Code No.: E00201
-- Error: Cooperative motion start error
-- Details: There is an error in sending/receiving synchronization signals among cooperative robots. The playback modes are different.
-- Action:
-    - Check communication status. Match the playback modes of the cooperative robots and then start cooperative motion.
+- 代码编号：E00201
+- 错误：协作运动启动错误
+- 详情：协作机器人之间的同步信号发送/接收存在错误。播放模式不同。
+- 操作：
+    - 检查通信状态。匹配协作机器人的播放模式，然后启动协作运动。
 ---
 
-- Code No.: E00203
-- Error: Cooperative partner robot fault - Emergency stop
-- Details: During cooperative motion, the partner robot's drive-ready state turned Off. The operation is stopped with drive-ready Off.
-- Action:
-    - Resolve the cause of the partner robot's stop, set drive-ready On, and restart.
+- 代码编号：E00203
+- 错误：协作伙伴机器人故障 - 紧急停机
+- 详情：在协作运动过程中，伙伴机器人的驱动准备状态关闭。操作因驱动准备关闭而停止。
+- 操作：
+    - 解决伙伴机器人停止的原因，设置驱动准备为开启，并重新启动。
 ---
 
-- Code No.: E00204
-- Error: Robot cooperative control communication error
-- Details: A communication error occurred with a partner robot during cooperative jog or playback.
-- Action:
-    - Check the cooperative control communication cables and connector connections.
+- 代码编号：E00204
+- 错误：机器人协作控制通信错误
+- 详情：在协作 jog 或播放过程中与伙伴机器人发生通信错误。
+- 操作：
+    - 检查协作控制通信电缆和连接器连接。
 ---
 
-- Code No.: E00227
-- Error: Cooperative control synchronization sequence error
-- Details: A sequence difference occurred between the master robot and slave robot commands during cooperative control.
-- Action:
-    - Check the cooperative control communication cables and connector connections.
+- 代码编号：E00227
+- 错误：协作控制同步序列错误
+- 详情：在协作控制过程中，主机器人和从机器人指令之间发生序列差异。
+- 操作：
+    - 检查协作控制通信电缆和连接器连接。
 ---

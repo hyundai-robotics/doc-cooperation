@@ -1,33 +1,30 @@
-﻿### 4.6.2. Positioner Master Teaching and Playback
+### 4.6.2. 主控器教学与回放
 
-Teach Master and Slave using the `cowork` command. On the Slave side, set `id=1` (positioner group number) to select the Master's positioner as Master.
+使用 `cowork` 命令对主控器和从控器进行教学。在从控器端，将 `id=1`（位置器组编号）设置为选择主控器的位置器作为主控器。
 
-While the positioner is set as Master (Master robot coordinate system 'Sync S1'), record the Slave positions. Recorded positions are stored in the positioner end effector coordinate system.
+当位置器设置为主控器（主机器人坐标系统 'Sync S1'）时，记录从控器的位置。记录的位置存储在位置器末端执行器坐标系统中。
 
-![](../../_assets/4-prg20.png) 
+![](../../_assets/4-prg20.png)
 
-To have the Master robot cooperate with the positioner, teach smov steps in the same way as for an ordinary positioner. When the Slave records a step while the Master's positioner is set as Master (Master robot coordinate system 'Sync S1'), it is recorded using a robot number that reflects the Master ID.
+为了让主机器人与位置器协作，按照普通位置器的方式教学 smov 步骤。当从控器在主控器的位置器设置为主控器（主机器人坐标系统 'Sync S1'）时记录步骤时，它会使用反映主控器 ID 的机器人编号进行记录。
 
- 
 ![](../../_assets/4-prg21.png)
 
-The Master uses the same positioner synchronization function, and the Slave is recorded with R11.
+主控器使用相同的位置器同步功能，从控器记录为 R11。
 
-Teach Master and Slave in the same way as described in (3) above and finish with `cowork end`.
-     
+按照上述 (3) 中描述的方式对主控器和从控器进行教学，并以 `cowork end` 结束。
+
 ![](../../_assets/4-prg22.png)
 
-After confirming operation in manual mode, operate in automatic mode.
+在手动模式下确认操作后，切换到自动模式进行操作。
 
-    
-![[Figure 4-7] Simulation of positioner synchronized operation per robot](../../_assets/4-9.png)
-
+![[Figure 4-7] 每个机器人位置器同步操作的仿真](../../_assets/4-9.png)
 
 <br>
 
 {% hint style="warning" %}
 
- - Jigless cooperative control supports positioner groups 1-3. When positioner jogging or in `cmov`, select the positioner group number 1-3.
- - If values set in the Slave with `cowork s,m=#1,id=#2` differ from the `cmov R#1#2` values, an `E1365 cmov Master No. ID is invalid.` error occurs.
+ - 无夹具协作控制支持位置器组 1-3。当进行位置器移动或在 `cmov` 中时，选择位置器组编号 1-3。
+ - 如果在从控器中设置的值与 `cowork s,m=#1,id=#2` 不同于 `cmov R#1#2` 的值，将出现 `E1365 cmov Master No. ID is invalid.` 错误。
 
 {% endhint %}

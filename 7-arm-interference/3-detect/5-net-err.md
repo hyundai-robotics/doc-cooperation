@@ -1,10 +1,10 @@
-﻿### 7.3.5. Handling Network Issues During Cooperative Control
+### 7.3.5. 处理协同控制中的网络问题
 
-If the cooperative control network is not functioning properly, arm interference detection between robots may not operate correctly. When problems occur on the cooperative control network, the following error may occur.
+如果协同控制网络无法正常工作，机器人之间的手臂干扰检测可能无法正确运行。当协同控制网络出现问题时，可能会出现以下错误。
 
 <br>
 
-| Error Message | E0244 Robot (0)'s arm interference detection is not possible |
+| 错误信息 | E0244 机器人 (0) 的手臂干扰检测无法进行 |
 |:--|:--|
-| Possible Causes | The HiNet network to the partner robot for which interference detection conditions were set is disconnected |
-| Action | - Check the network cable of the affected robot. <br> - Refer to Cooperative Control Status Monitoring and restore the cooperative control state to normal. |
+| 可能原因 | 与设定干扰检测条件的合作机器人之间的 HiNet 网络已断开 |
+| 行动 | - 检查受影响机器人的网络电缆。 <br> - 请参考协同控制状态监控，并将协同控制状态恢复为正常。 |

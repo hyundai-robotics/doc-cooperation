@@ -1,21 +1,21 @@
-﻿### 1.2.1. Key Feature Specifications
+### 1.2.1. 关键特性规格
 
 <br>
 
-| Key Feature Specification | Remarks | 
+| 关键特性规格 | 备注 | 
 | :---: | :---: | 
-| Number of cooperative robots | Up to 4 |
-| Communication method | General Ethernet (UDP) |
-| Communication speed | 100 Mbps |
-| Number of Masters supported | 1 |
-| Number of Slaves supported | Up to 3 Slaves per Master |
-| Drive Axis | Drive axis cooperation supported |
-| HiNet I/O | 12 bytes per robot (I/O signals) |
-| Jigless cooperation | Supports jigless cooperation between robot and positioner |
+| 协作机器人数量 | 最多 4 |
+| 通信方式 | 通用以太网 (UDP) |
+| 通信速度 | 100 Mbps |
+| 支持的主设备数量 | 1 |
+| 支持的从设备数量 | 每个主设备最多 3 个从设备 |
+| 驱动轴 | 支持驱动轴协作 |
+| HiNet I/O | 每个机器人 12 字节 (输入/输出信号) |
+| 无夹具协作 | 支持机器人与定位器之间的无夹具协作 |
 
-[Table 1-1] Cooperative control specifications
+[Table 1-1] 协作控制规格
 
 
 <br>
 
-![[Figure1-2] Jigless cooperative control](../../_assets/1-2.png)
+![[Figure1-2] 无夹具协作控制](../../_assets/1-2.png)

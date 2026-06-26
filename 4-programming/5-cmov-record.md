@@ -1,18 +1,18 @@
-﻿## 4.5. Checking cmov Recorded Positions
+## 4.5. 检查 cmov 录制位置
 
-The cmov steps are a useful feature that allows you to verify taught positions using the step forward/back functions in cmov recording mode. The cmov step records positions and orientations relative to the Master end effector coordinate system, so verify and execute based on the Master's tool position.
+cmov 步骤是一个有用的功能，允许您使用 cmov 录制模式中的前进/后退功能来验证教学位置。cmov 步骤相对于主端执行器坐标系统记录位置和方向，因此请根据主工具位置进行验证和执行。
 
- - (1) Set the robot taught as Master (cowork m) to Manual Cooperative Master state (R351,1).
- - (2) Set the robot taught as Slave (cowork s) to cmov recording state (R351,3).
- - (3) Move the Master robot to the step position to be cooperated and leave it stopped.
- - (4) On the Slave, select the cmov step to move to and press the step forward key; the Slave will move to the position recorded in the Master end effector. For example, if the cmov recording position is recorded as the origin (0,0,0) of the Master end effector coordinate system as shown below, the Slave will move to the Master end effector origin regardless of the Master's global position when executing cmov.
+ - (1) 将机器人设置为主（cowork m），并进入手动协作主状态 (R351,1)。
+ - (2) 将机器人设置为从（cowork s），并进入 cmov 录制状态 (R351,3)。
+ - (3) 将主机器人移动到要协作的步骤位置并保持停止。
+ - (4) 在从机器人上，选择要移动到的 cmov 步骤并按下前进步骤键；从机器人将移动到主端执行器中记录的位置。例如，如果 cmov 录制位置记录为主端执行器坐标系统的原点 (0,0,0)，如下所示，从机器人将在执行 cmov 时移动到主端执行器原点，而不管主机器人的全局位置。
 
  
-![[Figure 4-6] Checking cmov recorded positions](../_assets/4-6.png)
+![[Figure 4-6] 检查 cmov 录制位置](../_assets/4-6.png)
 
 {% hint style="warning" %}
- - In cmov recording state (R351,3), the robot will move to the recorded step position regardless of cowork command execution.
- - Master jogging is not allowed in cmov recording state.
- - Because real-time cooperative motion does not occur in cmov recording state, do not operate step forward/back on the Master simultaneously; keep the Master stopped.
- - If you change and then stop the Master's position while in cmov recording state, stepping forward to the cmov step will move to the updated position.
+ - 在 cmov 录制状态 (R351,3) 下，机器人将移动到记录的步骤位置，而不管协作命令执行情况。
+ - 在 cmov 录制状态下不允许主机器人的操控。
+ - 因为实时协作运动在 cmov 录制状态下不会发生，所以请勿同时在主机器人上操作前进/后退；保持主机器人停止。
+ - 如果在 cmov 录制状态下更改并停止主机器人的位置，则向 cmov 步骤前进将移动到更新的位置。
 {% endhint %}

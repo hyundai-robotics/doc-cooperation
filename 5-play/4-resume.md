@@ -1,24 +1,19 @@
-﻿## 5.4. Stop/Resume of Cooperative Playback
+## 5.4. 停止/恢复协同播放
 
-If the user inputs a stop command (external stop, internal stop) during cooperative motion, all robots engaged in cooperative motion will stop.
-
-
-<br>
-
-![[Figure 5-6] Warning displayed when a partner robot stops](../_assets/5-6.png)
+如果用户在协同运动期间输入停止命令（外部停止，内部停止），所有参与协同运动的机器人将停止。
 
 <br>
 
-
-
-After stopping during cooperative motion, changing the step number and replaying is only possible when cooperative playback is disabled. If you stop during cooperation, change the step, and then attempt to replay, a [Yes/No] confirmation is required from the user.
+![[Figure 5-6] 伙伴机器人停止时显示的警告](../_assets/5-6.png)
 
 <br>
 
-![[Figure 5-7] Message when changing step after stopping during cooperative motion](../_assets/5-7.png)
+在协同运动中停止后，仅在禁用协同播放时可以更改步骤并重新播放。如果在协作期间停止，更改步骤，然后尝试重新播放，则需要用户的 [Yes/No] 确认。
 
 <br>
 
- 
+![[Figure 5-7] 在协同运动中停止后更改步骤时的消息](../_assets/5-7.png)
 
-If a cooperative control state reset is input, it releases the cooperative state and operates. To operate while keeping the cooperative state, specify the stopped step number and start.
+<br>
+
+如果输入了协同控制状态重置，它将释放协同状态并操作。要在保持协同状态的同时操作，请指定停止的步骤号并开始。

@@ -1,4 +1,4 @@
-﻿## 4.3. cmov Command
+## 4.3. cmov 命令
 
 <br>
 
@@ -9,17 +9,16 @@ cmov R20,L,tg=po1,spd=60%,accu=0,tool=1
 cmov R20,L,tg=po1,spd=60%,accu=0,tool=1 until di1
 ```
 
-
 <br>
 
-### Parameters
-| param# | Meaning | 
+### 参数
+| param# | 说明 | 
 | :--- | :--- | 
-| param1| - Master robot system manipulator identifier <br> Format: R(#1)(#2) <br> #1 : Master robot system number (1~4) <br> #2 : Master manipulator identifier of the robot system <br> (0: Robot, 1: Positioner Group 1, 2: Positioner Group 2)| 
-| param2 | - Interpolation type <br> Specifies the interpolation mode for the slave robot; only linear and circular are supported <br> (L: Linear, C: Circular)|
-| param3 | - Movement speed (Speed) <Br> Specify the relative speed compared to the workpiece | 
-| param4 | - Accuracy (0~7)|
-| param5 | - Tool number (0~31) |
+| param1| - 主控机器人系统操纵器标识符 <br> 格式: R(#1)(#2) <br> #1 : 主控机器人系统编号 (1~4) <br> #2 : 机器系统的主操纵器标识符 <br> (0: 机器人, 1: 定位器组 1, 2: 定位器组 2)| 
+| param2 | - 插值类型 <br> 指定从属机器人插值模式；仅支持线性和圆形 <br> (L: 线性, C: 圆形)|
+| param3 | - 移动速度 (速度) <Br> 指定相对于工件的相对速度 | 
+| param4 | - 精度 (0~7)|
+| param5 | - 工具编号 (0~31) |
 
 
-![[Figure 4-3] Method for distinguishing ID identifiers](../_assets/4-3.png)
+![[Figure 4-3] 区分 ID 标识符的方法](../_assets/4-3.png)

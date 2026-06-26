@@ -1,23 +1,23 @@
-﻿### 2.1.1. Emergency Stop Wiring
+### 2.1.1. 紧急停止接线
 
-If an emergency stop occurs during cooperative motion, robots monitor each other's state via communication so that partner robots also stop, but hardware signals take precedence and positional mismatches between cooperative robots may occur. To minimize cooperative position mismatches during emergency stop, wire the controller's external emergency stop.
+如果在协作运动期间发生紧急停止，机器人通过通信监控彼此的状态，以便合作机器人也停止，但硬件信号优先，可能会发生合作机器人之间的位置不匹配。为了最小化紧急停止期间的合作位置不匹配，请接线控制器的外部紧急停止。
 
-The ${cont_model} controller provides a user external emergency stop. The external emergency stop wiring is shown below.
+${cont_model} 控制器提供用户外部紧急停止。外部紧急停止接线如下所示。
 
-When using the robot cooperative feature, install a dedicated emergency stop switch so that emergency stop signals can be input to each controller simultaneously. Use the user-provided external emergency stop wiring to integrate them into a single emergency stop as shown below. This minimizes cooperative position mismatches during an emergency stop.
+在使用机器人协作功能时，请安装专用紧急停止开关，以便能够同时将紧急停止信号输入到每个控制器。使用用户提供的外部紧急停止接线将它们集成到一个单一的紧急停止中，如下所示。这最小化了紧急停止期间的合作位置不匹配。
 
 <br>
 
-![[Figure 2-1] Emergency stop wiring for robot cooperation](../../_assets/2-1.png)
+![[图 2-1] 机器人合作的紧急停止接线](../../_assets/2-1.png)
 
 
 <br>
 
 {% hint style="warning" %}
-- A positional mismatch during cooperative motion may occur when an emergency stop happens.
-- For handling applications, install a floating mechanism to absorb cooperative mismatches during cooperative motion (errors on emergency stop, synchronization errors, calibration errors, trajectory errors).
-- For handling applications with 2 cooperative robots, it is recommended to install at least one floating mechanism.
-- Use a Safety Relay when using external emergency stop relays.
-    Example product: Omron G7S-4A2B
+- 在协作运动期间发生紧急停止时，可能会出现位置不匹配。
+- 对于处理应用，安装浮动机制以吸收在协作运动期间的合作不匹配（紧急停止错误、同步错误、校准错误、轨迹错误）。
+- 对于具有2个合作机器人的处理应用，建议至少安装一个浮动机制。
+- 使用外部紧急停止继电器时，请使用安全继电器。
+    示例产品：Omron G7S-4A2B
 
 {% endhint %}

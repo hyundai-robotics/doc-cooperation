@@ -1,19 +1,16 @@
-﻿## 5.3. Playback in Automatic Mode
+## 5.3. 自动模式下的播放
 
-(1) Switch all cooperative robots to automatic mode.
+(1) 将所有协作机器人切换到自动模式。
 
-(2) Verify that all cooperative robots have Drive Ready ON.
+(2) 验证所有协作机器人的驱动准备状态为开启。
 
-(3) Start the program from the beginning.
+(3) 从头开始启动程序。
 
-(4) Start each cooperative robot. (The start order of MASTER and SLAVE may be arbitrary.)
-
-
+(4) 启动每个协作机器人。（MASTER 和 SLAVE 的启动顺序可以是任意的。）
 
 {% hint style="warning" %}
 
- - Do not arbitrarily move the cursor and execute from cowork m (or cowork s) unless you are at the cooperative playback reference position. Cooperative motion calculates the relative position of Master and Slave from the cowork m (cowork s) position, so it must be executed from the cooperative reference position.
- - Set the cooperative waiting time appropriately. If one of MASTER or SLAVE reaches the cooperative reference position first and the partner robot does not arrive within the 'cooperative waiting time', an error occurs. To wait indefinitely, set the cooperative waiting time to 0.
-
+ - 除非您处于协作播放参考位置，否则不要随意移动光标并从 cowork m（或 cowork s）执行。协作运动从 cowork m（cowork s）位置计算 Master 和 Slave 的相对位置，因此必须从协作参考位置执行。
+ - 适当地设置协作等待时间。如果 MASTER 或 SLAVE 先到达协作参考位置，而合作机器人的另一方在 '协作等待时间' 内未到达，则会发生错误。要无限期等待，请将协作等待时间设置为 0。
 
 {% endhint %}

@@ -1,19 +1,19 @@
-﻿### 2.1.2. Network Configuration
+### 2.1.2. 网络配置
 
 <br>
 
-| Component | Specification | 
+| 组件 | 规格 | 
 | :---: | :---: | 
-| COM | Main CPU board | 
-| UTP cable | Hub connection: direct LAN cable <br> Direct connection of two units: cross LAN cable |
-| Network Hub | Company-specified switching hub |
+| COM | 主 CPU 板 | 
+| UTP 电缆 | 集线器连接：直通 LAN 电缆 <br> 两个单元的直接连接：交叉 LAN 电缆 |
+| 网络集线器 | 公司指定的交换集线器 |
 
 
-[Table 2-1] Cooperative control requirements
+[Table 2-1] 协作控制要求
 
 
 <br>
 
-- Connection method
-Connect one of the COM module's network sockets (LAN 1-3) to the general-purpose network using a UTP cable (direct), and connect the other end to the network hub. Up to 4 units can be connected to the hub this way.
-If connecting two robots without a hub, use a network UTP CROSS cable and connect it to the universal network sockets.
+- 连接方式
+将 COM 模块的网络插座之一（LAN 1-3）使用 UTP 电缆（直通）连接到通用网络，并将另一端连接到网络集线器。最多可以通过这种方式连接 4 个单元。
+如果在没有集线器的情况下连接两个机器人，请使用网络 UTP 交叉电缆并将其连接到通用网络插座。

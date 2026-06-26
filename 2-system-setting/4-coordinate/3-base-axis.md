@@ -1,14 +1,14 @@
-﻿### 2.4.3. Travel-Axis System
+### 2.4.3. 行程轴系统
 
-When configuring the travel-axis system for cooperative control, install travel axes with the same specifications as parallel as possible.
+在配置合作控制的行程轴系统时，尽可能平行安装具有相同规格的行程轴。
 
-![[Figure 2-6] Travel-axis system configuration for cooperative control](../../_assets/2-6.png)
+![[Figure 2-6] 合作控制的行程轴系统配置](../../_assets/2-6.png)
 
 {% hint style="warning" %}
-- Systems with travel axes should set the travel-axis specification to 'arbitrary' and perform travel-axis calibration before use.
-- Install the travel axes of cooperative robots as parallel as possible.
-- Large synchronization errors during travel-axis movement may be caused by inaccurate travel-axis calibration.
-- For details about the travel-axis calibration function, refer to the '${cont_model} controller operation manual'.
-- Travel-axis calibration should be performed for both MASTER and SLAVE.
+- 具有行程轴的系统应将行程轴规格设置为“任意”，并在使用前进行行程轴校准。
+- 尽可能平行安装合作机器人的行程轴。
+- 在行程轴运动期间的大同步误差可能是由于不准确的行程轴校准引起的。
+- 有关行程轴校准功能的详细信息，请参阅 '${cont_model} 控制器操作手册'。
+- 应对 MASTER 和 SLAVE 都进行行程轴校准。
 
 {% endhint %}

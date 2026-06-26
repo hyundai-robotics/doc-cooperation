@@ -1,1 +1,1 @@
-﻿# 7. Arm Interference Detection Features
+# 7. 臂干扰检测特性

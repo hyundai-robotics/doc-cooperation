@@ -1,31 +1,31 @@
-﻿## 2.2. Control Environment Settings
+## 2.2. 控制环境设置
 
-Set whether to use the cooperative control function and the robot number, etc.
+设置是否使用协作控制功能和机器人编号等。
 
-(1) Select 'System' → '4: Application Parameters' → '17: Cooperative Control'.
+(1) 选择 '系统' → '4: 应用参数' → '17: 协作控制'。
 
-(2) Select '1: Control Environment Settings'.
+(2) 选择 '1: 控制环境设置'。
 
-(3) Set the dialog parameters. The purpose of each parameter is as follows:
+(3) 设置对话框参数。每个参数的目的如下：
 
-- Cooperative Control Function: <Disabled, Enabled>
-Select whether to use the cooperative control function.
-- Robot Number: <1~4>
-Set the robot number. The robot number is the identifier for your controller on the cooperative control network. The ${cont_model} controller supports a maximum of 4 robots in a cooperative network. Ensure robot numbers are not duplicated.
+- 协作控制功能: <禁用, 启用>
+选择是否使用协作控制功能。
+- 机器人编号: <1~4>
+设置机器人编号。机器人编号是在协作控制网络中您控制器的标识符。${cont_model} 控制器支持最多 4 台机器人的协作网络。确保机器人编号不重复。
 
 <br>
 
-![[Figure 2-11] Control environment settings](../_assets/2-11.png)
+![[Figure 2-11] 控制环境设置](../_assets/2-11.png)
 
 
 <br>
 
 {% hint style="warning" %}
-- For special robots and robots with fewer than 6 degrees of freedom, only HiNet communication is applicable and the `cowork` command cannot be used.
-- Cooperative control is an optional feature. Therefore, a license key registration is required to use this function. A temporary key can be issued for one month; for continued use beyond that, contact the company.
+- 对于特殊机器人和自由度少于 6 的机器人，仅适用 HiNet 通信，且无法使用 `cowork` 命令。
+- 协作控制是一个可选功能。因此，需要注册许可证密钥以使用此功能。可以为一个月发放临时密钥；如需继续使用，请联系公司。
 
 <br>
 
-![[Figure 2-3] Cooperative control license key option settings](../_assets/2-3.png)
+![[Figure 2-3] 协作控制许可证密钥选项设置](../_assets/2-3.png)
 
 {% endhint %}

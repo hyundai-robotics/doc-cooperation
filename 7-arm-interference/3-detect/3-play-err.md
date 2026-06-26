@@ -1,35 +1,34 @@
-﻿### 7.3.3. Errors Occurring During Playback
+### 7.3.3. 播放过程中发生的错误
 
-When two robots move from S1 to S2 on a rail as shown below, if the S2 positions of the two robots are separated by more than the sum of the tool interference area and the expected maximum interference distance, no W0147 or E0237 will occur. This represents a normal program.
+当两个机器人如下面所示从 S1 移动到 S2 时，如果两个机器人的 S2 位置之间的距离超过工具干扰区域的总和和预期的最大干扰距离，则不会发生 W0147 或 E0237。这表示正常程序。
 
 <br> 
 
-![[Figure 7-25] Example of a normal program](../../_assets/7-25.png)
+![[Figure 7-25] 正常程序的示例](../../_assets/7-25.png)
 
 <br>
 
-If, as in the figure below, the S2 point is slightly outside the configured tool interference area but within the expected maximum interference distance, an error (W0147 or E0237) may occur. In this case, adjust the expected maximum interference distance or change the teach points.
+如果如下面的图所示，S2 点稍微超出了配置的工具干扰区域，但在预期的最大干扰距离以内，则可能发生错误 (W0147 或 E0237)。在这种情况下，请调整预期的最大干扰距离或更改教学点。
 
 <Br>
  
-![[Figure 7-26] Incorrect program example 1](../../_assets/7-26.png)
+![[Figure 7-26] 错误程序示例 1](../../_assets/7-26.png)
 
 <br>
  
-If the S2 point is taught so that it completely invades the defined tool interference area, an error (W0147 or E0237) will occur when the robots move to S2.
-
-
-<br>
-
-![[Figure 7-27] Incorrect program example 2](../../_assets/7-27.png)
+如果 S2 点被教导到完全侵入定义的工具干扰区域，则在机器人移动到 S2 时将发生错误 (W0147 或 E0237)。
 
 <br>
 
-In such cases, reduce the 'tool interference area' or the 'expected maximum interference distance' to prevent the error.
+![[Figure 7-27] 错误程序示例 2](../../_assets/7-27.png)
+
+<br>
+
+在这种情况下，减少“工具干扰区域”或“预期的最大干扰距离”以防止错误。
 
 
 {% hint style="warning" %}
 
-Setting the tool interference area too small-smaller than the actual tool-may cause collisions between robots.
+将工具干扰区域设置得过小——小于实际工具——可能会导致机器人之间发生碰撞。
 
 {% endhint %}

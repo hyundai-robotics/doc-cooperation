@@ -1,49 +1,42 @@
-﻿## 4.2. Teaching and Writing Programs for Cooperative Handling
+## 4.2. 教授和编写协作处理程序
 
-(1) Operators are required equal to the number of cooperative robots; therefore, each operator participates for each robot to be cooperated.
+(1) 操作员的数量必须与协作机器人数量相等；因此，每个操作员为每个被协作的机器人参与。
 
-(2) Verify that the cooperative robot common coordinate system is configured.
+(2) 验证协作机器人公共坐标系统是否已配置。
 
-(3) Move the MASTER and SLAVE robots to their respective cooperation start positions and record the start positions as reference.
+(3) 将 MASTER 和 SLAVE 机器人移动到各自的合作起始位置，并将起始位置记录为参考。
 
 ![](../_assets/4-prg3.png)
- 
- <br>
-
-![[Figure 4-1] Recording cooperative motion start reference positions](../_assets/4-1.png)
 
 <br>
 
-(4) Assign robot roles by entering R351 codes for MASTER and SLAVE robots.
+![[Figure 4-1] 记录协作运动起始参考位置](../_assets/4-1.png)
 
-(5) Register the cooperative control start command (`cowork m/s`). The `cowork` command specifies Master/Slave and assigns the Slave/Master numbers. Only one Master may be set, and up to three Slaves may be specified.
+<br>
 
- ![](../_assets/4-prg4.png)
- 
+(4) 通过输入 R351 代码为 MASTER 和 SLAVE 机器人分配机器人角色。
 
-(6) Operate the MASTER robot by jogging (JOG). The Slave follows the Master tool-tip position relatively. During cooperative jogging, the Slave must have the Enable switch pressed. Record step positions only on the Master; do not record them on the Slave controller.
+(5) 注册协作控制启动命令 (`cowork m/s`)。`cowork` 命令指定 Master/Slave 并分配 Slave/Master 编号。只能设置一个 Master，并且最多可以指定三个 Slaves。
 
- 
+![](../_assets/4-prg4.png)
+
+(6) 通过慢移 (JOG) 操作 MASTER 机器人。Slave 相对跟随 Master 工具尖端的位置。在协作慢移过程中，Slave 必须按下启用开关。仅在 Master 上记录步态位置；不要在 Slave 控制器上记录。
+
 ![](../_assets/4-prg5.png)
-      
 
- 
-![[Figure 4-2] Master robot operation](../_assets/4-2.png)
+![[Figure 4-2] MASTER 机器人操作](../_assets/4-2.png)
 
-(7) Record cooperative motion steps on the MASTER. Set the Master's interpolation type and speed. Use standard `move` commands within cooperative motion commands (cmov cannot be used).
+(7) 在 MASTER 上记录协作运动步骤。设置 Master's 插值类型和速度。在协作运动命令中使用标准 `移动 (move)` 命令（不能使用 cmov）。
 
- 
 ![](../_assets/4-prg6.png)
 
-(8) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control.
+(8) 当协作运动完成后，在 Master 和 Slave 上插入 `cowork end` 命令以结束协作控制。
 
- 
 ![](../_assets/4-prg7.png)
- 
 
 <br>
 
 {% hint style="warning" %}
-	Do not change the Slave's Enable switch to OFF during manual cooperative operation. Hardware signals take priority over communication and can cause position mismatches between cooperative robots. In severe cases, this may result in damage to the workpiece or the robot hand.
+	在手动协作操作期间，不要将 Slave 的启用开关更改为 OFF。硬件信号优先于通信，可能导致协作机器人之间的位置不匹配。在严重情况下，这可能导致工件或机器人手的损坏。
 
 {% endhint %}

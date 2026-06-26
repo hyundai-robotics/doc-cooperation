@@ -1,22 +1,22 @@
-﻿### 7.2.1. Enabling Arm Interference Prevention
+### 7.2.1. 启用机械臂干涉预防
 
-Select 'System' → '4: Application Parameters' → '17: Cooperative Control' → '4: Inter-robot Interference Prevention' → '1: Interference Prevention Conditions'.
-
-<br> 
-
-![[Figure 7-7] Arm Interference Prevention Menu](../../_assets/7-8.png) 
-
-<br>
-
-To enable arm interference prevention, select the 'Interference Detection Partner Robot'. The 'expected maximum interference distance' is the distance from the arm interference area at which the system expects interference and can perform deceleration stop.
+选择 'System' → '4: Application Parameters' → '17: Cooperative Control' → '4: Inter-robot Interference Prevention' → '1: Interference Prevention Conditions'.
 
 <br> 
 
-![[Figure 7-8] Arm Interference Prevention Conditions Screen](../../_assets/7-9.png)
+![[Figure 7-7]机械臂干涉预防菜单](../../_assets/7-8.png) 
 
 <br>
 
-| Error Message | E0244 Robot (0)'s arm interference detection is not possible |
+要启用机械臂干涉预防，选择 'Interference Detection Partner Robot'。 'expected maximum interference distance' 是系统预计干涉发生的机械臂干涉区域的距离，系统可以执行减速停车。
+
+<br> 
+
+![[Figure 7-8]机械臂干涉预防条件屏幕](../../_assets/7-9.png)
+
+<br>
+
+| 错误信息 | E0244 Robot (0)的机械臂干涉检测不可用 |
 |:--|:--| 
-| Possible Causes | - If the cooperative control of the partner robot set for interference detection is set to 'Disabled' on the partner robot. <br> - The partner robot is not participating in the cooperative control network. <br> - The partner robot has not configured arm interference prevention conditions. <br> - The partner robot's common coordinate system is not set. |
-| Action | Check your robot's and the partner robot's cooperative control status, common coordinate settings, participation in the cooperative control network, and interference prevention conditions. |
+| 可能原因 | - 如果设置为干涉检测的合作机器人在其上设置为 'Disabled'。 <br> - 合作机器人未参与合作控制网络。 <br> - 合作机器人尚未配置机械臂干涉预防条件。 <br> - 合作机器人的公共坐标系未设置。 |
+| 操作 | 检查您的机器人及合作机器人的合作控制状态、公共坐标设置、参与合作控制网络以及干涉预防条件。 |

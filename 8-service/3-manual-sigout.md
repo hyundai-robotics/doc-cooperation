@@ -1,10 +1,10 @@
-﻿## 8.3. Manual Output Function
+## 8.3. 手动输出功能
 
-You can manually change your robot's cooperative control status.
+您可以手动更改机器人的协作控制状态。
 
-- Display the 'General Output' window from 'Window Settings' → 'Selection'.
-- Move to the output signal corresponding to your robot number that you want to change manually.
-- Press the 'Manual Output' button and change it in the dialog that appears.
+- 从 '窗口设置' → '选择' 显示 '一般输出' 窗口。
+- 移动到您想要手动更改的机器人编号对应的输出信号。
+- 按下 '手动输出' 按钮，并在出现的对话框中进行更改。
 
 
 ![](../_assets/9-7.png)

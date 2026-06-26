@@ -1,1 +1,1 @@
-﻿## 3.5. Detection of Arm Interference and Soft Limits Between Cooperative Robots
+## 3.5. 协作机器人之间的臂干扰和软限制检测

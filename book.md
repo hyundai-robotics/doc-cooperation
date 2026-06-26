@@ -1,507 +1,482 @@
 ﻿
 [__SOURCE](README.md)
-# ${cont_model} Controller Function Manual - Cooperative Control
-
+# ${cont_model} 控制器功能手册 - 协同控制
 [__SOURCE](0-about-this-manual/README.md)
-# About the Manual
-
+# 关于手册
 [__SOURCE](0-about-this-manual/precautions.md)
-# Precautions
+# 注意事项
 
-{% include file="en/precautions.md" %}
-
+{% include file="zh/precautions.md" %}
 [__SOURCE](0-about-this-manual/safety-notice.md)
-# Safety Cautions
+# 安全注意事项
 
-{% include file="en/safety-notice.md" %}
-
+{% include file="zh/safety-notice.md" %}
 [__SOURCE](1-intro/README.md)
-# 1. Overview
-
+# 1. 概述
 [__SOURCE](1-intro/1-overview.md)
-## 1.1. Overview of Robot Cooperative Features
+## 1.1. 机器人协作功能概述
 
 <br>
 
 {% hint style="info" %}
-A separate license is required to use this feature; please contact us. <br>
-This feature is supported from V60.26-00.
+使用此功能需要单独的许可证；请与我们联系。 <br>
+此功能支持从 V60.26-00 版本开始。
 {% endhint %}
 
 <br>
 
-Robot cooperative features enable multiple robots to perform tasks that a single robot cannot accomplish.
+机器人协作功能使多个机器人能够执行单个机器人无法完成的任务。
 
-This feature applies in cases such as:
+该功能适用于以下情况：
 
-- When two robots with simple hands cooperate to handle a workpiece
-- When a workpiece is too large to be handled by a single robot
-- When a Master robot handles the workpiece while a Slave performs jigless tasks such as arc welding or sealing on the workpiece
- 
-This feature allows synchronization of up to 4 robots.
-Each robot can perform independent tasks and cooperative tasks within a single program.
+- 当两个配有简单手爪的机器人协作处理工件时
+- 当工件过大，无法被单个机器人处理时
+- 当主机器人处理工件，而从机器人执行无夹具的任务，例如在工件上进行弧焊或密封时
 
+该功能允许最多 4 个机器人同步操作。
+每个机器人可以在单个程序中执行独立任务和协作任务。
 
 <br>
 
-![[Figure 1.1] Robot cooperative features](../_assets/1-1.png)
-
+![[图 1.1] 机器人协作功能](../_assets/1-1.png)
 [__SOURCE](1-intro/2-main-func/README.md)
-## 1.2. Main Features
-
+## 1.2. 主要特征
 [__SOURCE](1-intro/2-main-func/1-specs.md)
-### 1.2.1. Key Feature Specifications
+### 1.2.1. 关键特性规格
 
 <br>
 
-| Key Feature Specification | Remarks | 
+| 关键特性规格 | 备注 | 
 | :---: | :---: | 
-| Number of cooperative robots | Up to 4 |
-| Communication method | General Ethernet (UDP) |
-| Communication speed | 100 Mbps |
-| Number of Masters supported | 1 |
-| Number of Slaves supported | Up to 3 Slaves per Master |
-| Drive Axis | Drive axis cooperation supported |
-| HiNet I/O | 12 bytes per robot (I/O signals) |
-| Jigless cooperation | Supports jigless cooperation between robot and positioner |
+| 协作机器人数量 | 最多 4 |
+| 通信方式 | 通用以太网 (UDP) |
+| 通信速度 | 100 Mbps |
+| 支持的主设备数量 | 1 |
+| 支持的从设备数量 | 每个主设备最多 3 个从设备 |
+| 驱动轴 | 支持驱动轴协作 |
+| HiNet I/O | 每个机器人 12 字节 (输入/输出信号) |
+| 无夹具协作 | 支持机器人与定位器之间的无夹具协作 |
 
-[Table 1-1] Cooperative control specifications
+[Table 1-1] 协作控制规格
 
 
 <br>
 
-![[Figure1-2] Jigless cooperative control](../../_assets/1-2.png)
+![[Figure1-2] 无夹具协作控制](../../_assets/1-2.png)
 [__SOURCE](1-intro/2-main-func/2-features.md)
-### 1.2.2. Feature Characteristics
+### 1.2.2. 特征特性
 
-- Communication
-  The cooperative control feature uses UDP (General Ethernet) communication to coordinate up to 4 robots.
+- 通信  
+  协同控制功能使用UDP（通用以太网）通信来协调最多4个机器人。
 
-- Common Coordinate System between Robots
-  Provides a function to determine relative positions between robots. The common coordinate system is obtained by teaching the same three points in the workspace on each robot.
+- 机器人之间的公共坐标系统  
+  提供确定机器人之间相对位置的功能。公共坐标系统是通过教导每个机器人在工作空间中的相同三个点获得的。
 
-- Manual Mode Cooperative Operation
-  Allows users to easily teach in manual mode. After assigning Master and Slave roles for each robot, handling applications can be taught by operating only the MASTER. For jigless cooperation, the Slave's positions can be taught relative to the Master's workpiece.
+- 手动模式协同操作  
+  允许用户在手动模式下轻松教学。在为每个机器人分配主从角色后，可以通过仅操作主机器人来教学处理应用。对于无夹具协作，从机器人的位置可以相对于主机器人的工件进行教学。
 
-- Positioner Master Support
-  You can assign a positioner as the Master robot, enabling cooperative control. Up to 4 robots can cooperate with a positioner simultaneously.
+- 辅助装置主支持  
+  你可以将一个位置器指定为主机器人，从而启用协同控制。最多4个机器人可以与一个位置器同时合作。
 
-- Teaching
-  Each controller needs an independent program. Split a program into parts for independent robot actions and cooperative actions to enable flexible and easy programming.
+- 教学  
+  每个控制器需要一个独立的程序。将程序分为独立机器人动作和协同动作的部分，以启用灵活和简单的编程。
 
-- Cooperative Playback
-  According to the `cowork` command, the system waits for partner robots to be ready and begins cooperation when all robots are ready.
+- 协同回放  
+  根据`cowork`命令，系统等待伙伴机器人准备就绪，当所有机器人准备就绪时开始协作。
 
-- HiNet I/O
-  Provides the capability to share your robot's information with other cooperative robots using I/O signals so that robot states can be checked without a separate interlock control panel.
+- HiNet I/O  
+  提供能够使用I/O信号与其他协同机器人共享您的机器人信息的能力，以便在没有单独的互锁控制面板的情况下检查机器人状态。
 [__SOURCE](1-intro/3-operation-seq.md)
-## 1.3. Operation Sequence
+## 1.3. 操作顺序
 
-This section describes the sequence for using cooperative robot features. Detailed instructions are provided in subsequent sections.
+本节描述了使用协作机器人功能的顺序。详细说明将在后续章节中提供。
 
-- (1) Robot Calibration
-Ensure each robot's axis origin and tool data are correctly set for cooperative control. See the automatic calibration feature for details.
+- (1) 机器人校准
+确保每个机器人的轴原点和工具数据已正确设置以进行协作控制。有关详细信息，请参见自动校准功能。
 
-- (2) Hardware Installation
-Connect hardware required for the controller's communication. Connect the network hub and Ethernet cable.
+- (2) 硬件安装
+连接控制器通信所需的硬件。连接网络集线器和以太网电缆。
 
-- (3) Control Environment Settings
-Set whether to use cooperative control for your robot and assign the robot number.
+- (3) 控制环境设置
+设置是否使用协作控制并分配机器人编号。
 
-- (4) Communication Settings
-Set network IP addresses for cooperative robots. To use HiNet I/O, set the start index and byte count for input/output signals. Your robot's signals are outputs and partner robots' signals are inputs.
+- (4) 通信设置
+为协作机器人设置网络IP地址。要使用HiNet I/O，请设置输入/输出信号的起始索引和字节计数。您的机器人的信号是输出，合作机器人信号是输入。
 
-- (5) Common Coordinate System Setup
-Perform calibration to provide relative positional information between cooperative robots.
+- (5) 共享坐标系统设置
+执行校准以提供协作机器人之间的相对位置信息。
 
-- (6) Teaching
-Use R351 (Manual Cooperative State Setting) to assign Master and Slave roles and teach cooperative motions by operating the Master robot.
+- (6) 教学
+使用R351（手动协作状态设置）分配主从角色，并通过操作主机器人进行协作运动的教学。
 
-- (7) Operation Check
-Verify cooperative motion in manual mode. Start cooperative robots by stepping forward simultaneously.
+- (7) 操作检查
+在手动模式下验证协作运动。通过同时前进启动协作机器人。
 
-- (8) Continuous Operation
-Switch to automatic mode. Place the program at the lead step and press the start switches on all controllers designated as cooperative robots.
-
+- (8) 连续操作
+切换到自动模式。将程序置于引导步骤，并按下所有指定为协作机器人的控制器上的启动开关。
 [__SOURCE](2-system-setting/README.md)
-# 2. System Settings
-
+# 2. 系统设置
 [__SOURCE](2-system-setting/1-install/README.md)
-## 2.1. Hardware Installation
-
+## 2.1. 硬件安装
 [__SOURCE](2-system-setting/1-install/1-wiring.md)
-### 2.1.1. Emergency Stop Wiring
+### 2.1.1. 紧急停止接线
 
-If an emergency stop occurs during cooperative motion, robots monitor each other's state via communication so that partner robots also stop, but hardware signals take precedence and positional mismatches between cooperative robots may occur. To minimize cooperative position mismatches during emergency stop, wire the controller's external emergency stop.
+如果在协作运动期间发生紧急停止，机器人通过通信监控彼此的状态，以便合作机器人也停止，但硬件信号优先，可能会发生合作机器人之间的位置不匹配。为了最小化紧急停止期间的合作位置不匹配，请接线控制器的外部紧急停止。
 
-The ${cont_model} controller provides a user external emergency stop. The external emergency stop wiring is shown below.
+${cont_model} 控制器提供用户外部紧急停止。外部紧急停止接线如下所示。
 
-When using the robot cooperative feature, install a dedicated emergency stop switch so that emergency stop signals can be input to each controller simultaneously. Use the user-provided external emergency stop wiring to integrate them into a single emergency stop as shown below. This minimizes cooperative position mismatches during an emergency stop.
+在使用机器人协作功能时，请安装专用紧急停止开关，以便能够同时将紧急停止信号输入到每个控制器。使用用户提供的外部紧急停止接线将它们集成到一个单一的紧急停止中，如下所示。这最小化了紧急停止期间的合作位置不匹配。
 
 <br>
 
-![[Figure 2-1] Emergency stop wiring for robot cooperation](../../_assets/2-1.png)
+![[图 2-1] 机器人合作的紧急停止接线](../../_assets/2-1.png)
 
 
 <br>
 
 {% hint style="warning" %}
-- A positional mismatch during cooperative motion may occur when an emergency stop happens.
-- For handling applications, install a floating mechanism to absorb cooperative mismatches during cooperative motion (errors on emergency stop, synchronization errors, calibration errors, trajectory errors).
-- For handling applications with 2 cooperative robots, it is recommended to install at least one floating mechanism.
-- Use a Safety Relay when using external emergency stop relays.
-    Example product: Omron G7S-4A2B
+- 在协作运动期间发生紧急停止时，可能会出现位置不匹配。
+- 对于处理应用，安装浮动机制以吸收在协作运动期间的合作不匹配（紧急停止错误、同步错误、校准错误、轨迹错误）。
+- 对于具有2个合作机器人的处理应用，建议至少安装一个浮动机制。
+- 使用外部紧急停止继电器时，请使用安全继电器。
+    示例产品：Omron G7S-4A2B
 
 {% endhint %}
-
 [__SOURCE](2-system-setting/1-install/2-network-config.md)
-### 2.1.2. Network Configuration
+### 2.1.2. 网络配置
 
 <br>
 
-| Component | Specification | 
+| 组件 | 规格 | 
 | :---: | :---: | 
-| COM | Main CPU board | 
-| UTP cable | Hub connection: direct LAN cable <br> Direct connection of two units: cross LAN cable |
-| Network Hub | Company-specified switching hub |
+| COM | 主 CPU 板 | 
+| UTP 电缆 | 集线器连接：直通 LAN 电缆 <br> 两个单元的直接连接：交叉 LAN 电缆 |
+| 网络集线器 | 公司指定的交换集线器 |
 
 
-[Table 2-1] Cooperative control requirements
+[Table 2-1] 协作控制要求
 
 
 <br>
 
-- Connection method
-Connect one of the COM module's network sockets (LAN 1-3) to the general-purpose network using a UTP cable (direct), and connect the other end to the network hub. Up to 4 units can be connected to the hub this way.
-If connecting two robots without a hub, use a network UTP CROSS cable and connect it to the universal network sockets.
-
+- 连接方式
+将 COM 模块的网络插座之一（LAN 1-3）使用 UTP 电缆（直通）连接到通用网络，并将另一端连接到网络集线器。最多可以通过这种方式连接 4 个单元。
+如果在没有集线器的情况下连接两个机器人，请使用网络 UTP 交叉电缆并将其连接到通用网络插座。
 [__SOURCE](2-system-setting/1-install/3-net-check.md)
-### 2.1.3. Network Connection Check
+### 2.1.3. 网络连接检查
 
-Check the network when the following situations occur:
-- During initial installation
-- When a network anomaly is detected during cooperative control operation
-
-<br>
-<br>
-
-- Check items:
-    - Verify the network cable connection.
-    - The COM network socket LED should be blinking green.
-    - Verify cable integrity.
-    - Check network status in [Inter-robot Cooperative Control] monitoring.
+当发生以下情况时检查网络：
+- 在初始安装期间
+- 在协作控制操作中检测到网络异常时
 
 <br>
+<br>
 
-![[Figure 2-2] Cooperative control status check](../../_assets/2-2.png)
+- 检查项目：
+    - 验证网络电缆连接。
+    - COM网络插座LED应闪烁绿色。
+    - 验证电缆完整性。
+    - 在[机器人间协作控制]监控中检查网络状态。
+
+<br>
+
+![[图2-2] 协作控制状态检查](../../_assets/2-2.png)
 
 <br>
 
 {% hint style="warning" %}
-- It is recommended that the cooperative control network be configured separately and independently from other networks.
+- 推荐将协作控制网络单独且独立于其他网络配置。
 
 {% endhint %}
-
 [__SOURCE](2-system-setting/2-ctrl-setting.md)
-## 2.2. Control Environment Settings
+## 2.2. 控制环境设置
 
-Set whether to use the cooperative control function and the robot number, etc.
+设置是否使用协作控制功能和机器人编号等。
 
-(1) Select 'System' → '4: Application Parameters' → '17: Cooperative Control'.
+(1) 选择 '系统' → '4: 应用参数' → '17: 协作控制'。
 
-(2) Select '1: Control Environment Settings'.
+(2) 选择 '1: 控制环境设置'。
 
-(3) Set the dialog parameters. The purpose of each parameter is as follows:
+(3) 设置对话框参数。每个参数的目的如下：
 
-- Cooperative Control Function: <Disabled, Enabled>
-Select whether to use the cooperative control function.
-- Robot Number: <1~4>
-Set the robot number. The robot number is the identifier for your controller on the cooperative control network. The ${cont_model} controller supports a maximum of 4 robots in a cooperative network. Ensure robot numbers are not duplicated.
+- 协作控制功能: <禁用, 启用>
+选择是否使用协作控制功能。
+- 机器人编号: <1~4>
+设置机器人编号。机器人编号是在协作控制网络中您控制器的标识符。${cont_model} 控制器支持最多 4 台机器人的协作网络。确保机器人编号不重复。
 
 <br>
 
-![[Figure 2-11] Control environment settings](../_assets/2-11.png)
+![[Figure 2-11] 控制环境设置](../_assets/2-11.png)
 
 
 <br>
 
 {% hint style="warning" %}
-- For special robots and robots with fewer than 6 degrees of freedom, only HiNet communication is applicable and the `cowork` command cannot be used.
-- Cooperative control is an optional feature. Therefore, a license key registration is required to use this function. A temporary key can be issued for one month; for continued use beyond that, contact the company.
+- 对于特殊机器人和自由度少于 6 的机器人，仅适用 HiNet 通信，且无法使用 `cowork` 命令。
+- 协作控制是一个可选功能。因此，需要注册许可证密钥以使用此功能。可以为一个月发放临时密钥；如需继续使用，请联系公司。
 
 <br>
 
-![[Figure 2-3] Cooperative control license key option settings](../_assets/2-3.png)
+![[Figure 2-3] 协作控制许可证密钥选项设置](../_assets/2-3.png)
 
 {% endhint %}
 [__SOURCE](2-system-setting/3-comm-setting.md)
-## 2.3 Communication Settings
+## 2.3 通信设置
 
-Set the network IP addresses for cooperative control and the information for HiNet I/O usage.
+设置协作控制的网络 IP 地址和 HiNet I/O 使用的信息。
 
-(1) Select 'System' → '4: Application Parameters' → '17: Cooperative Control'.
+(1) 选择 '系统' → '4: 应用程序参数' → '17: 协作控制'。
 
-(2) Select '2: Communication Settings'.
-- Add robots using the "+" button for the number of robots to be cooperated. (For example, if the number of cooperative robots is 3, robot1, robot2, robot3 should be equally added on all robots as shown below.)
+(2) 选择 '2: 通信设置'。
+- 使用 "+" 按钮添加机器人以设定协作数量。 (例如，如果协作机器人数量为 3，则 robot1、robot2、robot3 应在所有机器人上平等添加，如下所示。)
 
-(3) Set the dialog parameters. Each parameter's purpose is as follows:
+(3) 设置对话参数。每个参数的目的如下：
 
-- IP Address: Set network IP addresses for each cooperative robot. (For example, if robot1=192.168.1.150, robot2=192.168.1.151, robot3=192.168.1.152, set the same on all robots.)
-- HiNet I/O: Set the start index and byte count for input/output signals.
-HiNet I/O transmits your robot's information to other cooperative robots to check robot states without a separate interlock control panel; your robot info is used as output signals and other cooperative robots' info as input signals. (For example, robot1=fb7.0 with byte count 4, robot2=fb7.32 with byte count 4, robot3=fb7.64 with byte count 4; set the same on all robots. For more details, see "[6. HiNet I/O Features](../6-hinet/1-io-overview.md)")
+- IP 地址：为每个协作机器人设置网络 IP 地址。 (例如，如果 robot1=192.168.1.150，robot2=192.168.1.151，robot3=192.168.1.152，则在所有机器人上设置相同。)
+- HiNet I/O：设置输入/输出信号的起始索引和字节计数。
+HiNet I/O 将您的机器人的信息传输到其他协作机器人，以检查机器人状态，而无需单独的互锁控制面板；您的机器人信息作为输出信号，其他协作机器人的信息作为输入信号。 (例如，robot1=fb7.0，字节计数 4，robot2=fb7.32，字节计数 4，robot3=fb7.64，字节计数 4；在所有机器人上设置相同。有关更多详细信息，请参见 "[6. HiNet I/O 功能](../6-hinet/1-io-overview.md)")
 <br>
 
-![[Figure 2-12] Usage settings](../_assets/2-12.png)
+![[图 2-12] 使用设置](../_assets/2-12.png)
 
 <br>
 [__SOURCE](2-system-setting/4-coordinate/README.md)
-## 2.4. Common Coordinate System Settings
-
+## 2.4. 常见坐标系统设置
 [__SOURCE](2-system-setting/4-coordinate/1-setting-outline.md)
-### 2.4.1. Overview of Common Coordinate System Settings
+### 2.4.1. 公共坐标系统设置概述
 
-To perform cooperative operations, the relative positions between robots must be known accurately. The robot controller computes the tool tip position with respect to each robot's base coordinate frame, and additional information about the other robots must be registered. The positional relationship between robots is established by configuring a common coordinate system.
+为了执行协作操作，机器人之间的相对位置必须准确了解。机器人控制器根据每个机器人的基础坐标框架计算工具尖端位置，并且必须注册有关其他机器人的附加信息。通过配置一个公共坐标系统来建立机器人之间的位置关系。
 
-To mutually recognize the positions of Robot 1 and Robot 2, a common coordinate system is set (Figure 2.4). The setup is performed by teaching three identical points in space on each robot.
+为了相互识别机器人1和机器人2的位置，设置一个公共坐标系统（图2.4）。该设置通过在每个机器人上教导三个空间中的相同点来完成。
 
-![[Figure 2-4] Common coordinate system setup between cooperative robots](../../_assets/2-4.png)
+![[Figure 2-4] 协作机器人之间的公共坐标系统设置](../../_assets/2-4.png)
 
 {% hint style="warning" %}
-- Perform robot calibration before setting the common coordinate system.
+- 在设置公共坐标系统之前执行机器人校准。
 
 {% endhint %}
 [__SOURCE](2-system-setting/4-coordinate/2-common-coord.md)
-### 2.4.2. Setting a Common Coordinate System for Two or More Robots
+### 2.4.2. 为两个或更多机器人设置共同坐标系统
 
-A common coordinate system for cooperative robots is defined by teaching identical points between robots, so all cooperating robots must be able to indicate the same three points. Therefore, when the distance between robots is large, it may not be possible to set a common coordinate system. In such cases, a separate tool should be fabricated so that identical points between the robots can be taught.
+合作机器人的共同坐标系统是通过教导机器人之间相同的点来定义的，因此所有合作机器人必须能够指示相同的三个点。因此，当机器人之间的距离较大时，可能无法设置共同坐标系统。在这种情况下，应制造一个单独的工具，以便可以教导机器人之间的相同点。
 
-![[Figure 2-5] Setting a common coordinate system for two or more robots](../../_assets/2-5.png)
-
+![[图 2-5] 为两个或更多机器人设置共同坐标系统](../../_assets/2-5.png)
 [__SOURCE](2-system-setting/4-coordinate/3-base-axis.md)
-### 2.4.3. Travel-Axis System
+### 2.4.3. 行程轴系统
 
-When configuring the travel-axis system for cooperative control, install travel axes with the same specifications as parallel as possible.
+在配置合作控制的行程轴系统时，尽可能平行安装具有相同规格的行程轴。
 
-![[Figure 2-6] Travel-axis system configuration for cooperative control](../../_assets/2-6.png)
+![[Figure 2-6] 合作控制的行程轴系统配置](../../_assets/2-6.png)
 
 {% hint style="warning" %}
-- Systems with travel axes should set the travel-axis specification to 'arbitrary' and perform travel-axis calibration before use.
-- Install the travel axes of cooperative robots as parallel as possible.
-- Large synchronization errors during travel-axis movement may be caused by inaccurate travel-axis calibration.
-- For details about the travel-axis calibration function, refer to the '${cont_model} controller operation manual'.
-- Travel-axis calibration should be performed for both MASTER and SLAVE.
+- 具有行程轴的系统应将行程轴规格设置为“任意”，并在使用前进行行程轴校准。
+- 尽可能平行安装合作机器人的行程轴。
+- 在行程轴运动期间的大同步误差可能是由于不准确的行程轴校准引起的。
+- 有关行程轴校准功能的详细信息，请参阅 '${cont_model} 控制器操作手册'。
+- 应对 MASTER 和 SLAVE 都进行行程轴校准。
 
 {% endhint %}
 [__SOURCE](2-system-setting/4-coordinate/4-common-coord-set.md)
-### 2.4.4. Common Coordinate System Setup
+### 2.4.4. 共同坐标系统设置
 
-If a common coordinate system is not set, manual cooperative jog operations and cooperative replay are not possible. When the common coordinate system is set, it is recommended to verify the setup using cooperative jog operations before proceeding with full operations.
+如果未设置共同坐标系统，则无法进行手动协作移动操作和协作回放。当共同坐标系统设置完成时，建议在进行全面操作之前使用协作移动操作验证设置。
 
-The common coordinate system setup requires accurate knowledge of the robots' tool-tip positions. Otherwise, synchronization position errors may occur during cooperative control between robots. Therefore, calibration is required to set the robot origins and the exact tool positions. The ${cont_model} controller provides an automatic calibration function when a 3D position measurement device is not available (System → 6: Automatic Calibration → 1: Axis Origin and Tool Length Optimization). If a 3D position measurement device is available, more accurate calibration is possible; in that case, use the 9: Robot and Tool Calibration function. For more details, refer to the ${cont_model} operation manual.
+共同坐标系统的设置需要准确了解机器人工具尖端的位置。否则，在机器人之间的协作控制中可能会发生同步位置错误。因此，需要进行校准以设置机器人的原点和精确的工具位置。${cont_model} 控制器在没有 3D 位置测量设备时提供自动校准功能（系统 → 6：自动校准 → 1：轴原点和工具长度优化）。如果有 3D 位置测量设备，则可以进行更准确的校准；在这种情况下，使用 9：机器人和工具校准功能。有关更多详细信息，请参阅 ${cont_model} 操作手册。
 
-- Example of common coordinate system setup for a two-robot environment (ROBOT1, ROBOT2)
+- 两个机器人环境共同坐标系统设置示例（ROBOT1，ROBOT2）
 
-    - ① Select the program number for common coordinate system setup on both ROBOT1 and ROBOT2 controllers.
-    - ② Jog ROBOT1 and ROBOT2 and sequentially record three points in steps 1, 2, and 3 to form as large a triangle as possible. The recorded positions must correspond to the same spatial points; interpolation method and speed do not matter, but choose a tool number whose tool tip position is known accurately.
-    - ③ In Manual mode, select System → 4: Application Parameters → 3: Common Coordinate Setup.
-    - ④ In Automatic Calculation, enter the program number used for common coordinate setup.
-    - ⑤ The execution result displays the common coordinate system position and orientation as seen from the robot base.
-    - ⑥ Press the Confirm key to complete the setup.
+    - ① 在 ROBOT1 和 ROBOT2 控制器上选择共同坐标系统设置的程序编号。
+    - ② 移动 ROBOT1 和 ROBOT2，依次记录步骤 1、2 和 3 中的三个点，形成尽可能大的三角形。所记录的位置必须对应相同的空间点；插值方法和速度无关紧要，但选择一个工具编号，其工具尖端位置已知且准确。
+    - ③ 在手动模式下，选择系统 → 4：应用参数 → 3：共同坐标设置。
+    - ④ 在自动计算中，输入用于共同坐标设置的程序编号。
+    - ⑤ 执行结果显示从机器人基座观察到的共同坐标系统的位置和方向。
+    - ⑥ 按下确认键以完成设置。
 
-![[Figure 2-7] Per-robot program for common coordinate setup](../../_assets/2-7.png)
+![[Figure 2-7] 每个机器人共同坐标设置的程序](../../_assets/2-7.png)
 
-![[Figure 2-8] Teaching method for common coordinate setup](../../_assets/2-8.png)
+![[Figure 2-8] 共同坐标设置的教学方法](../../_assets/2-8.png)
 
-![[Figure 2-9] Common coordinate setup result screen](../../_assets/2-9.png)
+![[Figure 2-9] 共同坐标设置结果屏幕](../../_assets/2-9.png)
 
 {% hint style="warning" %}
-- Enter either the correct tool specifications or obtain tool data using automatic calibration for common coordinate setup. It is recommended that each point be recorded with the same robot posture.
-- Record the three points so they form as large a triangle as possible. If the points are too close or nearly collinear, errors may occur.
-- The orientation transformation of the common coordinate system Rx, Ry, Rz relates to the robot coordinate system as follows:
+- 输入正确的工具规格或使用自动校准获取工具数据以进行共同坐标设置。建议以相同的机器人姿态记录每个点。
+- 记录三个点，使其形成尽可能大的三角形。如果点太近或几乎共线，可能会发生错误。
+- 共同坐标系统的方向变换 Rx、Ry、Rz 与机器人坐标系统的关系如下：
 
-    - ① Rotate your robot (number 2) coordinate frame (ref) around the X-axis by γ.
-    - ② Rotate your robot (number 2) coordinate frame (ref) around the Y-axis by β.
-    - ③ Rotate your robot (number 2) coordinate frame (ref) around the Z-axis by α.
-    - ④ The pose obtained by rotating your robot (number 2) base coordinate frame by γ, β, α is the orientation of the common coordinate system in space.
+    - ① 绕 X 轴旋转你的机器人（编号 2）坐标框架（ref），旋转角度为 γ。
+    - ② 绕 Y 轴旋转你的机器人（编号 2）坐标框架（ref），旋转角度为 β。
+    - ③ 绕 Z 轴旋转你的机器人（编号 2）坐标框架（ref），旋转角度为 α。
+    - ④ 通过 γ、β、α 旋转你的机器人（编号 2）基座坐标框架所获得的姿态是空间中共同坐标系统的方向。
 
-![[Figure 2-10] Orientation transformation of the common coordinate system](../../_assets/2-10.png)
+![[Figure 2-10] 共同坐标系统的方向变换](../../_assets/2-10.png)
 
 {% endhint %}
 [__SOURCE](3-manual-mode/README.md)
-# 3. Manual Mode Cooperative Operation
-
+# 3. 手动模式协作操作
 [__SOURCE](3-manual-mode/1-mode-switch.md)
-## 3.1. Switching Between Independent and Cooperative Modes
+## 3.1. 切换独立模式和协作模式
 
-### 3.1.1. Mode switching by key operation
+### 3.1.1. 通过按键操作切换模式
 
-In manual mode, cooperative control operation mode can be changed as follows.
+在手动模式下，可以按如下方式更改协作控制操作模式。
 
-- ② Using R CODE
+- ② 使用 R CODE
   
-The operations are as shown in the table below.
+操作如下表所示。
 
 | Key Operation | Mode Switch |
 |:--:|:--:|
-| R351 -> 0 | Manual Independent Mode(INDIVIDUAL) |
-| R351 -> 1 | Manual Cooperative Mode, designate MASTER |
-| R351 -> 2 | Manual Cooperative Mode, designate SLAVE |
-| R351 -> 3 | cmov Recording Mode, designate SLAVE Jog Mode <br> (This mode can only be entered if the previous state was SLAVE) |
+| R351 -> 0 | 手动独立模式(INDIVIDUAL) |
+| R351 -> 1 | 手动协作模式，指定 MASTER |
+| R351 -> 2 | 手动协作模式，指定 SLAVE |
+| R351 -> 3 | cmov 记录模式，指定 SLAVE Jog 模式 <br> (此模式仅能在前一个状态为 SLAVE 时进入) |
 
-[Table 3-1] Mode switching by key operation  
+[Table 3-1] 通过按键操作切换模式  
 
-### Manual Mode Independent (INDIVIDUAL) state
+### 手动模式独立 (INDIVIDUAL) 状态
  
-![[Figure 3-3] Manual Mode Independent state screen](../_assets/3-3.png)
+![[Figure 3-3] 手动模式独立状态屏幕](../_assets/3-3.png)
 
 <br>
 
-   This state allows each robot to be jogged independently.	
+   此状态允许每个机器人独立地进行 jog。	
 
- - Manual Mode Cooperative (MASTER designated) state
+ - 手动模式协作 (指定为 MASTER) 状态
  
-![[Figure 3-4] Manual Mode Cooperative Master state screen](../_assets/3-4.png)
+![[Figure 3-4] 手动模式协作主状态屏幕](../_assets/3-4.png)
 
 <br>
 
-   This is the state for synchronized operation according to the Master's movement when a Slave is designated.
+   这是在指定 Slave 时，根据 Master 的运动进行同步操作的状态。
 
- - Manual Mode Cooperative (SLAVE designated) state
+ - 手动模式协作 (指定为 SLAVE) 状态
  
-![[Figure 3-5] Manual Mode Cooperative Slave state screen](../_assets/3-5.png)
+![[Figure 3-5] 手动模式协作从状态屏幕](../_assets/3-5.png)
 
 <br>
 
-    The state for the Slave to follow the Master's movement.
+    让 Slave 跟随 Master 的运动的状态。
 
 
- - cmov Recording Mode, SLAVE Jog mode state
+ - cmov 记录模式，SLAVE Jog 模式状态
   
 
-![[Figure 3-6] cmov Recording Mode state screen](../_assets/3-6.png)
+![[Figure 3-6] cmov 记录模式状态屏幕](../_assets/3-6.png)
 
 <br>
 
-In cmov recording mode, you can record cmov or verify taught positions using cmov step forward/back. Note that to record steps or move the robot, there must be a robot set as Master among the cooperative robots. The position recorded on the Slave is the relative position of the Slave robot based on the Master's end effector coordinate system.
+在 cmov 记录模式中，您可以记录 cmov 或使用 cmov 前进/后退确认授教位置。请注意，要记录步骤或移动机器人，必须在协作机器人中设定一个作为 Master 的机器人。记录在 Slave 上的位置是基于 Master 的末端执行器坐标系的相对位置。
 
 <br>
 
 {% hint style="warning" %}
- - Without a common coordinate system set, it is not possible to switch roles to Master or Slave from Manual Mode Independent state.
- - The R351,3 'cmov recording state' R CODE can only be entered from manual cooperative state (Slave designated mode) (R351,2).
+ - 未设置公共坐标系统时，无法从手动模式独立状态切换角色为 Master 或 Slave。
+ - R351,3 'cmov 记录状态' R CODE 仅能从手动协作状态 (指定为 Slave 模式) (R351,2) 进入。
  
 {% endhint %}
 [__SOURCE](3-manual-mode/2-operation.md)
-## 3.2. Manual Mode Cooperative Operation
-### 3.2.1. Setting MASTER and SLAVE Robots
+## 3.2. 手动模式协作操作
+### 3.2.1. 设置 MASTER 和 SLAVE 机器人
 
-Use R351 to set robot roles to MASTER and SLAVE. The robot role is independent of the robot number.
+使用 R351 设置机器人角色为 MASTER 和 SLAVE。机器人角色独立于机器人编号。
 
  
 
-![[Figure 3-7] Manual mode cooperative operation (Setting Master and Slave robots)](../_assets/3-7.png)
+![[Figure 3-7] 手动模式协作操作（设置主从机器人）](../_assets/3-7.png)
 
 <br>
          
- - ① Confirm that both MASTER and SLAVE robots are in 'Manual Mode'.
- - ② Ensure both MASTER and SLAVE robots have Drive Ready ON and are in standby.
- - ③ Keep the Slave robot's ENABLE switch held so that Drive Ready ON is maintained, and confirm that the MASTER's Drive Ready is also ON.
- - ④ When the MASTER robot is operated, the SLAVE robot follows by tracking the relative position.
+ - ① 确认 MASTER 和 SLAVE 机器人均处于“手动模式”。
+ - ② 确保 MASTER 和 SLAVE 机器人均已启用驱动准备并处于待机状态。
+ - ③ 持续按住从机器人 ENABLE 开关，以保持驱动准备开启，并确认 MASTER 的驱动准备也已开启。
+ - ④ 当 MASTER 机器人被操作时，SLAVE 机器人通过跟踪相对位置来跟随。
 
  
-![[Figure 3-8] Manual mode cooperative operation (Master operation / Slave following)](../_assets/3-8.png)
+![[Figure 3-8] 手动模式协作操作（主操作 / 从跟随）](../_assets/3-8.png)
 
 <br>
 
 {% hint style="warning" %}
- - Manual cooperative JOG is not possible in the following cases:
-    - When more than one Master is designated and operated
-    - When attempting to operate a robot set as Slave
-    - When the Enable switches of Master or Slave are not pressed
-    - When the inter-robot cooperative coordinate system is not configured
-    - When cooperative control communication between robots is disconnected
+ - 手动协作 JOG 在以下情况下不可用：
+    - 当指定并操作多个 Master 时
+    - 当尝试操作设置为 Slave 的机器人时
+    - 当 Master 或 Slave 的 Enable 开关未按下时
+    - 当机器人间协作坐标系统未配置时
+    - 当机器人之间的协作控制通信断开时
 
- - In Manual Mode cooperative operation, JOG is not permitted on robots set as Slave. To jog a Slave, change the robot role to Manual Mode Independent.
+ - 在手动模式协作操作中，设置为 Slave 的机器人不允许 JOG。要对从机进行 jog，请将机器人角色更改为手动模式独立。
 
- - If cooperative control is <Disabled>, the I:R# / S:R# / M:R# indicators will not appear at the top of the Manual Mode screen and cannot be configured, therefore Manual cooperative JOG is not possible.
+ - 如果协作控制被 <Disabled>，则 I:R# / S:R# / M:R# 指示灯将不会出现在手动模式屏幕的顶部，并且无法配置，因此不可能进行手动协作 JOG。
 {% endhint %}
-
 [__SOURCE](3-manual-mode/3-jog.md)
-## 3.3. Cooperative Drive Axis Jog
+## 3.3. 协作驱动轴慢动作
 
-Cooperative drive axis jogging is operated the same way as standard cooperative jogging. As shown in Figure 3-5, when operating the Master drive axis in cooperative jog state, the Slave's drive axis moves compensating the relative position.
+协作驱动轴慢动作的操作方式与标准协作慢动作相同。如图3-5所示，当在协作慢动作状态下操作主驱动轴时，从属驱动轴会补偿相对位置。
 
  
-![[Figure 3-9] Cooperative drive axis jog](../_assets/3-9.png)
+![[Figure 3-9] 协作驱动轴慢动作](../_assets/3-9.png)
 
 <br>
 
 {% hint style="warning" %}
- - The drive axes of cooperative control systems should be installed as parallel as possible between Master and Slave.  
-- Cooperative control drive axis systems support only a single axis.   
-- To use cooperative drive axis functionality, perform drive axis calibration first.  
+ - 协作控制系统的驱动轴应尽可能平行安装在主轴和从轴之间。  
+- 协作控制驱动轴系统仅支持单个轴。   
+- 要使用协作驱动轴功能，请先执行驱动轴校准。  
 {% endhint %}
-
 [__SOURCE](3-manual-mode/4-cmov.md)
-## 3.4. cmov Recording Mode Jog
+## 3.4. cmov 录制模式 Jog
 
-The cmov recording mode is a mode for teaching Slave positions for jigless cooperative motion.
+cmov 录制模式是用于教学无夹具协作运动的从属位置的模式。
 
- - How to set cmov recording mode:
-    - ① Select the robot role as Slave.
-    - ② Set the Master's manual cooperative state to MASTER.
-    - ④ Even in Cartesian coordinate jog state, jogging is performed relative to the robot's Cartesian coordinate system regardless of the Master coordinates.
+ - 如何设置 cmov 录制模式：
+    - ① 选择机器人角色为从属。
+    - ② 将主控的手动协作状态设置为 MASTER。
+    - ④ 即使在笛卡尔坐标 jog 状态下，jog 也相对于机器人的笛卡尔坐标系统执行，而不考虑主控坐标。
 
 <Br>
 
-![[Figure 3-10] cmov recording mode jog](../_assets/3-10.png)
+![[Figure 3-10] cmov 录制模式 jog](../_assets/3-10.png)
 
 <br>
  
 <br>
 
  {% hint style="warning" %}
-- The drive axes of cooperative control systems should be installed as parallel as possible between Master and Slave.
-- When the Slave is in cmov recording mode, jogging of the robot set as Master in manual cooperative state is not allowed.
+- 协作控制系统的驱动轴应尽可能平行安装在主控和从属之间。
+- 当从属处于 cmov 录制模式时，不允许在手动协作状态下对设置为主控的机器人进行 jog 操作。
 {% endhint %}
-
 [__SOURCE](3-manual-mode/5-arm-interfere/README.md)
-## 3.5. Detection of Arm Interference and Soft Limits Between Cooperative Robots
-
+## 3.5. 协作机器人之间的臂干扰和软限制检测
 [__SOURCE](3-manual-mode/5-arm-interfere/1-counter-err.md)
-### 3.5.1. Detection of Partner Errors
+### 3.5.1. 伴侣错误检测
 
-If a partner robot stops due to an arm interference error or soft limit error during cooperative motion, the system stops while maintaining relative positions. If the error occurs on a Slave, the Master will also stop and cannot be operated.
+如果由于手臂干涉错误或软限制错误导致合作运动中的伙伴机器人停止，系统会在保持相对位置的同时停止。如果错误发生在从属机器人上，主机器人也将停止，无法操作。
 
  
 <br>
  
-![[Figure 3-11] Soft limit error detection](../../_assets/3-11.png)
-
+![[Figure 3-11] 软限制错误检测](../../_assets/3-11.png)
 [__SOURCE](3-manual-mode/5-arm-interfere/2-err-clear.md)
-### 3.5.2. Error Clearance
+### 3.5.2. 错误清除
 
-Press the Master's jog key in a direction that does not cause the error to be released, and the error will be cleared. After clearing the error, pressing the jog key again in a direction that does not cause the error allows operation.
+按下主控的 jog 按钮朝不导致错误释放的方向，错误将被清除。清除错误后，再次按下 jog 按钮朝不导致错误的方向可以进行操作。
 
  
 <br>
  
-![[Figure 3-12] Clearing soft limit error](../../_assets/3-12.png)
-
+![[Figure 3-12] 清除软限制错误](../../_assets/3-12.png)
 [__SOURCE](4-programming/README.md)
-# 4. Cooperative Motion Teaching
-
+# 4. 协作运动教学
 [__SOURCE](4-programming/1-cowork/README.md)
-## 4.1. cowork Command
-
+## 4.1. cowork 命令
 [__SOURCE](4-programming/1-cowork/1-parameters.md)
-### 4.1.1. Command Parameters
+### 4.1.1. 命令参数
 
 The `cowork` command marks the start and end of cooperative control in a program and specifies each robot's MASTER and SLAVE roles.
 
 <br>
 
-### Syntax
+### 语法
 
 ```python
 cowork {param1},{param2},{param3},{param4},{param5}
@@ -515,90 +490,80 @@ cowork m,id=0,s=[2,3,4],wait=5
 
 <br>
 
-### Parameters
-| param# | Meaning | Example |
+### 参数
+| param# | 含义 | 示例 |
 | :--- | :--- | :--- |
-| param1| - Designate your robot role (MASTER/SLAVE) <br>- Specify end of cooperative motion (end) <br> m: Master <br> s: Slave <br> end : End cooperative motion <br> with : Position synchronization with partner robot; sync number must match| <br> <br> `cowork m,s=...` <br> `cowork s,m=...` <br> `cowork end` <br> `cowork with, sync=1` |
-| param2 | - Manipulator ID that the master robot controller designates as Master <br> If you are MASTER: <br> id = 0 indicates robot manipulator <br> id = 1 indicates the positioner group 1 registered as an auxiliary axis (if a positioner group is set as an auxiliary axis on the Master side)| `cowork m,id=1,s` <br> |
-| param3 | - Specify partner robot number <Br> If you designate yourself as MASTER: <br> the partners become SLAVEs and their robot numbers are specified (up to 3) <br> If you designate yourself as SLAVE: <br> the partner becomes MASTER and specify the robot number of the MASTER | `cowork m,s=[2,3,4]` <Br> `cowork s,m=1` |
-| param4 | - Manipulator ID that the Master robot controller designates as Master <br> If you are SLAVE: <br> id = 0 is robot manipulator <br> id = 1 is the positioner group 1 registered as an auxiliary axis (if a positioner group is set as an auxiliary axis on the Master side) | `cowork s,m=1,id=0` |
-| param5 | - Partner robot wait time (sec) < 0 (infinite wait) ~ 120 > <Br> If you designate yourself as MASTER: <br> Wait time for SLAVEs to reach the cooperative reference position <br> If you designate yourself as SLAVE: <br> Wait time for MASTER to reach the cooperative reference position | `cowork s,m=1,wait=30` |
-
+| param1| - 指定您的机器人角色 (MASTER/SLAVE) <br>- 指定合作运动的结束 (end) <br> m: 主控 <br> s: 从控 <br> end : 结束合作运动 <br> with : 与合作机器人位置同步；同步编号必须匹配| <br> <br> `cowork m,s=...` <br> `cowork s,m=...` <br> `cowork end` <br> `cowork with, sync=1` |
+| param2 | - 主控机器人控制器指定的操纵器ID <br> 如果您是 MASTER: <br> id = 0 表示机器人操纵器 <br> id = 1 表示注册为辅助轴的定位器组1 (如果在主控侧设置为辅助轴)| `cowork m,id=1,s` <br> |
+| param3 | - 指定合作机器人编号 <Br> 如果您指定自己为 MASTER: <br> 合作伙伴成为 SLAVES，并指定其机器人编号（最多3个） <br> 如果您指定自己为 SLAVE: <br> 合作伙伴成为 MASTER，并指定 MASTER 的机器人编号 | `cowork m,s=[2,3,4]` <Br> `cowork s,m=1` |
+| param4 | - 主控机器人控制器指定的操纵器ID <br> 如果您是 SLAVE: <br> id = 0 是机器人操纵器 <br> id = 1 是注册为辅助轴的定位器组1 (如果在主控侧设置为辅助轴) | `cowork s,m=1,id=0` |
+| param5 | - 合作机器人等待时间 (秒) < 0 (无限等待) ~ 120 > <Br> 如果您指定自己为 MASTER: <br> 等待 SLAVES 到达合作参考位置的时间 <br> 如果您指定自己为 SLAVE: <br> 等待 MASTER 到达合作参考位置的时间 | `cowork s,m=1,wait=30` |
 [__SOURCE](4-programming/1-cowork/2-usage.md)
-### 4.1.2. How to Use the `cowork` Command
+### 4.1.2. 如何使用 `cowork` 命令
 
-(1) On the MASTER robot, the actions within the `cowork ~ cowork end` section are treated as cooperative segment commands. SLAVEs cannot insert action commands.
+(1) 在 MASTER 机器人上，`cowork ~ cowork end` 部分的动作被视为协作段命令。SLAVE 不能插入动作命令。
 
-(2) On SLAVE robots, standard `move` commands cannot be used within the cooperative section; use the `cmov` command (cowork move) instead.
+(2) 在 SLAVE 机器人上，标准的 `移动 (move)` 命令不能在协作部分使用；请改用 `cmov` 命令（协作移动）。
 
-(3) In handling applications where the Slave follows the Master, as in the example below, the Slave will maintain the relative position to the Master and move accordingly when the `cowork` command is executed even if no `cmov` commands are inserted on the Slave.
+(3) 在处理从属跟随主控的应用程序时，如下面的示例，Slav会保持相对于主控的相对位置，并在执行 `cowork` 命令时相应移动，即使在 Slave 上没有插入 `cmov` 命令。
 
 ![](../../_assets/4-prg1.png)
- 
-(4) On the Slave, you can insert `cmov` commands that interpolate in the Master end effector coordinate system; `cmov` recorded positions are relative to the Master's tool end effector coordinate system. If taught as in the example below, within `cowork ~ cowork end` the Slave performs cooperative motion and follows the Master's movement along the `cmov` path recorded in the Master end effector coordinate system.
 
- ![](../../_assets/4-prg2.png)
+(4) 在 Slave 上，您可以插入 `cmov` 命令，这些命令在 Master 末端执行器坐标系统中进行插值；`cmov` 记录的位置是相对于 Master 的工具末端执行器坐标系统的。如果像下面的示例那样教授，在 `cowork ~ cowork end` 内，Slave 执行协作运动，并沿着 Master 末端执行器坐标系统中记录的 `cmov` 路径跟随 Master 的运动。
+
+![](../../_assets/4-prg2.png)
 
 {% hint style="warning" %}
 
- - A `cowork end` command must be inserted at the end of cooperative motion.
- - For SLAVE robots, `move` commands cannot be inserted within the cooperative section; for MASTER robots, `cmov` commands cannot be inserted.
+ - 必须在协作运动结束时插入 `cowork end` 命令。
+ - 对于 SLAVE 机器人，不能在协作部分中插入 `移动 (move)` 命令；对于 MASTER 机器人，不能插入 `cmov` 命令。
 
 {% endhint %}
-
 [__SOURCE](4-programming/2-programming.md)
-## 4.2. Teaching and Writing Programs for Cooperative Handling
+## 4.2. 教授和编写协作处理程序
 
-(1) Operators are required equal to the number of cooperative robots; therefore, each operator participates for each robot to be cooperated.
+(1) 操作员的数量必须与协作机器人数量相等；因此，每个操作员为每个被协作的机器人参与。
 
-(2) Verify that the cooperative robot common coordinate system is configured.
+(2) 验证协作机器人公共坐标系统是否已配置。
 
-(3) Move the MASTER and SLAVE robots to their respective cooperation start positions and record the start positions as reference.
+(3) 将 MASTER 和 SLAVE 机器人移动到各自的合作起始位置，并将起始位置记录为参考。
 
 ![](../_assets/4-prg3.png)
- 
- <br>
-
-![[Figure 4-1] Recording cooperative motion start reference positions](../_assets/4-1.png)
 
 <br>
 
-(4) Assign robot roles by entering R351 codes for MASTER and SLAVE robots.
+![[Figure 4-1] 记录协作运动起始参考位置](../_assets/4-1.png)
 
-(5) Register the cooperative control start command (`cowork m/s`). The `cowork` command specifies Master/Slave and assigns the Slave/Master numbers. Only one Master may be set, and up to three Slaves may be specified.
+<br>
 
- ![](../_assets/4-prg4.png)
- 
+(4) 通过输入 R351 代码为 MASTER 和 SLAVE 机器人分配机器人角色。
 
-(6) Operate the MASTER robot by jogging (JOG). The Slave follows the Master tool-tip position relatively. During cooperative jogging, the Slave must have the Enable switch pressed. Record step positions only on the Master; do not record them on the Slave controller.
+(5) 注册协作控制启动命令 (`cowork m/s`)。`cowork` 命令指定 Master/Slave 并分配 Slave/Master 编号。只能设置一个 Master，并且最多可以指定三个 Slaves。
 
- 
+![](../_assets/4-prg4.png)
+
+(6) 通过慢移 (JOG) 操作 MASTER 机器人。Slave 相对跟随 Master 工具尖端的位置。在协作慢移过程中，Slave 必须按下启用开关。仅在 Master 上记录步态位置；不要在 Slave 控制器上记录。
+
 ![](../_assets/4-prg5.png)
-      
 
- 
-![[Figure 4-2] Master robot operation](../_assets/4-2.png)
+![[Figure 4-2] MASTER 机器人操作](../_assets/4-2.png)
 
-(7) Record cooperative motion steps on the MASTER. Set the Master's interpolation type and speed. Use standard `move` commands within cooperative motion commands (cmov cannot be used).
+(7) 在 MASTER 上记录协作运动步骤。设置 Master's 插值类型和速度。在协作运动命令中使用标准 `移动 (move)` 命令（不能使用 cmov）。
 
- 
 ![](../_assets/4-prg6.png)
 
-(8) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control.
+(8) 当协作运动完成后，在 Master 和 Slave 上插入 `cowork end` 命令以结束协作控制。
 
- 
 ![](../_assets/4-prg7.png)
- 
 
 <br>
 
 {% hint style="warning" %}
-	Do not change the Slave's Enable switch to OFF during manual cooperative operation. Hardware signals take priority over communication and can cause position mismatches between cooperative robots. In severe cases, this may result in damage to the workpiece or the robot hand.
+	在手动协作操作期间，不要将 Slave 的启用开关更改为 OFF。硬件信号优先于通信，可能导致协作机器人之间的位置不匹配。在严重情况下，这可能导致工件或机器人手的损坏。
 
 {% endhint %}
-
 [__SOURCE](4-programming/3-cmov.md)
-## 4.3. cmov Command
+## 4.3. cmov 命令
 
 <br>
 
@@ -609,874 +574,813 @@ cmov R20,L,tg=po1,spd=60%,accu=0,tool=1
 cmov R20,L,tg=po1,spd=60%,accu=0,tool=1 until di1
 ```
 
-
 <br>
 
-### Parameters
-| param# | Meaning | 
+### 参数
+| param# | 说明 | 
 | :--- | :--- | 
-| param1| - Master robot system manipulator identifier <br> Format: R(#1)(#2) <br> #1 : Master robot system number (1~4) <br> #2 : Master manipulator identifier of the robot system <br> (0: Robot, 1: Positioner Group 1, 2: Positioner Group 2)| 
-| param2 | - Interpolation type <br> Specifies the interpolation mode for the slave robot; only linear and circular are supported <br> (L: Linear, C: Circular)|
-| param3 | - Movement speed (Speed) <Br> Specify the relative speed compared to the workpiece | 
-| param4 | - Accuracy (0~7)|
-| param5 | - Tool number (0~31) |
+| param1| - 主控机器人系统操纵器标识符 <br> 格式: R(#1)(#2) <br> #1 : 主控机器人系统编号 (1~4) <br> #2 : 机器系统的主操纵器标识符 <br> (0: 机器人, 1: 定位器组 1, 2: 定位器组 2)| 
+| param2 | - 插值类型 <br> 指定从属机器人插值模式；仅支持线性和圆形 <br> (L: 线性, C: 圆形)|
+| param3 | - 移动速度 (速度) <Br> 指定相对于工件的相对速度 | 
+| param4 | - 精度 (0~7)|
+| param5 | - 工具编号 (0~31) |
 
 
-![[Figure 4-3] Method for distinguishing ID identifiers](../_assets/4-3.png)
-
+![[Figure 4-3] 区分 ID 标识符的方法](../_assets/4-3.png)
 [__SOURCE](4-programming/4-arc-sealing.md)
-## 4.4. Teaching for Arc Welding and Sealing (Jigless Cooperative Control)
+## 4.4. 教学弧焊和密封（无夹具协作控制）
 
-(1) Set the manual cooperative roles of Master and Slave robots to 'Independent', record the start steps for cooperation, and insert the cowork command at the cooperation start position.
+(1) 将主机器人和从机器人的手动协作角色设置为“独立”，记录协作的起始步骤，并在协作起始位置插入cowork命令。
  
 ![](../_assets/4-prg8.png)
 
-![[Figure 4-4] Step start and target positions](../_assets/4-4.png)
+![[图 4-4] 步骤起始和目标位置](../_assets/4-4.png)
 
 
-(2) Set the Manual Cooperative states for Master and Slave according to their roles.
+(2) 根据主从机器人的角色设置手动协作状态。
 
 ![](../_assets/4-prg9.png)
 
 
-(3) When you jog the Master, the Slave follows. Record the Master step at the desired position.
+(3) 当您推动主机器人时，从机器人跟随。在所需位置记录主机器人的步骤。
 
  ![](../_assets/4-prg10.png)
 
-(4) Switch the Slave to cmov recording state using R351,3. The robot role indicator at the top of the screen changes from white to red.
+(4) 使用R351,3将从机器人切换到cmov录制状态。屏幕顶部的机器人角色指示器由白色变为红色。
 
  ![](../_assets/4-prg10.png)
 
-(5) Jog the Slave robot to the target position and press the 'Record' key.
+(5) 将从机器人推到目标位置并按下“记录”键。
  
 
-![[Figure 4-5] Recording cmov target positions](../_assets/4-5.png)
+![[图 4-5] 录制cmov目标位置](../_assets/4-5.png)
 
  
 ![](../_assets/4-prg11.png)  
 
 
-(6) The cmov positions are recorded on the Slave. The recorded cmov positions are coordinates relative to the Master tool end effector coordinate system. Press the [Properties] key to view or modify the recorded coordinates.
+(6) cmov位置在从机器人上被记录。记录的cmov位置是相对于主工具末端效应器坐标系统的坐标。按下[属性]键以查看或修改记录的坐标。
   
-(7) The recorded coordinate system will be shown as 'Master'. 
+(7) 记录的坐标系统将显示为“主”。
 
-(8) Similarly, move the Slave and record multiple cmov steps.
+(8) 同样，移动从机器人并记录多个cmov步骤。
 
  ![](../_assets/4-prg12.png)
 
-(9) Note that the movement planning for recorded steps is executed separately by Master and Slave, so the timing when Master and Slave reach their target positions may differ. To align the start timings of the Master's move position and the Slave's cmov position in the cooperative section, use mutual interlocks implemented with HiNet I/O or use `cowork with, sync=1`. The `cowork with` command performs synchronized motion only if the sync numbers match; encountering a `cowork with` with a different number will cause an error.
+(9) 请注意，记录步骤的运动规划由主机器人和从机器人分别执行，因此主机器人和从机器人到达其目标位置的时间可能会有所不同。要使主机器人的移动位置和从机器人的cmov位置在协作部分的起始时间对齐，可以使用HiNet I/O实现的互锁，或使用`cowork with, sync=1`。`cowork with`命令只有在同步数字匹配时才会执行同步运动；如果遇到不同数字的`cowork with`，将导致错误。
 
-(10) For example, to synchronize the start of step 5 (S5) for Master and Slave, you can use an _mb memory variable to check whether each robot has reached its step position.
+(10) 例如，要同步主机器人和从机器人第5步(S5)的开始，可以使用_mb内存变量来检查每个机器人是否已达到其步骤位置。
 
  ![](../_assets/4-prg13.png)
 
-* Using this method, after Master and Slave reach step 4 (S4), they verify that the partner robot has reached step 4 before moving to the next step (S5).
+* 使用此方法，在主机器人和从机器人达到第4步(S4)后，它们将在移动到下一步(S5)之前验证伙伴机器人是否已达到第4步。
 
-(11) When cooperative motion is finished, insert `cowork end` commands on both Master and Slave to end cooperative control teaching.
+(11) 当协作运动完成时，在主机器人和从机器人上插入`cowork end`命令以结束协作控制教学。
 
 ![](../_assets/4-prg14.png)     
 
-(12) The entire program example described above is shown below, and timing control such as ⓐ, ⓑ, ⓒ may be applied for cooperative timing control.
+(12) 上述整个程序示例如下所示，诸如ⓐ、ⓑ、ⓒ等时序控制可以用于协作时序控制。
 
  ![](../_assets/4-prg15.png)
 
-(13) The `cowork with` command is used during cooperative control (between `cowork` and `cowork end`) to synchronize positions between Master and Slave. When a `cowork with` command is encountered during cooperative control, it waits until all cooperating robots reach that `cowork with`. Therefore, the earlier program can be modified as follows.
+(13) `cowork with`命令在协作控制期间（在`cowork`和`cowork end`之间）用于同步主机器人和从机器人的位置。当在协作控制期间遇到`cowork with`命令时，它会等待所有协作机器人到达该`cowork with`。因此，可以将之前的程序修改如下。
 
  ![](../_assets/4-prg16.png)
 
 
 {% hint style="warning" %}
 
- - When using cmov weaving motion, reference points (refp) must be recorded within the cooperative control region (`cowork ~ cowork end`).
- - Seam-tracking of cmov trajectories using laser vision sensors is not supported.
- - In the cooperative control region (`cowork ~ cowork end`), the number of `cowork with` commands must be the same for both Master and Slave.
- - `cowork with` commands performed jointly by cooperating robots must use the same sync number.
+ - 使用cmov编织运动时，参考点(refp)必须在协作控制区域内录制（`cowork ~ cowork end`）。
+ - 不支持使用激光视觉传感器进行cmov轨迹的缝合跟踪。
+ - 在协作控制区域（`cowork ~ cowork end`）中，主机器人和从机器人的`cowork with`命令数量必须相同。
+ - 协作机器人共同执行的`cowork with`命令必须使用相同的同步数字。
 
 {% endhint %}
-
 [__SOURCE](4-programming/5-cmov-record.md)
-## 4.5. Checking cmov Recorded Positions
+## 4.5. 检查 cmov 录制位置
 
-The cmov steps are a useful feature that allows you to verify taught positions using the step forward/back functions in cmov recording mode. The cmov step records positions and orientations relative to the Master end effector coordinate system, so verify and execute based on the Master's tool position.
+cmov 步骤是一个有用的功能，允许您使用 cmov 录制模式中的前进/后退功能来验证教学位置。cmov 步骤相对于主端执行器坐标系统记录位置和方向，因此请根据主工具位置进行验证和执行。
 
- - (1) Set the robot taught as Master (cowork m) to Manual Cooperative Master state (R351,1).
- - (2) Set the robot taught as Slave (cowork s) to cmov recording state (R351,3).
- - (3) Move the Master robot to the step position to be cooperated and leave it stopped.
- - (4) On the Slave, select the cmov step to move to and press the step forward key; the Slave will move to the position recorded in the Master end effector. For example, if the cmov recording position is recorded as the origin (0,0,0) of the Master end effector coordinate system as shown below, the Slave will move to the Master end effector origin regardless of the Master's global position when executing cmov.
+ - (1) 将机器人设置为主（cowork m），并进入手动协作主状态 (R351,1)。
+ - (2) 将机器人设置为从（cowork s），并进入 cmov 录制状态 (R351,3)。
+ - (3) 将主机器人移动到要协作的步骤位置并保持停止。
+ - (4) 在从机器人上，选择要移动到的 cmov 步骤并按下前进步骤键；从机器人将移动到主端执行器中记录的位置。例如，如果 cmov 录制位置记录为主端执行器坐标系统的原点 (0,0,0)，如下所示，从机器人将在执行 cmov 时移动到主端执行器原点，而不管主机器人的全局位置。
 
  
-![[Figure 4-6] Checking cmov recorded positions](../_assets/4-6.png)
+![[Figure 4-6] 检查 cmov 录制位置](../_assets/4-6.png)
 
 {% hint style="warning" %}
- - In cmov recording state (R351,3), the robot will move to the recorded step position regardless of cowork command execution.
- - Master jogging is not allowed in cmov recording state.
- - Because real-time cooperative motion does not occur in cmov recording state, do not operate step forward/back on the Master simultaneously; keep the Master stopped.
- - If you change and then stop the Master's position while in cmov recording state, stepping forward to the cmov step will move to the updated position.
+ - 在 cmov 录制状态 (R351,3) 下，机器人将移动到记录的步骤位置，而不管协作命令执行情况。
+ - 在 cmov 录制状态下不允许主机器人的操控。
+ - 因为实时协作运动在 cmov 录制状态下不会发生，所以请勿同时在主机器人上操作前进/后退；保持主机器人停止。
+ - 如果在 cmov 录制状态下更改并停止主机器人的位置，则向 cmov 步骤前进将移动到更新的位置。
 {% endhint %}
-
 [__SOURCE](4-programming/6-positioner/README.md)
-## 4.6. Positioner Master System
+## 4.6. 位置器主系统
 
 <br>
 
-This feature allows assigning a positioner as the cooperative Master so that Slave robots can cooperate with the Master positioner. Positioner groups 1-3 are supported.
-
+此功能允许将位置器指定为合作主设备，以便从属机器人可以与主位置器协作。支持位置器组 1-3。
 [__SOURCE](4-programming/6-positioner/1-jog.md)
-### 4.6.1. Positioner Master Jog
+### 4.6.1. 位置器主控手动操作
 
 <Br>
 
-(1) Perform positioner group setup and positioner calibration for the robot that has a positioner installed to enable positioner synchronization.
+(1) 对安装有位置器的机器人执行位置器组设置和位置器校准，以启用位置器同步。
 
-(2) Use R351,1 or a user key to set the robot with the positioner to Manual Cooperative Master (M:G#R#).
+(2) 使用 R351,1 或用户钥匙将带有位置器的机器人设置为手动协作主控 (M:G#R#)。
 
-(3) Press the 'Mechanism' key to select the positioner mechanism.
+(3) 按下 '机制' 按钮以选择位置器机制。
 
 ![](../../_assets/4-7.png)
 
-(4) Press the 'Coordinate System' key so that the synchronization coordinate system S1 (or S2) is selected.
+(4) 按下 '坐标系统' 按钮，以便选择同步坐标系统 S1 (或 S2)。
 
- ![](../../_assets/4-8.png)
+![](../../_assets/4-8.png)
 
+(5) 使用 R351,2 (S:G#R#) 将从属机器人设置为 SLAVE。
 
-(5) Set the Slave robot to SLAVE using R351,2 (S:G#R#).
-
-(6) When performing positioner synchronized jog, both Robot 1 and Robot 2 are operated synchronized with the positioner.
-
+(6) 在执行位置器同步手动操作时，机器人 1 和机器人 2 与位置器同步操作。
 [__SOURCE](4-programming/6-positioner/2-teaching.md)
-### 4.6.2. Positioner Master Teaching and Playback
+### 4.6.2. 主控器教学与回放
 
-Teach Master and Slave using the `cowork` command. On the Slave side, set `id=1` (positioner group number) to select the Master's positioner as Master.
+使用 `cowork` 命令对主控器和从控器进行教学。在从控器端，将 `id=1`（位置器组编号）设置为选择主控器的位置器作为主控器。
 
-While the positioner is set as Master (Master robot coordinate system 'Sync S1'), record the Slave positions. Recorded positions are stored in the positioner end effector coordinate system.
+当位置器设置为主控器（主机器人坐标系统 'Sync S1'）时，记录从控器的位置。记录的位置存储在位置器末端执行器坐标系统中。
 
-![](../../_assets/4-prg20.png) 
+![](../../_assets/4-prg20.png)
 
-To have the Master robot cooperate with the positioner, teach smov steps in the same way as for an ordinary positioner. When the Slave records a step while the Master's positioner is set as Master (Master robot coordinate system 'Sync S1'), it is recorded using a robot number that reflects the Master ID.
+为了让主机器人与位置器协作，按照普通位置器的方式教学 smov 步骤。当从控器在主控器的位置器设置为主控器（主机器人坐标系统 'Sync S1'）时记录步骤时，它会使用反映主控器 ID 的机器人编号进行记录。
 
- 
 ![](../../_assets/4-prg21.png)
 
-The Master uses the same positioner synchronization function, and the Slave is recorded with R11.
+主控器使用相同的位置器同步功能，从控器记录为 R11。
 
-Teach Master and Slave in the same way as described in (3) above and finish with `cowork end`.
-     
+按照上述 (3) 中描述的方式对主控器和从控器进行教学，并以 `cowork end` 结束。
+
 ![](../../_assets/4-prg22.png)
 
-After confirming operation in manual mode, operate in automatic mode.
+在手动模式下确认操作后，切换到自动模式进行操作。
 
-    
-![[Figure 4-7] Simulation of positioner synchronized operation per robot](../../_assets/4-9.png)
-
+![[Figure 4-7] 每个机器人位置器同步操作的仿真](../../_assets/4-9.png)
 
 <br>
 
 {% hint style="warning" %}
 
- - Jigless cooperative control supports positioner groups 1-3. When positioner jogging or in `cmov`, select the positioner group number 1-3.
- - If values set in the Slave with `cowork s,m=#1,id=#2` differ from the `cmov R#1#2` values, an `E1365 cmov Master No. ID is invalid.` error occurs.
+ - 无夹具协作控制支持位置器组 1-3。当进行位置器移动或在 `cmov` 中时，选择位置器组编号 1-3。
+ - 如果在从控器中设置的值与 `cowork s,m=#1,id=#2` 不同于 `cmov R#1#2` 的值，将出现 `E1365 cmov Master No. ID is invalid.` 错误。
 
 {% endhint %}
-
 [__SOURCE](5-play/README.md)
-# 5. Cooperative Motion Playback
-
+# 5. 协作运动播放
 [__SOURCE](5-play/1-overview.md)
-## 5.1. Overview of Cooperative Playback
+## 5.1. 合作播放概述
 
-This section provides an overview of cooperative playback and its main behaviors, including manual verification and automatic playback procedures. Refer to subsequent sections for detailed instructions.
-
+本节提供合作播放及其主要行为的概述，包括手动验证和自动播放程序。有关详细说明，请参阅后续章节。
 [__SOURCE](5-play/2-program-check.md)
-## 5.2. Program Check in Manual Mode
+## 5.2. 手动模式下的程序检查
 
-(1) In manual mode, set the Master robot's manual cooperative state to I (Indiv.) or M (Master), and set the Slave robot's manual cooperative state to I (Indiv.) or S (Slave).
-(2) Turn Drive Ready On and press the 'Step Forward' key on both sides.
-(3) To verify synchronous motion between Master and Slave, press the Master and Slave step forward keys until cooperative motion is completed.
- 
- <br>
- 
+(1) 在手动模式下，将主机器人（Master）的手动协作状态设置为 I (Indiv.) 或 M (Master)，并将从机器人（Slave）的手动协作状态设置为 I (Indiv.) 或 S (Slave)。  
+(2) 打开驱动就绪并同时按下两侧的“前进”键。  
+(3) 按下主机器人和从机器人的前进键，直到协作运动完成，以验证主从机器人的同步运动。  
+
+<br>
+
 ![](../_assets/4-prg23.png)
 
-![[Figure 5-5] Program check in manual mode](../_assets/5-5.png)
+![[图 5-5] 手动模式下的程序检查](../_assets/5-5.png)
 
 <br>
- 
 
 {% hint style="warning" %}
- 
- - If the Slave is in cmov recording mode, manual mode cooperative operation with the Master will not be possible.
- - When executing step forward/backward, set 'Execute function on step forward' in Condition Settings to On.
- - The Master and Slave robots check the execution position only at the moment the cowork command is executed; they do not synchronize Master and Slave step positions outside of that. Therefore, the relative positions of Master and Slave checked using step forward/back may differ during automatic mode playback.
- - To synchronize the positions of the two robots, use the `cowork with, sync=1` statement.
+
+ - 如果从机器人处于 cmov 录制模式，则无法与主机器人进行手动模式协作操作。  
+ - 在执行前进/后退时，将条件设置中的“在前进时执行功能”设置为开启。  
+ - 主机器人和从机器人仅在执行协作命令的瞬间检查执行位置；在此之外，它们不会同步主从机器人的步骤位置。因此，在自动模式播放期间，使用前进/后退检查的主从机器人的相对位置可能会有所不同。  
+ - 要同步两个机器人的位置，请使用 `cowork with, sync=1` 语句。  
 
 {% endhint %}
-
 [__SOURCE](5-play/3-auto-mode.md)
-## 5.3. Playback in Automatic Mode
+## 5.3. 自动模式下的播放
 
-(1) Switch all cooperative robots to automatic mode.
+(1) 将所有协作机器人切换到自动模式。
 
-(2) Verify that all cooperative robots have Drive Ready ON.
+(2) 验证所有协作机器人的驱动准备状态为开启。
 
-(3) Start the program from the beginning.
+(3) 从头开始启动程序。
 
-(4) Start each cooperative robot. (The start order of MASTER and SLAVE may be arbitrary.)
-
-
+(4) 启动每个协作机器人。（MASTER 和 SLAVE 的启动顺序可以是任意的。）
 
 {% hint style="warning" %}
 
- - Do not arbitrarily move the cursor and execute from cowork m (or cowork s) unless you are at the cooperative playback reference position. Cooperative motion calculates the relative position of Master and Slave from the cowork m (cowork s) position, so it must be executed from the cooperative reference position.
- - Set the cooperative waiting time appropriately. If one of MASTER or SLAVE reaches the cooperative reference position first and the partner robot does not arrive within the 'cooperative waiting time', an error occurs. To wait indefinitely, set the cooperative waiting time to 0.
-
+ - 除非您处于协作播放参考位置，否则不要随意移动光标并从 cowork m（或 cowork s）执行。协作运动从 cowork m（cowork s）位置计算 Master 和 Slave 的相对位置，因此必须从协作参考位置执行。
+ - 适当地设置协作等待时间。如果 MASTER 或 SLAVE 先到达协作参考位置，而合作机器人的另一方在 '协作等待时间' 内未到达，则会发生错误。要无限期等待，请将协作等待时间设置为 0。
 
 {% endhint %}
-
 [__SOURCE](5-play/4-resume.md)
-## 5.4. Stop/Resume of Cooperative Playback
+## 5.4. 停止/恢复协同播放
 
-If the user inputs a stop command (external stop, internal stop) during cooperative motion, all robots engaged in cooperative motion will stop.
-
-
-<br>
-
-![[Figure 5-6] Warning displayed when a partner robot stops](../_assets/5-6.png)
+如果用户在协同运动期间输入停止命令（外部停止，内部停止），所有参与协同运动的机器人将停止。
 
 <br>
 
-
-
-After stopping during cooperative motion, changing the step number and replaying is only possible when cooperative playback is disabled. If you stop during cooperation, change the step, and then attempt to replay, a [Yes/No] confirmation is required from the user.
+![[Figure 5-6] 伙伴机器人停止时显示的警告](../_assets/5-6.png)
 
 <br>
 
-![[Figure 5-7] Message when changing step after stopping during cooperative motion](../_assets/5-7.png)
+在协同运动中停止后，仅在禁用协同播放时可以更改步骤并重新播放。如果在协作期间停止，更改步骤，然后尝试重新播放，则需要用户的 [Yes/No] 确认。
 
 <br>
 
- 
+![[Figure 5-7] 在协同运动中停止后更改步骤时的消息](../_assets/5-7.png)
 
-If a cooperative control state reset is input, it releases the cooperative state and operates. To operate while keeping the cooperative state, specify the stopped step number and start.
+<br>
 
+如果输入了协同控制状态重置，它将释放协同状态并操作。要在保持协同状态的同时操作，请指定停止的步骤号并开始。
 [__SOURCE](5-play/5-robot-lock.md)
-## 5.5. Robot Lock Function (Robot Lock Playback)
+## 5.5. 机器人锁定功能（机器人锁定播放）
 
-Set 'Condition Settings' → '5: Robot Lock' to <Enabled>.
+将“条件设置”→“5：机器人锁定”设置为<Enabled>。
 
+ 
+<br>
+
+![[图 5-8] 机器人锁定启用设置](../_assets/5-8.png)
+
+<br>
+
+当主机器人设置为机器人锁定<Enabled>并执行播放时，奴隶机器人在主机器人不移动的情况下进行协作运动，只有轴数据监视器发生变化。
+
+
+<br>
+
+![[图 5-10] 机器人锁定功能（主锁定)](../_assets/5-10.png)
+
+<br>
+
+如果奴隶机器人设置为机器人锁定<Enabled>而主机器人设置为<Disabled>，主机器人正常操作，而奴隶机器人保持停止，只有监视数据移动。
+
+<br>
+
+![[图 5-11] 机器人锁定功能（奴隶锁定)](../_assets/5-11.png)
+
+<br>
+
+ 
+
+当主机和奴隶都设置为机器人锁定<Enabled>时，程序运行时主机和奴隶都会停止。
  
 <br>
 
-![[Figure 5-8] Robot Lock Enable Setting](../_assets/5-8.png)
-
-<br>
-
-When the Master robot is set to Robot Lock <Enabled> and playback is performed, the Slave performs cooperative motion while the Master robot does not move and only the axis data monitor changes.
-
-
-<br>
-
-![[Figure 5-10] Robot Lock Function (Master Lock)](../_assets/5-10.png)
-
-<br>
-
-If the Slave robot is set to Robot Lock <Enabled> and the Master robot is set to <Disabled>, the Master robot operates normally while the Slave robot remains stopped and only monitoring data moves.
-
-<br>
-
-![[Figure 5-11] Robot Lock Function (Slave Lock)](../_assets/5-11.png)
-
-<br>
-
- 
-
-When both Master and Slave are set to Robot Lock <Enabled>, the program runs with both Master and Slave stopped.
- 
-<br>
-
-![[Figure 5-12] Robot Lock Function (Master, Slave Lock)](../_assets/5-12.png)
+![[图 5-12] 机器人锁定功能（主机，奴隶锁定)](../_assets/5-12.png)
 
 <br>
 
 
 {% hint style="warning" %}
 
- - Set the cooperative waiting time to an appropriate length.
- - Robots set to Robot Lock <Enabled> will not move, so move them to a position where they will not interfere with other robots before running the program.
- - When changing the Robot Lock setting back to <Disabled> and running, the robot positions and step positions may not correspond; please run the program from the beginning.
+ - 将协作等待时间设置为适当长度。
+ - 设置为机器人锁定<Enabled>的机器人将不会移动，因此在运行程序之前，将它们移动到不会干扰其他机器人的位置。
+ - 当将机器人锁定设置更改回<Disabled>并运行时，机器人位置和步进位置可能不对应；请从头开始运行程序。
 
 {% endhint %}
-
 [__SOURCE](6-hinet/README.md)
-# 6. HiNet I/O Features
-
+# 6. HiNet I/O 特性
 [__SOURCE](6-hinet/1-io-overview.md)
-## 6.1. HiNet I/O Overview
+## 6.1. HiNet I/O 概述
 
-HiNet I/O is a function that shares information between robots via the cooperative control network. Each controller monitors information from cooperative robots, so the sections set to be shared can be used freely. The maximum data size each controller can use is 12 bytes, and it can receive 36 bytes excluding its own portion.
+HiNet I/O 是一个通过协作控制网络在机器人之间共享信息的功能。每个控制器监控来自协作机器人的信息，因此设置为共享的部分可以自由使用。每个控制器可以使用的最大数据大小为 12 字节，并且可以接收 36 字节（不包括其自身部分）。
  
 
 ![[Figure 6-1] HiNet Group Structure](../_assets/6-1.png)
 
-This function can be used via the robot language (HRScript), allowing various applications that meet user needs.
+此功能可以通过机器人语言 (HRScript) 使用，允许满足用户需求的各种应用。
 
 
 ![ ](../_assets/6-3.png) 
 
 <br>
 
-For example, if configured as below, when ROBOT 1 is the local robot, its information is set to fb7.dob0 ~ fb7.dob3, ROBOT2's information is received at fb7.dib4 ~ fb7.dib7, ROBOT3's information at fb7.dib8 ~ fb7.dib11, and ROBOT4's information at fb7.dib12 ~ fb7.dib15.
+例如，如果配置如下，当 ROBOT 1 是本地机器人时，其信息设置为 fb7.dob0 ~ fb7.dob3，ROBOT2 的信息在 fb7.dib4 ~ fb7.dib7 接收，ROBOT3 的信息在 fb7.dib8 ~ fb7.dib11 接收，ROBOT4 的信息在 fb7.dib12 ~ fb7.dib15 接收。
 
-<If your robot is ROBOT 1>
+<如果您的机器人是 ROBOT 1>
 
 | Robot No. | Start Signal | Byte Count | Note |
 | :---: | :---: |  :---: | :---: | 
-| ROBOT 1 | fb7.0 | 4 | Output (fb7.dob0 ~ fb7.dob3) |
-| ROBOT 2 | fb7.32 | 4 | Input (fb7.dib4 ~ fb7.dib7) |
-| ROBOT 3 | fb7.64 | 4 | Input (fb7.dib8 ~ fb7.dib11) |
-| ROBOT 4 | fb7.96 | 4 | Input (fb7.dib12 ~ fb7.dib15) |
+| ROBOT 1 | fb7.0 | 4 | 输出 (fb7.dob0 ~ fb7.dob3) |
+| ROBOT 2 | fb7.32 | 4 | 输入 (fb7.dib4 ~ fb7.dib7) |
+| ROBOT 3 | fb7.64 | 4 | 输入 (fb7.dib8 ~ fb7.dib11) |
+| ROBOT 4 | fb7.96 | 4 | 输入 (fb7.dib12 ~ fb7.dib15) |
 
 
-![[Figure 6-2] HiNet I/O Usage Example (Group 1 - 4 Robots) ](../_assets/6-2.png)
-
+![[Figure 6-2] HiNet I/O 使用示例 (组 1 - 4 个机器人)](../_assets/6-2.png)
 [__SOURCE](6-hinet/2-example.md)
-## 6.2. Examples
+## 6.2. 示例
 
-It is not possible to list all applications that can be implemented with the robot language, but a simple example application is shown in the following figure. Because input/output signals can be used, it has the advantage of supporting various applications.
+无法列出所有可以用机器人语言实现的应用，但以下图中展示了一个简单的示例应用。由于可以使用输入/输出信号，因此支持各种应用的优势。 
 
 ![](../_assets/6-4.png)
-
 [__SOURCE](7-arm-interference/README.md)
-# 7. Arm Interference Detection Features
-
+# 7. 臂干扰检测特性
 [__SOURCE](7-arm-interference/1-overview/README.md)
-## 7.1. Overview of Arm Interference Detection Features
-
+## 7.1. 手臂干扰检测功能概述
 [__SOURCE](7-arm-interference/1-overview/1-purpose.md)
-### 7.1.1. Purpose of the Feature
+### 7.1.1. 功能的目的
 
 <br>
 
-The purpose is to prevent accidents by stopping the robot in advance when a collision between robot arms and tools is predicted due to program errors or user mistakes (jogging or program creation errors).
-
+目的是通过在预测到机器人手臂和工具之间由于程序错误或用户错误（手动操作或程序创建错误）而发生碰撞时提前停止机器人，以防止事故。
 [__SOURCE](7-arm-interference/1-overview/2-coverage.md)
-### 7.1.2. Scope of the Feature
+### 7.1.2. 功能范围
 
 
  <Br>
 
-![[Figure 7-1] Interference between robots](../../_assets/7-1.png)
+![[Figure 7-1] 机器人之间的干扰](../../_assets/7-1.png)
  <br>
 
-Interference between robot tools and arms is detected using a simplified cylindrical model, and it can also be applied to robots that use drive axes.
+使用简化的圆柱模型检测机器人工具和手臂之间的干扰，同时也可以应用于使用驱动轴的机器人。
 
-- Robots that support the interference detection feature must be connected to the cooperative control network.
-- The supported groups and number of robots are the same as for cooperative control.
-
+- 支持干扰检测功能的机器人必须连接到协作控制网络。
+- 支持的组和机器人数量与协作控制相同。
 [__SOURCE](7-arm-interference/1-overview/3-restiction.md)
-### 7.1.3. Limitations of the Feature
+### 7.1.3. 功能的限制
 
-This feature cannot intelligently and automatically avoid interference between robots nor automatically determine and execute robot drive priorities.
+此功能无法智能和自动地避免机器人之间的干扰，也无法自动确定和执行机器人驱动优先级。
 
-- It does not support automatic arm interference avoidance without mutual interlocks.
-- It does not support automatic deadlock avoidance between robots.
-- It does not detect interference between a robot's own arm and tool.
-
+- 它不支持在没有互锁的情况下自动避免臂干扰。
+- 它不支持在机器人之间自动避免死锁。
+- 它不检测机器人自身的臂和工具之间的干扰。
 [__SOURCE](7-arm-interference/2-setting/README.md)
-## 7.2. Configuration Procedures
-
+## 7.2. 配置程序
 [__SOURCE](7-arm-interference/2-setting/1-arm-set.md)
-### 7.2.1. Enabling Arm Interference Prevention
+### 7.2.1. 启用机械臂干涉预防
 
-Select 'System' → '4: Application Parameters' → '17: Cooperative Control' → '4: Inter-robot Interference Prevention' → '1: Interference Prevention Conditions'.
-
-<br> 
-
-![[Figure 7-7] Arm Interference Prevention Menu](../../_assets/7-8.png) 
-
-<br>
-
-To enable arm interference prevention, select the 'Interference Detection Partner Robot'. The 'expected maximum interference distance' is the distance from the arm interference area at which the system expects interference and can perform deceleration stop.
+选择 'System' → '4: Application Parameters' → '17: Cooperative Control' → '4: Inter-robot Interference Prevention' → '1: Interference Prevention Conditions'.
 
 <br> 
 
-![[Figure 7-8] Arm Interference Prevention Conditions Screen](../../_assets/7-9.png)
+![[Figure 7-7]机械臂干涉预防菜单](../../_assets/7-8.png) 
 
 <br>
 
-| Error Message | E0244 Robot (0)'s arm interference detection is not possible |
+要启用机械臂干涉预防，选择 'Interference Detection Partner Robot'。 'expected maximum interference distance' 是系统预计干涉发生的机械臂干涉区域的距离，系统可以执行减速停车。
+
+<br> 
+
+![[Figure 7-8]机械臂干涉预防条件屏幕](../../_assets/7-9.png)
+
+<br>
+
+| 错误信息 | E0244 Robot (0)的机械臂干涉检测不可用 |
 |:--|:--| 
-| Possible Causes | - If the cooperative control of the partner robot set for interference detection is set to 'Disabled' on the partner robot. <br> - The partner robot is not participating in the cooperative control network. <br> - The partner robot has not configured arm interference prevention conditions. <br> - The partner robot's common coordinate system is not set. |
-| Action | Check your robot's and the partner robot's cooperative control status, common coordinate settings, participation in the cooperative control network, and interference prevention conditions. |
-
+| 可能原因 | - 如果设置为干涉检测的合作机器人在其上设置为 'Disabled'。 <br> - 合作机器人未参与合作控制网络。 <br> - 合作机器人尚未配置机械臂干涉预防条件。 <br> - 合作机器人的公共坐标系未设置。 |
+| 操作 | 检查您的机器人及合作机器人的合作控制状态、公共坐标设置、参与合作控制网络以及干涉预防条件。 |
 [__SOURCE](7-arm-interference/2-setting/2-arm-region.md)
-### 7.2.2. Setting Arm Interference Areas
+### 7.2.2. 设置臂干扰区域
 
-The arm interference area model is a cylinder composed of hemispheres on both ends. For example, for the H-axis, you can model the radius from the H-axis joint position to the V-axis joint position as shown below.
-
-
-<br>
-
-![[Figure 7-10] Hemispherical and cylindrical arm interference area](../../_assets/7-10.png)
+臂干扰区域模型是一个由两个半球组成的圆柱体。例如，对于 H 轴，您可以将从 H 轴关节位置到 V 轴关节位置的半径建模如下所示。
 
 <br>
 
-The cylindrical link model for the robot body arm applies to S, H, V, and B axes. The default radius values for each axis are determined as follows. If additional equipment is mounted on the robot, set the radius for the corresponding axis larger than the default value.
-
- - S-axis radius: Set to twice the distance from the S-axis rotation center to the H-axis joint
- - H-axis radius: 1.8 times the distance from the B-axis rotation center to the flange face
- - V-axis radius: Distance from the B-axis rotation center to the flange face
+![[Figure 7-10] 半球形和圆柱形臂干扰区域](../../_assets/7-10.png)
 
 <br>
 
-![[Figure 7-11] Axis-specific interference radius settings](../../_assets/7-11.png)
+机器人身体臂的圆柱链接模型适用于 S、H、V 和 B 轴。每个轴的默认半径值确定如下。如果在机器人上安装了额外的设备，请将相应轴的半径设置得大于默认值。
+
+ - S 轴半径：设置为从 S 轴旋转中心到 H 轴关节的距离的两倍
+ - H 轴半径：为从 B 轴旋转中心到法兰面距离的 1.8 倍
+ - V 轴半径：从 B 轴旋转中心到法兰面的距离
 
 <br>
 
-Currently, arm interference detection supports detecting all axes using the S, H, and V axis settings.
+![[Figure 7-11] 轴特定的干扰半径设置](../../_assets/7-11.png)
 
 <br>
 
-![[Figure 7-12] H-axis offset radius](../../_assets/7-12.png)
+目前，臂干扰检测支持使用 S、H 和 V 轴设置检测所有轴。
+
+<br>
+
+![[Figure 7-12] H 轴偏移半径](../../_assets/7-12.png)
 
 <br>
 
 {% hint style="warning" %}
-If you intend to set values smaller than the defaults, exercise extreme caution. For example, the H-axis of a serial-link robot such as the HS220 has an offset to the right from the S-axis center as shown in the figure. The H-axis interference detection area is set based on the segment from the S-axis rotation center along the H-axis link to the V-axis rotation center, so the H-axis radius must be set large enough to include the entire H-axis link from the S-axis rotation center.
+如果您打算设置小于默认值的值，请极其谨慎。例如，HS220 等串联链接机器人的 H 轴相对于 S 轴中心向右偏移，如图所示。H 轴干扰检测区域是基于从 S 轴旋转中心沿 H 轴链接到 V 轴旋转中心的段设置的，因此 H 轴半径必须设置得足够大，以包含从 S 轴旋转中心到整个 H 轴链接的区域。
 {% endhint %}
-
 [__SOURCE](7-arm-interference/2-setting/3-tool-region.md)
-### 7.2.3. Setting Tool Interference Areas
+### 7.2.3. 设置工具干涉区域
 
 <Br>
 
-![[Figure 7-13] Flange coordinate system](../../_assets/7-13.png)
+![[Figure 7-13] 法兰坐标系统](../../_assets/7-13.png)
 
 <Br>
 
-To set the tool interference area for each tool number, use the robot flange coordinate system as a reference. When the robot is in the reference pose, the flange coordinate system has Z pointing outward normal to the flange face, X pointing downward, and Y pointing to the robot's left.
+要为每个工具编号设置工具干涉区域，使用机器人法兰坐标系统作为参考。当机器人处于参考姿态时，法兰坐标系统的Z轴指向法兰面外部，X轴指向下方，Y轴指向机器人的左侧。
 
-You can set up to 4 interference areas per tool number. For any tool number used in the robot program, you must configure the tool interference area. If not configured, tool interference detection will not occur.
+每个工具编号可以设置最多4个干涉区域。对于机器人程序中使用的任何工具编号，您必须配置工具干涉区域。如果不配置，将不会发生工具干涉检测。
 
-### 1) Example for a single (servo-gun) tool
+### 1) 单个（伺服枪）工具示例
 
-The tool interference area is set by defining start and end points and a radius from coordinates on the tool flange. You may set up to four interference areas per tool number.
+工具干涉区域通过定义起点和终点以及从工具法兰上的坐标到半径来设置。每个工具编号可以设置最多四个干涉区域。
 
-Refer to the figure below for flange coordinate directions and an example configuration.
+请参见下图以获取法兰坐标方向和示例配置。
  
  <Br>
 
-![[Figure 7-14] Flange coordinate system example](../../_assets/7-14.png)
+![[Figure 7-14] 法兰坐标系统示例](../../_assets/7-14.png)
 
 <Br>
 
-### 2) Example for a hanger-type tool
+### 2) 吊具类型工具示例
 
-#### 2-1) When configuring only one tool interference area
+#### 2-1) 配置只有一个工具干涉区域时
 
-For asymmetrical tools relative to the flange center, when defining a single tool interference area you can set the tool shape center and use the maximum distance from center to tool corners as the radius. In the example below, relative to the robot coordinate system X=-175, Y=-485, and the radius should be set slightly larger than the larger of R1 and R2 (e.g., 1300 rather than 1250). Because hemispheres are created at each end of the cylinder when setting a radius of 1300, set Z positions as P1=(-175,-485,500) and P2=(-175,-485,1000).
+对于相对于法兰中心的不对称工具，在定义单个工具干涉区域时，可以设置工具形状中心，并使用从中心到工具角的最大距离作为半径。在下面的示例中，相对于机器人坐标系统，X=-175，Y=-485，半径应设置为比R1和R2中的较大值稍大（例如，1300而不是1250）。当设置半径为1300时，在圆柱体的每一端创建半球，因此将Z位置设置为P1=(-175,-485,500)和P2=(-175,-485,1000)。
 
  
  <Br>
 
-![[Figure 7-15] Drawing for 1 tool interference area setting](../../_assets/7-15.png)
+![[Figure 7-15] 1个工具干涉区域设置的图纸](../../_assets/7-15.png)
 
 
 <Br>
   
 
-![[Figure 7-16] 1 tool interference area setting](../../_assets/7-16.png)
+![[Figure 7-16] 1个工具干涉区域设置](../../_assets/7-16.png)
 
 
 <Br>
 
-However, when the radius is set this large, it may be unnecessarily larger than the actual tool shape. If precise tool region settings are required, model the tool by dividing it into multiple regions.
+但是，当半径设置得如此之大时，可能会比实际工具形状不必要地更大。如果需要精确的工具区域设置，可以通过将工具划分为多个区域来建模该工具。
 
 
-#### 2-2) When configuring 4 tool interference areas
+#### 2-2) 配置4个工具干涉区域时
 
 <Br>
   
 
-![[Figure 7-17] Drawing for 4 tool interference areas](../../_assets/7-17.png)
+![[Figure 7-17] 4个工具干涉区域的图纸](../../_assets/7-17.png)
 
 
 <Br>
 
-For large tools such as hangers, dividing the area can prevent overestimation of the tool interference area. For example, for a tool of width 2110mm and height 1350mm, divide the vertical area into three equal parts and model three cylinders with approximately 350mm radius as areas 1-3. Finally, set the offset from the flange to the tool as area 4 to achieve the configuration below.
+对于大型工具，例如吊具，划分区域可以防止过高估计工具干涉区域。例如，对于宽度为2110mm和高度为1350mm的工具，将垂直区域分成三等份，并将三个大约350mm半径的圆柱体建模为区域1-3。最后，将从法兰到工具的偏移设置为区域4，以实现如下配置。
 
  
 <Br>
   
 
-![[Figure 7-18] 4 tool interference areas configuration](../../_assets/7-18.png)
+![[Figure 7-18] 4个工具干涉区域配置](../../_assets/7-18.png)
 
 <Br>
-
-
-
 [__SOURCE](7-arm-interference/2-setting/4-monitor.md)
-### 7.2.4. Arm Interference Status Monitoring
+### 7.2.4. 臂干扰状态监测
 
 <Br>
 
-![[Figure 7-21] Cooperative control monitoring](../../_assets/7-21.png)
+![[Figure 7-21] 协同控制监测](../../_assets/7-21.png)
 
 
 <br>
 
-You can check the arm interference state in 'Cooperative Control Monitoring'. The arm interference state displays the potential interference axis and the interference distance.
+您可以在“协同控制监测”中检查臂干扰状态。臂干扰状态显示潜在干扰轴和干扰距离。
 
- - Potential Interference Axis: The axis of your robot that has the smallest distance to the partner robot
- - Interference Distance [mm]: Distance between potential interference axes
-      - Display range: 10 times the expected maximum interference distance (if expected maximum interference distance is 0, display range is 1000 mm)
-      - If interference distance exceeds the display range, it is shown as ----.
+ - 潜在干扰轴：与合作机器人距离最近的机器人轴
+ - 干扰距离 [mm]：潜在干扰轴之间的距离
+      - 显示范围：期望最大干扰距离的10倍（如果期望最大干扰距离为0，则显示范围为1000 mm）
+      - 如果干扰距离超过显示范围，将显示为----。
 
-If the monitored arm interference state differs from the actual state, check the cooperative control common coordinate system and the arm interference detection configuration.
-
+如果监测到的臂干扰状态与实际状态不同，请检查协同控制公共坐标系统和臂干扰检测配置。
 [__SOURCE](7-arm-interference/3-detect/README.md)
-## 7.3. Interference Detection
-
+## 7.3. 干涉检测
 [__SOURCE](7-arm-interference/3-detect/1-decel-stop.md)
-### 7.3.1. Deceleration Stop
+### 7.3.1. 减速停止
 
-If the robot decelerates and stops after invading the user-configured arm interference area and tool interference area, due to deceleration distance and robot inertia, a collision may occur even if an error is detected. Therefore, the detection area is expanded taking robot speed into account to detect interference earlier.
+如果机器人减速并在用户配置的手臂干扰区域和工具干扰区域内停止，由于减速距离和机器人惯性，即使检测到错误，也可能发生碰撞。因此，考虑到机器人速度，检测区域会被扩展，以便更早地检测到干扰。
 
-The figure below illustrates the concept of generating an expected interference area (Level 2 detection area) when robots move toward each other. The dashed area indicates the expected interference area, and the solid line indicates the user-configured interference area.
+下面的图示说明了在机器人相互移动时生成预期干扰区域（级别 2 检测区域）的概念。虚线区域表示预期干扰区域，实线表示用户配置的干扰区域。
  
-![[Figure 7-22] Interference area invasion 1](../../_assets/7-22.png)
+![[Figure 7-22] 干扰区域入侵 1](../../_assets/7-22.png)
 
 
 <br>
 
-The expected interference area is automatically set by calculating the robot's travel speed and stopping time, but the user can set the maximum value as the 'expected maximum interference distance.'
-The expected interference distance calculated by the controller, when the robot moves at high speed, is the configured interference area plus the expected maximum interference distance to detect interference. In the expected interference distance range, the robot performs deceleration stop, and if it enters the interference area, it performs an immediate stop without deceleration. If the robot moves at low speed and the controller-calculated expected distance is smaller than the 'expected maximum interference distance', it will not detect interference even if it is within the expected maximum interference distance.
+预期干扰区域是通过计算机器人的行驶速度和停止时间自动设置的，但用户可以将最大值设置为“预期最大干扰距离”。当机器人以高速移动时，控制器计算的预期干扰距离为配置的干扰区域加上预期最大干扰距离以检测干扰。在预期干扰距离范围内，机器人执行减速停止，如果进入干扰区域，则立即停止而不减速。如果机器人以低速移动且控制器计算的预期距离小于“预期最大干扰距离”，则即使在预期最大干扰距离内也不会检测到干扰。
 
- ![[Figure 7-23] Arm interference prevention conditions](../../_assets/7-23.png)
+![[Figure 7-23] 手臂干扰预防条件](../../_assets/7-23.png)
 
 
 <br>
 
-| Error Message | - W0147 Robot 0) expected arm interference and stopped  <br> - E0237 Robot 0) ARM interference area detected |
+| 错误消息 | - W0147 机器人 0) 预期手臂干扰并已停止  <br> - E0237 机器人 0) 检测到手臂干扰区域 |
 |:--|:--|
-| Possible Causes | When a robot invades another robot's expected interference area during movement, the above warning and error messages may occur simultaneously and stop the robot. |
-| Action | If the above warning occurs during normal program playback, re-check the work program. |
-
-
+| 可能原因 | 当机器人在移动过程中侵入另一台机器人的预期干扰区域时，可能同时发生上述警告和错误消息并停止机器人。 |
+| 行动 | 如果在正常程序播放期间出现上述警告，请重新检查工作程序。 |
 [__SOURCE](7-arm-interference/3-detect/2-quick-stop.md)
-### 7.3.2. Immediate Stop
+### 7.3.2. 立即停止
 
-Even if deceleration stopping occurs in the predicted interference detection (Level 2 detection area), the robot may still invade the interference area due to deceleration distance during stopping. If the interference area is directly exceeded, an immediate stop is performed without deceleration.
+即使在预测的干扰检测中发生减速停车（第2级检测区域），机器人仍可能由于停车时的减速距离而侵入干扰区域。如果直接超过干扰区域，则会立即停止而不进行减速。
 
  
-![[Figure 7-24] Interference area invasion 2](../../_assets/7-24.png)
+![[Figure 7-24] 干扰区域侵犯 2](../../_assets/7-24.png)
 
 
-| Error Message | E0237 Robot 0) ARM interference area detected |
+| 错误信息 | E0237 机器人 0) 臂部干扰区域检测到 |
 |:--|:--|
-| Possible Causes | The arm and tool areas were invaded |
-| Action | If the above warning occurs during normal program playback, re-check the work program. |
-
-
+| 可能原因 | 臂部和工具区域被侵犯 |
+| 行动 | 如果在正常程序播放期间出现上述警告，请重新检查工作程序。 |
 [__SOURCE](7-arm-interference/3-detect/3-play-err.md)
-### 7.3.3. Errors Occurring During Playback
+### 7.3.3. 播放过程中发生的错误
 
-When two robots move from S1 to S2 on a rail as shown below, if the S2 positions of the two robots are separated by more than the sum of the tool interference area and the expected maximum interference distance, no W0147 or E0237 will occur. This represents a normal program.
+当两个机器人如下面所示从 S1 移动到 S2 时，如果两个机器人的 S2 位置之间的距离超过工具干扰区域的总和和预期的最大干扰距离，则不会发生 W0147 或 E0237。这表示正常程序。
 
 <br> 
 
-![[Figure 7-25] Example of a normal program](../../_assets/7-25.png)
+![[Figure 7-25] 正常程序的示例](../../_assets/7-25.png)
 
 <br>
 
-If, as in the figure below, the S2 point is slightly outside the configured tool interference area but within the expected maximum interference distance, an error (W0147 or E0237) may occur. In this case, adjust the expected maximum interference distance or change the teach points.
+如果如下面的图所示，S2 点稍微超出了配置的工具干扰区域，但在预期的最大干扰距离以内，则可能发生错误 (W0147 或 E0237)。在这种情况下，请调整预期的最大干扰距离或更改教学点。
 
 <Br>
  
-![[Figure 7-26] Incorrect program example 1](../../_assets/7-26.png)
+![[Figure 7-26] 错误程序示例 1](../../_assets/7-26.png)
 
 <br>
  
-If the S2 point is taught so that it completely invades the defined tool interference area, an error (W0147 or E0237) will occur when the robots move to S2.
-
-
-<br>
-
-![[Figure 7-27] Incorrect program example 2](../../_assets/7-27.png)
+如果 S2 点被教导到完全侵入定义的工具干扰区域，则在机器人移动到 S2 时将发生错误 (W0147 或 E0237)。
 
 <br>
 
-In such cases, reduce the 'tool interference area' or the 'expected maximum interference distance' to prevent the error.
+![[Figure 7-27] 错误程序示例 2](../../_assets/7-27.png)
+
+<br>
+
+在这种情况下，减少“工具干扰区域”或“预期的最大干扰距离”以防止错误。
 
 
 {% hint style="warning" %}
 
-Setting the tool interference area too small-smaller than the actual tool-may cause collisions between robots.
+将工具干扰区域设置得过小——小于实际工具——可能会导致机器人之间发生碰撞。
 
 {% endhint %}
-
 [__SOURCE](7-arm-interference/3-detect/4-dead-lock.md)
-### 7.3.4. Handling in Deadlock State
+### 7.3.4. 处理死锁状态
 
-A deadlock occurs when two robots invade each other's interference area and cannot move the robots further by jogging or program execution. In this case, release the interference detection for the affected robot relative to the partner robot, and then use the jog function to move out of the interference area carefully under user supervision.
- 
+死锁发生在两个机器人相互侵犯彼此的干扰区域，并且无法通过手动或程序执行进一步移动机器人。在这种情况下，释放受影响机器人相对于伙伴机器人的干扰检测，然后在用户监督下使用手动功能小心地移出干扰区域。
+
 <br> 
 
-![[Figure 7-28] Release inter-robot arm interference detection](../../_assets/7-28.png)
+![[Figure 7-28] 释放机器人之间的手臂干扰检测](../../_assets/7-28.png)
 
 <br>
 
-After moving out of the interference area, check the partner robot number and resume operation.
- 
+移出干扰区域后，检查伙伴机器人编号并恢复操作。
+
 <Br> 
 
-![[Figure 7-29] Setting inter-robot arm interference detection](../../_assets/7-29.png)
-
+![[Figure 7-29] 设置机器人之间的手臂干扰检测](../../_assets/7-29.png)
 [__SOURCE](7-arm-interference/3-detect/5-net-err.md)
-### 7.3.5. Handling Network Issues During Cooperative Control
+### 7.3.5. 处理协同控制中的网络问题
 
-If the cooperative control network is not functioning properly, arm interference detection between robots may not operate correctly. When problems occur on the cooperative control network, the following error may occur.
+如果协同控制网络无法正常工作，机器人之间的手臂干扰检测可能无法正确运行。当协同控制网络出现问题时，可能会出现以下错误。
 
 <br>
 
-| Error Message | E0244 Robot (0)'s arm interference detection is not possible |
+| 错误信息 | E0244 机器人 (0) 的手臂干扰检测无法进行 |
 |:--|:--|
-| Possible Causes | The HiNet network to the partner robot for which interference detection conditions were set is disconnected |
-| Action | - Check the network cable of the affected robot. <br> - Refer to Cooperative Control Status Monitoring and restore the cooperative control state to normal. |
-
+| 可能原因 | 与设定干扰检测条件的合作机器人之间的 HiNet 网络已断开 |
+| 行动 | - 检查受影响机器人的网络电缆。 <br> - 请参考协同控制状态监控，并将协同控制状态恢复为正常。 |
 [__SOURCE](8-service/README.md)
-# 8. Service Functions
-
+# 8. 服务功能
 [__SOURCE](8-service/1-status-mon.md)
-## 8.1. Cooperative Control Status Monitor
+## 8.1. 协作控制状态监视器
 
-(1) Select 'Inter-robot Cooperative Control' from 'Window Settings' → 'Selection'.
- 
+(1) 从“窗口设置”→“选择”中选择“机器人间协作控制”。
+
  ![](../_assets/9-2.png)
 
 
-(3) The cooperative control status is displayed as follows.
+(3) 协作控制状态显示如下。
 
  ![](../_assets/9-3.png)
 
 
 
-(4) Each item in the monitoring function has the following meanings.
+(4) 监视功能中的每个项目具有以下含义。
 
- - Motor ON: Indicates the drive-ready state of each robot. (on/off)
-- Operation Mode: Indicates whether each robot is set to manual mode or automatic mode. (Manual/Automatic)
-- Manual Cooperation: Displays the manual cooperative state of each robot.
-    - Independent: Individual jog state
-    - Master: Cooperative jog state, MASTER specified
-    - Slave: Cooperative jog state, SLAVE specified
-- Automatic Cooperation: Displays the cooperative state during robot playback.
-    - Stop: Robot is not running
-    - Individual: Performing individual robot playback actions
-    - Waiting: Waiting in the cowork command for the partner robot to reach the cooperation position
-    - Cooperation: During cooperative playback
-- Error State: Shows the recent error state of each robot. Cleared upon startup
-- Potential Interference Axis: The axis of the robot closest to the partner robot
-- Interference Distance [mm]: Distance between potential interference axes
+ - 电动机开启: 指示每个机器人的驱动准备状态。(开/关)
+- 操作模式: 指示每个机器人是否设置为手动模式或自动模式。(手动/自动)
+- 手动协作: 显示每个机器人的手动协作状态。
+    - 独立: 个别走动状态
+    - 主控: 协作走动状态，指定主控
+    - 从控: 协作走动状态，指定从控
+- 自动协作: 显示机器人播放期间的协作状态。
+    - 停止: 机器人未运行
+    - 独立: 执行个别机器人播放动作
+    - 等待: 在合作命令中等待伙伴机器人到达协作位置
+    - 协作: 在协作播放期间
+- 错误状态: 显示每个机器人的最近错误状态。启动时清除
+- 潜在干扰轴: 最接近伙伴机器人的机器人轴
+- 干扰距离 [mm]: 潜在干扰轴之间的距离
 
 
 {% hint style="warning" %}
-If cooperative control is set to <Disabled> in the cooperative control parameters, monitoring information will not be displayed.
+如果在协作控制参数中将协作控制设置为<Disabled>，则不会显示监视信息。
 
 ![](../_assets/9-4.png)
 
 {% endhint %}
-
 [__SOURCE](8-service/2-io-mon.md)
-## 8.2. HiNet I/O Monitor
+## 8.2. HiNet I/O 监控
 
-(1) Select 'General Input' from 'Window Settings' → 'Selection'.  
+(1) 从 '窗口设置' → '选择' 中选择 '一般输入'。  
 ![](../_assets/9-5.png)
 
-
-(2) Check the status of configured input signals for each robot.  
+(2) 检查每个机器人的配置输入信号的状态。  
 ![](../_assets/9-6.png)
-
 [__SOURCE](8-service/3-manual-sigout.md)
-## 8.3. Manual Output Function
+## 8.3. 手动输出功能
 
-You can manually change your robot's cooperative control status.
+您可以手动更改机器人的协作控制状态。
 
-- Display the 'General Output' window from 'Window Settings' → 'Selection'.
-- Move to the output signal corresponding to your robot number that you want to change manually.
-- Press the 'Manual Output' button and change it in the dialog that appears.
+- 从 '窗口设置' → '选择' 显示 '一般输出' 窗口。
+- 移动到您想要手动更改的机器人编号对应的输出信号。
+- 按下 '手动输出' 按钮，并在出现的对话框中进行更改。
 
 
 ![](../_assets/9-7.png)
-
 [__SOURCE](8-service/4-rcode.md)
 ## 8.4. R code
 
 
 
-R codes used for cooperative control.
+用于协同控制的 R 代码。
 
-[Table 8-1] R351 Manual Cooperative State Setting
+[Table 8-1] R351 手动协同状态设置
 
-| R351 | Description |
+| R351 | 描述 |
 |:--:|:--:|
-|0|Indiv. (Individual)|
-|1|Master|
-|2|Slave|
-|3|cmov Recording Mode|
+|0|个体 (Individual)|
+|1|主 (Master)|
+|2|从 (Slave)|
+|3|cmov 录制模式 (Recording Mode)|
 
 <br>
-[Table 8-2] R353 Robot Cooperative State Reset
+[Table 8-2] R353 机器人协同状态重置
 
-| R353 | Description |
+| R353 | 描述 |
 |:--:|:--:|
-|0|Cancel Reset|
-|1|Execute Reset|
-
+|0|取消重置 (Cancel Reset)|
+|1|执行重置 (Execute Reset)|
 [__SOURCE](9-error-code/README.md)
-# 9. Error Codes
-
+# 9. 错误代码
 [__SOURCE](9-error-code/1-warning.md)
-## 9.1. Warning
+## 9.1. 警告
 
 <br>
 
 ---
-- Code No.: W00123
-- Warning: Robot stop requested
-- Details: During cooperative control, a stop command was received from a partner robot. In this case, the above message is displayed and the robot stops.
-- Action:
-    - Start the Slave robot drive first, then start the Master drive to resume the program.
+- 代码编号：W00123
+- 警告：请求机器人停止
+- 详情：在协作控制期间，接收到来自合作机器人停止命令。在这种情况下，将显示上述消息，机器人停止。
+- 行动：
+    - 首先启动从属机器人驱动，然后启动主驱动以恢复程序。
 
 ---
-- Code No.: W00124
-- Warning: Slave robot jog operation not allowed
-- Details: The robot is set to manual cooperative Slave state. A robot configured as Slave cannot be operated independently.
-- Action:
-    - To operate each robot individually in manual mode, change the manual cooperative state to 'Independent'. The manual cooperative state can be changed using user keys or the R351 code.
+- 代码编号：W00124
+- 警告：不允许从属机器人手动操作
+- 详情：该机器人设置为手动协作从属状态。配置为从属的机器人无法独立操作。
+- 行动：
+    - 若要在手动模式下单独操作每个机器人，请将手动协作状态更改为“独立”。手动协作状态可以使用用户键或R351代码更改。
 
 ---
-- Code No.: W00131
-- Warning: Cooperative jog operation not allowed - Duplicate Master robots
-- Details: More than one robot connected on HiNet is set as manual cooperative Master.
-- Action:
-    - Only one manual cooperative Master can be set. Please change the settings.
+- 代码编号：W00131
+- 警告：不允许协作手动操作 - 重复的主机器人
+- 详情：HiNet上连接的多个机器人被设置为手动协作主。
+- 行动：
+    - 只能设置一个手动协作主。请更改设置。
 
 ---
-- Code No.: W00132
-- Warning: Cooperative jog operation not allowed - Slave selection unavailable
-- Details: An attempt was made to jog the Master robot while the Slave robot was not set to a cooperative-ready state.
-- Action:
-    - Confirm that the Slave robot is selected, prepare the Slave robot for cooperation (Enabling Switch On), and then operate.
+- 代码编号：W00132
+- 警告：不允许协作手动操作 - 不可用的从属选择
+- 详情：在从属机器人未设置为协作准备状态时，尝试对主机器人进行手动操控。
+- 行动：
+    - 确认已选择从属机器人，准备从属机器人以进行协作（启用开关开启），然后进行操作。
 ---
 
-- Code No.: W00133
-- Warning: Slave jog setting changed - Stop
-- Details: During Master cooperative jog operation, a Slave robot that was operating together was detected to have its manual cooperative state changed.
-- Action:
-    - Re-check the Slave's cooperative state before operating.
+- 代码编号：W00133
+- 警告：从属手动设置已更改 - 停止
+- 详情：在主协作手动操作期间，检测到与之一起操作的从属机器人的手动协作状态已更改。
+- 行动：
+    - 在操作之前重新检查从属的协作状态。
 ---
 
-- Code No.: W00134
-- Warning: Master Tool coordinate system not selected
-- Details: This occurs when attempting to jog a Slave robot in cmov recording mode (R351,3). A Master robot is not specified. It may also occur when using the cmov step forward function. The currently set Master number differs from the Master number recorded in cmov.
-- Action:
-    - Set the correct Master robot to Manual Cooperative Master state.
+- 代码编号：W00134
+- 警告：未选择主工具坐标系
+- 详情：当尝试在cmov录制模式（R351,3）下对从属机器人进行手动操控时发生此情况。未指定主机器人。在使用cmov向前一步函数时也可能会发生此情况。当前设置的主编号与在cmov中记录的主编号不同。
+- 行动：
+    - 将正确的主机器人设置为手动协作主状态。
 ---
-
 [__SOURCE](9-error-code/2-system-err.md)
-## 9.2. System Error
+## 9.2. 系统错误
 
 ---
 
-- Code No.: E00200
-- Error: Exceeded maximum speed during cooperative motion
-- Details: A command that exceeds the robot's maximum speed was received while following cooperative motion.
-- Action:
-    - For the Slave performing cooperative motion, change the robot posture at the reference position, modify the recorded cooperative positions, or lower the recorded speed and replay.
+- 代码编号：E00200
+- 错误：在协作运动中超出最大速度
+- 详情：在执行协作运动时接收到了超出机器人最大速度的指令。
+- 操作：
+    - 对于执行协作运动的从机器人，在参考位置改变机器人姿态，修改录制的协作位置，或者降低录制速度并重新播放。
 ---
 
-- Code No.: E00201
-- Error: Cooperative motion start error
-- Details: There is an error in sending/receiving synchronization signals among cooperative robots. The playback modes are different.
-- Action:
-    - Check communication status. Match the playback modes of the cooperative robots and then start cooperative motion.
+- 代码编号：E00201
+- 错误：协作运动启动错误
+- 详情：协作机器人之间的同步信号发送/接收存在错误。播放模式不同。
+- 操作：
+    - 检查通信状态。匹配协作机器人的播放模式，然后启动协作运动。
 ---
 
-- Code No.: E00203
-- Error: Cooperative partner robot fault - Emergency stop
-- Details: During cooperative motion, the partner robot's drive-ready state turned Off. The operation is stopped with drive-ready Off.
-- Action:
-    - Resolve the cause of the partner robot's stop, set drive-ready On, and restart.
+- 代码编号：E00203
+- 错误：协作伙伴机器人故障 - 紧急停机
+- 详情：在协作运动过程中，伙伴机器人的驱动准备状态关闭。操作因驱动准备关闭而停止。
+- 操作：
+    - 解决伙伴机器人停止的原因，设置驱动准备为开启，并重新启动。
 ---
 
-- Code No.: E00204
-- Error: Robot cooperative control communication error
-- Details: A communication error occurred with a partner robot during cooperative jog or playback.
-- Action:
-    - Check the cooperative control communication cables and connector connections.
+- 代码编号：E00204
+- 错误：机器人协作控制通信错误
+- 详情：在协作 jog 或播放过程中与伙伴机器人发生通信错误。
+- 操作：
+    - 检查协作控制通信电缆和连接器连接。
 ---
 
-- Code No.: E00227
-- Error: Cooperative control synchronization sequence error
-- Details: A sequence difference occurred between the master robot and slave robot commands during cooperative control.
-- Action:
-    - Check the cooperative control communication cables and connector connections.
+- 代码编号：E00227
+- 错误：协作控制同步序列错误
+- 详情：在协作控制过程中，主机器人和从机器人指令之间发生序列差异。
+- 操作：
+    - 检查协作控制通信电缆和连接器连接。
 ---
-
 [__SOURCE](9-error-code/3-operation-err.md)
-## 9.3. Operation Error
+## 9.3. 操作错误
 
 ---
 
-- Code No.: E01340
-- Error: Inappropriate robot cooperation conditions (WD, common coordinate)
-- Details: The controller is configured in a state unsuitable for executing the cowork command.
-- Action:
-    - Check that communication status is normal, verify that the partner's common coordinate system is set, and confirm the manual cooperative state matches the robot role required by the cowork command.
+- 代码编号：E01340
+- 错误：不适当的机器人协作条件（WD，公共坐标）
+- 详细信息：控制器配置处于不适合执行协作命令的状态。
+- 操作：
+    - 检查通信状态是否正常，验证伙伴的公共坐标系统是否已设置，并确认手动协作状态与协作命令所需的机器人角色匹配。
 ---
 
-- Code No.: E01341
-- Error: Cooperative playback wait time exceeded
-- Details: In the cowork command, the waiting time for partner robots to become ready for cooperation exceeded the time set in the command.
-- Action:
-    - Set the wait time considering the time required for all cooperative robots to reach the cooperation positions.
-    - If set to 0, it will wait indefinitely until all robots are ready for cooperation.
-
----
-
-- Code No.: E01342
-- Error: Robot cooperation state or common coordinate invalid
-- Details: The robot cooperation state is invalid or the common coordinate system is not set, so the cowork command cannot be executed.
-- Action:
-    - In System → Control Parameters → Network → Service → Cooperative Control dialog, set the cooperative control function to <Enabled> and then set the common coordinate system.
----
-
-- Code No.: E01343
-- Error: cowork function execution mismatch
-- Details: This occurs when the cowork command was executed redundantly or the program ended without a cowork end command.
-- Action:
-    - Program so that cowork and cowork end commands are paired.
-    - When re-executing the cowork command after a step change, initialize the cooperative control state.
+- 代码编号：E01341
+- 错误：协作播放等待时间超出
+- 详细信息：在协作命令中，伙伴机器人准备协作的等待时间超过了命令中设定的时间。
+- 操作：
+    - 根据所有协作机器人到达协作位置所需的时间设置等待时间。
+    - 如果设置为0，将无限期等待，直到所有机器人准备好协作。
 
 ---
 
-- Code No.: E01344
-- Error: cowork parameter (m/s, robot number) error
-- Details: The partner robot number in the cowork command is incorrectly set to the robot's own number.
-- Action:
-    - Change the robot number in the cowork command to the partner robot number.
+- 代码编号：E01342
+- 错误：机器人协作状态或公共坐标无效
+- 详细信息：机器人协作状态无效或未设置公共坐标系统，因此无法执行协作命令。
+- 操作：
+    - 在系统 → 控制参数 → 网络 → 服务 → 协作控制对话框中，将协作控制功能设置为<Enabled>，然后设置公共坐标系统。
 ---
 
-- Code No.: E01345
-- Error: Slave robot is already in cooperative state
-- Details: The Slave robot is cooperating or stopped at the cowork end position.
-- Action:
-    - Do not perform artificial step changes to ensure normal cooperative operation between Master and Slave.
+- 代码编号：E01343
+- 错误：协作功能执行不匹配
+- 详细信息：当协作命令被重复执行或程序在没有协作结束命令的情况下结束时会发生此错误。
+- 操作：
+    - 编程以确保协作和协作结束命令成对使用。
+    - 在步骤更改后重新执行协作命令时，初始化协作控制状态。
+
 ---
 
-- Code No.: E01355
-- Error: Cooperative partner robot fault - Stopped
-- Details: The cooperative partner robot is stopped in a state where cooperative motion is not possible. It stops because cooperative motion cannot be performed.
-- Action:
-    - Confirm that the operation modes among robots are the same.
-    - If restarting after a stop during cooperative motion, start the Slave first and then the Master.
+- 代码编号：E01344
+- 错误：协作参数（m/s，机器人编号）错误
+- 详细信息：协作命令中的伙伴机器人编号不正确地设置为机器人的自身编号。
+- 操作：
+    - 将协作命令中的机器人编号更改为伙伴机器人编号。
+---
+
+- 代码编号：E01345
+- 错误：从属机器人已经在协作状态
+- 详细信息：从属机器人正在协作或停在协作结束位置。
+- 操作：
+    - 不要进行人为步骤更改，以确保主从之间的正常协作操作。
+---
+
+- 代码编号：E01355
+- 错误：协作伙伴机器人故障 - 停止
+- 详细信息：协作伙伴机器人处于无法进行协作运动的停止状态。由于无法执行协作运动而停止。
+- 操作：
+    - 确认机器人之间的操作模式相同。
+    - 在协作运动期间停止后重新启动时，先启动从属，然后启动主设备。
 ---

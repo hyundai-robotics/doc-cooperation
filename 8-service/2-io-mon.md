@@ -1,8 +1,7 @@
-﻿## 8.2. HiNet I/O Monitor
+## 8.2. HiNet I/O 监控
 
-(1) Select 'General Input' from 'Window Settings' → 'Selection'.  
+(1) 从 '窗口设置' → '选择' 中选择 '一般输入'。  
 ![](../_assets/9-5.png)
 
-
-(2) Check the status of configured input signals for each robot.  
+(2) 检查每个机器人的配置输入信号的状态。  
 ![](../_assets/9-6.png)

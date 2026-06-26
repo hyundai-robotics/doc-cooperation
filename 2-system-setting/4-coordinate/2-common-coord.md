@@ -1,5 +1,5 @@
-﻿### 2.4.2. Setting a Common Coordinate System for Two or More Robots
+### 2.4.2. 为两个或更多机器人设置共同坐标系统
 
-A common coordinate system for cooperative robots is defined by teaching identical points between robots, so all cooperating robots must be able to indicate the same three points. Therefore, when the distance between robots is large, it may not be possible to set a common coordinate system. In such cases, a separate tool should be fabricated so that identical points between the robots can be taught.
+合作机器人的共同坐标系统是通过教导机器人之间相同的点来定义的，因此所有合作机器人必须能够指示相同的三个点。因此，当机器人之间的距离较大时，可能无法设置共同坐标系统。在这种情况下，应制造一个单独的工具，以便可以教导机器人之间的相同点。
 
-![[Figure 2-5] Setting a common coordinate system for two or more robots](../../_assets/2-5.png)
+![[图 2-5] 为两个或更多机器人设置共同坐标系统](../../_assets/2-5.png)

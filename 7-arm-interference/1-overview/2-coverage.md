@@ -1,12 +1,12 @@
-﻿### 7.1.2. Scope of the Feature
+### 7.1.2. 功能范围
 
 
  <Br>
 
-![[Figure 7-1] Interference between robots](../../_assets/7-1.png)
+![[Figure 7-1] 机器人之间的干扰](../../_assets/7-1.png)
  <br>
 
-Interference between robot tools and arms is detected using a simplified cylindrical model, and it can also be applied to robots that use drive axes.
+使用简化的圆柱模型检测机器人工具和手臂之间的干扰，同时也可以应用于使用驱动轴的机器人。
 
-- Robots that support the interference detection feature must be connected to the cooperative control network.
-- The supported groups and number of robots are the same as for cooperative control.
+- 支持干扰检测功能的机器人必须连接到协作控制网络。
+- 支持的组和机器人数量与协作控制相同。

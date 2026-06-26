@@ -1,25 +1,25 @@
-﻿### 2.1.3. Network Connection Check
+### 2.1.3. 网络连接检查
 
-Check the network when the following situations occur:
-- During initial installation
-- When a network anomaly is detected during cooperative control operation
-
-<br>
-<br>
-
-- Check items:
-    - Verify the network cable connection.
-    - The COM network socket LED should be blinking green.
-    - Verify cable integrity.
-    - Check network status in [Inter-robot Cooperative Control] monitoring.
+当发生以下情况时检查网络：
+- 在初始安装期间
+- 在协作控制操作中检测到网络异常时
 
 <br>
+<br>
 
-![[Figure 2-2] Cooperative control status check](../../_assets/2-2.png)
+- 检查项目：
+    - 验证网络电缆连接。
+    - COM网络插座LED应闪烁绿色。
+    - 验证电缆完整性。
+    - 在[机器人间协作控制]监控中检查网络状态。
+
+<br>
+
+![[图2-2] 协作控制状态检查](../../_assets/2-2.png)
 
 <br>
 
 {% hint style="warning" %}
-- It is recommended that the cooperative control network be configured separately and independently from other networks.
+- 推荐将协作控制网络单独且独立于其他网络配置。
 
 {% endhint %}
