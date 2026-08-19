@@ -72,7 +72,7 @@
   * [8.3. 수동출력 기능](8-service/3-manual-sigout.md)
   * [8.4. R code](8-service/4-rcode.md)
 * [9. 에러코드](9-error-code/README.md)
-  * [9.1. Warning](9-error-code/1-warning.md)
-  * [9.2. System Error](9-error-code/2-system-err.md)
-  * [9.3. Operation Error](9-error-code/3-operation-err.md)
+  * [9.1. 경고](9-error-code/1-warning.md)
+  * [9.2. 시스템 에러](9-error-code/2-system-err.md)
+  * [9.3. 조작 에러](9-error-code/3-operation-err.md)
 
